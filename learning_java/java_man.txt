@@ -1,0 +1,63 @@
+- install oracle java:
+
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt update
+sudo apt install oracle-java8-installer
+
+javac -version
+
+sudo apt install oracle-java8-set-default
+
+- run with javac to compile
+- then run with java
+
+javac <classname>.java
+java <classname>
+
+- minimal program setup must have a class and main method
+
+./Hello.java
+
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java");
+    }
+}
+
+- types in Java:
+
+byte
+0 -128 +127
+-----------
+short
+0 -32768 +32767
+---------------
+int
+0 -2147483648 +2147483647
+-------------------------
+long
+0L -9223372036854775808 +9223372036854775807
+--------------------------------------------
+float
+0.0f -3.4Е+38 +3.4Е+38
+----------------------
+double
+0.0d -1.7Е+308 +1.7Е+308
+------------------------
+boolean
+false Възможните стойности са две – true или false
+--------------------------------------------------
+char
+'\u0000' 0 +65535
+-----------------
+Object
+null
+------
+String
+null
+------
+
+Object and String are Classes in Java and are defined through the language itself not a part from it, but just the standart libraries.
+
+
+

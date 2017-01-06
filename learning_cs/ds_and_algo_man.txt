@@ -1,0 +1,127 @@
+- Algorithm Complexity -
+
+    - count instructions (very rough estimate)
+    lets say each of those is a step and roughly takes one instruction
+
+        - declare variable or change value
+        - index an array
+        - compare values
+        - arithnetic operation
+        - call a function/method
+
+     Examples - the average method
+     5 steps outside the while loop + 6 steps inside while loop
+     1 + 1 + 2 + n * (1 + 3 + 2) + 1 =
+     5 + n * 5
+
+     - so the length of the input will be key for the complexity
+     array of 100 will be 605 steps - linear complexity
+
+     this estimate is function of the length of the input
+
+    Examples - the sunToZero method
+    4 outside the loops + 3 in the outer loop + 3 + 4 in the inner loop + 2 in the conditional
+
+    1 + 2 + n * (n * 5) + 1 =
+    4 + 5 * n* n
+
+    f(n) = 5 * n * n + 4
+
+    ----------------------------
+    f(n) = 6 + 5 * n   | f1(n) = 5 * n
+    f(10000) = 5006    | f1(1000) = 5000
+    f(100000) = 50006  | f1(10000) = 50000
+
+    or in the form of f(n) = c1 * n + c2 we can safely drop c2 constants
+
+    - Complexity analysis
+        - compare classes of functions
+
+        - linear functions - f(n) = c1 * n + c2
+        - quadratic functions - f(n) = c1 + n * n + c2 * n + c3
+        - cubic funcrtions - f(n) = c1 + n * n * n + c2
+
+    - Complexity of algorithm
+        - by time
+        - memory
+
+    Examples - the search method
+    it can finish in one or in n steps
+
+    we take the worst case scenario to evaluate complexity
+    Thats called Big O Notetion
+
+    - binary search where
+
+    16 / 2 = 8
+    8 / 2 = 4
+    4 / 2 = 2
+    2 / 2 = 1
+
+    - 4 steps
+    log2 16 = 4
+
+    n / 2 * i <= 1
+    n <= 2 * i
+    log2n <= i
+
+    is logarithmic
+    - divide and conquer approach algorithms are usually logarithmic (merge sort)
+
+    O(1) - constant
+    O(n) - linear
+    O(n * n) - quadratic
+
+    O(1) :> O(lg(n)) :> O(n * lg(n)) :> O(n * n)
+
+    - Intuition for Data Structures
+        - a structure for keeping data (no shit)
+        - different ways to keep and organise data
+        - difined operations on the structured data
+        - often the algorithmic complexity of these operations is important
+        - needs implementation else it is just abstract data type
+        
+        - Array 
+            - native in Java 
+            - it contains fixed number of elements of one type (in Java)
+            - elements are kept in the same place in memory(all elements are next to each other)
+                - which is the main differnce from vector/list
+            - operartions:
+                - create array with type and size
+                - access elements by index
+                - change value of element by index
+                - take length of array
+
+        int[] arr = {1, 2, 3, 4};
+            
+            - in pseudo code:
+            
+            operation                          - time complexity in Java 
+            --------------------------------------------------------------
+            array = createArray(type, size)    - O(n) *** | linear in Java
+            element - getElement(array, index) - O(1)
+            setElement(array, index, value)    - O(1)
+            len = length(array)                - O(1)
+        
+        - two styles of implementation:
+        operation(stracture, data)
+        structure.operation(data)
+
+        - ArrayList 
+            - is the implementation of List/Vector in Java similar to the List in python and ruby
+            - it allows for growing data
+                - there are ListArray and ListVector - the last is synchronized
+                - A Vector defaults to doubling the size of its array, while the ArrayList increases its array size by 50 percent
+
+        ArrayList<String> langs = new ArrayList<String>();
+        langs.add("Java");
+        langs.add("Python");
+
+        - HashMap
+            - key value pairs 
+
+        HashMap<String, String> typings = new HashMap<>();
+        typings.put("Java", "Static");
+        typings.put("Python", "Dynamic");
+
+    - Linear Data Structures
