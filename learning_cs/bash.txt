@@ -1,0 +1,8 @@
+- Archives
+    > unzip file.zip -d dest/
+    > tar -xvf file.tar dest/
+    > tar -xzvf file.tar.gz dest/
+    > tar -xjvf file.tar.bz2 dest/
+
+- GUI
+    > xdg-open <name-of-default-user-program>

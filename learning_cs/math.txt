@@ -1,0 +1,19 @@
+'--------'
+Trigonometry
+'--------'
+
+1. Wiki
+    - from greek trigonon (triangle) and metron measure
+    - a branch of math that studies relationships involving lengths and angles of triangles
+    - emerged in the Hellenistic world during 3rd c. B.C. from applications of geometry to astonomical studies
+    - if at least the length of one side and the value of one angle is known all can be determined
+    - since any non-right-angle-triangle(on a flat plane) can be bisected to create two right-angle triangles,
+    most problems can be reduced to calculations on right-angle triangles. One exception is spherical trigonometry
+
+    Sine = Opposite / Hypotenuse     - SOH
+    Cosine = Adjecent / Hypotenuse   - CAH
+    Tangent = Opposite / Adjecent    - TOA
+
+    Some Old Hippie Caugth Another Hippie Trippin' On Acid
+
+

@@ -1,0 +1,37 @@
+
+
+Description:
+
+Content:
+    Preface
+    I. Functional Programming
+    II. Building Abstractions
+    III. Tools, Platforms and Projects
+
+
+Preface
+    -
+
+    0.1 Why Clojure?
+
+        - hosted on the JVM - can use Java libriries and in turn be used from Java
+        - is a Lisp - retains the best of Lisp heritage
+        - is functional - encourages use of first-class and higher-order functions with values, has its
+                         own set of immutable data structures
+        - inovative solution to the challenges inherent in concurrency and parallelization
+        - a dynamic programming language - dynamically and strongly typed
+
+    0.2 The REPL
+
+    user=> (defn average [numbers]
+               (/ (apply + numbers) (count numbers)))
+
+    - user - namespace
+    - to require in the repl:
+        (require 'clojure/string)
+        (require ['clojure.string :as 'string])
+
+    0.3 Homoiconicity
+        - clojure code is composed of literal representaions of its own data structures and atomic values.
+         This is known as homoiconicity or code-as-data.
+
