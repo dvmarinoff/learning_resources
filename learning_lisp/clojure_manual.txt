@@ -35,3 +35,65 @@ Preface
         - clojure code is composed of literal representaions of its own data structures and atomic values.
          This is known as homoiconicity or code-as-data.
 
+    0.4 The Reader
+
+    0.4 Speial Form
+
+        - Defining Vars: def
+            - def - defines (or redifines) a var (with an optional value) within the current namespace
+
+            (def p "value")
+            ;=#'user/p
+            p
+            ;= "value"
+
+            - many forms implicitly create or redifine vars, and therefore use def internally.
+             It is customary for such forms to be prefixed with "def", such as defn, defn-,
+             defprotocol, defronce, defmacro, and so on
+
+        - Local Bindings: let
+            - let - allows to define named references that are lexically scoped to the extend
+             of the let expression
+
+            (defn hypot [x y]
+                (let [x2 (* x x)
+                      y2 (* y y)]
+                    (Math/sqrt (+ x2 y2))))
+
+            - NOTE: Occasionally, you will want evaluate an expression in the binding vector
+             provided to let , but have no need to refer to its result within the context
+             of the let ’s body. In these cases, it is customary to use an underscore
+             as the bound name for such values, so that readers of the code will know
+             that results of such expressions are going unused intentionally
+
+            (let [location (get-lat-long)
+                    _ (println "Current location: " location)
+                    location (find-city-name location)])
+
+            - let has to particular semantic wrinkles that are very different from other languages:
+                - All locals are immutable. You can override local bindings within nasted let form
+                 or later binding of the same name within the same binding vector, but there is no way
+                 to change its value within the scope of a single let form
+                    - loop and recur special forms provide for looping cases
+                    - reference types provides for mutable local bindings
+
+                - let's binding vector is interpreted at compile time to provide optional destructuring
+                 of common collection types
+
+        - Destructuring (let, Part 2)
+            -
+Part I. Functional programming and Concurrency
+
+    0. What does functional programming mean
+
+        - A preference for working with immutable values:
+            - immutable data structures that satisfy simple abstraction, rather than mutable bags of state
+            - functions as values, enabling higher-order functions
+
+        - A preference for declarative processing of data over imperative control structures and iteration
+        - The natural incremental composition of functions, higher-order functions, and immutable data
+         structures in order to solve complex problems by working with higher-level abstractions
+
+    1. On the Importance of Values
+
+        -
