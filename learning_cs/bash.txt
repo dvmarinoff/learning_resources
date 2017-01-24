@@ -7,15 +7,15 @@
 - GUI
     > xdg-open <name-of-default-user-program>
 
-- SHELL 
-    - turn on shell mode 
+- SHELL
+    - turn on shell mode
     CTRL + ALT +F1
 
     - see pdf in console (not working ok)
     less file.pdf
     pdftotext file.pdf
 
-    - system 
+    - system
     sudo poweroff
     sudo reboot
 
@@ -26,7 +26,7 @@
 
         - permissions:
             user group others
-            
+
             read, write, execute, no permission
             4     2      1        0
             chmod u=rwx,g=rx,o=r myfile
@@ -49,7 +49,7 @@
     Hello World!
 
     - global local variables
-    
+
     #!/bin/bash
     VAR="global variable"
     function bash {
@@ -63,3 +63,51 @@
 
     #predefined variables
     echo $1 $2 $3 ' -> $1 $2 $3'
+
+
+
+    - Bash Academy
+    0. Inception.
+    - shell program is one that provides users with an interface to interact with other programs
+    - The main difference between bash and most other programs is that unlike them, bash was not programmed to perform a certain task
+    - The bash shell is a binary program that runs either interactively or non-interactively, usually in a text-based interface
+     provided by a terminal emulator program
+    - generally runs in text-based interface, so a terminal emulation is needed
+        - rxvt, xterm, gnome-terminal, konsole, Terminal, cmd.exe, Console 2, mintty
+
+    - to check if bash is running
+    echo "$BASH_VERSION"
+    --------------------------
+    ssh <ip address>
+    password:
+    screen
+    mail -s Hello <email>
+    Hello lhunath,
+
+    How are you today?
+    -------------------------
+   - in a terminal, many terminal-based programs can run simultaneously, forming a chain through which
+    your input and their output flows
+
+   - a program generally lives on a disk and when started the kernel loads it's pre-written instructions(it's code)
+    by creating a process for the program to work in. A process relays the program instructions to the kernel
+
+    - file descriptors - a process also has a few hooks to the outside world via file descriptors
+     These are essentially plugs we use to connect processes to files, devices or other processes.
+     They are identified by numbers. The first three are standart.
+
+        - standart input - File descriptor 0. Most processes receive their input.
+        - standart output - File sescriptor 1.
+        - standart error - File descriptor 2. Most processes send their error and information messages.
+         Bash uses it not only for errors, but information messages.
+
+         If a program needs its output to go to another program's input, as opposed to your display,
+         it will instruct the kernel to connect its standard output to the other program's standard input.
+         Now all the information it sends to its standard output file descriptor will flow into the other
+         program's standard input file descriptor. These flows of information between files,
+         devices and processes are called streams
+
+    - stream - is information (specifically, bytes) flowing through the links between files, devices and processes
+     in a running system. They can transport any kind of bytes, and the receiving end can only consume their bytes
+     in the order they were sent.
+
