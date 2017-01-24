@@ -6,3 +6,60 @@
 
 - GUI
     > xdg-open <name-of-default-user-program>
+
+- SHELL 
+    - turn on shell mode 
+    CTRL + ALT +F1
+
+    - see pdf in console (not working ok)
+    less file.pdf
+    pdftotext file.pdf
+
+    - system 
+    sudo poweroff
+    sudo reboot
+
+- Scripting
+
+    - chmod -
+    chmod options permissions filname
+
+        - permissions:
+            user group others
+            
+            read, write, execute, no permission
+            4     2      1        0
+            chmod u=rwx,g=rx,o=r myfile
+            chmod 754
+
+            chmod +x - to make file executable
+
+    -
+    which bash - will locate bash on the system
+    /bin/bash
+
+    the first line is not read as a comment, it defines the interpreter
+    ./hello_world.sh
+    #!/bin/bash
+    STRING="Hello World!"
+    echo $STRING
+
+    chmod +x hello_world.sh
+    ./hello_world.sh
+    Hello World!
+
+    - global local variables
+    
+    #!/bin/bash
+    VAR="global variable"
+    function bash {
+        local VAR="local variable"
+        echo $VAR
+    }
+    echo $VAR
+    bash
+
+    - passing arguments
+
+    #predefined variables
+    echo $1 $2 $3 ' -> $1 $2 $3'
