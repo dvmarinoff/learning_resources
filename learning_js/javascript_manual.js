@@ -449,3 +449,38 @@ var f = compose(negate, square, mult2, add1);
 console.log(f(2));
 
 3. Immutable
+
+Containers
+
+function Container (x) {
+    this.__value = x;
+    // redefined just for node
+    this.inspect = function () {
+        return "Container(" +  x + ")";
+    }
+}
+Container.of = function (x) {
+    return new Container(x);
+};
+Container.prototype.map = function (f) {
+    if(this.__value === undefined) {
+        return this;
+    }
+    if(this.__value === null) {
+        return this;
+    }
+    return Container.(f(this.__value));
+};
+
+var inc = (x) => x + 1;
+var dec = (x) => x - 1;
+var minus100 = (x) => x - 100;
+var weird = function (x) {
+    if(x < 0) {
+        return null;
+    }
+    return x * 2;
+};
+a = Container.of(4);
+a.map(inc).map(inc).map(inc); // => 7
+a.map(weird).map(weird).map(minus100); // => Container(null)

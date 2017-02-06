@@ -1,0 +1,67 @@
+emacs -nw - open in text-based console
+
+C - Ctrl key
+M - meta key
+<SPC> -  Space bar
+
+C-x C-c - close
+C-g - cancel command
+
+C-v - move one screen forward
+M-v - move one screen backward
+C-l - cycle cursor centered in middle, top, bottom
+
+C-n - next line
+C-p - previous line
+C-b - backward
+C-f - forward
+
+M-f - move between words forward
+M-b - move between words backward
+
+- very often Meta is used for operations over language units,
+and Control for operations over characters, lines, etc.
+
+C-a - move to beginning of line
+C-e - move to end of line
+M-a - move to beggining of sentence
+M-e - move to end of sentence
+
+M-< - move to beggining of text
+M-> - move to end of text
+
+C-u - to enter numeric argument before command
+Holding M - to enter numeric argument with command
+
+C-x 1 - expand the window with the cursor and kill the rest
+
+C-h k <command> - to see documentation window
+
+<DEL> - delete char before cursor
+C-d - delete the character under the cursor
+M-<DEL> - kill the word before the cursor
+M-d - kill the next word after the cursor
+C-k - kill from cursor position to end of line
+M-k - kill from cursor to end of sentence
+
+C-<SPC> - select text
+C-w - kill text
+
+C-y - yank text (paste)
+M-y - go to previuos yank
+C-/ - undo
+
+C-x C-s - save text to current file
+C-x s - loop the bufers and ask which to save
+C-x C-f - find file or create one
+C-x C-b - to see list of buffers that exist
+C-x b <name> - to switch to file
+
+C-x - character extend
+M-x - named command extend
+
+M-x open-menu-bar - opens the menu bar
+q - to quit the browser or other tool
+
+C-z - suspend emacs (useful in text-based console)
+C-x C-c - to quit emacs
