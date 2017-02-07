@@ -65,3 +65,43 @@ q - to quit the browser or other tool
 
 C-z - suspend emacs (useful in text-based console)
 C-x C-c - to quit emacs
+
+M-x repl s<Tab> <return> 'stringtobereplaced' <return> 'withthisstring'
+
+Autosave is enabled
+#main.js# - is the name of auto-saved file, but open the original and type
+
+M-x recover-file <return> yes <return>
+
+Mode line - gives information on the status of emacs
+
+M-x <mode-name> - to switch to other mode
+
+auto-fill-mode - for auto dividing lines when they are too long
+
+C-u 20 C-x f - to set margin to be 20
+
+M-q - auto-refills paragraph
+
+C-s - for search forward
+C-r - for search backward
+
+C-x 2 - splits into two windows
+C-x 4 C-f <filename> - to open file in other window
+C-M-v - scrolls second window
+C-x o - moves cursor to other window
+
+M-x make-frame - to open another frame
+M-x delete-frame - to close frame
+
+<ESC> <ESC> <ESC> - to get out of what C-g can not get you out
+
+C-h - for help
+C-h ? - to see what kind of help is available
+C-h c C-p - displayes a very brief description of the command
+C-h k - diplayes documentation
+C-h f - describes a function
+use C-M-v to scroll help menu
+C-h i - read included manuals
+"Completion" - manual for auto-completion
+"Dired" - manual for working with files and dirs
