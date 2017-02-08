@@ -105,3 +105,29 @@ use C-M-v to scroll help menu
 C-h i - read included manuals
 "Completion" - manual for auto-completion
 "Dired" - manual for working with files and dirs
+
+CIDER
+
+Manual installation
+
+in ~/.emacs.d
+at ~/.emacs.d/init.el add
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+	     (package-initialize)
+
+M-x package-refresh-contents
+
+M-x package install [RET] cider
+M-x cider-jack-in
+M-x cider-quit
+
+C-x C-e - at the end of a s-exp evaluates it
+C-c C-d d - when cursor is over a function to display its doc
+M-. - jump to the source of a function
+M-, - to pop the stack and return where you were
+M-n - go forward in repl history
+M-p - go backward in repl history
+C-c M-o - to clear the repl
