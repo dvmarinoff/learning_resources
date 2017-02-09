@@ -12,9 +12,11 @@ M-v - move one screen backward
 C-l - cycle cursor centered in middle, top, bottom
 
 C-n - next line
-C-p - previous line
+C-p - previous line                             
 C-b - backward
 C-f - forward
+M-g g <line number> - go to line number
+C-j - go to new line and indent
 
 M-f - move between words forward
 M-b - move between words backward
@@ -48,14 +50,20 @@ C-<SPC> - select text
 C-w - kill text
 
 C-y - yank text (paste)
+C-w - cut selection
+M-w - copy selection
 M-y - go to previuos yank
 C-/ - undo
+
+M-/ - hippie expand, cycles through possible expansions
+M-\ - delete all spaces and tabs around point
 
 C-x C-s - save text to current file
 C-x s - loop the bufers and ask which to save
 C-x C-f - find file or create one
 C-x C-b - to see list of buffers that exist
-C-x b <name> - to switch to file
+C-x b <name> - to switch to buffer
+C-x k - to kill buffer
 
 C-x - character extend
 M-x - named command extend
@@ -124,10 +132,35 @@ M-x package install [RET] cider
 M-x cider-jack-in
 M-x cider-quit
 
+Easy Clojure setup
+
+     - just delete any .emacs or .emacs.d and in fresh .emacs.d 
+     paste the content of the zip. In init.el paste the lines
+     from README.md instructions for cider upgrade and run emacs
+     - has very outdated packages, so better base a new config on it
+https://github.com/flyingmachine/emacs-for-clojure
+
+http://www.braveclojure.com/basic-emacs/
+
+C-c M-j - to jack in
 C-x C-e - at the end of a s-exp evaluates it
 C-c C-d d - when cursor is over a function to display its doc
 M-. - jump to the source of a function
 M-, - to pop the stack and return where you were
 M-n - go forward in repl history
 M-p - go backward in repl history
+C-<up> - go forward in repl history
+C-<down> - go backward in repl history
 C-c M-o - to clear the repl
+
+C-c C-k - evaluate the whole buffer
+C-M-x   - evaluate
+
+C-c M-n - switch namespace in repl
+
+    - checkout the use-packege syntax
+    (use-package company
+      :ensure t
+      :bind (("C-c /". company-complete))
+      :config
+      (global-company-mode))
