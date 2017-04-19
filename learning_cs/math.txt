@@ -1,19 +1,181 @@
-'--------'
-Trigonometry
-'--------'
+////
+// Trigonometry
+////
 
-1. Wiki
+1. wikipedia:
     - from greek trigonon (triangle) and metron measure
-    - a branch of math that studies relationships involving lengths and angles of triangles
-    - emerged in the Hellenistic world during 3rd c. B.C. from applications of geometry to astonomical studies
-    - if at least the length of one side and the value of one angle is known all can be determined
-    - since any non-right-angle-triangle(on a flat plane) can be bisected to create two right-angle triangles,
-    most problems can be reduced to calculations on right-angle triangles. One exception is spherical trigonometry
+    - a branch of math that studies relationships involving lengths and angles
+     of triangles
+    - emerged in the Hellenistic world during 3rd c. B.C. from applications of
+     geometry to astonomical studies
+    - if at least the length of one side and the value of one angle is known all
+     can be determined
+    - since any non-right-angle-triangle(on a flat plane) can be bisected to
+     create two right-angle triangles, most problems can be reduced to
+     calculations on right-angle triangles. One exception is spherical trigonometry
 
     Sine = Opposite / Hypotenuse     - SOH
     Cosine = Adjecent / Hypotenuse   - CAH
     Tangent = Opposite / Adjecent    - TOA
 
-    Some Old Hippie Caugth Another Hippie Trippin' On Acid
+    Some Old Hippie Caught Another Hippie Trippin' On Acid
+
+////
+// Functions
+////
+- wikipedia: in math, a function is a relation between a set of inputs and a set
+ of permissible outputs with the property that each input is related to exactly
+ one output
+
+- mathsisfun: a function relates each element of a set with exactly one element
+  of another set
+
+  - "...each element..." - means that every element in X is related to some
+   element in Y. We say that the function covers X (relates every element of it).
+   (But some elements of Y might not be related to at all, which is fine.)
+
+  - "...exactly one..." - one-to-many is not ok, but many-to-one is ok
+
+  - vertical line test - on a graph, the idea of single valued means that
+   no vertical line ever crosses more than one value
+
+  - domain, codomain and range
+    - the set "X" is called the Domain,
+    - the set "Y" is called the Codomain, and
+    - the set of elements that get pointed to in Y (the actual values produced
+     by the function) is called the Range
+
+  - ordered pairs
+    - another way to think about functions
+    (4.16)
+    (input, output)
+    (x, f(x))
+
+    - set of ordered pairs
+    {(2,4), (3,5), (7,3)}
+      - a benefit of ordered pairs is that we can graph them as coordinates
 
 
+input x --> [ function f ] --> output f(x)
+
+input | relationship | output
+   3  |     x * x    |    9
+   4  |     x * x    |   16
+   5  |     x * x    |   25
+
+   - functions process sets of things
+    - set of even numbers { -4, -2, 0, 2, 4 }
+    - set of clothes      { 'hat', 'shirt' }
+   - each individual thing is called a member (or element)
+   - function takes elements of a set and returns elements of a set
+
+- Set-Builder Notation
+
+  { x | x > 0 }
+  { x : x > 0 }
+
+  - it says "the set of all x's, such that x is greater than 0"
+
+  { x E R | x > 3 }
+
+  [3, infinity]
+
+  - E - means a member of
+  - R - stands for real numbers
+
+- Interval Notation
+
+  [0, 20]
+  - include 0 and 20
+  (0, 20)
+  - not 0 and 20
+
+////
+// Vectors
+////
+  - a vector has magnitude (size) and direction
+  - the length of the line shows its magnitude and the arrowhead points
+   in the direction
+
+      magnitude
+  --- ---------> --- direction
+    tail     head
+
+        -->
+    a = AB
+
+  - velocity, acceleration, force and many other things are vectors
+  - subtracting
+    - first we reverse the direction of the vector we want to subtract,
+    - then add them as usual
+
+  - calculations
+    - most common way is to first break up vectors into x and y parts
+
+       x  y
+  a = (8.13)
+  b = (26.7)
+
+  c = a + b
+  ax + bx = 8 + 26 = 34
+  ay + by = 13 + 7 = 20
+
+  c = (34.20)
+
+  - magnitude
+  |a| or ||a||
+
+  |a| = cqrt(x*x + y*y)
+
+  - scalar
+   - a scalar has magnitude (size) only
+   - when we multiply a vector by a scalar it is called "scaling" a vector,
+    because we change how big or small the vector is
+
+////
+// Logarithms
+////
+  - How many of one number do we multiply to get another number?
+
+  x * x = log x y
+
+- Partial Sums
+
+  4 SIGMA n=1 n
+
+////
+// Probability
+////
+
+
+////
+// Calculus
+////
+1. Intro
+
+  - Sam and Alex are travelling in the car ... but the speedometer is broken.
+   ...
+   "No, Sam! Not our average for the last minute, or even the last second,
+   I want to know our speed RIGHT NOW."
+
+   Think about it ... how do we figure out a speed at an exact instant in time?
+   What is the distance? What is the time difference?
+   They are both zero, giving us nothing to calculate with!
+
+   But Sam has an idea ... invent a time so short it won't matter.
+
+    delta t
+
+   So Sam works out the difference in distance between t and (t + delta t)
+   
+
+  - The word Calculus comes from Latin meaning "small stone". Because it is like
+   understanding something by looking at small pieces
+
+   - Differential Calculus cuts something into small pieces to find how it changes
+
+   - Integral Calculus joins (integrates) the small pieces together to find how
+    much there is
+
+   - and Differential Calculus and Integral Calculus are like inverses of each
+    other, just like multiplication and division are inverses
