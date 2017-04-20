@@ -167,7 +167,7 @@ input | relationship | output
     delta t
 
    So Sam works out the difference in distance between t and (t + delta t)
-   
+
 
   - The word Calculus comes from Latin meaning "small stone". Because it is like
    understanding something by looking at small pieces
@@ -179,3 +179,18 @@ input | relationship | output
 
    - and Differential Calculus and Integral Calculus are like inverses of each
     other, just like multiplication and division are inverses
+
+////
+// Church encoding
+////
+
+λv.e
+  - stands for the function that maps the input v to the output e
+
+Y(F) = F(Y(F))
+
+function Y(F) { return F(Y(F)) ; }
+
+Y(F) = F(λ x.(Y(F))(x))
+
+function Y(F) { return F(function (x) { return (Y(F))(x) ; } ) ; }
