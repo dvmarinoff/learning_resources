@@ -1,0 +1,185 @@
+0. What you need to dive in?
+
+sudo apt-get install haskell-platform
+
+ghci - interactive mode
+
+myfunction.hs
+:l myfunctions - loads myfunctions in interactive mode
+:r             - reloads current script
+:q             - quit ghci
+
+ - use let to declare functions in ghci
+
+1. Starting out
+
+:set prompt "ghci> "
+
+5 * -3 - will not work, but
+5 * (-3) - will work
+
+ghci> not (True && True)
+False
+ghci> 5 /= 4
+True
+ghci> "hello" == "hello"
+True
+ghci> succ 8
+9
+
+- Function application (calling a function by putting a space after it and then
+ typing out the parameters) has the highest precedence
+ - If a function takes two parameters, we can also call it as an infix function
+  by surrounding it with backticks
+
+  div 92 10
+  92 `div` 10
+
+- function application uses spaces not () as in imperative languages
+
+  bar (bar 3)
+
+  is like bar(bar(3)) in js
+
+- functions
+
+  doubleMe x = x + x
+
+
+- lists (linked list)
+
+  numbers = [4, 8, 15, 16, 23, 42]
+
+ghci> head numbers
+4
+ghci> tail numbers
+[8, 15, 16, 23, 42]
+ghci> tail (tail numbers)
+[15, 16, 23, 42]
+
+  - haskell data structures are immutable
+
+  - use cons operator to create new
+  - cons associates from right to left attaching elements at the front
+  - because haskell data structures are immutable it is ok to share tail
+
+ghci> 5 : []
+[5]
+ghci> 5 : 1 : []
+[5, 1]
+ghci> 99 : tail numbers
+[99, 8, 15, 16, 23, 42]
+
+  - length numbers
+  - reverse numbers
+  - index operator - !!
+  - last numbers - gives the last element
+  - init numbers - anything but the last element
+  - null numbers - is the list empty
+  - elem - is element in the list
+  - concat operator - ++
+  - haskell strings are also lists
+  - >, < - to check alphabetical order of words
+  - maximum numbers
+  - minimum numbers
+  - sum numbers
+  - product numbers
+  - because haskell is lazy you can work with infinite lists
+
+ghci> numbers !! 3
+16
+ghci> elem 15 numbers
+True
+ghci> [1, 2, 3] ++ [4, 5, 6]
+[1, 2 ,3, 4, 5, 6]
+ghci> ['f', 'n', 'o', 'r', 'd']
+"fnord"
+ghci> "adam" < "ant"
+True
+ghci> sum [1..100]
+5050
+ghci> ['a'..'e']
+"abcde"
+ghci> [2, 4..10]
+[2, 4, 6, 8, 10]
+ghci> [10,9..]
+[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+ghci> [1..]
+.... C-c
+ghci> take 5 [1..]
+[1, 2, 3, 4, 5]
+
+- list comprehensions
+
+ghci> [2 ^ n | n <- [1..10]]
+[2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+ghci> [2 ^ n | n <- [1..10], 2^n >= 10, 2^n < 100]
+[16, 32, 64]
+ghci> [x | x <- "outarages", not (elem x "aeiou")]
+"trgs"
+ghci> [[x * y | y <- [1..5]] | x <- [1..5]]
+[[1,2,3,4,5],[2,4,6,8, 10],[3,6,9,12,15],[4,8,12,16,20],[5,10,15,20,25]]
+
+- tuples
+
+  (1,2)
+
+  -
+  - the length of a tuple is part of its type, not like in lists
+    [1,2,3] == [1,2,3,4]
+    False
+    (1,2) === (1,2,3)
+    Couldn't match expected type `(t0, t1)` ...
+  - elements of a tuple can be of different type, but elements of a list
+   must be of one type
+
+   (1,"two")
+
+   ("Honda", "Civic", 2003)
+
+  - so tuple is like struct in c or object in java
+
+  - functions on pairs
+    - fst - gives first element
+    - snd - gives second element
+    - zip - turns to lists into a list of pairs(tuples)
+
+ghci> zip ["Adam", "Benjamin"] ["Milly", "Dorcas"]
+[("Adam", "Milly"), ("Benjamin", "Dorcas")]
+
+  - solving a puzzle with list comprehensions
+
+  let numbers = [1..8]
+  let words = ["one", "two", "three", "four", "five", "six", "seven", "eight"]
+  let pairs = zip numbers words
+  let result = [(fst p, fst q) | p <- pairs, q <- pairs, fst p < fst q, length (snd p) > length (snd q)]
+
+  [(3,4),(3,5),(3,6),(4,6),(5,6)]
+
+- Types and type classes
+
+  - types are sets of values
+
+    Int { 2, 3, 4 ...}
+
+  - typeclasses are sets of types
+
+    Num { Int, Float, Double }
+
+  - Value -> Type -> Typeclass
+  - functions also have type
+
+  :t - to check class of a value
+
+  dividesEvenly :: Int -> Int -> Bool
+  dividesEvenly x y = (x `div` y) * x == y
+
+- function syntax
+
+  noVowels :: [Char] -> [Char]
+  noVowels word = if word == ""
+                  then ""
+                  else if head word `elem` "aeiouAEIOU"
+                      then noVowels (tail word)
+                  else
+                      (head word) : noVowels (tail word)
