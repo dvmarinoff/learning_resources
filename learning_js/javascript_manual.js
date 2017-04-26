@@ -484,3 +484,48 @@ var weird = function (x) {
 a = Container.of(4);
 a.map(inc).map(inc).map(inc); // => 7
 a.map(weird).map(weird).map(minus100); // => Container(null)
+
+
+////
+// clojurescript
+////
+
+- clojure to js compiler
+
+  - basic setup
+
+    - to run build file:
+
+    java -cp cljs.jar:src clojure.main build.clj  
+
+    - directory structure:
+
+    out/
+    src/<name>/core.cljs
+    cljs.jar
+    build.clj
+    index.html
+
+    - basic files content:
+
+    :core.cljs
+    (ns hello-world.core)
+
+    (enable-console-print!)
+
+    (println "Hello World!")
+
+    
+    :build.clj
+    (require 'cljs.build.api)
+    (cljs.build.api/bulid "src"
+      {:main 'hello-world.core
+       :output-to "out/main.js"})
+
+    :index.html
+    <html>
+      <body>
+        <script type="text/javascript" src="out/main.js"></script>
+      </body>
+    </html>
+

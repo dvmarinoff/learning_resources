@@ -1,2 +1,11 @@
 **/*.swp
 garbige/
+.idea
+.sass-cache
+**/*.jpg
+**/*.jpeg
+**/*.png
+**/*.svg
+**/node_modules
+**/bower_components
+**/*.jar
