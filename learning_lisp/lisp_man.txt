@@ -220,6 +220,10 @@
 3. Lists
 '----------'
 
+'------------'
+10. Macros
+'------------'
+10.1. Eval
 
 
 '----////-----------\\\\----'
@@ -315,3 +319,90 @@
 1.4.Introducing Lancet
 
 1.5.Wrapping Up
+
+
+
+
+
+
+
+
+
+
+
+
+////
+// 
+////
+ - macros allow Clojure to derive a lot of its build in functionality
+ from a tiny core of functions and special forms.
+
+ - when is not a special form, but a macro
+
+(macroexpand '(when boolean-expression
+	        expression-1
+		expression-2
+		expression-3))
+
+(defmacro infix
+  "rearranges a list into the correct order for infix notation"
+  [infixed]
+  (list (second infixed) (first infixed) (last infixed)))
+
+(infix (1 + 1))
+; => 2
+
+ - one key difference between functions and macros is that function
+ arguments are fully evaluated before they're past to the function,
+ and macros receive arguments as unevaluated data
+
+ - use macroexpand to see code
+
+(macroexpand '(infix (1 + 1)))
+; => (+ 1 1)
+
+ - with arguments destructuring
+
+(defmacro infix-2
+  [[operand1 op operand2]]
+  (list op operand1 operand2))
+
+ - multiple arity macro
+ 
+(defmacro and
+  "Evaluates exprs one at a time, from left to right."
+  {:added "1.0"}
+  ([] true)
+  ([x] x)
+  ([x & next]
+   `(let [and# ~x]
+      (if and# (and ~@next) and#))))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

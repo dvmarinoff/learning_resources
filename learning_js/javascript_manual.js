@@ -529,3 +529,34 @@ a.map(weird).map(weird).map(minus100); // => Container(null)
       </body>
     </html>
 
+////
+// Compilers, transpilars and others targeting javascript
+////
+
+
+. coffiescript
+  influence: python, ruby
+
+. babel (es6, es7...)
+  influence: ???
+  
+. clojurescript
+  influence: clojure (lisp)
+
+. elm
+  influence: ml, haskell
+  
+  best points:
+    very easy to start
+
+  strengths:
+    - front-end dsl
+    - 
+  weaknesses:
+    - js interop is inconvinient making it hard to use js libraries
+
+. purescript
+  influence: haskell
+
+. reason
+  influence: ocaml
