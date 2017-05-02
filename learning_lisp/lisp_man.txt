@@ -367,8 +367,7 @@
   [[operand1 op operand2]]
   (list op operand1 operand2))
 
- - multiple arity macro
- 
+
 (defmacro and
   "Evaluates exprs one at a time, from left to right."
   {:added "1.0"}
