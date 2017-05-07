@@ -165,6 +165,8 @@ C-c M-n - switch namespace in repl
       :config
       (global-company-mode))
 
+C-c C-t n - run tests in a source buffer
+C-c C-t C-n - run tests in a REPL buffer
 
 WEB
 
