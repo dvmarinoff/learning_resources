@@ -36,4 +36,23 @@
     (calculate-pascal-value r c)
     (println "not a valid pascal position")))
 
-  ;; Task 2 Matching parens
+;; Task 2 Matching parens
+(defn parens-value [p]
+  (cond
+    (= \( p) 1
+    (= \) p) -1
+    :else 0))
+
+(defn sum-parens [p]
+  (reduce + (map parens-value p)))
+
+(defn balance
+  "checks if parens in p are balanced"
+  [p]
+  (if (= 0 (sum-parens p))
+   true 
+   false))
+
+;; Task 3
+(defn count-change (money change)
+  ())
