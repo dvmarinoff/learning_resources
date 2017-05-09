@@ -485,6 +485,30 @@ a = Container.of(4);
 a.map(inc).map(inc).map(inc); // => 7
 a.map(weird).map(weird).map(minus100); // => Container(null)
 
+////
+// Maybe monad
+////
+var Maybe = function (val) {
+        this.__value =  val;
+    }
+Maybe.of = function (val) {
+    return new Maybe(val);
+};
+Maybe.prototype.isNothing = function () {
+    return (this.__value === null || this.value === undefined);
+};
+Maybe.prototype.map = function (f) {
+    if(this.isNothing()) {
+        return Maybe.of(null);
+    }
+    return Maybe.of(f(this.value));
+};
+Maybe.prototype.orElse = function (default) {
+    if(this.isNothing()) {
+        return Maybe.of(default);
+    }
+    return this;
+};
 
 ////
 // clojurescript
