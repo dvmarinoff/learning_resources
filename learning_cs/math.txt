@@ -149,6 +149,40 @@ input | relationship | output
 
 
 ////
+// Combinations and Permutations
+////
+
+Combination - when order doesn't matter
+Permutation - ordered Combination
+
+- Permutations
+    
+  - Permutations with repetition
+   When a thing has n different things we have n choices each time
+
+  For example: choosing 2 of those things, the permutations are:
+
+  n * n * n
+
+  More generally: choosing r of something that has n different types,
+  the permutations are:
+
+  n * n * ... (r times) = n ^ r
+
+  - Permutations without repetition
+  In this case, we have to reduce the number of available choices
+  each time:
+
+  16 * 15 * 14 * 13 * ... = 20922789888000
+
+  or if we need only 3:
+
+  16 * 15 * 14 = 3360
+
+  
+
+
+////
 // Calculus
 ////
 1. Intro

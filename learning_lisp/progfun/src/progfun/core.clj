@@ -47,7 +47,7 @@
   (reduce + (map parens-value p)))
 
 (defn balance
-  "checks if parens in p are balanced"
+  "checks if parens in char array p are balanced"
   [p]
   (if (= 0 (sum-parens p))
    true 
