@@ -1,3 +1,117 @@
+var R = require('rambda');
+
+////
+// RECURSION
+////
+
+// recursive implementation looks like math definition
+var fibR = function (n) {
+    if(n < 1) return 1;
+    return fibR(n - 1) + fibR(n - 2);
+};
+
+// but without tail call optimization is limited by the frame stack
+// and is slower than imperative implementation
+var fibI = function (n) {
+    if(n === 0) return 0;
+    if(n === 1) return 1;
+    var current = 1;
+    var previous = 0;
+    var sum = 1;
+    for(var i = 1; i < n; i+=1) {
+        sum = previous + current;
+        previous = current;
+        current = sum;
+    }
+    return current;
+};
+
+
+// console.log('R: ' + fibR(6) + ' I: ' + fibI(6));
+
+// not tail recursive
+var factR = function (n) {
+    if(n === 0) return 1;
+    return n * factR(n - 1);
+};
+
+// What is tail position?
+// return x * fact(x - 1) -> not tail position
+// function foo () { bar(); } -> not in tail position
+// var a = () => f() || g(); -> only g in tail position (result of f is needed)
+// var a = x => x ? f() : g(); -> both in tail position
+
+// tail recursive
+var factTR = function (n) {
+    function recur (n, acc) {
+        if(n === 0) return acc;
+        return recur(n - 1, n * acc);
+    }
+    return recur(n, 1);
+};
+
+// tail recursive with default
+var factTRD = function (n, acc = 1) {
+    if(n <= 1) return acc;
+    return factTDR(n - 1, n * acc );
+};
+
+var factI = function (n) {
+    if(n === 0) return 1;
+    var fact = n;
+    while(n > 1) {
+        fact = fact * (n - 1);
+        n--;
+    }
+    return fact;
+};
+
+// console.log('factTR(100) -> ' + factTR(100));
+
+////
+// MEMOIZATION
+////
+
+// if using pure function inputs can be safely mapped to outputs
+// and can be cached and reused
+
+// basic one-arity function memoizer
+function memoize (f) {
+    if(f instanceof Function) {
+        if(f.length === 0 || f.length > 1) return f;
+
+        var fn = function (x) {
+            if(fn.memoizer.values[x] == null) {
+                fn.memoizer.values[x] = f.call(f, x);
+            }
+            return fn.memoizer.values[x];
+        };
+
+        fn.memoizer = { values : [] };
+        return fn;
+    } else {
+        return f;
+    }
+}
+
+// basic implementation
+function memoizeB (f) {
+    var fTable = {};
+    return function () {
+        var input = JSON.stringify(arguments);
+        console.log(fTable);
+        if(!fTable[input]) {
+            fTable[input] = f.apply(f, arguments);
+        }
+        return fTable[input];
+    }
+}
+
+// example usage
+var addM = memoizeB(function(x, y) { return x + y; });
+console.log(addM(1,2));
+console.log(addM(1,2));
+
 ////
 // CURRED FUNCTIONS
 ////
@@ -104,24 +218,117 @@ var f = compose(negate, square, mult2, add1);
 console.log(f(2));
 
 ////
-// memoize
+// TRANSDUCERS
 ////
-function memoize (f) {
-    var fTable = {};
-    return function () {
-        var input = JSON.stringify(arguments);
-        console.log(fTable);
-        if(!fTable[input]) {
-            fTable[input] = f.apply(f, arguments);
-        }
-        return fTable[input];
-    }
-}
 
-// example usage
-var addM = memoize(function(x, y) { return x + y; });
-console.log(addM(1,2));
-console.log(addM(1,2));
+//       map(inc)  filter(even)
+// [1,2,3,4] > [2,3,4,5] > [2,4]
+//
+//       transducer
+// [1,2,3,4] >> [2,4]
+
+[1,2,3,4]
+    .map((x) => x + 1)
+    .filter((x) => x % 2 === 0);
+
+// -> [2, 4]
+
+// map implemented with reduce
+var mapIncReducer = (result, input) => {
+    result.push(input + 1);
+    return result;
+};
+
+[1,2,3,4]
+    .reduce(mapIncReducer, []);
+
+// extract operation function increment
+var mapReducer = (f) => (result, input) => {
+    result.push(f(input));
+    return result;
+};
+
+[1,2,3,4]
+    .reduce(mapReducer( (x) => x + 1 ), []);
+
+
+// same for filter function
+var filterReducer = (predicate) => (result, input) => {
+    if(predicate(input)) {
+        result.push(input);
+    }
+    return result;
+};
+
+[1,2,3,4]
+    .reduce(filterReducer( (x) => x % 2 === 0), []);
+
+// push and + are reducing functions, they take initial value and input,
+// and reduce them to a single output value
+// array.push(4) -> [1,2,3,4]
+// 10 + 1 -> 11
+
+// extract reducing function
+var mapping = (f) => (reducing) => (result, input) => reducing(result, f(input));
+var filtering = (predicate) => (reducing) => (result, input) => predicate(input) ? reducing(result, input) : result;
+
+// type of reducer is
+// result, input -> result
+// and composition of reducers has the exact same type
+
+// wrapping in transduce helper function
+var transduce = (xform, reducing, initial, input) => input.reduce(xform(reducing), initial);
+
+var add = (x, y) => (y) => x  + y;
+var inc = add(1);
+var even = (x) => x % 2 === 0;
+
+// usage:
+var xform = R.compose(
+    mapping(inc),
+    filtering(even));
+
+transduce(xform, (xs, x) => {
+    xs.push(x);
+    return xs;
+}, [], [1, 2, 3, 4]);
+
+// -> [2, 4]
+
+
+
+////
+// TUPLES
+////
+
+// used for interfunction communication
+
+const Tuple = function () {
+    const typeInfo = Array.prototype.slice.call(arguments, 0);
+    const _T = function () {
+        const values = Array.prototype.slice.call(arguments, 0);
+        if(values.some( (val) => val === null || val === undefined )) {
+            throw new ReferenceError('Tuples may not have any null vales');
+        }
+        if(values.length !== typeInfo.length) {
+            throw new TypeError('Tple arity does not match its protptype');
+        }
+        values.map(function (val, index) {
+            this['_' + (index + 1)] = checkType(typeInfo[index])(val);
+        }, this);
+        Object.freeze(this);
+
+        _T.prototype.values = function () {
+            return Object.keys(this).map(function (k) {
+               return this[k];
+            }, this);
+        };
+
+        return _T;
+    };
+};
+
+const Status = Tuple(Boolean, String);
 
 ////
 // MONADS

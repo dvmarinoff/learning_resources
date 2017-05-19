@@ -125,3 +125,27 @@
         typings.put("Python", "Dynamic");
 
     - Linear Data Structures
+
+
+Clojure Data Structures
+ - vector
+    - abstraction:
+        - has size
+        - you can access its elements by index in constant time
+        - provide quick, indexed random access to its elements
+        - on the other hand it is generally more expensive to modify vectors
+
+    - syntax:
+
+    [1 2 3 4]
+
+    (v 0)
+    -> 1
+
+    - operations:
+        
+        - conj -
+
+    - implementation:
+
+
