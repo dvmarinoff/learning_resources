@@ -371,23 +371,51 @@ III. Javascript FP
 . coffiescript
   influence: python, ruby
 
+  best points:
+    brings ruby/python syntactic expressiveness to js
+
+  strenghts:
+    simple and similar to javascript
+
+  weaknesses:
+    es6/7 makes it mostly obsolete
+  
 . babel (es6, es7...)
-  influence: ???
+  influence: ...
+
+  best points:
+    use latest es6/7/... features today
+
+  strengths:
+    interesting libraries like sweet.js
+
+  weaknesses:
+    es6/7/...
 
 . clojurescript
   influence: clojure (lisp)
+
+  best points:
+    being a lisp, best interactive development posible, almost all of clojure
+
+  strengths:
+    most advanced javascript replacement
+
+  weaknesses:
+    being a lisp, not very good for mobile
 
 . elm
   influence: ml, haskell
 
   best points:
-    very easy to start
+    very easy to start, best rendering performance
 
   strengths:
     - front-end dsl
 
   weaknesses:
     - js interop is inconvinient making it hard to use js libraries
+    - usable only in react type web projects, not in mobile or server
 
 . purescript
   influence: haskell

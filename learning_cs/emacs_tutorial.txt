@@ -12,7 +12,7 @@ M-v - move one screen backward
 C-l - cycle cursor centered in middle, top, bottom
 
 C-n - next line
-C-p - previous line                             
+C-p - previous line
 C-b - backward
 C-f - forward
 M-g g <line number> - go to line number
@@ -134,7 +134,7 @@ M-x cider-quit
 
 Easy Clojure setup
 
-     - just delete any .emacs or .emacs.d and in fresh .emacs.d 
+     - just delete any .emacs or .emacs.d and in fresh .emacs.d
      paste the content of the zip. In init.el paste the lines
      from README.md instructions for cider upgrade and run emacs
      - has very outdated packages, so better base a new config on it

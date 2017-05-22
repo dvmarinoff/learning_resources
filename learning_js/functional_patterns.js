@@ -213,6 +213,9 @@ var compose = function() {
     };
 };
 
+// es6
+const pipe = (...fns) => x => fns.reduce((y, f) => f(y), x);
+
 // example usage
 var f = compose(negate, square, mult2, add1);
 console.log(f(2));

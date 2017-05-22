@@ -1,4 +1,18 @@
 ////
+// Contents
+////
+
+1. Trigonometry
+2. Functions
+3. Vectors
+4. Logarithms
+5. Probability
+6. Combinations and Permutations
+7. Discrete Mathematics
+8. Computability Theory
+9. Calculus
+
+////
 // Trigonometry
 ////
 
@@ -142,6 +156,16 @@ input | relationship | output
 - Partial Sums
 
   4 SIGMA n=1 n
+
+
+
+////
+// Discrete Mathematics
+////
+
+// Logic and proof
+
+
 
 ////
 // Probability
