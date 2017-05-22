@@ -1,12 +1,20 @@
 # learning_resources
 notes, summaries and task solutions on computer programming subjects
 
-- javascript
-- common lisp
-- clojure
-- bash
-- emacs
-- computer science subjects
-  - algorithm complexity
-  - data structures (with java)
-  - functional programming
+- Computer Science
+
+  - math
+  - discrete mathematics
+  - computablility theory
+  - calculus
+
+- Languages:
+
+  - javascript
+  - common lisp
+  - clojure
+ 
+- Tools:
+
+  - bash
+  - emacs
