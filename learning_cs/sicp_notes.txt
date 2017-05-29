@@ -1,0 +1,125 @@
+////
+// The Foundations: Logic and Proofs
+////
+
+The rules of logic specify the meaning of mathematical statements.
+To understand mathematics, we must understand what makes up a correct
+mathematical argument, that is, a proof.
+Once we prove a mathematical statement is true, we call it a theorem.
+A collection of theorems on a topic organize what we know about this topic.
+
+In CS proofs are used to establish that computer programs:
+  - produce the correct output for all possible input values
+  - security of a system
+  - artificial intelligence
+  - automated reasoning systems allow computers to construct their own proofs
+
+
+
+// 1.1 Propositional Logic
+
+- Propositions
+
+A `proposition` is a declarative sentence (that is, a sentence that declares
+a fact) that is either true or false, but not both.
+
+ARISTOTLE (384 b.c.e.–322 b.c.e.):
+First developed systematically the area of logic that deals with propositions
+now called the `propositional calculus` or `propositional logic`.
+
+`Propositional variables`: p, q, r, s
+
+T - True
+F - False
+
+GEORGE BOOLE (1815–1864):
+in The Laws of Thought (1854) explored methods for producing new propositions
+from those that we already have called `compound propositions`.
+
+`negation` - denoted by ¬p (!p), not p
+
+`connectives` - form new proposition from 2 or more existing
+
+    - `conjunction` of p and q, denoted by p ∧ q (p && q)
+
+    - `disjunction` of p and q, denoted by p ∨ q (p || q), p or q.
+      p ∨ q is false when both p and q are false and is true otherwise.
+
+      - inclusive or (p ∨ q) OR
+      - exclusive or (p ⊕ q) XOR 'Soup or salad comes with an entrée'
+
+- Conditional Statements
+
+Let p and q be propositions. The conditional statement p → q is the proposition
+if p, then q. The conditional statement p → q is false when p is true and q is
+false, and true otherwise. In the conditional statement p → q, p is called
+the hypothesis (or antecedent or premise) and q is called the conclusion
+(or consequence)
+
+Remember that 'q unless ¬p' expresses the same conditional statement as
+'if p, then q'.
+
+The if-then construction used in many programming languages is different from
+that used in logic.
+
+x = 0
+if 2 + 2 = 4 then x = x + 1
+
+- Converse, Contrapositive, and Inverse
+
+from p → q we can form three related statements
+
+    - `converse`: q → p
+    - `contrapositive`: ¬q → ¬p
+    - `inverse`: ¬p → ¬q
+
+Remember that only contrapositive is equivalent
+
+Note that one of the most common logical errors is to assume that the converse
+or the inverse of a conditional statement is equivalent to this conditional
+statement
+
+- Bi-conditionals
+
+A way to combine propositions that expresses that two propositions
+have the same truth value
+
+Let p and q be propositions. The bi-conditional statement p ↔ q
+is the proposition 'p if and only if q'.
+The bi-conditional statement p ↔ q is true when p and q have the same truth
+values, and is false otherwise.
+
+
+'p is necessary and sufficient for q'
+'if p then q, and conversely'
+'p iff q.' (if and only if)
+
+p ↔ q has the truth value of (p → q) ∧ (q → p)
+
+
+
+// 1.2 Applications of Propositional Logic
+
+
+
+// 1.3 Propositional Equivalences
+
+
+
+// 1.4 Predicates and Quantifiers
+
+
+
+// 1.5 Nested Quantifiers
+
+
+
+// 1.6 Rules of Inference
+
+
+
+// 1.7 Introduction to Proofs
+
+
+
+// 1.8 Proof Methods and Strategy
