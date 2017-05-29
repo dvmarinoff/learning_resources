@@ -397,3 +397,18 @@ Maybe.prototype.orElse = function (defaultValue) {
 
 // example usage
 // TODO: example usage
+
+
+
+////
+// Crockford Object
+////
+// not much functional as just being a new pattern
+function constructor (spec) {
+    let {member} = spec,
+        {other} = other_constructor(spec),
+        method = function () {
+            // member, other, method, spec
+        };
+        return Object.freeze({method, other});
+}
