@@ -56,6 +56,14 @@ false, and true otherwise. In the conditional statement p → q, p is called
 the hypothesis (or antecedent or premise) and q is called the conclusion
 (or consequence)
 
+p → q asserts that q is true on the condition that p holds
+
+p q  p → q
+T T    T
+T F    F
+F T    T
+F F    T
+
 Remember that 'q unless ¬p' expresses the same conditional statement as
 'if p, then q'.
 
@@ -96,13 +104,167 @@ values, and is false otherwise.
 
 p ↔ q has the truth value of (p → q) ∧ (q → p)
 
-
+p  q p ↔ q
+T  T   T
+T  F   F
+F  T   F
+F  F   T
 
 // 1.2 Applications of Propositional Logic
 
+- System specifications
 
+'The diagnostic message is stored in the buffer or it is retransmitted.'
+'The diagnostic message is not stored in the buffer.'
+'If the diagnostic message is stored in the buffer, then it is retransmitted.'
+
+s OR r      | s ∨ r
+NOT s       | ¬ s
+s then r    | s → r
+
+if s false and r true it is consistent
+
+'The diagnostic message is not retransmitted'
+
+NOT r       | ¬ r
+
+now not consistent
+
+- Boolean searches
+- Logic Puzzles
+
+RAYMOND SMULLYAN (BORN 1919)
+books on recreational logic and mathematics:
+
+Satan, Cantor, and Infinity;
+What Is the Name of This Book?;
+The Lady or the Tiger?;
+Alice in Puzzleland;
+To Mock a Mockingbird;
+Forever Undecided;
+The Riddle of Scheherazade: Amazing Logic Puzzles, Ancient and Modern;
+
+he is considered to be a modern-day Lewis Carroll
+interested in self-reference and has worked on extending some of Gödel’s results
+
+- Logic Circuits
+
+Propositional logic can be applied to the design of computer hardware.
+This was first observed in 1938 by Claude Shannon.
 
 // 1.3 Propositional Equivalences
+
+An important type of step used in a mathematical argument is the replacement
+of a statement with another statement with the same truth value.
+
+`tautology` - a compound proposition that is always true, no matter what
+  the truth values of the propositional variables that occur in it
+
+`contradiction` - a compound proposition that is always false
+
+`contingency` - a compound proposition that is neither a tautology nor a
+  contradiction
+
+         tautology  contradiction
+p   ¬q   p ∨ ¬p     p ∧ ¬p
+T    F     T          F
+F    T     T          F
+
+- Logical Equivalences
+
+The compound propositions p and q are called logically equivalent if p ↔ q is a
+tautology. The notation p ≡ q denotes that p and q are logically equivalent.
+
+Remark: ≡ is not logical connective or compound statement, just expresses that
+p ↔ q is a tautology
+
+AUGUSTUS DE MORGAN (1806–1871)
+mathematical induction and
+De Morgan Laws
+¬(p ∧ q) ≡ ¬p ∨ ¬q
+¬(p ∨ q) ≡ ¬p ∧ ¬q
+
+they extend to
+¬(p 1 ∨ p 2 ∨ · · · ∨ p n ) ≡ (¬p 1 ∧ ¬p 2 ∧ · · · ∧ ¬p n )
+and
+¬(p 1 ∧ p 2 ∧ · · · ∧ p n ) ≡ (¬p 1 ∨ ¬p 2 ∨ · · · ∨ ¬p n )
+
+
+
+Equivalence Name
+-------------------------------------------------------
+p ∧ T ≡ p
+p ∨ F ≡ p                           Identity laws
+-------------------------------------------------------
+p ∨ T ≡ T
+p ∧ F ≡ F                           Domination laws
+-------------------------------------------------------
+p ∨ p ≡ p
+p ∧ p ≡ p                           Idempotent laws
+-------------------------------------------------------
+¬(¬p) ≡ p                           Double negation law
+-------------------------------------------------------
+p ∨ q ≡ q ∨ p
+p ∧ q ≡ q ∧ p                       Commutative laws
+-------------------------------------------------------
+(p ∨ q) ∨ r ≡ p ∨ (q ∨ r)
+(p ∧ q) ∧ r ≡ p ∧ (q ∧ r)           Associative laws
+-------------------------------------------------------
+p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)
+p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)     Distributive laws
+-------------------------------------------------------
+¬(p ∧ q) ≡ ¬p ∨ ¬q
+¬(p ∨ q) ≡ ¬p ∧ ¬q                  De Morgan’s laws
+-------------------------------------------------------
+p ∨ (p ∧ q) ≡ p
+p ∧ (p ∨ q) ≡ p                     Absorption laws
+-------------------------------------------------------
+p ∨ ¬p ≡ T
+p ∧ ¬p ≡ F                          Negation
+-------------------------------------------------------
+
+
+
+Logical Equivalences Involving Conditional Statements
+-------------------------------------------------------
+p → q ≡ ¬p ∨ q
+p → q ≡ ¬q → ¬p
+p ∨ q ≡ ¬p → q
+p ∧ q ≡ ¬(p → ¬q)
+¬(p → q) ≡ p ∧ ¬q
+(p → q) ∧ (p → r) ≡ p → (q ∧ r)
+(p → r) ∧ (q → r) ≡ (p ∨ q) → r
+(p → q) ∨ (p → r) ≡ p → (q ∨ r)
+(p → r) ∨ (q → r) ≡ (p ∧ q) → r
+
+
+
+Equivalences Involving Bi-conditional Statements
+-------------------------------------------------------
+p ↔ q ≡ (p → q) ∧ (q → p)
+p ↔ q ≡ ¬p ↔ ¬q
+p ↔ q ≡ (p ∧ q) ∨ (¬p ∧ ¬q)
+¬(p ↔ q) ≡ p ↔ ¬q
+
+
+
+- Propositional Satisfiability
+
+`satisfiable` - a compound proposition is satisfiable if there is an assignment
+  of truth values to its variables that makes it true
+
+
+AUGUSTA ADA, COUNTESS OF LOVELACE (1815–1852)
+worked with Charles Babbage on his Analytic Engine
+the 'engine is the material expression of any indefinite function of any degree
+of generality and complexity'
+
+- Applications of Satisfiability
+
+Many problems, in:
+robotics, software testing, computer-aided design, machine vision,
+integrated circuit design, computer networking, and genetics,
+can be modeled in terms of propositional satisfiability
 
 
 
