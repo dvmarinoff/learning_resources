@@ -30,3 +30,10 @@
   (testing "balance"
     (is (= true (balance (seq (char-array "(if (zero? x) max (/ 1 x))")))))
     (is (= false (balance (seq (char-array "(()(")))))))
+
+;; Fizz Buzz
+(deftest fizz-buzz
+  (testing "fizz-buzz"
+    (is (= "Fizz" (fizz-buzz 3)))
+    (is (= "Buzz" (fizz-buzz 5)))
+    (is (= "FizzBuzz" (fizz-buzz 15)))))

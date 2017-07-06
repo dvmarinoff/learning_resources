@@ -314,7 +314,7 @@ const Tuple = function () {
             throw new ReferenceError('Tuples may not have any null vales');
         }
         if(values.length !== typeInfo.length) {
-            throw new TypeError('Tple arity does not match its protptype');
+            throw new TypeError('Tuple arity does not match its protptype');
         }
         values.map(function (val, index) {
             this['_' + (index + 1)] = checkType(typeInfo[index])(val);

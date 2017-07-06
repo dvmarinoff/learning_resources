@@ -266,17 +266,256 @@ robotics, software testing, computer-aided design, machine vision,
 integrated circuit design, computer networking, and genetics,
 can be modeled in terms of propositional satisfiability
 
-
+HENRY MAURICE SHEFFER (1883–1964)
+introduced what is now known as the Sheffer stroke. Used in Whitehead and
+Russell’s Principia Mathematica
 
 // 1.4 Predicates and Quantifiers
 
+Propositional logic cannot adequately express the meaning of all statements in
+mathematics and in natural language:
 
+'Every computer connected to the university network is functioning properly.'
+
+Predicate logic can be used to express the meaning of a wide range of statements
+in mathematics and computer science in ways that permit us to reason and explore
+relationships between objects.
+
+- Predicates
+
+    statements involving variables:
+
+    x > 3,
+    x = y + 3,
+    x + y = z,
+    'computer x is under attack by an intruder'
+
+    We can denote the statement 'x is greater than 3' by P (x)
+    The statement P (x) is also said to be the value of the propositional
+    function P at x
+    Once a value has been assigned to the variable x, the statement P (x)
+    becomes a proposition and has a truth value
+
+CHARLES SANDERS PEIRCE (1839–1914)
+He made important contributions to an amazing number of disciplines.
+He is noted as the preeminent system-building philosopher competent and
+productive in logic, mathematics, and a wide range of sciences.
+
+- Preconditions and Postconditions
+
+`preconditions` - the statements that describe valid input
+`postconditions` - conditions that the output should satisfy when the program
+  has run
+
+- Quantifiers
+
+express the extent to which a predicate is true over a range of elements
+
+all, some, many, none, and few
+
+studied by predicate calculus
+
+- The Universal Quantifier
+
+The universal quantification of P (x) is the statement:
+
+'P (x) for all values of x in the domain.'
+
+The notation ∀xP (x) denotes the universal quantification of P (x).
+We read ∀xP (x) as 'for all xP (x)' or 'for every xP (x).'
+An element for which P (x) is false is called a counterexample of ∀xP (x).
+
+- The Existential Quantifier
+
+'There exists an element x in the domain such that P (x).'
+We use the notation ∃xP (x)
+
+- The Uniqueness Quantifier
+
+The notation ∃!xP (x) [or ∃ 1 xP (x)] states:
+  'There exists a unique x such that P (x) is true.'
+
+- Logical Equivalences Involving Quantifiers
+
+∀x(P (x) ∧ Q(x)) ≡ ∀xP (x) ∧ ∀xQ(x)
+
+we can distribute a universal quantifier over a conjunction
+we can also distribute an existential quantifier over a disjunction
+
+However, we cannot distribute a universal quantifier over a disjunction, nor can
+we distribute an existential quantifier over a conjunction
+
+∀x(P (x) ∧ Q(x)) ≡ ∀xP (x) ∧ ∀xQ(x)
+
+¬∀xP (x) ≡ ∃x ¬P (x)
+
+The rules for negations for quantifiers are called:
+
+De Morgan’s Laws for Quantifiers
+-----------------------------------
+Negation   Equivalent Statement   When Is Negation True?         When False?
+¬∃xP (x)   ∀x¬P (x)               For every x, P (x) is false    There is an x for which
+¬∀xP (x)   ∃x¬P (x)               There is an x for which        P (x) is true.
+                                  P (x) is false                 P (x) is true for every x
+
+CHARLES LUTWIDGE DODGSON (1832–1898)
+His writings published under this real name include articles and books on
+geometry, determinants, and the mathematics of tournaments and elections.
+(He also used the pseudonym Lewis Carroll for his many works on
+recreational logic)
 
 // 1.5 Nested Quantifiers
 
+∀x∀y(x + y = y + x)
+∀x∃y(x + y = 0)
+∀x∀y∀z(x + (y + z) = (x + y) + z)
 
+In working with quantifications of more than one variable, it is sometimes
+helpful to think in terms of nested loops
+
+Quantifications of Two Variables
+-----------------------------------
+Statement      When True?                             When False?
+∀x∀yP (x, y)   P (x, y) is true for every pair x, y   There is a pair x, y for
+∀y∀xP (x, y)                                          which P (x, y) is false
+
+∀x∃yP (x, y)   For every x there is a y for           There is an x such that
+               which P (x, y) is true                 P (x, y) is false for every y
+
+∃x∀yP (x, y)   There is an x for which P (x, y)       For every x there is a y for
+               is true for every y                    which P (x, y) is false
+
+∃x∃yP (x, y)   There is a pair x, y for which         P (x, y) is false for every
+∃y∃xP (x, y)   P (x, y) is true                       pair x, y
+
+
+A statement is in prenex normal form (PNF) if and only if it is of the form:
+
+Q 1 x 1 Q 2 x 2 · · · Q k x k P (x 1 , x 2 , . . . , x k )
+
+where each Q i , i = 1, 2, . . . , k, is either the existential quantifier or
+the universal quantifier, and P (x 1 , . . . , x k ) is a predicate
+involving no quantifiers
+
+For example:
+
+∃x∀y(P (x, y) ∧ Q(y))
+
+is in prenex normal form, whereas:
+
+∃xP (x) ∨ ∀xQ(x)
+
+is not (because the quantifiers do not all occur first)
 
 // 1.6 Rules of Inference
+
+An argument in propositional logic is a sequence of propositions. All but the
+final proposition in the argument are called premises and the final proposition
+is called the conclusion.
+An argument is valid if the truth of all its premises implies that the
+conclusion is true.
+An argument form in propositional logic is a sequence of compound propositions
+involving propositional variables.
+An argument form is valid no matter which particular propositions are
+substituted for the propositional variables in its premises, the conclusion
+is true if the premises are all true.
+
+
+- Modus ponens (Latin for mode that affirms)
+
+The tautology (p ∧ (p → q)) → q is the basis of the rule of inference called
+modus ponens, or the law of detachment
+
+- the symbol ∴ denotes “therefore”
+
+  p
+  p → q
+  -----
+∴ q
+
+Rules of Inference
+----------------------
+Rule of Inference   Tautology                         Name
+  p                 (p ∧ (p → q)) → q                 Modus ponens
+  p → q
+  -----
+∴ q
+
+  ¬q                (¬q ∧ (p → q)) → ¬p               Modus tollens
+  p → q
+  ----
+∴ ¬p
+
+  p → q             ((p → q) ∧ (q → r)) → (p → r)     Hypothetical syllogism
+  q → r
+  -----
+∴ p → r
+
+  p ∨ q             ((p ∨ q) ∧ ¬p) → q                Disjunctive syllogism
+  ¬p
+  ----
+∴ q
+
+  p                 p → (p ∨ q)                       Addition
+  -----
+∴ p ∨ q
+
+  p ∧ q             p ∧ q) → p                        Simplification
+  ----
+∴ p
+
+  p                 ((p) ∧ (q)) → (p ∧ q)             Conjunction
+  q
+  -----
+∴ p ∧ q
+
+  p ∨ q             ((p ∨ q) ∧ (¬p ∨ r)) → (q ∨ r)    Resolution
+  ¬p ∨ r
+  -----
+∴ q ∨ r
+
+
+- Resolution
+
+Computer programs have been developed to automate the task of reasoning and
+proving theorems. Many of these programs make use of a rule of inference known
+as resolution. This rule of inference is based on the tautology:
+
+((p ∨ q) ∧ (¬p ∨ r)) → (q ∨ r)
+
+- Fallacies
+
+  fallacy of affirming the conclusion:
+
+  ((p → q) ∧ q) → p
+
+  is not a tautology. However, there are many incorrect arguments that treat
+  this as a tautology
+
+  fallacy of denying the hypothesis:
+
+  ((p → q) ∧ ¬p) → ¬q
+
+Rules of Inference for Quantified Statements
+------------------------------------------------
+Rule of Inference             Name
+
+  ∀xP (x)                     Universal instantiation
+  -------
+∴ P (c)
+
+  P (c) for an arbitrary c    Universal generalization
+  ------------------------
+∴ ∀xP (x)
+
+  ∃xP (x)                     Existential instantiation
+  ------------------------
+∴ P (c) for some element c
+
+  P (c) for some element c    Existential generalization
+  ------------------------
+∴ ∃xP (x)
+
 
 
 

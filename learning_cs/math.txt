@@ -360,6 +360,53 @@ Permutation - ordered Combination
 λv.e
   - stands for the function that maps the input v to the output e
 
+  - λ - introduces a function
+  - v - is the name of the input
+  - . - 'body' of function
+  - e - output in terms of the input
+
+  - Why is it important?
+      - Can encode any computation
+      - Basis for functional programming (ml family languages are compiled down
+       to small core language, which is a glorified version of lambda calculus)
+
+  - it has only three constructs:
+      - variables - x, y, z, ...
+      - function definition - λ
+      - function application
+
+  λx . x + 1
+
+  (x) => x + 1;
+
+  λx . λy . x + y
+
+  (x, y) => (y) => x + y;
+
+  - function application
+
+  (λx . x + 1) 5
+
+  - True - from two things return the first
+  - False - choose the second
+
+  True = λx . λy . x
+
+  False = λx . λy . y
+
+  Not = λb . b False True
+
+  - Example:
+
+  (λb . b False True) True
+  True False True
+  (λx . λy . x) False True
+  False
+
+  - Y combinator - the key to doing recursion in lambda calculus
+
+  Y = λf . (λx . f(x x)) (λx . f(x x))
+
 Y(F) = F(Y(F))
 
 function Y(F) { return F(Y(F)) ; }
@@ -367,3 +414,8 @@ function Y(F) { return F(Y(F)) ; }
 Y(F) = F(λ x.(Y(F))(x))
 
 function Y(F) { return F(function (x) { return (Y(F))(x) ; } ) ; }
+
+Church black box like pure functions
+Turing used state
+
+Everything is simply a value, numbers are like functions

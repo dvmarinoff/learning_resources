@@ -11,22 +11,22 @@
 (defn fact
   "find factorial of a number"
   [x]
-  (if (= x 0)
+  (if (zero? x)
     1
     (loop [n x a 1]
       (if (= n 1)
         a
         (recur (dec n) (* a n))))))
-  
+
 (defn is-pascal-position
-  "is position row r col c in a pascal triangle"  
+  "is position row r col c in a pascal triangle"
   [r c]
   (if (> c r)
     false
     true))
 
 (defn calculate-pascal-value
-  "calculate the value at row r and col c in a pascal triangle" 
+  "calculate the value at row r and col c in a pascal triangle"
   [r c]
   (/ (fact r) (* (fact c) (fact (- r c)))))
 
@@ -49,10 +49,47 @@
 (defn balance
   "checks if parens in char array p are balanced"
   [p]
-  (if (= 0 (sum-parens p))
-   true 
+  (if (zero? (sum-parens p))
+   true
    false))
 
 ;; Task 3
 (defn count-change (money change)
   ())
+
+
+;;;; Fizz Buzz
+(defn fizz-buzz
+  ([i]
+    (cond
+      (zero? (mod i (* 3 5))) "FizzBuzz"
+      (zero? (mod i 3)) "Fizz"
+      (zero? (mod i 5)) "Buzz"
+      :else (str i)))
+  ([start end]
+   (map fizz-buzz (range start end))))
+
+(fizz-buzz 1)
+(fizz-buzz 3)
+(fizz-buzz 5)
+(fizz-buzz 15)
+(fizz-buzz 0 100)
+
+;;;; digits
+(defn digits [n]
+  (reduce dr [] n))
+
+(defn dr [acc i]
+  (conj acc i))
+
+(defn num->digits [num]
+  (loop [n num res []]
+    (if (zero? n)
+      res
+    (recur (quot n 10) (conj res (mod n 10))))))
+
+(mod 9 10)
+
+(num->digits 1024)
+
+(digits 1024)
