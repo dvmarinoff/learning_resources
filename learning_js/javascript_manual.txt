@@ -267,7 +267,7 @@ II. JavaScript OOP
        - Subtyping (also called subtype polymorphism or inclusion polymorphism): when a name denotes instances
         of many different classes related by some common superclass. Often referred to as simply polymorphism.
 
-- Other relevent stuff:
+- Other relevant stuff:
    - mixin - a class that contains methods for use by other classes without having to be the parent class
     of those other classes.
 
@@ -283,13 +283,68 @@ II. JavaScript OOP
     It is often used to specify that a subclass must provide an implementation of the method.
     Abstract methods are used to specify interfaces in some computer languages.
 
-- NOTE:
-TODO: math refs to type and set theory
 
 
 3. Classical OOP
 
 4. Prototypal OOP
+
+// Concatenative inheritance (mixins or $.extend())
+
+// guitar amp example
+var distortion = { distortion: 1 };
+var volume = { volume: 1 };
+var cabinet = { cabinet: 'maple' };
+var lowCut = { lowCut: 1 };
+var inputLevel = { inputLevel: 1 };
+
+function GuitarAmp (options) {
+    return Object.assaign({}, distortion, volume, cabinet, options);
+}
+
+function BaseAmp (options) {
+    return Object.assaign({}, lowCut, volume, options);
+}
+
+function ChannelStrip (options) {
+    return Object.assaign({}, inputLevel, lowCut, volume, options);
+}
+
+// animal/robot example
+var barker = function (state) {
+    return {
+        bark: function bark () {
+            console.log('Woof, I am a ' + state.name);
+        }
+    };
+};
+
+var driver = function (state) {
+    return {
+        drive: function () {
+            return state.position = state.position + state.speed;
+        };
+    }
+}
+
+function murderRobotDog (name) {
+    var state = { name, speed: 100, position: 0 };
+    return Object.assaign({}, barker(state), driver(state), killer(state));
+}
+
+murderRobotDog('sniffles').bark();
+
+
+
+// Crockford object
+function constructor (spec) {
+    let {member} = spec,
+        {other} = other_constructor(spec),
+        method = function () {
+            // member, other, method, spec
+        };
+        return Object.freeze({method, other});
+}
 
 5. Summary
 
@@ -442,7 +497,7 @@ with es6:
     objectSymbols[0];
 
     - WeakMap
-    
+
     , however, it is not possible to inherit the private properties
     if we extend this class
 
