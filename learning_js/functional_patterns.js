@@ -334,7 +334,7 @@ const Tuple = function () {
 const Status = Tuple(Boolean, String);
 
 ////
-// MONADS
+// FUNCTORS
 ////
 
 // basic container
@@ -398,7 +398,23 @@ Maybe.prototype.orElse = function (defaultValue) {
 // example usage
 // TODO: example usage
 
+////
+// MONADS
+////
+var IO = f => {
+    this.__value(f)
+}
+IO.of = x => {
+    return new IO(_ => x)
+}
+IO.map = f => {
+    return new IO(_.compose(f, this.__value))
+}
 
+//  $ :: String -> IO [DOM]
+var $ = selector => {
+    return new IO( _ => document.querySelectorAll(selector))
+}
 
 ////
 // Crockford Object

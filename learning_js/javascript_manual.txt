@@ -287,7 +287,37 @@ II. JavaScript OOP
 
 3. Classical OOP
 
+3.1 Classes
+
+function Dog (name) {
+    var self = this;
+    self.name = name;
+};
+Dog.prototype.bark = function () {
+    var self = this;
+    console.log('woof, woof, I am ' + self.name);
+    return self;
+};
+
+var sniffles = new Dog('Sniffles');
+sniffles.bark();
+
+3.2 Factory function
+
+var dog = function (state) {
+    var name = state.name;
+    return {
+        bark: function () {
+            console.log('woof, woof, I am ' + name);
+        }
+    }
+};
+
+var sniffles = dog({name: 'sniffles'});
+sniffles.bark();
+
 4. Prototypal OOP
+
 
 // Concatenative inheritance (mixins or $.extend())
 
@@ -299,15 +329,15 @@ var lowCut = { lowCut: 1 };
 var inputLevel = { inputLevel: 1 };
 
 function GuitarAmp (options) {
-    return Object.assaign({}, distortion, volume, cabinet, options);
+    return Object.assign({}, distortion, volume, cabinet, options);
 }
 
 function BaseAmp (options) {
-    return Object.assaign({}, lowCut, volume, options);
+    return Object.assign({}, lowCut, volume, options);
 }
 
 function ChannelStrip (options) {
-    return Object.assaign({}, inputLevel, lowCut, volume, options);
+    return Object.assign({}, inputLevel, lowCut, volume, options);
 }
 
 // animal/robot example
@@ -329,7 +359,7 @@ var driver = function (state) {
 
 function murderRobotDog (name) {
     var state = { name, speed: 100, position: 0 };
-    return Object.assaign({}, barker(state), driver(state), killer(state));
+    return Object.assign({}, barker(state), driver(state), killer(state));
 }
 
 murderRobotDog('sniffles').bark();
@@ -360,7 +390,106 @@ III. Javascript FP
     - With curried functions you get easier reuse of more abstract functions, since you get to specialize.
 2.2. Composition
 2.3. Partial application
-2.4. Monads
+2.4. Category Theory
+
+- is an abstract branch of mathematics that	can	formalize concepts from several
+different branches such	as set theory, type	theory,	group theory, logic, and more.
+It primarily deals	with:
+    - objects,
+    - morphisms,
+    - and transformations,
+    which mirrors programming quite	closely
+
+Category
+    - a collection of objects
+    - a collection of morphisms
+    - a notion of composition on morphisms
+    - a distinguished morphism called identity
+
+    - :: is read as "has type of"
+
+    - example:
+        - objects     - data types (Boolean is a set of [true, false])
+        - morphisms   - pure functions
+        - composition - the composition function
+        - identity    - the id function
+
+        //  g :: String -> Number
+        //  f :: Number -> Boolean
+
+        var g = x => x.length
+        var f = x => x === 4
+
+        var compose = (f, g) => x => f(g(x))
+
+        var isFourLetterWord = compose(f, g)
+
+        var id = x => x
+
+        Set Types [Int, String, Boolean, ...]
+
+        g      is path from String to Number
+        f      is path from Number to Boolean
+        f of g is path from String to Boolean
+
+        // identity
+        compose(id,	f) == compose(f, id) ==	f
+        // ;-> true
+
+
+
+Functors
+    - some generic container which implements a map operation
+    - the map operation returns new functor of the same type with transformed value
+
+    - the laws:
+        - transformation of contents
+        - maintains structure
+        - return a new functor
+
+    // array is the closest native thing to functor in js
+    var dragons = [{name: 'Fluffykins', health: 100},
+                   {name: 'Deathlord', health: 100},
+                   {name: 'Little pizza', health: 90}];
+
+    var names = dragons.map(dragon => dragon.name)
+
+Monads
+    - Functor that implements flatMap
+
+    - Monad Laws:
+        - Left identity
+
+            return x >>= f is the same damn thing as f x
+
+        - Right identity
+
+            m >>= return is no different than just m
+
+        - Associativity
+
+            Doing (m >>= f) >>= g is just like doing m >>= (\x -> f x >>= g)
+
+    var IO = f => {
+        this.__value(f)
+    }
+    IO.of = x => {
+        return new IO(_ => x)
+    }
+    IO.map = f => {
+        return new IO(_.compose(f, this.__value))
+    }
+
+    //  $ :: String -> IO [DOM]
+    var $ = selector => {
+        return new IO( _ => document.querySelectorAll(selector))
+    }
+
+
+
+Catamorphism
+    - reduce/fold is a implementation
+
 3. Vanilla Javascript fp style methods
     - .map()
     - .filter()
