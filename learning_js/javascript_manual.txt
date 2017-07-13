@@ -490,6 +490,30 @@ Monads
 Catamorphism
     - reduce/fold is a implementation
 
+2.5. Lambda Calculus
+
+x                      // variable name
+x => x                 // anonymous function
+(x => x)(4)            // function application
+
+x
+λx.x
+λx.x 4
+
+(x => x)(y => y)       // evaluates to y => y
+
+s => s(s)              // self application function
+
+(s => s(s))(x => x)    // x => x
+
+(s => s(s))(s => s(s)) // recursion
+
+f => x => f(x)
+
+(f => x => f(x))(x => x)(s => s(s))
+
+
+
 3. Vanilla Javascript fp style methods
     - .map()
     - .filter()
