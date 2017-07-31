@@ -470,15 +470,13 @@ Monads
 
             Doing (m >>= f) >>= g is just like doing m >>= (\x -> f x >>= g)
 
-    var IO = f => {
-        this.__value(f)
-    }
-    IO.of = x => {
-        return new IO(_ => x)
-    }
-    IO.map = f => {
+    var IO = function f (x) {
+        this.__value(x)
+    };
+    IO.of = x => new IO( _ => x)
+    IO.map = function (f) {
         return new IO(_.compose(f, this.__value))
-    }
+    };
 
     //  $ :: String -> IO [DOM]
     var $ = selector => {

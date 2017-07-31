@@ -93,3 +93,11 @@
 (num->digits 1024)
 
 (digits 1024)
+
+;;;; fibonacci
+(defn fibo-iter
+  ([n] (fibo-iter 0 1 n))
+  ([curr nxt n]
+   (cond
+     (zero? n) curr
+     :else (recur nxt (+ curr nxt) (dec n)))))

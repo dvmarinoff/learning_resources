@@ -401,20 +401,25 @@ Maybe.prototype.orElse = function (defaultValue) {
 ////
 // MONADS
 ////
-var IO = f => {
-    this.__value(f)
-}
-IO.of = x => {
-    return new IO(_ => x)
-}
-IO.map = f => {
-    return new IO(_.compose(f, this.__value))
-}
-
+var IO = function (f) {
+    this.__value(f);
+};
+IO.of = x => return new IO( _ => x)
+IO.map = function (f) {
+    return new IO(R.compose(f, this.__value));
+};
+ 
 //  $ :: String -> IO [DOM]
 var $ = selector => {
     return new IO( _ => document.querySelectorAll(selector))
 }
+
+
+
+
+
+
+
 
 ////
 // Crockford Object

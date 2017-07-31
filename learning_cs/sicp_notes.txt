@@ -191,7 +191,7 @@ and
 
 
 
-Equivalence Name
+Equivalence                         Name
 -------------------------------------------------------
 p ∧ T ≡ p
 p ∨ F ≡ p                           Identity laws
@@ -524,3 +524,668 @@ Rule of Inference             Name
 
 
 // 1.8 Proof Methods and Strategy
+
+- Exhaustive Proof and Proof by Cases
+
+    Exhaustive proofs
+
+    Proofs by cases
+
+    Without loss of generality
+
+    Common errors
+
+- Existence Proofs
+
+
+GODFREY HAROLD HARDY (1877–1947)
+
+
+
+SRINIVASA RAMANUJAN (1887–1920)
+
+
+
+- Uniqueness Proofs
+
+- Proof Strategies
+
+    Forward and Back Reasoning
+
+- Looking for Counterexamples
+
+
+////
+// Basic Structures: Sets, Functions, Sequences, Sums, and Matrices
+////
+
+2.1. Sets
+
+- Introduction
+
+a fundamental discrete structure on which all other discrete structures
+are built
+
+    Definition 1:
+    A set is an unordered collection of objects, called elements or members of
+    the set. A set is said to contain its elements. We write a ∈ A to denote
+    that a is an element of the set A. The notation a ∈ A denotes that a is not
+    an element of the set A.
+
+It is common for sets to be denoted using uppercase letters. Lowercase letters
+are usually used to denote elements of sets
+
+`roster method`:
+
+The set V of all vowels in the English alphabet can be written as
+V = {a, e, i, o, u}
+
+ellipses (...) are used when the general pattern of the elements is obvious
+
+`builder notation`:
+
+O = {x | x is an odd positive integer less than 10},
+
+or, specifying the universe as the set of positive integers, as
+
+O = {x ∈ Z + | x is odd and x < 10}.
+
+Some important sets:
+N = {0, 1, 2, 3, . . .}, the set of natural numbers
+Z = {. . . , −2, −1, 0, 1, 2, . . .}, the set of integers
+Z + = {1, 2, 3, . . .}, the set of positive integers
+Q = {p/q | p ∈ Z, q ∈ Z, and q = 0}, the set of rational numbers
+R, the set of real numbers
+R + , the set of positive real numbers
+C, the set of complex numbers.
+
+    NOTE:
+    Beware that mathematicians disagree whether 0 is a natural number.
+    We consider it quite natural.
+
+in:
+[a, b] = {x | a ≤ x ≤ b}
+[a, b] is called the closed interval
+(a, b) = {x | a < x < b}
+(a, b) is called the open interval
+
+Note that the concept of a datatype, or type, is built upon the concept of a set.
+Type is the name of a set, together with a set of operations that can be
+performed on objects from that set. For example:
+
+Boolean is the name of the set {0, 1} together with operators such as
+AND, OR, and NOT
+
+    Definition 2:
+    Two sets are equal if and only if they have the same elements. Therefore,
+    if A and B are sets, then A and B are equal if and only if
+    ∀x(x ∈ A ↔ x ∈ B). We write A = B if A and B are equal sets.
+
+The order or if an element is listed more than once does not matter.
+
+{1, 3, 3, 3, 5, 5, 5, 5} = {1, 3, 5},
+{1, 3, 5} = {3, 5, 1}
+
+
+GEORG CANTOR (1845–1918)
+is considered the founder of set theory. His contributions in this area include
+the discovery that the set of real numbers is uncountable. He is also noted for
+his many important contributions to analysis. Cantor also was interested in
+philosophy and wrote papers relating his theory of sets with metaphysics
+
+
+    Empty set (null set)
+    has no elements, denoted ∅ or {}
+
+    Singleton set
+    has one element
+    {∅} is not empty, but singleton set of one empty set
+
+    Naive set theory
+    This description of a set as a collection of objects, based on the intuitive
+    notion of an object, was first stated in 1895 by  Cantor. The theory that
+    results from this intuitive definition of a set, and the use of the
+    intuitive notion that for any property whatever, there is a set consisting
+    of exactly the objects with this property, leads to paradoxes, or logical
+    inconsistencies
+
+    Axiomatic set theory
+    These logical inconsistencies can be avoided by building set theory
+    beginning with axioms. But it is much more abstract.
+
+- Venn diagrams
+    graphical representation of sets.
+    U is the universal set
+
+- Subsets
+
+    Definition 3:
+    The set A is a subset of B if and only if every element of A is also an
+    element of B. We use the notation A ⊆ B to indicate that A is a subset
+    of the set B.
+
+BERTRAND RUSSELL (1872–1970)
+Russell’s greatest work was in his development of principles that could be used
+as a foundation for all of mathematics. His most famous work is Principia
+Mathematica, written with Alfred North Whitehead, which attempts to deduce all
+of mathematics using a set of primitive axioms. He wrote many books on
+philosophy, physics, and his political ideas. Russell won the Nobel Prize for
+literature in 1950
+
+
+
+Theorem 1 shows that every nonempty set S is guaranteed to have at least two
+subsets, the empty set and the set S itself,
+
+THEOREM 1:
+For every set S, (i ) ∅ ⊆ S and (ii ) S ⊆ S.
+
+
+
+JOHN VENN (1834–1923)
+Venn’s book Symbolic Logic clarifies ideas originally presented by Boole.
+Today Venn diagrams are primarily used to analyze logical arguments and to
+illustrate relationships between sets. He made contributions to probability
+theory described in his widely used textbook on that subject
+
+
+
+- The Size of a Set
+
+    Definition 4:
+    Let S be a set. If there are exactly n distinct elements in S where n is a
+    nonnegative integer, we say that S is a finite set and that n is the
+    cardinality of S. The cardinality of S is denoted by |S|.
+
+    Definition 5:
+    A set is said to be infinite if it is not finite.
+
+- Power Sets
+
+    Definition 6:
+    Given a set S, the power set of S is the set of all subsets of the set S.
+    The power set of S is denoted by P (S).
+
+    The power set of {1, 2, 3} is:
+    P({0, 1, 2}) = {∅, {0}, {1}, {2}, {0, 1}, {0, 2}, {1, 2}, {0, 1, 2}}
+
+    The power set of null set is:
+    P ({∅}) = {∅, {∅}}
+
+    If a set has n elements, then its power set has 2 ** n elements
+
+- Cartesian Products
+
+    Definition 7:
+    The ordered n-tuple (a 1 , a 2 , . . . , a n ) is the ordered collection
+    that has a 1 as its first element, a 2 as its second element, . . . ,
+    and a n as its nth element.
+
+In particular, ordered 2-tuples are called ordered pairs. The ordered pairs
+(a, b) and (c, d) are equal if and only if a = c and b = d
+
+RENÉ DESCARTES (1596–1650)
+he wrote several books, including the Discours, which contains his contributions
+to analytic geometry, for which he is best known. He also made fundamental
+contributions to philosophy
+
+
+
+    Definition 8:
+    Let A and B be sets. The Cartesian product of A and B, denoted by A × B,
+    is the set of all ordered pairs (a, b), where a ∈ A and b ∈ B. Hence,
+    A × B = {(a, b) | a ∈ A ∧ b ∈ B}.
+
+If A is all students and B is all courses:
+the Cartesian product A × B consists of all the ordered pairs of the form
+(a, b), where a is a student at the university and b is a course offered at
+the university. One way to use the set A × B is to represent all possible
+enrollments of students in courses at the university
+
+A = {1, 2} and B = {a, b, c}
+
+A * B = {(1, a), (1, b), (1, c), (2, a), (2, b), (2, c)}
+
+    Definition 9:
+    The Cartesian product of the sets A 1 , A 2 , ... , A n ,
+    denoted by A 1 × A 2 × ··· × A n , is the set of ordered n-tuples
+    (a 1 , a 2 , ... , a n ), where a i belongs to A i for i = 1, 2, ... , n.
+    In other words,
+    A 1 × A 2 × ··· × A n = {(a 1 , a 2 , ... , a n ) | a i ∈ A i for i = 1, 2, ... , n}.
+
+- Using Set Notation with Quantifiers
+
+∀x∈ S(P (x)) is shorthand for ∀x(x ∈ S → P (x))
+∃x∈ S(P (x)) is shorthand for ∃x(x ∈ S ∧ P (x))
+
+- Truth Sets and Quantifiers
+
+2.2. Set Operations
+
+- Introduction
+
+    Let A and B be sets. The union of the sets A and B, denoted by A ∪ B, is the
+    set that contains those elements that are either in A or in B, or in both
+
+A ∪ B = {x | x ∈ A ∨ x ∈ B}
+
+    Let A and B be sets. The intersection of the sets A and B, denoted by A ∩ B,
+    is the set containing those elements in both A and B
+
+A ∩ B = {x | x ∈ A ∧ x ∈ B}
+
+    Two sets are called disjoint if their intersection is the empty set
+
+Note that |A| + |B| counts each element that is in A but not in B or in B but
+not in A exactly once, and each element that is in both A and B exactly twice.
+Thus, if the number of elements that are in both A and B is subtracted from
+|A| + |B|, elements in A ∩ B will be counted only once. Hence,
+
+Principle of inclusion–exclusion:
+|A ∪ B| = |A| + |B| − |A ∩ B|
+
+    Let A and B be sets. The difference of A and B, denoted by A − B, is the set
+    containing those elements that are in A but not in B. The difference of
+    A and B is also called the complement of B with respect to A
+
+A − B = {x | x ∈ A ∧ x ∈ / B}
+
+    Let U be the universal set. The complement of the set A, denoted by A, is
+    the complement of A with respect to U . Therefore, the complement
+    of the set A is U − A
+
+A = {x ∈ U | x ∈ / A}
+
+- Set Identities
+
+Set identities and propositional equivalences are just special cases of
+identities for Boolean algebra
+
+
+Identity                           Name
+--------------------------------------------------------
+A ∩ U = A                          Identity laws
+A ∪∅= A
+--------------------------------------------------------
+A ∪ U = U                          Domination laws
+A ∩∅=∅
+--------------------------------------------------------
+A ∪ A = A                          Idempotent laws
+A ∩ A = A
+--------------------------------------------------------
+(A) = A                            Complementation law
+--------------------------------------------------------
+A ∪ B = B ∪ A                      Commutative laws
+A ∩ B = B ∩ A
+--------------------------------------------------------
+A ∪ (B ∪ C) = (A ∪ B) ∪ C          Associative laws
+A ∩ (B ∩ C) = (A ∩ B) ∩ C
+--------------------------------------------------------
+A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)    Distributive laws
+A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)
+--------------------------------------------------------
+A ∩ B = A ∪ B                      De Morgan’s laws
+A ∪ B = A ∩ B
+--------------------------------------------------------
+A ∪ (A ∩ B) = A                    Absorption laws
+A ∩ (A ∪ B) = A
+--------------------------------------------------------
+A ∪ A = U                          Complement laws
+A ∩ A =∅
+--------------------------------------------------------
+
+- Generalized Unions and Intersections
+
+    The union of a collection of sets is the set that contains those elements
+    that are members of at least one set in the collection
+                     n
+A1 ∪ A2 ∪ ... ∪ An = U Ai
+                     i=1
+
+     The intersection of a collection of sets is the set that contains those
+     elements that are members of all the sets in the collection
+                      n
+ A1 ∩ A2 ∩ ... ∩ An = ∩ Ai
+                      i=1
+
+- Computer Representation of Sets
+
+2.3. Functions
+
+- Introduction
+
+    Definition:
+    Let A and B be nonempty sets. A function f from A to B is an
+    assignment of exactly one element of B to each element of A. We write
+    f (a) = b if b is the unique element of B assigned by the function f to
+    the element a of A. If f is a function from A to B, we write f : A → B.
+
+    Remark: Functions are sometimes also called mappings or transformations.
+
+    Definition:
+    If f is a function from A to B, we say that A is the domain of
+    f and B is the codomain of f. If f (a) = b, we say that b is the image of a
+    and a is a preimage of b. The range, or image, of f is the set of all
+    images of elements of A. Also, if f is a function from A to B, we say that
+    f maps A to B.
+
+    Definition:
+    Let f1 and f2 be functions from A to R. Then f1 + f2
+    and f1 f2 are also functions from A to R defined for all x ∈ A by
+    (f1 + f2)(x) = f1(x) + f2(x),
+    (f1 f2)(x) = f1(x)f2(x).
+
+Let f1 and f2 be functions from R to R such that
+f1(x) = x ** 2 and f2(x) = x − x ** 2 .
+What are the functions f1 + f2 and f1 f2 ?
+
+From the definition of the sum and product of functions, it follows that:
+(f1 + f2)(x) = f1(x) + f2(x) = x ** 2 + (x − x ** 2 ) = x
+and
+(f1 f2)(x) = x ** 2 (x − x ** 2 ) = x ** 3 − x ** 4
+
+    Let f be a function from A to B and let S be a subset of A. The image of S
+    under the function f is the subset of B that consists of the images of the
+    elements of S. We denote the image of S by f (S), so
+    f (S) = {t | ∃s ∈ S (t = f (s))}.
+    We also use the shorthand {f (s) | s ∈ S} to denote this set.
+
+- One-to-One and Onto Functions
+
+    One-to-one:
+    A function f is said to be one-to-one, or an injunction, if and only if
+    f (a) = f (b) implies that a = b for all a and b in the domain of f.
+    A function is said to be injective if it is one-to-one
+
+
+
+    Onto:
+    A function f from A to B is called onto, or a surjection, if and only if for
+    every element b ∈ B there is an element a ∈ A with f (a) = b. A function f
+    is called surjective if it is onto
+
+
+
+    One-to-one correspondence:
+    The function f is a one-to-one correspondence, or a bijection, if it is
+    both one-to-one and onto. We also say that such a function is bijective.
+
+
+
+    Suppose that f : A → B
+    To show that f is injective Show that if f(x) = f(y) for arbitrary
+    x, y ∈ A with x  = y, then x = y
+
+    To show that f is not injective Find particular elements x, y ∈ A such that
+    x = y and f(x) = f(y)
+
+    To show that f is surjective Consider an arbitrary element y ∈ B and find
+    an element x ∈ A such that f(x) = y
+
+    To show that f is not surjective Find a particular y ∈ B such that
+    f(x) = y for all x ∈ A
+
+
+
+- Inverse Functions and Compositions of Functions
+
+    Let f be a one-to-one correspondence from the set A to the set B.
+    The inverse function of f is the function that assigns to an element b
+    belonging to B the unique element a in A such that f (a) = b. The inverse
+    function of f is denoted by f −1 . Hence, f −1 (b) = a when f (a) = b
+
+
+
+    Let g be a function from the set A to the set B and let f be a function from
+    the set B to the set C. The composition of the functions f and g, denoted
+    for all a ∈ A by f ◦ g, is defined by:
+    (f ◦ g)(a) = f (g(a))
+
+Remark: f ◦ g and g ◦ f are not equal. In other words, the commutative law does
+not hold for the composition of functions
+
+- The Graphs of Functions
+
+    Let f be a function from the set A to the set B. The graph of the function f
+    is the set of ordered pairs {(a, b) | a ∈ A and f (a) = b}
+
+- Some Important Functions
+
+the floor function
+
+the ceiling function
+
+JAMES STIRLING (1692–1770)
+In 1730 he published Methodus Differentialis, his most important work,
+presenting results on infinite series, summations, interpolation, and
+quadrature. It is in this book that his asymptotic formula for n! appears.
+Stirling also worked on gravitation and the shape of the earth; he stated, but
+did not prove, that the earth is an oblate spheroid
+
+- Partial Functions
+
+In abstract mathematics, we often want to discuss functions that are defined
+only for a subset of the real numbers, such as 1/x, x, and arcsin (x).
+Also, we may want to use such notions as the “youngest child” function,
+which is undefined for a couple having no children, or the “time of sunrise,”
+which is undefined for some days above the Arctic Circle
+
+    A partial function f from a set A to a set B is an assignment to each
+    element a in a subset of A, called the domain of definition of f , of a
+    unique element b in B. The sets A and B are called the domain and codomain
+    of f , respectively. We say that f is undefined for elements in A that are
+    not in the domain of definition of f . When the domain of definition of f
+    equals A, we say that f is a total function
+
+2.4. Sequences and Summations
+
+- Sequences
+
+    A sequence is a function from a subset of the set of integers (usually
+    either the set {0, 1, 2, . . .} or the set {1, 2, 3, . . .}) to a set S.
+    We use the notation a n to denote the image of the integer n. We call a n a
+    term of the sequence
+
+    A geometric progression is a sequence of the form:
+    a, ar, ar2 , ..., ar ** n, ...
+    where the initial term a and the common ratio r are real numbers
+
+Remark: A geometric progression is a discrete analogue of the exponential
+function f(x) = ar ** x
+
+    An arithmetic progression is a sequence of the form:
+    a, a + d, a + 2d, ... , a + nd, ...
+
+Remark: or f (x) = dx + a
+
+- Recurrence Relations
+
+    A recurrence relation for the sequence {a n } is an equation that expresses
+    a n in terms of one or more of the previous terms of the sequence, namely,
+    a0, a1, ..., a_n−1 , for all integers n with n ≥ n 0 , where n 0 is a
+    nonnegative integer. A sequence is called a solution of a recurrence
+    relation if its terms satisfy the recurrence relation
+
+    - initial conditions - for a recursively defined sequence specify the terms
+     that precede the first term where the recurrence relation takes effect
+
+    - closed formula - we say that we have solved the recurrence relation
+     together with the initial conditions when we find an explicit formula
+
+    - iteration - repeated use of the recurrence relation
+
+    - forward substitution - finding successive terms beginning with the initial
+     condition and ending with an
+
+ a 2 = 2 + 3
+ a 3 = (2 + 3) + 3 = 2 + 3 · 2
+ a 4 = (2 + 2 · 3) + 3 = 2 + 3 · 3
+ ...
+ a n = a n−1 + 3 = (2 + 3 · (n − 2)) + 3 = 2 + 3(n − 1)
+
+    - backward substitution - begin with an and iterate to express it in terms
+     of falling terms of the sequence until we found it in terms of a1
+
+ a n = a n−1 + 3
+ = (a n−2 + 3) + 3 = a n−2 + 3 · 2
+ = (a n−3 + 3) + 3 · 2 = a n−3 + 3 · 3
+ ...
+ = a 2 + 3(n − 2) = (a 1 + 3) + 3(n − 2) = 2 + 3(n − 1)
+
+    The Fibonacci sequence, f0 , f1 , f2 , ... , is defined by the initial
+    conditions f0 = 0, f1 = 1, and the recurrence relation
+    f_n = f_n−1 + f_n−2 for n = 2, 3, 4, ...
+
+
+Example: Compound Interest
+a0 = 10,000
+interest = 0.11
+
+an = a_n-1 + (a_n-1 * 0.11) = (1.11) * a_n-1
+
+a1 = (1.11) * a0
+a2 = (1.11) * (1.11) * a0 = (1.11) ** 2 * a0
+a3 = (1.11) ** 3 * a0
+
+an = (1.11) ** n * a0
+
+a30 = (1.11) ** 30 * 10000 = 22892297
+
+- Special Integer Sequences
+
+    1. Are there runs of the same value? That is, does the same value occur many
+     times in a row?
+    2. Are terms obtained from previous terms by adding the same amount or an
+     amount that depends on the position in the sequence?
+    3. Are terms obtained from previous terms by multiplying by a particular
+     amount?
+    4. Are terms obtained by combining previous terms in a certain way?
+    5. Are there cycles among the terms?
+
+- Summations
+
+
+
+
+      n
+    Sigma a_j
+    j = m
+
+    Sigma_m<=j<=n a_j
+
+(read as the sum from j = m to j = n of a j ) to represent
+
+a_m + a_m+1 + ... + a_n
+
+Here, the variable j is called the index of summation, and the choice of the
+letter j as the variable is arbitrary; that is, we could have used any other
+letter, such as i or k.
+The index of summation runs through all integers starting with its lower limit m
+and ending with its upper limit n
+
+NEIL SLOANE (BORN 1939)
+One of his favorite problems is the kissing problem (a name he coined), which
+asks how many spheres can be arranged in n dimensions so that they all touch a
+central sphere of the same size. (In two dimensions the answer is 6, because 6
+pennies can be placed so that they touch a central penny. In three dimensions,
+12 billiard balls can be placed so that they touch a central billiard ball.
+Two billiard balls that just touch are said to “kiss,” giving rise to the
+terminology “kissing problem” and “kissing number.”) Sloane, together with
+Andrew Odlyzko, showed that in 8 and 24 dimensions, the optimal kissing numbers
+are, respectively, 240 and 196,560. The kissing number is known in dimensions
+1, 2, 3, 4, 8, and 24, but not in any other dimensions. Sloane’s books include
+Sphere Packings, Lattices and Groups, 3d ed., with John Conway;
+The Theory of Error-Correcting Codes with Jessie MacWilliams;
+The Encyclopedia of Integer Sequences with Simon Plouffe (which has grown into
+the famous OEIS website);
+
+
+    Theorem:
+    If a and r are real numbers and r  = 0, then:
+                  { ar**n-1 - a
+      n           { ------------   if r != 1
+    Sigma ar**j = {   r - 1
+     j=0          {
+                  { (n + 1)a       if r = 1
+
+Double summations arise in many contexts (as in the analysis of nested loops in
+computer programs). An example of a double summation is:
+
+      4     3
+    Sigma Sigma i j
+     i=1   j=1
+
+         4                     4
+     = Sigma (i + 2i + 3i) = Sigma 6i = 6 + 12 + 18 + 24 = 60
+        i=1                   i=1
+
+
+Some Useful Summation Formulae
+------------------------------------------
+Sum                      Closed Form
+------------------------------------------
+  n                      ar**n+1 - a
+Sigma a*r**k (r!=0)      -----------, r!=1
+ k=0                        r - 1
+
+  n                      n(n + 1)
+Sigma k                  --------
+ k=1                        2
+
+  n                      n(n + 1)(2n + 1)
+Sigma k ** 2             ----------------
+ k=1                            6
+
+  n                      n**2 (n + 1)**2
+Sigma k ** 3             ---------------
+ k=1                             4
+
+ inf                       1
+Sigma x**k, |x| < 1      -----
+ k=0                     1 - x
+
+ inf                         1
+Sigma k*x**k-1, |x| < 1  ----------
+ k=1                     (1 - x)**2
+
+
+
+    Some infinite series
+
+2.5. Cardinality of Sets
+
+- Introduction
+
+- Countable Sets
+
+    Hilbert's Grand Hotel
+
+DAVID HILBERT (1862–1943)
+
+
+- An Uncountable Set
+
+    Results About Cardinality
+
+    SCHRÖDER-BERNSTEIN THEOREM If A and B are sets with |A| ≤ |B| and |B| ≤
+    |A|, then |A| = |B|. In other words, if there are one-to-one functions f
+    from A to B and g from B to A, then there is a one-to-one correspondence
+    between A and B.
+
+    Uncomputable functions
+
+    We say that a function is computable if there is a computer program in some
+    programming language that finds the values of this function. If a function
+    is not computable we say it is uncomputable.
+
+    The continuum Hypothesis
+
+2.6. Matrices
+
+- Introduction
+
+- Matrix Arithmetic
+
+- Transposes and Powers of Matrices
+
+- Zero–One Matrices

@@ -144,19 +144,26 @@ http://www.braveclojure.com/basic-emacs/
 
 C-c M-j - to jack in
 C-x C-e - at the end of a s-exp evaluates it
+C-c C-z - quick switch between repl and source buffer
 C-c C-d d - when cursor is over a function to display its doc
-M-. - jump to the source of a function
-M-, - to pop the stack and return where you were
+M-. - from repl jump to the source of a function
+M-, - to pop the stack and return where you were (go back from M-.)
 M-n - go forward in repl history
 M-p - go backward in repl history
 C-<up> - go forward in repl history
 C-<down> - go backward in repl history
 C-c M-o - to clear the repl
 
-C-c C-k - evaluate the whole buffer
+C-c C-k - evaluate the whole buffer (load the code)
 C-M-x   - evaluate
+C-c C-c - will break from a loop at the top level
+         of the cider repl (stop evaluation)
 
-C-c M-n - switch namespace in repl
+C-c M-n - set namespace in repl from list of available
+C-u C-c C-z - set namespace in repl to current and switch to it
+
+C-c M-t v - to select value for tracing
+C-c M-i - inspect a value like a nested map
 
     - checkout the use-packege syntax
     (use-package company
@@ -167,6 +174,10 @@ C-c M-n - switch namespace in repl
 
 C-c C-t n - run tests in a source buffer
 C-c C-t C-n - run tests in a REPL buffer
+
+NOTE:
+
+install which key for key binding tips
 
 WEB
 
