@@ -15,7 +15,7 @@
         java/
 
  sbt - starts sbt
- 
+
  console - starts Scala interpreter inside sbt (repl),
   which also loads code from project
 
@@ -27,7 +27,3 @@
 0.2. Basic syntax
 
 println("Oh, hai!")
-
-
-
- 

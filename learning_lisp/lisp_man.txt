@@ -163,7 +163,7 @@
     (setf x (list 'a 'b 'c))
     > (A B C)
 2.12. Functional Programming
-    - means writing programs that work br returning values, insted of by modifying things.
+    - means writing programs that work by returning values, instead of by modifying things.
     - remove - for example, takes an object and a list and return a new list without the object.
     (setf lst '(c a r a t))
     > (C A R A T)
@@ -332,7 +332,7 @@
 
 
 ////
-// 
+//
 ////
  - macros allow Clojure to derive a lot of its build in functionality
  from a tiny core of functions and special forms.
@@ -376,19 +376,3 @@
   ([x & next]
    `(let [and# ~x]
       (if and# (and ~@next) and#))))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

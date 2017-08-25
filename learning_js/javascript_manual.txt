@@ -652,6 +652,47 @@ with es6:
     , however, it is not possible to inherit the private properties
     if we extend this class
 
+V. Odd behavior
+
+1. Function definition
+
+Function declaration
+
+function add (x, y) {
+    return x + y;
+}
+
+Function expression
+
+var add = function (x, y) { return x + y; };
+
+
+Named function expression
+
+var add = function add (x, y) { return x + y; };
+
+
+Arrow function
+does not bind its own this, arguments, super, or new.target.
+best suited for non-method functions, and they cannot be used as constructors
+
+    - does not bind it's own this
+    - does not have a prototype property
+    - can't be called with new
+    - does not bind an arguments object
+    - in call() or apply() this is ignored
+
+var add = (x, y) => x + y
+var add = (x, y) => { return x + y; }
+
+(x, y) => x + y
+_ => 1 + 1
+
+In Strict Mode:
+    - starting with ES2015, functions inside blocks are now scoped to that block.
+     Prior to ES2015, block-level functions were forbidden in strict mode
+
+VI. Rise of the Transpilers (comparison)
 ////
 // clojurescript
 ////

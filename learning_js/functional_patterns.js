@@ -53,7 +53,7 @@ var factTR = function (n) {
 // tail recursive with default
 var factTRD = function (n, acc = 1) {
     if(n <= 1) return acc;
-    return factTDR(n - 1, n * acc );
+    return factTRD(n - 1, n * acc );
 };
 
 var factI = function (n) {
@@ -67,6 +67,13 @@ var factI = function (n) {
 };
 
 // console.log('factTR(100) -> ' + factTR(100));
+
+// reduce over lazy seq (not lazy in this case)
+var factF = n => Array.from({ length:n }, (v, k) => k + 1).reduce( (acc, x) => acc * x );
+
+// tramplines
+// continuation-passing style
+
 
 ////
 // MEMOIZATION
@@ -408,7 +415,7 @@ IO.of = x => return new IO( _ => x)
 IO.map = function (f) {
     return new IO(R.compose(f, this.__value));
 };
- 
+
 //  $ :: String -> IO [DOM]
 var $ = selector => {
     return new IO( _ => document.querySelectorAll(selector))
@@ -416,15 +423,12 @@ var $ = selector => {
 
 
 
-
-
-
-
-
 ////
 // Crockford Object
 ////
-// not much functional as just being a new pattern
+// not as much functional as just being a new pattern by Douglas Crockford.
+// It is much like the revealing module pattern with es6 destructuring and
+// Object.freeze() for security
 function constructor (spec) {
     let {member} = spec,
         {other} = other_constructor(spec),
@@ -433,3 +437,34 @@ function constructor (spec) {
         };
         return Object.freeze({method, other});
 }
+
+function Dollar (spec) {
+    let { amount = 0,
+          signiture = 'No signiture' } = spec;
+    const getAmount = _ => amount;
+    const getSigniture = _ => signiture;
+    const times = multiplier => Dollar(amount * multiplier);
+    const equals = money => true;
+    return Object.freeze({getAmount, getSigniture, times, equals, spec});
+}
+
+function Franc (spec) {
+    let { amount = 0,
+          signiture = 'No signiture' } = spec;
+    function getAmount () {
+        return amount;
+    }
+    function getSigniture () {
+        return signiture;
+    }
+    function times (multiplier) {
+        return Dollar(amount * multiplier);
+    }
+    function equals (money) {
+        return true;
+    }
+    return Object.freeze({getAmount, getSigniture, times, equals, spec});
+}
+
+const five = Dollar({ amount: 5, signiture: 'USD' });
+const ten = Franc({ amount: 10, signiture: 'CHF' });

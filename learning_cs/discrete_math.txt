@@ -852,6 +852,73 @@ A1 ∪ A2 ∪ ... ∪ An = U Ai
 
 2.3. Functions
 
+- wikipedia: in math, a function is a relation between a set of inputs and a set
+ of permissible outputs with the property that each input is related to exactly
+ one output
+
+- mathsisfun: a function relates each element of a set with exactly one element
+  of another set
+
+  - "...each element..." - means that every element in X is related to some
+   element in Y. We say that the function covers X (relates every element of it).
+   (But some elements of Y might not be related to at all, which is fine.)
+
+  - "...exactly one..." - one-to-many is not ok, but many-to-one is ok
+
+  - vertical line test - on a graph, the idea of single valued means that
+   no vertical line ever crosses more than one value
+
+  - domain, codomain and range
+    - the set "X" is called the Domain,
+    - the set "Y" is called the Codomain, and
+    - the set of elements that get pointed to in Y (the actual values produced
+     by the function) is called the Range
+
+  - ordered pairs
+    - another way to think about functions
+    (4.16)
+    (input, output)
+    (x, f(x))
+
+    - set of ordered pairs
+    {(2,4), (3,5), (7,3)}
+      - a benefit of ordered pairs is that we can graph them as coordinates
+
+
+input x --> [ function f ] --> output f(x)
+
+input | relationship | output
+   3  |     x * x    |    9
+   4  |     x * x    |   16
+   5  |     x * x    |   25
+
+   - functions process sets of things
+    - set of even numbers { -4, -2, 0, 2, 4 }
+    - set of clothes      { 'hat', 'shirt' }
+   - each individual thing is called a member (or element)
+   - function takes elements of a set and returns elements of a set
+
+- Set-Builder Notation
+
+  { x | x > 0 }
+  { x : x > 0 }
+
+  - it says "the set of all x's, such that x is greater than 0"
+
+  { x E R | x > 3 }
+
+  [3, infinity]
+
+  - E - means a member of
+  - R - stands for real numbers
+
+- Interval Notation
+
+  [0, 20]
+  - include 0 and 20
+  (0, 20)
+  - not 0 and 20
+
 - Introduction
 
     Definition:
@@ -1120,6 +1187,40 @@ computer programs). An example of a double summation is:
         i=1                   i=1
 
 
+Proof 1: Summation of N by Gauss
+
+  n
+Sigma i
+ i=1
+
+S(n) = 1 + 2 + 3 + 4 + ... + n
+
+rewrite in different order:
+S(n) = n + (n - 1) + (n - 2) + (n - 3) + ... + 4 + 3 + 2 + 1
+
+add the first and second rows right sides to double:
+2S(n) = n + 1 +((n - 1) + 2) + ((n - 2) + 3) + ((n - 3) + 4) ...
+2S(n) = (n + 1) + (n + 1) + (n + 1) + ... + (n + 1)
+
+2S(n) = n(n + 1)
+
+S(n) = n(n + 1)
+       --------
+          2
+
+Proof 2: Summation of N by Induction (finite arithmetic series)
+
+1) base case -> S(1)
+2) induction -> assume True for S(k) then must be True for S(k + 1)
+
+S(k + 1) = 1 + 2 + 3 + 4 + ... + k + k + 1
+
+S(k + 1) = k(k + 1)  + (k + 1) = k(k + 1) + 2(k + 1) = k(k + 1) + 2(k + 1) =
+           --------              --------   --------   -------------------
+              2                     2          2                2
+
+         = ( (k + 1)(k + 2) ) / 2 = ( (k + 1)((k + 1) + 1) ) / 2
+
 Some Useful Summation Formulae
 ------------------------------------------
 Sum                      Closed Form
@@ -1156,17 +1257,78 @@ Sigma k*x**k-1, |x| < 1  ----------
 
 - Introduction
 
+A function is called uncomputable if no computer program can be written
+to find all its values, even with unlimited time and memory. We will use the
+concepts in this section to explain why uncomputable functions exist
+
+    The sets A and B have the same cardinality if and only if there is a
+    one-to-one correspondence from A to B. When A and B have the same
+    cardinality, we write |A| = |B|
+
+    If there is a one-to-one function from A to B, the cardinality of A is less
+    than or the same as the cardinality of B and we write |A| ≤ |B|. Moreover,
+    when |A| ≤ |B| and A and B have different cardinality, we say that the
+    cardinality of A is less than the cardinality of B and we write |A| < |B|
+
 - Countable Sets
+
+    A set that is either finite or has the same cardinality as the set of
+    positive integers is called countable.A set that is not countable is called
+    uncountable. When an infinite set S is countable, we denote the cardinality
+    of S by א 0 (where א is aleph, the first letter of the Hebrew alphabet). We
+    write |S| = א 0 and say that S has cardinality “aleph null”
+
+Example:
+Show that the set of odd positive integers is a countable set.
+
+Solution:
+To show that the set of odd positive integers is countable, we will exhibit a
+one-to-one correspondence between this set and the set of positive integers.
+Consider the function:
+
+f (n) = 2n − 1    from Z+
+
+to the set of odd positive integers. We show that f is a one-to-one
+correspondence by showing that it is both one-to-one and onto. To see that it
+is one-to-one, suppose that f (n) = f (m). Then 2n − 1 = 2m − 1, so n = m.
+To see that it is onto, suppose that t is an odd positive integer. Then t is 1
+less than an even integer 2k, where k is a natural number.
+Hence t = 2k − 1 = f (k).
+
+An infinite set is countable if and only if it is possible to list the elements
+of the set in a sequence (indexed by the positive integers). The reason for this
+is that a one-to-one correspondence f from the set of positive integers to a set
+S can be expressed in terms of a sequence a1 , a2 , ..., an , ... , where
+a1 = f(1), a2 = f(2), ... , an = f (n), ...
 
     Hilbert's Grand Hotel
 
+    A paradox which takes advantage of infinite sets to show that we can always
+    accommodate a new guest at the Grand Hotel, even when all rooms are already
+    occupied
+
 DAVID HILBERT (1862–1943)
+He almost always worked on one area of mathematics at a time, making important
+contributions, then moving to a new mathematical subject (calculus of variations,
+geometry, algebra, number theory, logic, and mathematical physics).
+Also Hilbert is remembered for his famous list of 23 difficult problem.
+
+
+Examples of countable sets are:
+    all integers
+    positive rational numbers
 
 
 - An Uncountable Set
 
+    Not all infinite sets have the same size!
+
     Results About Cardinality
 
+    Theorem:
+    If A and B are countable sets, then A ∪ B is also countable.
+
+    Theorem:
     SCHRÖDER-BERNSTEIN THEOREM If A and B are sets with |A| ≤ |B| and |B| ≤
     |A|, then |A| = |B|. In other words, if there are one-to-one functions f
     from A to B and g from B to A, then there is a one-to-one correspondence
@@ -1184,8 +1346,436 @@ DAVID HILBERT (1862–1943)
 
 - Introduction
 
+A matrix is a rectangular array of numbers. A matrix with m rows and n columns
+is called an m × n matrix(pl. matrices). Two matrices are equal if they
+have the same number of rows and the same number of columns and the
+corresponding entries in every position are equal
+
 - Matrix Arithmetic
+
+Addition:
+Let A = [a ij ] and B = [b ij ] be m × n matrices. The sum of A and B,
+denoted by A + B, is the m × n matrix that has a ij + b ij as its (i, j )th
+element. In other words, A + B = [a ij + b ij ]
+
+Product:
+Let A be an m × k matrix and B be a k × n matrix. The product of A and B,
+denoted by AB, is the m × n matrix with its (i, j)th entry equal to the sum
+of the products of the corresponding elements from the ith row of A and the j th
+column of B. In other words, if AB = [c ij ], then
+
+c_ij = a i1 b1_j + a i2 b2_j + ... + a_ik b_kj
 
 - Transposes and Powers of Matrices
 
+The identity matrix of order n is the n × n matrix I n = [δ ij ],
+where δ ij = 1 if i = j and δ ij = 0 if i  = j . Hence
+
+    [ 1 0 ... 0 ]
+    [ 0 1 ... 0 ]
+I_n [ . . ... 0 ]
+    [ . . ... 0 ]
+    [ . . ... 0 ]
+    [ 0 0 ... 0 ]
+
+
+Let A = [a ij ] be an m × n matrix. The transpose of A, denoted by A t , is the
+n × m matrix obtained by interchanging the rows and columns of A.
+In other words, if A t = [b ij ], then
+
+b_ij = a j i for i = 1, 2, ... , n and j = 1, 2, ... , m.
+
+
+
+A square matrix A is called symmetric if A = A t. Thus A = [ a_ij ] is symmetric
+if a_ij = a j i for all i and j with 1 ≤ i ≤ n and 1 ≤ j ≤ n
+
 - Zero–One Matrices
+
+Let A = [ a_ij ] and B = [ b_ij ] be m × n zero–one matrices. Then the join of
+A and B is the zero–one matrix with (i, j )th entry a_ij ∨ b_ij . The join of
+A and B is denoted by A ∨ B. The meet of A and B is the zero–one matrix with
+(i, j )th entry a_ij ∧ b_ij . The meet of A and B is denoted by A ∧ B
+
+
+
+Let A = [a_ij ] be an m × k zero–one matrix and B = [b_ij ] be a k × n zero–one
+matrix. Then the Boolean product of A and B, denoted by A  B, is the m × n
+matrix with (i, j )th entry c_ij where
+
+c_ij = (a_i1 ∧ b_1j ) ∨ (a_i2 ∧ b_2j ) ∨ ... ∨ (a_ik ∧ b_kj ).
+
+
+
+Let A be a square zero–one matrix and let r be a positive integer.
+The rth Boolean power of A is the Boolean product of r factors of A
+The rth Boolean product of A is denoted by A[r] . Hence
+
+A[r] = A A A A } r times
+
+(This is well defined because the Boolean product of matrices is associative.)
+We also define A[0] to be I_n .
+
+////
+// Algorithms
+////
+
+3.1. Algorithms
+
+Many problems can be solved by considering them as special cases of
+general problems.
+
+- Introduction
+
+When presented with such a problem, the first thing to do is to construct
+a model that translates the problem into a mathematical context.
+Discrete structures used in such models include:
+sets, sequences, functions,
+permutations, relations, graphs, trees, networks,
+and finite state machines
+
+An algorithm is a finite sequence of precise instructions for performing a
+computation or for solving a problem.
+
+ABU JA‘FAR MOHAMMED IBN MUSA AL-KHOWARIZMI (C. 780 – C. 850)
+an astronomer and mathematician, was a member of the House of Wisdom, an academy
+of scientists in Baghdad. The name al-Khowarizmi means “from the town of
+Kowarzizm,” which was then part of Persia, but is now called Khiva and is part
+of Uzbekistan. al-Khowarizmi wrote books on mathematics, astronomy,
+and geography. Western Europeans first learned about algebra from his works.
+The word algebra comes from al-jabr, part of the title of his book
+Kitab al-jabr w’al muquabala.
+
+    - Properties of Algorithms
+    Input, Output, Definiteness, Correctness,
+    Finiteness, Effectiveness, Generality
+
+- Searching Algorithms
+
+The Linear Search
+
+
+The Binary Search
+
+When the list terms are sorted in order of increasing size
+
+- Sorting
+
+// The Bubble Sort
+
+Theta(n**n)
+
+// The Insertion Sort
+
+sorted and unsorted
+shift until in right place of sorted portion
+
+Pseudo-code 1:
+for i = 1 to n - 1
+    element = array[i]
+    j = i
+    while (j > 0 and array[j - 1] > element)
+        array[j] = array[j - 1]
+        j = j - 1
+    array[j] = element
+
+It is summation
+
+ n-1
+Sigma i = n(n - 1) = (n**2)/2 - n/2 = n**2 is dominant
+ i=1      --------
+             2
+Theta(n**2)
+Omega(n)
+
+// The Selection Sort
+
+sorted and unsorted
+current minimum
+swap with the first unsorted
+if itself leave it at position
+
+Pseudo-code 1:
+for 1 = 1 to n -1
+    min = 1
+    for j=i + 1 to n
+        if array[j] < array[min]
+            min = j
+    if min != i
+        swap array[min] and array[i]
+
+Similar to Insertion Sort summation
+Theta(n**2)
+Omega(n**2)
+
+// The Merge Sort
+
+
+
+- Greedy Algorithms
+
+Algorithms that make what seems to be the “best” choice at each step
+
+Greedy Change-Making Algorithm
+
+Pseudo-code 2:
+procedure change(c1, c2, ..., cr : values of denominations of coins, where
+    c1 > c2 > ... > c  ; n: a positive integer)
+    for i := 1 to r
+        d_i := 0 {d_i counts the coins of denomination c_i used}
+        while n ≥ c_i
+            d_i := d_i + 1 {add a coin of denomination c_i }
+            n := n − c_i
+    { d i is the number of coins of denomination c_i
+     in the change for i = 1, 2, ..., r }
+
+Lemma 1:
+If n is a positive integer, then n cents in change using quarters, dimes,
+nickels, and pennies using the fewest coins possible has at most two dimes, at
+most one nickel, at most four pennies, and cannot have two dimes and a nickel.
+The amount of change in dimes, nickels, and pennies cannot exceed 24 cents.
+
+Theorem 1:
+The greedy algorithm (Algorithm 6) produces change using the fewest coins
+possible.
+
+Greedy Algorithm for Scheduling Talks
+
+procedure schedule(s1 ≤ s2 ≤ ... ≤ s_n : start times of talks,
+    e1 ≤ e2 ≤ ... ≤ e_n : ending times of talks)
+    sort talks by finish time and reorder so that e1 ≤ e2 ≤ ... ≤ e_n
+    S := ∅
+    for j := 1 to n
+        if talk j is compatible with S then
+            S := S ∪ {talk j }
+    return S{ S is the set of talks scheduled }
+
+- The Halting Problem
+
+3.2. The Growth of Functions
+
+- Introduction
+
+- Big-O-Notation
+
+
+PAUL GUSTAV HEINRICH BACHMANN (1837–1920)
+
+
+EDMUND LANDAU (1877–1938)
+
+
+DONALD E. KNUTH (BORN 1938)
+
+
+- Big-O Estimates for some important Function
+
+Theorem 1:
+Let f (x) = a_n*x**n + a_n−1*x**n−1 + ... + a_1x + a_0 ,
+where a0 , a1 , ... , a_n−1 , a_n are real numbers.
+Then f(x) is O( x**n ).
+
+^
+|
+|    n!
+|
+|    2**n
+|
+|    n**2
+|
+|    n log n
+|
+|    n
+|
+|    log n
+|
+|    1
+----------------------------->
+
+    - Useful Big-O Estimates involving logarithms, powers,
+     and exponential functions
+
+- The Growth of Combinations of Functions
+
+Theorem 2:
+Suppose that f1(x) is O( g1(x) ) and that f2(x) is O( g2(x) ).
+Then (f1 + f2)(x) is O( max(|g1(x)|, |g2(x)|) )
+
+Corollary 1:
+Suppose that f1(x) and f2(x) are both O( g(x) ). Then (f1 + f2)(x) is O( g(x) )
+
+
+Theorem 3:
+Suppose that f1(x) is O( g1(x) ) and f2(x) is O( g2(x) ).
+Then (f1 f2)(x) is O( g1(x)g2(x) )
+
+
+
+- Big-Omega and Big-Theta Notation
+
+Theorem 4:
+Let f(x) = a_n*x**n + a_n−1*x**n−1 + ... + a1x + a0, where a0, a1, ... ,
+a_n are real numbers with a_n != 0. Then f(x) is of order x**n
+
+Unfortunately, as Knuth observed, big-O notation is often used by careless
+writers and speakers as if it had the same meaning as big-Theta notation.
+Keep this in mind when you see big-O notation used. The recent trend has been
+to use big-Theta notation whenever both upper and lower bounds on the size of
+a function are needed
+
+3.3. Complexity of Algorithms
+
+- Introduction
+
+- Time Complexity
+
+- Complexity of Matrix Multiplication
+
+- Algorithmic Paradigms
+
+- Understanding the Complexity of Algorithms
+
+P versus NP
+
+STEPHEN COOK (BORN 1939)
+
+
+
+...
+
+// Here follows a list of random notes on math topics
+
+////
+// Combinations and Permutations
+////
+
+Combination - when order doesn't matter
+Permutation - ordered Combination
+
+- Permutations
+
+  - Permutations with repetition
+   When a thing has n different things we have n choices each time
+
+  For example: choosing 2 of those things, the permutations are:
+
+  n * n * n
+
+  More generally: choosing r of something that has n different types,
+  the permutations are:
+
+  n * n * ... (r times) = n ^ r
+
+  - Permutations without repetition
+  In this case, we have to reduce the number of available choices
+  each time:
+
+  16 * 15 * 14 * 13 * ... = 20922789888000
+
+  or if we need only 3:
+
+  16 * 15 * 14 = 3360
+
+////
+// Trigonometry
+////
+
+1. wikipedia:
+  - from greek trigonon (triangle) and metron measure
+  - a branch of math that studies relationships involving lengths and angles
+   of triangles
+  - emerged in the Hellenistic world during 3rd c. B.C. from applications of
+   geometry to astonomical studies
+  - if at least the length of one side and the value of one angle is known all
+   can be determined
+  - since any non-right-angle-triangle(on a flat plane) can be bisected to
+   create two right-angle triangles, most problems can be reduced to
+   calculations on right-angle triangles. One exception is spherical trigonometry
+
+  Sine = Opposite / Hypotenuse     - SOH
+  Cosine = Adjecent / Hypotenuse   - CAH
+  Tangent = Opposite / Adjecent    - TOA
+
+  Some Old Hippie Caught Another Hippie Trippin' On Acid
+
+////
+// Vectors
+////
+    - a vector has magnitude (size) and direction
+    - the length of the line shows its magnitude and the arrowhead points
+     in the direction
+
+        magnitude
+    --- ---------> --- direction
+      tail     head
+
+          -->
+      a = AB
+
+    - velocity, acceleration, force and many other things are vectors
+    - subtracting
+      - first we reverse the direction of the vector we want to subtract,
+      - then add them as usual
+
+    - calculations
+      - most common way is to first break up vectors into x and y parts
+
+         x  y
+    a = (8.13)
+    b = (26.7)
+
+    c = a + b
+    ax + bx = 8 + 26 = 34
+    ay + by = 13 + 7 = 20
+
+    c = (34.20)
+
+    - magnitude
+    |a| or ||a||
+
+    |a| = cqrt(x*x + y*y)
+
+    - scalar
+     - a scalar has magnitude (size) only
+     - when we multiply a vector by a scalar it is called "scaling" a vector,
+      because we change how big or small the vector is
+
+////
+// Calculus
+////
+//TODO: move this in the begging of separate piece on calculus
+1. Intro
+
+- Sam and Alex are traveling in the car ... but the speedometer is broken.
+ ...
+ "No, Sam! Not our average for the last minute, or even the last second,
+ I want to know our speed RIGHT NOW."
+
+ Think about it ... how do we figure out a speed at an exact instant in time?
+ What is the distance? What is the time difference?
+ They are both zero, giving us nothing to calculate with!
+
+ But Sam has an idea ... invent a time so short it won't matter.
+
+  delta t
+
+ So Sam works out the difference in distance between t and (t + delta t)
+
+
+- The word Calculus comes from Latin meaning "small stone". Because it is like
+ understanding something by looking at small pieces
+
+ - Differential Calculus cuts something into small pieces to find how it changes
+
+ - Integral Calculus joins (integrates) the small pieces together to find how
+  much there is
+
+ - and Differential Calculus and Integral Calculus are like inverses of each
+  other, just like multiplication and division are inverses
+
+////
+// Logarithms
+////
+- How many of one number do we multiply to get another number?
+
+x * x = log x y

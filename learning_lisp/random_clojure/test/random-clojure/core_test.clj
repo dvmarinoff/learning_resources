@@ -1,4 +1,4 @@
-(ns progfun.core-test
+(ns random-clojure.core-test
   (:require [clojure.test :refer :all]
             [progfun.core :refer :all]))
 

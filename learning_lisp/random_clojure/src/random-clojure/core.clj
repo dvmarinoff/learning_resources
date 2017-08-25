@@ -1,4 +1,4 @@
-(ns progfun.core
+(ns random-clojure.core
   (:gen-class))
 
 (defn -main

@@ -1,0 +1,186 @@
+////
+// Computability Theory
+////
+
+////
+// History of Computability
+////
+- Georg Cantor
+    - counting sets by mapping them to each other
+    - bijection - exact matching by mapping
+
+    - diagonalization method
+
+    0    1
+    |----|
+
+    0    2    3
+    |----|----|
+
+    - there is infinite numbers between 0 and 1
+    - N < (1 , 0)
+    - Continuum problem - is there N < x < (0 , 1)
+                        - is unsolvable
+
+- David Hilbert
+    - Entscheidungsproblem
+
+    Is there an Algorithm that given a statement in formal logic will determine
+    if that statement is true or false?
+
+    - he was depending on logic to be complete meaning:
+    every provable statement is true and every true statement is provable
+
+- Kurt Godel
+    A math systems should be:
+        - sufficiently expressive
+        - completeness - ability to prove every true statement
+
+        axioms -> theorems -> proofs
+
+        principal of explosion
+        - "bigs can fly" || "unicorns exist"
+        - "unicorns don't exist" || "unicorns exist"
+
+        - inconsistent system can prove anything
+
+
+    - first incompleteness theorem
+        - any sufficiently expressive math system must be either incomplete or
+         inconsistent
+
+         - if add incomplete statements as axiom a new system is created
+
+    - second incompleteness theorem
+        - a consistent math system cant prove its own consistency
+
+
+    - after Alonzo Church solution:
+        - General recursive functions
+
+- Alonzo Church
+    - lambda calculus - a macro language for logic
+
+    L,M,N ::= x
+            | (lambda x.N)
+            | (L M)
+
+    - The Halting Problem
+        - 'how to catch an infinite loop?'
+
+        Program   ->   Decider      <-   Input
+                       Algorithm
+
+                          |
+                     Halts or not
+
+    - undecidable problem
+    - Proof by contradiction used
+    - with Cantors' diagonalization
+
+- Alan Turing
+
+    - Turing machines
+
+        - if turing machine is the definition of algorithm then the
+         Entschaidungsproblem is undecidable
+
+    - the three definitions turned out to be equivalent
+
+
+
+- Gerhard Gentzen
+    - Natural Deduction
+
+- Curry - Howard correspondence
+
+               propositions as types
+                     proofs as programs
+    normalisation of proofs as evaluation of programs
+
+
+                     Natural Deduction <--> Typed Lambda Calculus
+                     Gentzen (1935)         Church (1940)
+
+                          Type Schemes <--> ML Type System
+                          Hindley (1969)    Milner (1975)
+
+                              System F <--> Polymorphic Lambda Calculus
+                              Girard (1972) Reynolds (1974)
+
+                           Modal Logic <--> Monads(state, exceptions)
+                           Lewis (1910)     Kleisli (1965) Moggi (1987)
+
+    Classical-Intuitionistic Embedding <--> Continuation Passing Style
+    Godel (1933)                            Reynolds (1972)
+
+                                     ? <--> Concurrency and Distribution
+
+    - and there is a third column that corresponds to category theory
+
+////
+// Church encoding
+////
+
+λv.e
+  - stands for the function that maps the input v to the output e
+
+  - λ - introduces a function
+  - v - is the name of the input
+  - . - 'body' of function
+  - e - output in terms of the input
+
+  - Why is it important?
+      - Can encode any computation
+      - Basis for functional programming (ml family languages are compiled down
+       to small core language, which is a glorified version of lambda calculus)
+
+  - it has only three constructs:
+      - variables - x, y, z, ...
+      - function definition - λ
+      - function application
+
+  λx . x + 1
+
+  (x) => x + 1;
+
+  λx . λy . x + y
+
+  (x, y) => (y) => x + y;
+
+  - function application
+
+  (λx . x + 1) 5
+
+  - True - from two things return the first
+  - False - choose the second
+
+  True = λx . λy . x
+
+  False = λx . λy . y
+
+  Not = λb . b False True
+
+  - Example:
+
+  (λb . b False True) True
+  True False True
+  (λx . λy . x) False True
+  False
+
+  - Y combinator - the key to doing recursion in lambda calculus
+
+  Y = λf . (λx . f(x x)) (λx . f(x x))
+
+Y(F) = F(Y(F))
+
+function Y(F) { return F(Y(F)) ; }
+
+Y(F) = F(λ x.(Y(F))(x))
+
+function Y(F) { return F(function (x) { return (Y(F))(x) ; } ) ; }
+
+Church black box like pure functions
+Turing used state
+
+Everything is simply a value, numbers are like functions
