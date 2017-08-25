@@ -15,17 +15,17 @@ notes, summaries and task solutions on computer programming subjects
 
   - javascript in learning_js/:
 
-    - The javascript manual
+        - The javascript manual
 
-    - Functional Programming Concepts and Patterns in javascript
+        - Functional Programming Concepts and Patterns in javascript
 
-    - TODO: OOP Concepts and Patterns in javascript
+        - TODO: OOP Concepts and Patterns in javascript
 
   - lisps in learning_lisp/:
 
-    - notes from Paul Graham's Common Lisp
+        - notes from Paul Graham's Common Lisp
 
-    - notes from Clojure for the Brave and True
+        - notes from Clojure for the Brave and True
 
         - TODO: merge with notes from clojure_manual
 
@@ -37,6 +37,6 @@ notes, summaries and task solutions on computer programming subjects
 
     Mans and cheetsheet for great tools:
 
-    - Emacs
+        - Emacs
 
-    - TODO: Bash
+        - TODO: Bash
