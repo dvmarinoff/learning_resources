@@ -57,7 +57,57 @@ String
 null
 ------
 
-Object and String are Classes in Java and are defined through the language itself not a part from it, but just the standart libraries.
+Object and String are Classes in Java and are defined through the language
+itself not a part from it, but just the standart libraries.
 
+- Intuition for Data Structures
+    - a structure for keeping data (no shit)
+    - different ways to keep and organise data
+    - difined operations on the structured data
+    - often the algorithmic complexity of these operations is important
+    - needs implementation else it is just abstract data type
 
+    - Array
+        - native in Java
+        - it contains fixed number of elements of one type (in Java)
+        - elements are kept in the same place in memory(all elements are next to each other)
+            - which is the main differnce from vector/list
+        - operartions:
+            - create array with type and size
+            - access elements by index
+            - change value of element by index
+            - take length of array
 
+    int[] arr = {1, 2, 3, 4};
+
+        - in pseudo code:
+
+        operation                          - time complexity in Java
+        --------------------------------------------------------------
+        array = createArray(type, size)    - O(n) *** | linear in Java
+        element - getElement(array, index) - O(1)
+        setElement(array, index, value)    - O(1)
+        len = length(array)                - O(1)
+
+    - two styles of implementation:
+    operation(stracture, data)
+    structure.operation(data)
+
+    - ArrayList
+        - is the implementation of List/Vector in Java similar to the List in python and ruby
+        - it allows for growing data
+            - there are ListArray and ListVector - the last is synchronized
+            - A Vector defaults to doubling the size of its array, while the ArrayList increases its array size by 50 percent
+
+    ArrayList<String> langs = new ArrayList<String>();
+    langs.add("Java");
+    langs.add("Python");
+
+    - HashMap
+        - key value pairs
+
+    HashMap<String, String> typings = new HashMap<>();
+    typings.put("Java", "Static");
+    typings.put("Python", "Dynamic");
+
+- Linear Data Structures

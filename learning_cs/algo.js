@@ -1,15 +1,5 @@
 var sorting = (function () {
-    // -- Haskell
-    // insert :: Int -> [Int] -> [Int]
-    // insert x [] = [x]
-    // insert x (y:ys) = if x < y
-    //                  then x:y:ys
-    //                  else y : insert x ys
-    //
-    // insertionSort :: [Int] -> [Int]
-    // insertionSort [x] = [x]
-    // insertionSort (x:xs) = insert x (insertionSort xs)
-
+    'use strict';
     //    swap :: Int, Int, [Int] -> [Int]
     const swap = (x, y, arr) => {
         let b = arr[y];
@@ -24,8 +14,8 @@ var sorting = (function () {
         }
         return arr;
     }
-    //  insertionSort :: Int, Int, [Int] -> [Int]
-    var insertionSort = function (i, len, arr) {
+    //    insertionSort :: Int, Int, [Int] -> [Int]
+    const insertionSort = (i, len, arr) => {
         console.log(arr); // uncomment to log sorting steps
         if(i < len) {
             insertionSort(i+1, len, insert(i, arr));
@@ -33,20 +23,36 @@ var sorting = (function () {
         return arr;
     };
 
-    var insertionBinarySort = function (arr) {
+    //    insertionBinarySort :: [Int] -> [Int]
+    const insertionBinarySort = (arr) => {
         // TODO:
         return arr;
     };
+    //    selectionSort :: [Int] -> [Int]
+    const selectionSort = (arr) => {
+        return arr;
+    };
+    //    bubbleSort :: [Int] -> [Int]
+    const bubbleSort = (arr) => {
+        return arr;
+    };
+    //    mergeSort :: [Int] -> [Int]
+    const mergeSort = (arr) => {
+        return arr;
+    };
+    //    heapSort :: [Int] -> [Int]
+    const heapSort = (arr) => {
+        return arr;
+    };
+    //    quickSort :: [Int] -> [Int]
+    const quickSort = (arr) => {
+        return arr;
+    };
+    //    librarySort :: [Int] -> [Int]
+    const librarySort = (arr) => {
+        return arr;
+    };
 
-    var mergeSort = function (arr) {
-        return arr;
-    };
-    var heapSort = function (arr) {
-        return arr;
-    };
-    var quickSort = function (arr) {
-        return arr;
-    };
     return {
         insertionSort: insertionSort,
         mergeSort: mergeSort,
@@ -98,6 +104,18 @@ var searching = (function () {
 
 ;(function () {
     'use strict';
+
+    // just playing with some stuff
+    // -- Haskell
+    // insert :: Int -> [Int] -> [Int]
+    // insert x [] = [x]
+    // insert x (y:ys) = if x < y
+    //                  then x:y:ys
+    //                  else y : insert x ys
+    //
+    // insertionSort :: [Int] -> [Int]
+    // insertionSort [x] = [x]
+    // insertionSort (x:xs) = insert x (insertionSort xs)
 
     var arr = [-4, 3, -9, 0, 4, 1, 14, 6  ,3, 0, 0, 0, 0, -1, -2, -3 , 4];
     var n = 8;//arr.length;
@@ -190,6 +208,4 @@ var searching = (function () {
         if(n === 0) return acc;
         return fact(n - 1, n * acc);
     }
-
-
 }());

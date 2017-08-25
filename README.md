@@ -32,3 +32,11 @@ notes, summaries and task solutions on computer programming subjects
   - TODO: haskell, purescript, scala
 
   - currently learning_scala/ and learning_haskell/ are delayed
+
+- Tools:
+
+    Mans and cheetsheet for great tools:
+
+    - Emacs
+
+    - TODO: Bash
