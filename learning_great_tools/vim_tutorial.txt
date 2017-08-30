@@ -1,0 +1,62 @@
+/**/
+- Insert Mode
+- Text Manipulation Mode
+
+- Basic Movement
+h,j,k,l - left, down, up, right
+i       - insert
+<esc>   - return to normal mode
+
+- Speak in Sentances
+- Verbs:
+c       - change
+d       - delete
+v       - visually select
+y       - yank(copy)
+p       - put(paste)
+.       - repeat
+u       - undo
+
+- Nouns:
+$       - end of line
+^       - beginning of line
+w       - word
+s       - sentence
+b       - block
+
+- Modifiers:
+t[letter]       - to[letter]
+i               - inside
+5               - do 5 times
+[verb twice]    - execute on the entire line
+
+- Putting it Together:
+d$      - delete to end of line
+ciw     - change inside word
+ci"     - change inside quotes
+.       - do that again
+vt<     - visually select to carat
+yy      - yank current line
+5p      - put yanked text into buffer 5 times
+3dd     - delete current line three times
+
+- Buffers, Windows and Tabs:
+
+- Commands:
+:w      - write to [file]
+:e      - edit [file]
+:sp     - open [file] in split window
+:vs     - open [file] in vertically split window
+:tabnew - open a new tab
+:tabf   - open [file] in a new tab
+
+- Configuration:
+.vimrc file stores aliases
+
+- Plugins:
+// alanctkc dotfiles
+
+- Go Back or CTRL + Z
+
+in normal mode: u
+CTRL + R to redo
