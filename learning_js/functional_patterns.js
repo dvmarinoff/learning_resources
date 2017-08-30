@@ -197,6 +197,16 @@ var add = curry(function (x, y) {
     return x + y;
 });
 
+// Partial application
+const partial = (fn, ...fixedArgs) => {
+  return function (...remainingArgs) {
+    return fn.apply(this, fixedArgs.concat(remainingArgs));
+  };
+};
+
+const add = (a, b) => a + b;
+const inc = partial(add, 1);
+
 ////
 // COMPOSITION
 ////

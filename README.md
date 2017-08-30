@@ -15,11 +15,11 @@ notes, summaries and task solutions on computer programming subjects
 
   - javascript in learning_js/:
 
-    - The javascript manual
+        - The javascript manual
 
-    - Functional Programming Concepts and Patterns in javascript
+        - Functional Programming Concepts and Patterns in javascript
 
-    - TODO: OOP Concepts and Patterns in javascript
+        - TODO: OOP Concepts and Patterns in javascript
 
   - lisps in learning_lisp/:
 

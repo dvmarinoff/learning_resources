@@ -157,6 +157,22 @@ I. Javascript Basics
 
 - .assign() -
 
+- .freeze() - prevents new properties from being added to it;
+              prevents existing properties:
+                from being removed
+                or their enumerability, configurability, or writability, from
+                being changed
+              prevents the prototype from being changed
+
+            - in contrast const creates immutable binding, i. e. cannot assaign
+             new value to binding
+
+- .seal()   - seals an object,
+            prevents new properties from being added
+            marks all existing properties as non-configurable
+            Values of present properties can still be changed as long as they
+            are writable
+
 3. The Function
 
 - arguments -
@@ -197,6 +213,23 @@ I. Javascript Basics
        var y    - is declaration
 
 - closures
+    - A closure is a persistent local variable scope
+
+    A closure is a persistent scope which holds on to local variables even after
+    the code execution has moved out of that block. Languages which support
+    closure (such as JavaScript, Swift and Ruby) will allow you to keep a
+    reference to a scope (including its parent scopes), even after the block in
+    which those variables were declared has finished executing, provided you
+    keep a reference to that block or function somewhere.
+
+    The scope object, and all its local variables, are tied to the function, and
+    will persist as long as that function persists.
+
+    This gives us function portability. We can expect any variables that were in
+    scope when the function was first defined to still be in scope when we later
+    call the function, even if we call the function in a completely different
+    context.
+
     - are techniques for implementing lexically scoped name binding in languages with first-class functions.
      Operationally, a closure is a record storing a function[a] together with an environment.
 

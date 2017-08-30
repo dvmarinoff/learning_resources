@@ -93,39 +93,24 @@ var searching = (function () {
     var testArray = [1, 3, 2, 8, 4, 2, 10, 9 , 8, 7, 6, 5, 1, 14];
     var sortedArray = [1, 2, 3, 4, 5, 6, 7, 8, 10, 14];
     var reversedArray = [14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-
+    var emptyArray = [];
+    var smallArray = [1, 2, 3, 4];
     // var insertionSort = sorting.insertionSort(0, reversedArray.length, reversedArray);
     // console.log(insertionSort);
 
-    var binarySearch = searching.binarySearch(14, 0, sortedArray.length-1, sortedArray);
+    //var binarySearch = searching.binarySearch(14, 0, sortedArray.length-1, sortedArray);
     // console.log(binarySearch);
     // console.log(sortedArray[binarySearch] == 14);
 }());
 
-;(function () {
+var digitOperations = (function () {
     'use strict';
-
-    // just playing with some stuff
-    // -- Haskell
-    // insert :: Int -> [Int] -> [Int]
-    // insert x [] = [x]
-    // insert x (y:ys) = if x < y
-    //                  then x:y:ys
-    //                  else y : insert x ys
-    //
-    // insertionSort :: [Int] -> [Int]
-    // insertionSort [x] = [x]
-    // insertionSort (x:xs) = insert x (insertionSort xs)
-
-    var arr = [-4, 3, -9, 0, 4, 1, 14, 6  ,3, 0, 0, 0, 0, -1, -2, -3 , 4];
-    var n = 8;//arr.length;
-
+    // Big Integer with arithmetic on digits in array
     const add = (x, y) => x => y => x + y
     const inc = add(1)
     const sum = (acc, x) => acc + x
     const product = (acc, x) => acc * x
     const absDiff = (x, y) => Math.abs(x - y)
-
 
     const pos = x => x > 0
     const neg = x => x < 0
