@@ -1577,19 +1577,19 @@ Then f(x) is O( x**n ).
 
 ^
 |
-|    n!
+|    n!                        Factorial
 |
-|    2**n
+|    2**n                      Exponential
 |
-|    n**2
+|    n**2                      Polynomial
 |
-|    n log n
+|    n log n                   Linearithmic
 |
-|    n
+|    n                         Linear
 |
-|    log n
+|    log n                     Logarithmic
 |
-|    1
+|    1                         Constant complexity
 ----------------------------->
 
     - Useful Big-O Estimates involving logarithms, powers,

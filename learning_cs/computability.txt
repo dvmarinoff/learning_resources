@@ -6,6 +6,7 @@
 // History of Computability
 ////
 - Georg Cantor
+    Naive set theory:
     - counting sets by mapping them to each other
     - bijection - exact matching by mapping
 
@@ -22,51 +23,99 @@
     - Continuum problem - is there N < x < (0 , 1)
                         - is unsolvable
 
-- David Hilbert
-    - Entscheidungsproblem
+- Bertrand Russell
+    The paradoxes of naive set theory:
+    The Barber paradox
+    The set of all sets that doesn't contain themselves as members?
 
+- David Hilbert
+    Entscheidungsproblem (decision problem)
+    - could an effective procedure be devised which would demonstrate in a
+     finite time whether any given mathematical proposition was, or was not,
+     provable from a given set of axioms
+
+    The second problem on his famous list of 22 unsolved problems was:
+    2) prove math is consistent
+
+    He was depending on logic to be complete meaning:
+    every provable statement is true and every true statement is provable
+
+    Since Euclid it was believed that every problem can be solved.
+    Proves were devised the same way he did in Elements:
+    from a set of axioms like a+b = b+a
+    Even Fermat's last theorem was solved after 320 years.
+    So all of math can be derived from a small set of axioms?
+
+    But the challenge is to finally prove that believe:
     Is there an Algorithm that given a statement in formal logic will determine
     if that statement is true or false?
 
-    - he was depending on logic to be complete meaning:
-    every provable statement is true and every true statement is provable
+    Is an axiom just something we cannot prove and add to a system?
+    Can a system stay consistent after we keep appending to it?
 
 - Kurt Godel
-    A math systems should be:
-        - sufficiently expressive
-        - completeness - ability to prove every true statement
+    Inconsistency or Incompletness:
+    In 1930 published prove to his Incompletness theorem where,
+    he showed that any logic powerful enough to represent arithmetic
+    could encode the statement:
 
-        axioms -> theorems -> proofs
-
-        principal of explosion
-        - "bigs can fly" || "unicorns exist"
-        - "unicorns don't exist" || "unicorns exist"
-
-        - inconsistent system can prove anything
-
+    'This statement is not provable'
+        - if it is False then it is provable, (and proves something false!)
+        - else it is True, but not provable, (annoying incompletness)
+        (Liar's paradox with provability)
 
     - first incompleteness theorem
         - any sufficiently expressive math system must be either incomplete or
-         inconsistent
+        inconsistent
 
-         - if add incomplete statements as axiom a new system is created
+        - if add incomplete statements as axiom a new system is created
 
     - second incompleteness theorem
         - a consistent math system cant prove its own consistency
 
+    - Godel numbering
+    He found a way to for math to talk about itself by using 'Godel numbering'
+    to encode statements and proofs as numbers (this is why he depended on
+    arithmetic). This was one of the first functional programs.
 
-    - after Alonzo Church solution:
-        - General recursive functions
+    // TODO: Godel numbering from numberphile
+    // TODO: find more sources on Godel numbering
+
+    A math systems should be:
+        - sufficiently expressive
+        - complete - ability to prove every true statement
+
+        principal of explosion
+        - "bigs can fly" || "unicorns exist"
+        - "unicorns don't exist" || "unicorns exist"
+        - inconsistent system can prove anything
 
 - Alonzo Church
-    - lambda calculus - a macro language for logic
+    Lambda calculus - a macro language for logic:
+    Now that there is no solution to the Entschaidungs problem, the new goal is
+    to show that the problem is undecidable, that is to show that no algorithm
+    is going to work. For that we need to go back and work on a formal
+    definition for what is an algorithm.
 
-    L,M,N ::= x
-            | (lambda x.N)
-            | (L M)
+    Between 1932 and 1936 he worked with his Lambda calculus on the Halting
+    problem and used his results to show that yes if an algorithm is what you
+    can express in Lambda calculus, that is the case that the Entschaidungs
+    problem is undecidable.
+
+    Complete definition of the Lambda calculus:
+
+                              Just 3 constructs
+    ----------------------------------------------
+    L,M,N ::= x               variables
+            | (lambda x.N)    function definition
+            | (L M)           function application
+
+
+    Created a decade before the first computer, and base for the functional
+    languages (How cool!)
 
     - The Halting Problem
-        - 'how to catch an infinite loop?'
+        - or 'how to catch an infinite loop?'
 
         Program   ->   Decider      <-   Input
                        Algorithm
@@ -78,19 +127,66 @@
     - Proof by contradiction used
     - with Cantors' diagonalization
 
+    But when Godel come visting to Prinston he didn't like Church's solution
+    and accepted the challenge to come with his own:
+
+     Godel - General recursive functions of natural numbers
+
+     Church showed that both definitions of effectively computable are
+     equivalent, but Godel again was unconvinced:
+
+     'My definition is the same as your definition. My definition must be wrong
+     then.' =)
+
 - Alan Turing
+    Turing machines - a hat-trick for math
+    The impasse was resolved in Cambridge by his Turing Machines.
 
-    - Turing machines
+    Again, he showed that if a turing machine is definition of an algorithm then
+    the Entschaidungsproblem is undecidable. And proved that his solution is
+    equivalent to that of Church and hence to Godels.
 
-        - if turing machine is the definition of algorithm then the
-         Entschaidungsproblem is undecidable
+    But by using a different philosophy he managed to convince Godel:
+    He gave an argument that anything that a computer can do can be done by a
+    Turing machine(computer means a person following a sequence of instructions).
 
-    - the three definitions turned out to be equivalent
+    - the three definitions turned out to be equivalent!
 
-
-
+////
+// Propositions as types
+////
 - Gerhard Gentzen
+    Natural Deduction:
+    While working on Hilberts program he came up with a new way of writing down
+    logic. And than with Natural deduction, sequent calculus(the first and
+    second most used formalisms of todays logic)
+
     - Natural Deduction
+
+          [A]
+          ...
+          B                 A imp B    A
+    1) ------- imp-Ix    2) ------------ imp-E
+       A imp B                    B
+
+       A      B              A & B                    A & B
+    3) -------- &-I      4) ------- &-E0           5) ----- &-E1
+        A & B                  A                        B
+
+    1) Assume A is True and if form that you get a prove of B then you know A
+       implies B
+
+    2) If you know A implies B and you know A then you know B
+
+    3) If you have a proof of A and a proof of B you've proved A and B
+
+    4)
+
+    5)
+
+    Hints to typography:
+    - hypothesis above the line, conclusion below and elimination rules on
+    the right side
 
 - Curry - Howard correspondence
 
