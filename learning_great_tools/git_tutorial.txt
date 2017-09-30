@@ -10,6 +10,7 @@ git config --system
 git config --global    //to user level
 git config 	       //project level
 
+git config --global core.autocrlf true
 git config --global user.name "Pesho Peshev"
 git config --global user.email "some@kaspichan.com"
 git config --list
