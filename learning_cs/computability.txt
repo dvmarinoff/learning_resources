@@ -34,7 +34,9 @@
      finite time whether any given mathematical proposition was, or was not,
      provable from a given set of axioms
 
-    The second problem on his famous list of 22 unsolved problems was:
+     - 3 parts to the problem - consistency, completeness, decidability
+
+    This was second problem on his famous list of 22 unsolved problems was:
     2) prove math is consistent
 
     He was depending on logic to be complete meaning:
@@ -43,6 +45,7 @@
     Since Euclid it was believed that every problem can be solved.
     Proves were devised the same way he did in Elements:
     from a set of axioms like a+b = b+a
+    If you work hard enough you can prove every true theorem?
     Even Fermat's last theorem was solved after 320 years.
     So all of math can be derived from a small set of axioms?
 
@@ -50,7 +53,7 @@
     Is there an Algorithm that given a statement in formal logic will determine
     if that statement is true or false?
 
-    Is an axiom just something we cannot prove and add to a system?
+    But isn't an axiom just something we cannot prove and add to a system?
     Can a system stay consistent after we keep appending to it?
 
 - Kurt Godel
@@ -71,11 +74,11 @@
         - if add incomplete statements as axiom a new system is created
 
     - second incompleteness theorem
-        - a consistent math system cant prove its own consistency
+        - a consistent math system can't prove its own consistency
 
     - Godel numbering
-    He found a way to for math to talk about itself by using 'Godel numbering'
-    to encode statements and proofs as numbers (this is why he depended on
+    He found a way for math to talk about itself by using 'Godel numbering'
+    by encoding statements and proofs as numbers (this is why he depended on
     arithmetic). This was one of the first functional programs.
 
     // TODO: Godel numbering from numberphile
@@ -92,22 +95,22 @@
 
 - Alonzo Church
     Lambda calculus - a macro language for logic:
-    Now that there is no solution to the Entschaidungs problem, the new goal is
+    Now that there is no solution to the Entschaidungsproblem, the new goal is
     to show that the problem is undecidable, that is to show that no algorithm
     is going to work. For that we need to go back and work on a formal
     definition for what is an algorithm.
 
     Between 1932 and 1936 he worked with his Lambda calculus on the Halting
     problem and used his results to show that yes if an algorithm is what you
-    can express in Lambda calculus, that is the case that the Entschaidungs
-    problem is undecidable.
+    can express in Lambda calculus, that is the case that the
+    Entschaidungsproblem is undecidable.
 
     Complete definition of the Lambda calculus:
 
                               Just 3 constructs
     ----------------------------------------------
     L,M,N ::= x               variables
-            | (lambda x.N)    function definition
+            | (λ x.N)         function definition
             | (L M)           function application
 
 
@@ -158,7 +161,7 @@
 - Gerhard Gentzen
     Natural Deduction:
     While working on Hilberts program he came up with a new way of writing down
-    logic. And than with Natural deduction, sequent calculus(the first and
+    logic. And than with Natural deduction and sequent calculus(the first and
     second most used formalisms of todays logic)
 
     - Natural Deduction
@@ -173,8 +176,8 @@
     3) -------- &-I      4) ------- &-E0           5) ----- &-E1
         A & B                  A                        B
 
-    1) Assume A is True and if form that you get a prove of B then you know A
-       implies B
+    1) Assume A is True and if from that you can get a prove of B then you know
+       A implies B
 
     2) If you know A implies B and you know A then you know B
 
