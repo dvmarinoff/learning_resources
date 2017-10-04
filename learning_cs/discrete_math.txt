@@ -1225,8 +1225,8 @@ Some Useful Summation Formulae
 ------------------------------------------
 Sum                      Closed Form
 ------------------------------------------
-  n                      ar**n+1 - a
-Sigma a*r**k (r!=0)      -----------, r!=1
+  n                      ar^n+1 - a
+Sigma a*r^k (r!=0)       -----------, r!=1
  k=0                        r - 1
 
   n                      n(n + 1)
@@ -1234,20 +1234,20 @@ Sigma k                  --------
  k=1                        2
 
   n                      n(n + 1)(2n + 1)
-Sigma k ** 2             ----------------
+Sigma k ^ 2              ----------------
  k=1                            6
 
-  n                      n**2 (n + 1)**2
-Sigma k ** 3             ---------------
+  n                      n^2 (n + 1)^2
+Sigma k ^ 3              ---------------
  k=1                             4
 
  inf                       1
-Sigma x**k, |x| < 1      -----
+Sigma x^k, |x| < 1       -----
  k=0                     1 - x
 
  inf                         1
-Sigma k*x**k-1, |x| < 1  ----------
- k=1                     (1 - x)**2
+Sigma k*x^k-1, |x| < 1   ----------
+ k=1                     (1 - x)^2
 
 
 
@@ -1482,10 +1482,10 @@ for i = 1 to n - 1
 It is summation
 
  n-1
-Sigma i = n(n - 1) = (n**2)/2 - n/2 = n**2 is dominant
+Sigma i = n(n - 1) = (n^2)/2 - n/2 = n^2 is dominant
  i=1      --------
              2
-Theta(n**2)
+Theta(n^2)
 Omega(n)
 
 // The Selection Sort
@@ -1505,8 +1505,8 @@ for 1 = 1 to n -1
         swap array[min] and array[i]
 
 Similar to Insertion Sort summation
-Theta(n**2)
-Omega(n**2)
+Theta(n^2)
+Omega(n^2)
 
 // The Merge Sort
 
@@ -1571,17 +1571,17 @@ DONALD E. KNUTH (BORN 1938)
 - Big-O Estimates for some important Function
 
 Theorem 1:
-Let f (x) = a_n*x**n + a_n−1*x**n−1 + ... + a_1x + a_0 ,
+Let f (x) = a_n*x^n + a_n−1*x^n−1 + ... + a_1x + a_0 ,
 where a0 , a1 , ... , a_n−1 , a_n are real numbers.
-Then f(x) is O( x**n ).
+Then f(x) is O( x^n ).
 
 ^
 |
 |    n!                        Factorial
 |
-|    2**n                      Exponential
+|    2^n                       Exponential
 |
-|    n**2                      Polynomial
+|    n^2                       Polynomial
 |
 |    n log n                   Linearithmic
 |
@@ -1614,8 +1614,8 @@ Then (f1 f2)(x) is O( g1(x)g2(x) )
 - Big-Omega and Big-Theta Notation
 
 Theorem 4:
-Let f(x) = a_n*x**n + a_n−1*x**n−1 + ... + a1x + a0, where a0, a1, ... ,
-a_n are real numbers with a_n != 0. Then f(x) is of order x**n
+Let f(x) = a_n*x^n + a_n−1*x^n−1 + ... + a1x + a0, where a0, a1, ... ,
+a_n are real numbers with a_n != 0. Then f(x) is of order x^n
 
 Unfortunately, as Knuth observed, big-O notation is often used by careless
 writers and speakers as if it had the same meaning as big-Theta notation.
@@ -1781,28 +1781,77 @@ Permutation - ordered Combination
 
 How many 2s do we multiply to get 8?
 
-Answer: 2 × 2 × 2 = 8, so we had to multiply 3 of the 2s to get 8
-
-log2(8) = 3
-
-2^?^ = 8
-
-2^3^ = 8
-
-log~2~(8) = 3
-
-> log~a~(x) = ln(x) / ln(a)
+2 × 2 × 2 = 8, so we had to multiply 3 of the 2s to get 8
 
 
-log8(2) = 1/3
+To what power a have to raise 2 to get 8? -> 3
 
-log2(1/8) = -3
+log_2(8) = 3
 
+2^? = 8
+2^3 = 8
+
+// Properties of logarithms
+
+Product rule        | log_b(M N) = log_b(M) + log_b(N)
+Quotient rule       | log_b(M/N) = log_b(M) - log_b(N)
+Power rule          | log_b(M^p) = p * log_b(M)
+Change of base rule | log_b(M)   = log_a(M) / log_a(b)
+
+
+log_17(357) = log_10(357) / log_10(17)
+
+1 / log_b(4) = log_4(b)
+
+// Properties of exponents
+
+b^x = b^y * b^z = b^y+z   x = y + z
+b^x^y = b^xy
+
+log (2^3)^3 = log(2^9)
+sqrt(32) = 32^1/2
+
+
+log_8(2) = 1/3
+log_2(1/8) = -3
 2^-3 = 1/2^3 = 1/8
 
-
-log8(1/2) =
-
-if 8^1/3 = 2 then
-
+8^1/3 = 2
+log_8(1/2) = -1/3
 8^-1/3 = 1 / (1/8^1/3) = 1/2
+
+
+// e and the compound interest
+
+1) borrow 1 usd for 1 year at 100%
+2) borrow 1 usd for 1/2 * 2 year at 100%
+
+1                   1                            1
+|                   |                            | * 1.083  100%/12=8 1/3 %
+|                   | * 1.5 50% (6 months)       1.083^1
+|                   |                            |
+|* 2 100% (1 year)  1+0.50 = 1.50                1.083^2
+|                   |                            |
+|                   | * 1.5 50% (6 months)       ...
+|                   |                            |
+1+1                 1.50 + 0.75 = 2.25           1.083^12 = 2.60
+
+= 1(2)^1            = 1(1.5)^2                   =
+
+= 1(1 + 100%/1)^1   = 1(1 + 100%/2)^2            = 1(1 + 100%/12)^12
+                                                 = (1 + 1/12)^12
+
+for 364 day it is 2.71456 and is approaching e = 2.71828182846
+
+// e as a limit
+
+lim    (1 + 1/n)^n = e = 2.71828182846
+n->inf
+
+ln - the natural logarithm
+
+log_e(67) = x same as
+ln(67) = x
+
+Note: in Computer Science the natural base of logarithm is 2 not e
+log(N) = log_2(N)

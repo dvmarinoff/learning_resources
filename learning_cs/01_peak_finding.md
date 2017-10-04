@@ -130,7 +130,7 @@ T(n,m) = T(n, m/2) + Theta(n)
 
 T(n,1) = Theta(n)
 T(n,m) = Theta(n) + ... + Theta(n) = Theta(n log2m)  
-.....................|.............................    
+    
 ...........Theta(n) log2m times....................  
 
 
@@ -140,15 +140,15 @@ T(n,m) = Theta(n) + ... + Theta(n) = Theta(n log2m)
 
 A very nice tool with which given a horrible function like
 
-> g(x) = 1.1x^2^ + (10 + sin(x + 1.5)) * x^1.5^ + 6006
+> g(x) = 1.1x^2 + (10 + sin(x + 1.5)) * x^1.5 + 6006
 
-you can just say that it is equal to \theta (x^2^)
+you can just say that it is equal to \theta (x^2)
 
 ^  
 |  
 |f'(x) - upper bound   
 |g(x) - complex function  
-|f(x) = x^2^ - lower bound  
+|f(x) = x^2 - lower bound  
 |  
 +------------>
 
@@ -163,8 +163,8 @@ The three symbols important for asymptotic complexity are:
 Theta , O, Omega
 
 If I say that g(x) = Theta(f(x)) it means two things:  
-    * I have a lower bound x^2^, under g(x)  
-    * I have an upper bound that also looks like x^2^,  
+    * I have a lower bound x^2, under g(x)  
+    * I have an upper bound that also looks like x^2,  
      but over g(x).  
      
 Note: When we use Theat bounds can differ only by
@@ -196,13 +196,13 @@ Example 3:
 
 lets consider the function:
 
-> f(x) = (1 + sin(x)) * x^1.5^ + x^1.4^
+> f(x) = (1 + sin(x)) * x^1.5 + x^1.4
 
 upper bound is:
-f'(x) = 3x^1.5^
+f'(x) = 3x^1.5
 
 lower bound is:
-f(x) = x^1.4^
+f(x) = x^1.4
 
 
 Bounds differ by exponent, which is more than a constant
@@ -210,11 +210,11 @@ factor, so they don't look the same.
 
 So in this wierd case you can only say:
 
-> g(x) = Theta () - in this case not possible
-> g(x) = Omega (x^1.4^) - lower bound
-> g(x) = O(x^1.5^) - upper bound
+> g(x) = Theta () - in this case not possible  
+> g(x) = Omega (x^1.4) - lower bound  
+> g(x) = O(x^1.5) - upper bound  
 
-Note: we are going to use O instead of Theta for most of
+Note: we are going to use O instead of Theta for most of  
 the time, because of convenience
 
 Most recurence relations will resolve to:  
@@ -223,7 +223,7 @@ Most recurence relations will resolve to:
 > O(log n)  
 > O(n)  
 > O(n log n)  
-> O(n^2^)  
+> O(n^2)  
 
 Theta - both  
 Omega - lower bound   
@@ -233,11 +233,17 @@ O - upper bound
 
 Note: logs
 
-log(n^100^) = 100 log(n) -> Theta(n)
+log(n^100) = 100 log(n) -> Theta(n) - Power rule
 
-exponent can be pulled infront of
+log5(n) = log(n) / log 5 -> Theta(log n) - Change of base rule
 
-log~5~(n) = log(n) / log 5 -> Theta(lg n)
+In CS the natural base of logarithm is 2 not e
+log(n) = log2(n)
+
+f(x) = log_ln(5) ((log(n))^100) = Theta(log log n)
+
+f(x) = log_ln(5) (log(n^100)) ~ log(100 * log(n)) = log(100) + log(log (n))  
+= Theta(log log n)  
 
 
 
@@ -245,7 +251,7 @@ q1:
 
 f(n) - Theta(?)
 
-1) f(n) = 10^80^
+1) f(n) = 10^80
 -> Theta(1)
 
 Note: 10^80^ is the estimated number of atoms in the
@@ -254,8 +260,8 @@ the real world, is not going to be bigger than this.
 'Philosophicaly' for any algorithm in any realistic input
 the running time will be Theta(1).
 
-2) f(n) = (20n)^7^
--> Theta(n^7^)
+2) f(n) = (20n)^7
+-> Theta(n^7)
 
 3) f(n) = 
 
