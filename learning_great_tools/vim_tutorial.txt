@@ -32,6 +32,7 @@ i               - inside
 
 - Putting it Together:
 d$      - delete to end of line
+dw      - delete word
 ciw     - change inside word
 ci"     - change inside quotes
 .       - do that again

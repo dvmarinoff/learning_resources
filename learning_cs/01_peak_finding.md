@@ -266,3 +266,33 @@ the running time will be Theta(1).
 3) f(n) = 
 
 ### Methodology for Proofs
+
+
+
+### 1D Peak finding
+
+To figure out the running time for the whole algorithm,
+you need to look at the running time of each step
+
+pseudo-code:
+
+1) start at the middle
+2) look at neigbors
+3) see if local peak then done
+   else recurse
+
+
+1) T(N)   = Theta(1)
+2) T(N)   = Theta(1)
+3) T(N/2) = Theta(1) + Theta(N/2)
+
+Solving the recurrence:
+
+T(N) = c + T(N/2)
+= c + c + T(N/4)
+= c + c + c + T(N/8)
+= c + c + c + c + T(N/2)
+
+i * c + T( N / 2^i )
+
+

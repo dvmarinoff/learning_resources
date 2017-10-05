@@ -114,7 +114,7 @@ C-h i - read included manuals
 "Completion" - manual for auto-completion
 "Dired" - manual for working with files and dirs
 
-CIDER
+;; CIDER
 
 Manual installation
 
@@ -132,7 +132,7 @@ M-x package install [RET] cider
 M-x cider-jack-in
 M-x cider-quit
 
-Easy Clojure setup
+;; Easy Clojure setup
 
      - just delete any .emacs or .emacs.d and in fresh .emacs.d
      paste the content of the zip. In init.el paste the lines
@@ -179,7 +179,14 @@ NOTE:
 
 install which key for key binding tips
 
-WEB
+;; WEB
 
 C-j - expand abbreviation in emmet-mode
 M-x run-skewer
+
+;; SPACEMACS
+
+to fix fonts for Ubuntu 16.10:
+
+git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git ~/.fonts/adobe-fonts/source-code-pro
+fc-cache -f -v ~/.fonts/adobe-fonts/source-code-pro
