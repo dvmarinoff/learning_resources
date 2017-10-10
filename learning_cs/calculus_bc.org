@@ -1,0 +1,76 @@
+* Limits and Continuity
+
+** ex.1: Limit
+
+lim f(x) = 4
+x->3
+
+lim f(x) = 4
+x->3-
+
+lim f(x) = 4
+x->3+
+
+- the limit of f of x as x approaches 3 is 4
+- the limit as we approach from the left is 4
+- the limit as we aproach from the right is 4
+
+** ex.2: Right and Left
+
+lim f(x) = -4
+x->3-
+
+lim f(x) = 1
+x->3+
+
+- the function is discontinuos at x = 3,
+- we have 2 limits from right and left, but
+- the limit at x->3 does not exist
+
+- the value of a function is not the same as the limit of the function
+- we predict the limit by approximating infinitly close to the value,
+but the value may be undefined, and the function can still have a limit,
+- but if the value is infinity, we are infinitly approximating infinity
+and in this case the limit does not exist from that direction
+
+
+** ex.3: Continuity
+
+*** Over a point
+f is continuos when x=a if and only if
+
+lim f(x) = f(a) 
+x->a
+
+*** Over an interval
+
+f is cont. over (a,b) if and only if
+f is cont. over every point in that interval
+
+f is cont. over [a,b] if and only if
+
+lim f(x) = f(a) and lim f(x) = f(b)
+x->a+               x->b-
+
+** Properties of Limits
+
+lim f(x) = L    lim g(x) = M
+x->a            x->a
+
+lim( f(x) + g(x) ) = L + M     | Sum
+x-> a
+
+lim ( f(x) - g(x) ) = L - M    |  
+x->a
+
+lim ( f(x) * g(x) ) = L * M    | Product
+x->a
+
+lim ( f(x) / g(x) ) = L / M    | Difference
+
+lim f(g(x)) = lim f( lim g(a) )| Composition
+x->a
+
+
+
+ex.4:
