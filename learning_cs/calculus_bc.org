@@ -72,5 +72,62 @@ lim f(g(x)) = lim f( lim g(a) )| Composition
 x->a
 
 
+** Limits by substitution, factoring and rationalizing
 
 ex.4:
+
+f(x) = x^2 + x - 6 / x - 2 = (x + 3)(x - 2) / (x - 2) = x + 3 , x != 2
+
+f(x) { x + 3     , x != 2
+     { undefined , x = 2
+
+lim f(x) = ?
+x->2
+
+ex.5:
+
+lim x + 1/ sqrt(x + 5) - 2 = ?    | 0/0 
+x-> -1
+
+g(x) = x + 1/ sqrt(x + 5) - 2 =
+
+= (x + 1 / sqrt(x + 5) - 2) * (sqrt(x + 5) + 2 / sqrt(x + 5) + 2) =
+
+= (x + 1)(sqrt(x + 5) + 2) / x + 5 - 4 = sqrt(x + 5) + 2 , x != -1  
+
+f(x) = sqrt(x + 5) + 2
+f(x) = g(x) for all x != 1
+
+lim g(x) = 4
+x-> -1
+
+
+(a + b)(a - b) = a^2 - b^2
+
+
+** Limits of trigonometric functions
+
+ex.6:
+
+lim sin(x) = ? = sin(π) = 0
+x-> π
+
+sin and cosn are defined for all real numbers and are continuos
+over thier entire domain (tan and cot are also continuous), and
+thier limit will be the value of the function at that point 
+
+
+lim tan(x) = lim sin(x)/cos(x) = 0 / -1 = 0 
+x-> π
+
+lim cot(x) = lim cos(x)/sin(x) = 
+x-> π
+
+sin π = sin(π/2 + π/2) = cos π/2 = 0
+sin(π) = 0
+cos(0) = 1
+cos(π) = -1
+cos(π/2) = 0
+
+
+Note: 0/0 is undetermined form -> the limit may still exist

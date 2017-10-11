@@ -1,4 +1,3 @@
-/**/
 - Insert Mode
 - Text Manipulation Mode
 
@@ -32,7 +31,9 @@ i               - inside
 
 - Putting it Together:
 d$      - delete to end of line
-dw      - delete word
+dw      - delete word with space
+de      - delete word without space
+cw      - change word (delete to end of word and enter insert mode)
 ciw     - change inside word
 ci"     - change inside quotes
 .       - do that again
@@ -51,6 +52,25 @@ yy      - yank current line
 :tabnew - open a new tab
 :tabf   - open [file] in a new tab
 
+
+- Search:
+/ - to enter search from normal mode type <search> RET
+n - to repeat search forward
+N - to repeat search backwards
+? - to search in backwards direction
+
+% - search for matching (, [, {
+
+- Find and Replace
+:s/old/new/  - replace old with new on the line once
+:s/old/new/g - replace old with new on the whole line
+:%s/old/new/g - replace in the whole document
+:%s/old/new/gc - replace and ask for confirmation each time
+
+:#,#s/old/new/g - replace between line numbers(#,#)
+
+
+
 - Configuration:
 .vimrc file stores aliases
 
@@ -61,3 +81,5 @@ yy      - yank current line
 
 in normal mode: u
 CTRL + R to redo
+
+r + letter - replace what is under with letter
