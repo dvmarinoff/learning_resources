@@ -112,7 +112,7 @@ ex.6:
 lim sin(x) = ? = sin(π) = 0
 x-> π
 
-sin and cosn are defined for all real numbers and are continuos
+sin and cos are defined for all real numbers and are continuos
 over thier entire domain (tan and cot are also continuous), and
 thier limit will be the value of the function at that point 
 
@@ -174,7 +174,54 @@ c = 2πr
 
   The point (a,b) on the circle gives us the sin and cos of Theta
   
-  tan = sin / cos
-  cot = 1 / tan (adjacent / opposite)
+  
+  tangens, cosecant, secant and cotangent:
+
+  tan T = sin T / cos T = opposite / adjacent 
+  
+  csc T = 1 / sin T = hypotenuse / opposite = h / a
+
+  sec T = 1 / cos T = hypothenuse / adjacent = h / b
+
+  cot T = 1 / tan A = adjacent / opposite = b / a
+
+  Some specieal values:
+
+  sin 0  = 0
+  sin 30 = 1/2
+  sin 45 = sqrt(2)/2
+  sin 60 = sqrt(3)/2
+  sin 90 = 1
+
+  Pytagorean identity
+
+  cos^2(T) + sin^2(T) = 1
+
+  Double angle identities:
+
+  sin(2x) = 2 * sin(x) * cos(x)
+  cos(2x) = cos^2(x) - sin^2(x)
+          = 2 cos^2(x) - 1
+          = 1 - 2sin^2(x)
+
+  tan(2x) = 2tan(x) / 1 - tan^2(x)
+
+  Power reducing identities:
+
+  sin^2(x) = (1 - cos(2x)) / 2
+  cos^2(x) = (1 + cos(2x)) / 2
+  tan^2(x) = (1 - cos(2u)) / (1 + cos(2u))
+  
 
 
+  [[./img/sine-cosine-identities-symmetry.png]]
+
+*** Features of sinusoidal functions
+
+    - midlane:
+      
+    - amplitude:
+      how far does the function vary from the midline
+
+    - period:
+      how much to change x to go to the same point in the cycle
