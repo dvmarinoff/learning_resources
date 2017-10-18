@@ -132,7 +132,13 @@ cos(π/2) = 0
 
 Note: 0/0 is undetermined form -> the limit may still exist
 
-** Trigonometry Review
+
+* Pre Calculus
+
+# Trigonometry
+# Linear Algebra
+
+* Trigonometry
 
 *** Radians
 
@@ -247,7 +253,8 @@ c = 2πr
 
  e^iTau = cos(Tau) + i * sin(Tau) = 1 + 0 = 1
 
-* Vectors and Spaces
+
+* Linear Algebra
 
 ** Vectors
 
@@ -331,15 +338,7 @@ c = 2πr
    
    = (3 cos(30) + 6 cos(340)), (3 sin(30) + 6 sin(340))
 
- 
-
-** Linear combinations and spans
-
-** Linear dependance and independance
-
-** Subspaces and basis for a subspace
-
-** Vector dot and cross products
+*** Vector dot and cross products
 
    dot product
 
@@ -360,7 +359,9 @@ c = 2πr
    [ r1 * c1    r1 * c2 ]
    [ r2 * c1    r2 * c2 ]
 
-   Matrix multiplication:
+** Matrices
+
+*** Matrix multiplication:
 
    [2 1] * [1 4]
    [5 2]   [3 6]
@@ -381,12 +382,37 @@ c = 2πr
    2 x 3   and   3 x 2    yes
    2 x 3   and   2 x 3    no
 
-   
-   
+*** Identity matrix 
 
+    1 * x = x   <- identity
 
-** Matrices for solving systems by elimination
+    I * A = A
 
-** Null space and column space
+    A = [1 2 3]
+        [4 5 6]
+        [7 8 9]
 
-* Matrix transformations
+    [1 0 0]       [1 2 3]
+    [0 1 0] x A = [4 5 6]
+    [0 0 1]       [7 8 9]       
+                  
+   - Multiplicative Inverses
+
+     1/3 * 3 = 1
+     3 * 1/3 = 1
+    
+     All nonzero real numbers have one, but
+     not all matrices have multiplicative inverses
+
+   - Dimensions of identity matrix
+
+     It is always going to be square.
+     From:
+
+     I    x     A      =    A
+     ? x ?      a x b       a x b
+     a x a
+
+     - Cols of 1st = Rows of 2nd
+     - Rows of product = rows of 1st
+

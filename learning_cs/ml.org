@@ -1,0 +1,186 @@
+* Lecture 1: Intro to ML
+
+* Lecture 2: Linear and Logistic Regression
+
+* Lecture 3: Python
+
+** Conditionals
+
+if cond1:
+    do()
+ifel cond2:
+    do()
+else:
+    do()
+
+** Loops:
+
+>>> knights = {'gallahad': 'the pure', 'robin': 'the brave'}
+>>> numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+>>> for k, v in knights.items(): print(k, v)
+
+>>> for x in numbers: print(x)
+
+>>> for i in range(10): do()
+
+
+** Collections:
+
+   Seqs are mutable(list) and immutable(tuple, range)
+
+*** tuple
+
+>>> t = (1,2,3,4)
+
+    immutable,
+    collection
+ 
+    - packing and unpacking
+
+>>> t = 12345, 54321, 'hello!'
+>>> x, y, z = t
+
+
+*** list
+
+>>> l = [1,2,3,4]
+
+    mutable,
+    more like array or vector or linked-list?
+    
+    - methods:
+      .append(x)                - adds at the end
+      .extend(iterable)
+      .insert(i, x)
+      .remove(x)                - remove first by value
+      .pop([i])                 - if no arg, returns last
+      .clear()
+      .index(x[,start[,end]])   - return 0-based index of value
+      .count
+      .sort
+      .reverse
+      .copy
+      del a[i:j]                - removes by index at pos or range
+
+    - as stacks:
+      with .append() and .pop()
+
+    - as queues:
+      with .append() and .pop(0)
+
+    - list comprehensions:
+
+>>> [x**2 for x in range(10)]
+>>> [x for x in vec if x >= 0]
+>>> [(x, x**2) for x in range(6)]
+
+>>> # flatten a list using a listcomp with two 'for'
+
+>>> vec = [[1,2,3], [4,5,6], [7,8,9]]
+>>> [num for elem in vec for num in elem]
+
+Out[]: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    - queues: better use collections deque
+
+>>> from collections import deque
+>>> queue = deque(["Eric", "John", "Michael"])
+>>> queue.append("Terry")           # Terry arrives
+>>> queue.append("Graham")          # Graham arrives
+>>> queue.popleft()
+
+    - map:
+
+>>> squares = list(map(lambda x: x**2, range(10)))
+
+    - reduce:
+
+>>> 
+
+    - filter:
+
+>>> 
+
+
+*** dict
+
+>>> tel = {'jack': 4098, 'sape': 4139}
+
+    classical hash map
+
+    - methods:
+    d[key]                 - to access by key
+    del d[key]             - remove
+    .iter(d)               - return an iterator over the keys of the dictionary
+    .clear()
+    .copy()
+    .get(key[,default])    - get value else default value
+    .keys()
+    .values()
+    .items()
+    .pop(key[,default])
+    .popitem()             - remove arbitrary
+    .update([other])       - overwrites existing 
+
+>>> dict([('sape', 4139), ('guido', 4127), ('jack', 4098)])
+>>> dict(sape=4139, guido=4127, jack=4098)
+
+*** set
+
+>>> basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+
+    like math sets
+
+>>> 'orange' in basket
+Out[]: True
+
+>>> a = set('abracadabra')
+Out[]: {'a', 'r', 'b', 'c', 'd'} # unique letters in a
+
+
+*** range
+
+>>> range(1,10)
+
+    range(start, stop, step)
+    
+    it is useful, because it is more efficient. Values are generated only when needed
+    lazy seq
+
+*** Common Seq Operations
+
+    x in s 	              True if an item of s is equal to x, else False
+    x not in s 	          False if an item of s is equal to x, else True
+    s + t 	              the concatenation of s and t
+    s * n or n * s 	      equivalent to adding s to itself n times
+    s[i] 	                ith item of s, origin 0
+    s[i:j] 	              slice of s from i to j
+    s[i:j:k] 	            slice of s from i to j with step k
+    len(s) 	              length of s
+    min(s) 	              smallest item of s
+    max(s) 	              largest item of s
+    s.index(x[, i[, j]]) 	index of the first occurrence of x in s (at or after index i and before index j)
+    s.count(x)
+
+** Functions:
+    
+- argument lists
+- keyword arguments
+- default arguments
+
+- destructuring
+
+a,b,c = abc(): return a, b, c
+
+
+- recur
+   no tco!?
+
+
+** Decorators
+
+** OOP
+    
+** Generators
+   
