@@ -372,7 +372,20 @@ c = 2πr
    = [5    14]
      [11   32]
 
-   Order matters when we multiply matrices.
+
+   by finding dot products of rows from left and cols from right:
+
+   1st row times 1st col     1st row times 2nd col
+   2nd row times 1st col     2nd row times 2nd col
+
+
+   - commutative property of multiplication does not hold
+     order matters when we multiply matrices
+
+     A * B != B * A
+
+   - result is not always defined
+
    We can find the product only if the number of columns
    in the first matix is equal to the number of rows in
    the second matrix. The middle to numbers must be equal:
