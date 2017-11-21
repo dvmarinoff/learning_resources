@@ -343,21 +343,48 @@ if f(x) is continuoue over the closed interval [a,b]
 
 *** Intermediate Value Theorem
 
-There exist a c that lies on L
+'There exist a c that lies on L'
+
+Suppose f is a function continuous at every point
+of the interval [a,b]:
+
+- f will take on every value between
+ f(a) and f(b) over the interval
+
+- For any L between the value f(a) and f(b),
+ there exists a number c in [a,b] for which f(c) = L
 
 *** Extream Value Theorem
 
-There exist values where the function takes a maximum and a minimum
+'There exist values where the function takes a maximum and a minimum'
 
+f cont. over [a,b] -> Exists absolute maximum and
+absolute minimum value of f
 
 *** Mean Value Theorem
 
-If also differeniable over the open interval (a,b)
+'If also differeniable over the open interval (a,b)
 There exists a pint c where the derivative of f(x)
 (slope of the tangent line at that point) is the same
-as the avarage rate of change
+as the avarage rate of change'
+
+
+NOTE: Differentiability implies continuity
 
 [[./img/existence_theorems_intro.jpg]]
+
+
+* Using Derivatives to Analyze Functions
+
+** L'Hopital's rule
+
+\lim_{x\to a} f(x) = 0 and \lim_{x\to a} g(x) = 0 and \lim_{x\to a} \frac{f'(x)}{g'(x)} = L 
+
+Then:
+
+\lim_{x\to a} \frac{f(x)}{g(x)} = L
+
+[[./l'hopital's_rule.jpg]]
 
 * Pre Calculus
 
