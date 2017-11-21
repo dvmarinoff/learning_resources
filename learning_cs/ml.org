@@ -1,8 +1,8 @@
-* Lecture 1: Intro to ML
+* Lecture 01: Intro to ML
 
-* Lecture 2: Linear and Logistic Regression
+* Lecture 02: Linear and Logistic Regression
 
-* Lecture 3: Python
+* Lecture 03: Python
 
 ** Conditionals
 
@@ -184,3 +184,98 @@ a,b,c = abc(): return a, b, c
     
 ** Generators
    
+* Lecture 04:   
+
+* Lecture 05:
+
+* Lecture 06: ... data exploration, feature enfineering
+
+
+
+* Andrew Ng Machine Learning at Coursera
+
+** Week 01.
+
+*** Definition
+
+    Example with checkers:
+    E ::= the experience of playing many games
+    T ::= the task of playing the game
+    P ::= the probability of winning the next game
+
+    if P to do T increases as E increases it is machine learning
+    
+    Probability Task Experience 
+    
+*** Supervised learning
+
+    Task: Housing price prediction
+    
+    y price, x size
+
+    Straight line(linear function) or quadratic function
+    150 usd                           200 usd
+
+    Supervised means that 'right answers' were given, and the goal
+    is to produce more 'right answers'
+
+    Regression problem - tring to predict continuous valued output (the price)
+
+    Classification problem - tring to predict a discrete valued output (0 or 1)
+
+*** Unsupervised learning 
+
+    The data set has no 'right answers'/labels given,
+    we have to find the structure into the data
+
+    Task: Google News group stories
+    Task: Genomics shared by individuals
+    Task: Organize computer clusters
+    Task: Social networks
+    Task: Market Segmentation
+    Task: Astronomical data analysis
+
+    Clustering algorithm - tries to find clusters in data
+
+    Problem: Cockteail party
+    Person 1     Microphone 1
+    Person 2     Microphone 2
+
+    Task: separate voices of both persons
+
+*** Model and Cost Function
+    
+**** Linear Regression with one variable
+
+    Task: Housing prices
+
+    Trainig Set ---> Learning Algorithm ---> h(x) ---> prediction of y
+
+    h is function from x to y
+
+    Cost function - we can use to measure the accuracy of h()
+    or how to 'fit the best line into the data'
+
+    This is like a fancy avarage function of all results of h()
+    The difference between the predicted value and the actual value
+    Also Squared error or Mean squared error function
+
+    Hypothesis: h (x) = T0 + T1x
+
+    Ti - parameters of the model
+
+    Ex.:
+
+    Hypothesis:      hT(x) = T0 T1x
+
+    Parameters:      T0, T1
+
+    Cost Function:   J(T0, T1) = 1/2m SUM m i=1 (hT(x^(i)) - y^(i))^2
+
+    Goal:            minimize J(T0, T1)
+                      T0, T1
+
+*** Gradient descent
+
+A general algorithm for minimizing the cost function J.
+It is general and used all over the place in ml
