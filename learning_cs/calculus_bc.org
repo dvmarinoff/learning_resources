@@ -384,7 +384,7 @@ Then:
 
 \lim_{x\to a} \frac{f(x)}{g(x)} = L
 
-[[./l'hopital's_rule.jpg]]
+[[./img/l'hopital's_rule.jpg]]
 
 * Pre Calculus
 
