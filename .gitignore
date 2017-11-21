@@ -2,7 +2,6 @@
 garbige/
 .idea
 .sass-cache
-**/*.jpg
 **/*.jpeg
 **/*.png
 **/*.svg
