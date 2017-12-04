@@ -396,7 +396,9 @@ NOTE: Differentiability implies continuity
 Using derivatives to take limits
 Useful in special case of undetermined form:
 
-\[ \frac{0}{0} \]
+If $ax^2+bx+c=0$ with $a≠0$, then: $$x={-b±√{b^2-4ac}}/{2a}$$
+
+$$ \frac{0}{0} $$
 
 test: \( \frac{1}{2} \)
 
