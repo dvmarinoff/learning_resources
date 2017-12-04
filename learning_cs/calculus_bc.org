@@ -396,30 +396,28 @@ NOTE: Differentiability implies continuity
 Using derivatives to take limits
 Useful in special case of undetermined form:
 
-If $ax^2+bx+c=0$ with $a≠0$, then: $$x={-b±√{b^2-4ac}}/{2a}$$
+{0}/{0}
 
-$$ \frac{0}{0} $$
+{1}/{2}
 
-test: \( \frac{1}{2} \)
+\infty/\infty
 
-$ \infty/\infty $
-
-$ -\infty/\infty $
+-\infty/\infty
 
 
-$ \lim_{x\to a} f(x) = 0 $
+\lim_{x\to a} f(x) = 0
 
 and
 
-$ \lim_{x\to a} g(x) = 0 $
+\lim_{x\to a} g(x) = 0
 
 and
 
-$ \lim_{x\to a} \frac{f'(x)}{g'(x)} = L $ 
+\lim_{x\to a} \frac{f'(x)}{g'(x)} = L 
 
 Then:
 
-$ \lim_{x\to a} \frac{f(x)}{g(x)} = L $
+\lim_{x\to a} \frac{f(x)}{g(x)} = L
 
 [[./img/l'hopital's_rule.jpg]]
 
