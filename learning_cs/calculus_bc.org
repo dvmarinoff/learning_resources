@@ -291,7 +291,22 @@ d/dx sin = cos
 
 d/dx cos = -sin
 
+*** Derivative of e^x and ln(x) 
+
+d/dx [sin x] = cos x
+d/dx [cos x] = -sin x
+d/dx [tan x] = 1/cos^2(x) = sec^2(x)
+
+d/dx [e^x] = e^x
+
+slope of the tangent line at any point on e^x equals the value of e^x
+
+d/dx [ln x] = 1/x = x^-1
+
+fills the gap in the power rule
+
 *** Product rule
+
 
 d/dx[f(x) * g(x)] = f'(x)*g(x) + f(x)*g'(x)
 
@@ -384,7 +399,7 @@ Then:
 
 \lim_{x\to a} \frac{f(x)}{g(x)} = L
 
-[[./l'hopital's_rule.jpg]]
+[[./img/l'hopital's_rule.jpg]]
 
 * Pre Calculus
 
@@ -482,7 +497,7 @@ c = 2πr
   
 
 
-  [[./img/sine-cosine-identities-symmetry.png]]
+  [[./img/sine_cosine_identities_symmetry.jpg]]
 
 *** Features of sinusoidal functions
 
@@ -514,6 +529,13 @@ c = 2πr
 
  e^iTau = cos(Tau) + i * sin(Tau) = 1 + 0 = 1
 
+** Hyperbolic Trig functions
+
+cosh x = e^x + e^-x / 2
+
+sinh x = e^x - e^-x / 2
+
+NOTE: read as [kosch] and [sinch]  
 
 * Algebra
 

@@ -279,3 +279,30 @@ a,b,c = abc(): return a, b, c
 
 A general algorithm for minimizing the cost function J.
 It is general and used all over the place in ml
+
+
+* Neural Networks
+
+** Intro
+
+
+
+** RNN (Recurrent Neural Networks)
+
+Vanila NNs and Convolutional NNs have constrained API
+They operate over fixed:
+input vectors, output vectors and computational steps
+
+RNNs allow to operate over sequances of vectors
+
+RNNs might be just unreasonably effective,
+despite them being considered hard to train
+
+
+
+Input Sequence Vectors <-> State Vectors -> Output Sequence Vectors
+
+
+They are Turing-Complete
+If training vanilla neural nets is optimization over functions,
+training recurrent nets is optimization over programs
