@@ -393,11 +393,31 @@ NOTE: Differentiability implies continuity
 
 ** L'Hopital's rule
 
-\lim_{x\to a} f(x) = 0 and \lim_{x\to a} g(x) = 0 and \lim_{x\to a} \frac{f'(x)}{g'(x)} = L 
+Using derivatives to take limits
+Useful in special case of undetermined form:
+
+\[ \frac{0}{0} \]
+
+test: \( \frac{1}{2} \)
+
+$ \infty/\infty $
+
+$ -\infty/\infty $
+
+
+$ \lim_{x\to a} f(x) = 0 $
+
+and
+
+$ \lim_{x\to a} g(x) = 0 $
+
+and
+
+$ \lim_{x\to a} \frac{f'(x)}{g'(x)} = L $ 
 
 Then:
 
-\lim_{x\to a} \frac{f(x)}{g(x)} = L
+$ \lim_{x\to a} \frac{f(x)}{g(x)} = L $
 
 [[./img/l'hopital's_rule.jpg]]
 
