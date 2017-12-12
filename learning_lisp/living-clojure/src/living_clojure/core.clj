@@ -298,3 +298,130 @@ fav-food
 
 (let [[color size] ["blue" "small"]]
   (str "The " color " door is " size))
+
+;; use :as to keep the original
+(let [[color [size] :as original] ["blue" ["small"]]]
+  {:color color :size size :original original})
+
+;; destructuring maps
+(let [{flower1 :flower1 flower2 :flower2}
+      {:flower1 "red" :flower2 "blue"}]
+  (str "The flowers are " flower1 " and " flower2))
+
+;; use :or for default values
+(let [{flower1 :flower1 flower2 :flower2 :or {flower2 "missing"}}
+      {:flower1 "red"}]
+  (str "The flowers are " flower1 " and " flower2))
+
+;; shortcut for maps using :keys directive
+(let [{:keys [flower1 flower2]}
+      {:flower1 "red" :flower2 "blue"}]
+  (str "The flowers are " flower1 " and " flower2))
+
+;; example with defn
+(defn flower-colors [{:keys [flower1 flower2]}]
+  (str "The flowers are " flower1 " and " flower2))
+
+;; the power of laziness over infinity
+
+;; evaluate the first 5 members from the range [0, inf]
+(take 5 (range))
+
+;; repeat takes a value
+(take 5 (repeat "rabbit"))
+
+;; repeatedly takes a function (with no args) and executes it
+(repeatedly 5 #(rand-int 100))
+
+;; cycle takes a collection
+(take 5 (cycle ["big" "small"]))
+
+;; the other seq functions will also work on lazy sequences
+
+;; recursion
+
+;; first attempt
+(defn n [xs]
+  (let [x (first xs)]
+    (when-not (nil? x)
+      (do
+        (prn x)
+        (n (rest xs))))))
+
+(n [1 2 3 4])
+
+;; more concise
+(defn alice-is [in out]
+  (if (empty? in)
+    out
+    (alice-is (rest in) (conj out (str "Alice is " (first in))))))
+
+(alice-is ["normal" "too small" "too big" "swimming"] [])
+
+;; using loop and recur
+;; loop repeats the body of the function inside
+;; recur protects the stack (no tco)
+(defn alice-is-2 [input]
+  (loop [in input out []]
+    (if (empty? in)
+      out
+      (recur (rest in) (conj out (str "Alice is " (first in)))))))
+
+(alice-is-2 ["normal" "too small" "too big" "swimming"])
+
+;; map the ultimate
+
+(map #( str %) [:mouse :duck :dodo :lory :eaglet])
+
+;; note that result is not a vector but a clojure.lang.LazySeq
+;; so we can map on infinite sequences
+(take 10 (map #(str %) (range)))
+
+;; you can use map on multiple collections
+;; it will terminate when the shortest collection ends
+(defn gen-animal-string [animal color]
+  (str color "-" animal))
+
+(map gen-animal-string
+     ["mouse" "duck" "dodo" "lory" "eaglet"]
+     ["brown" "black" "blue" "pink" "gold"])
+
+;; you can use it with infinite sequences
+
+;; reduce the ultimate
+
+(reduce + [1 2 3 4 5])
+
+;; sum of squares
+(reduce (fn [acc x] (+ acc (* x x))) [1 2 3])
+
+;; won't work with infinite sequences
+
+;; filter
+
+(filter (complement nil?) [:mouse nil :duck :hourse nil])
+
+;; complement takes a function and returns opposite truth value
+
+;; remove
+(remove nil? [:mouse nil :duck :hourse nil])
+
+;; flatten
+(flatten [[:duck [:mouse] [[:lory]]]])
+
+;; partition
+(partition 3 [1 2 3 4 5 6 7 8 9])
+
+;; partition-all
+;; won't drop the not fitting elements
+(partition-all 3 [1 2 3 4 5 6 7 8 9 10])
+
+;; partition-by
+;; creates new partition every time the result changes
+(partition-by #(= 3 %) [1 2 3 4 5 6 7 8 9 10])
+
+;; into
+;; use to transform into another collection
+(into [] '(1 2 3 4))
+
+(into (sorted-map) {:b 2 :d 4 :a 1})
