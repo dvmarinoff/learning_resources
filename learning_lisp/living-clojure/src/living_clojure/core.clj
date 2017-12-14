@@ -426,7 +426,9 @@ fav-food
 
 (into (sorted-map) {:b 2 :d 4 :a 1})
 
+;;;;
 ;; Handling Real-World State and Concurrency
+;;;;
 
 ;; using atoms for independent items
 
@@ -501,3 +503,44 @@ who-atom
 ;; commute - alternative to alter, but does not do retries
 ;; may be useful in commutative transactions (addition) or
 ;; last-one-wins like behavior
+
+;; using agents to manage changes on their own
+;; asynchronous
+
+(def who-agent (agent :caterpillar))
+@who-agent
+
+;; use send form to change the state of an agent
+;; uses fixed thread pool
+(send who-agent change)
+
+;; use send-off form for potentialy I/O blocking actions
+;; uses expandable thread pool
+
+;; errors
+(defn change-error [state]
+  (throw (Exception. "Boom!")))
+
+(send who-agent change-error)
+
+;; evaluate to see the thrown error cached
+(send-off who-agent change)
+
+;; restart-agent resets and clears the agent from errors
+;; else it stays in the same state
+(restart-agent who-agent :caterpillar)
+
+;; set-error-mode! - :fail or :continue
+(set-error-mode! who-agent :continue)
+
+;; set-error-handler!
+(defn err-handler-fn [a e]
+  (println "error " e " value is " @a))
+
+(set-error-handler! who-agent err-handler-fn)
+
+;;| Type  | Communication | Coordination  |
+;;|-------+---------------+---------------|
+;;| Atom  | Syncronous    | Uncoordinated |
+;;| Ref   | Synchronous   | Coordinated   |
+;;| Agent | Asynchronous  | Uncoordinated |

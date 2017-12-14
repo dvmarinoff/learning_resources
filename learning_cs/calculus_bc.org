@@ -644,6 +644,8 @@ is positive goes to 0 thean back to being positive
 
 
 
+
+
 * Pre Calculus
 
 # Trigonometry
@@ -1081,4 +1083,44 @@ Also Binomial Coeficient or n choose k
 
 
 * Cryptography
+
+*** Deep learning for NLP 
+
+Traditional machine learning uses more 'hard-coded' methods and requires
+experienced and deeply knowlegable domain specialists to code them.
+Deep learning uses vectors as more efficient and simpler abstraction
+in order to turn tml on its head.
+
+Representations of language
+
+|           |      TML         |    DL   |
++-----------+------------------+---------+
+| phonology | all phonemes     | vectors |
+| morphology| all morphemes    | vectors |
+| words     | one-hot encoding | vectors |
+| syntax    | phrase rules     | vectors |
+| semantics | lambda calculus  | vectors |
+
+NOTE: one-hot encoding (uses matrix, not very efficient)
+
+|     | The | cat | sat | on | the | mat |
+| The |  1  |  0  |  0  |  0 |  1  |  0  |
+| cat |  0  |  1  |  0  |  0 |  0  |  0  |
+...
+
+Applications
+
+Easy: spell checking, synonym suggestions, keyword search
+easy to bruteforce with tml
+
+Intermediate:
+reading level,
+extracting information,
+predicting next word,
+classification
+
+Complex:
+machine translation,
+quation answering,
+chatbots,
 
