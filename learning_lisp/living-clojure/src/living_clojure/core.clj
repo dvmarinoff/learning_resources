@@ -425,3 +425,79 @@ fav-food
 (into [] '(1 2 3 4))
 
 (into (sorted-map) {:b 2 :d 4 :a 1})
+
+;; Handling Real-World State and Concurrency
+
+;; using atoms for independent items
+
+(def who-atom (atom :caterpillar))
+
+who-atom
+;; => #atom[:caterpillar 0x621da3f9]
+
+;; use @ to dereference the atom and see the value
+@who-atom
+;; => :caterpillar
+
+;; reset! to change the state
+(reset! who-atom :chrysalis)
+@who-atom
+
+;; swap! to change by appling a function (pure function)
+(defn change [state]
+  (case state
+    :caterpillar :chrysalis
+    :chysalis    :butterfly
+    :butterfly))
+
+(swap! who-atom change)
+
+;; example
+(def counter (atom 0))
+@counter
+(dotimes [_ 5] (swap! counter inc))
+@counter
+
+;; _ convetion for naming param that is not being used
+;; in this case the name of the value
+
+;; future form - takes a body and executes it another thread
+(let [n 5]
+  (future (dotimes [_ n] (swap! counter inc)))
+  (future (dotimes [_ n] (swap! counter inc)))
+  (future (dotimes [_ n] (swap! counter inc))))
+
+@counter
+;; => 15
+
+;; using refs for coordinated changes
+;; when you need to change multiple things like bank accounts
+;; all actions on refs within the transaction are
+;; - atomic
+;; - consistent
+;; - isolated
+;; strategy like in databases (stm)
+
+;; example
+(def alice-height (ref 3))
+(def right-hand-bites (ref 10))
+
+;; dosync form - to run the function in a transaction
+(defn eat-from-right-hand
+  "decriments alice's height each time she eats from right hand"
+  []
+  (dosync (when (pos? @right-hand-bites)
+    (alter right-hand-bites dec)
+    (alter alice-height #(+ % 24)))))
+
+(let [n 2]
+  (future (dotimes [_ n] (eat-from-right-hand)))
+  (future (dotimes [_ n] (eat-from-right-hand)))
+  (future (dotimes [_ n] (eat-from-right-hand))))
+
+(prn @right-hand-bites)
+(prn @alice-height)
+
+;; commute - alternative to alter, but does not do retries
+;; may be useful in commutative transactions (addition) or
+;; last-one-wins like behavior

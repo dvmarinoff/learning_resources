@@ -461,6 +461,187 @@ Then:
 
 ** Minimun and Maximum
 
+f(c) is a relative maximum
+if f(c) >= f(x)
+for All x member of (c - h, c + h) for h > 0
+
+f(d) is a relative minimum
+if f(d) <= f(x)
+for All x member of (d - h, d + h) for h > 0
+
+** Analyzing a function with its derivative
+
+When f'(x) is below the x axis f(x) is decreasing
+
+Example:
+
+f(x) = x^3 - 12x + 2
+f'(x) = 3x^2 -12
+
+3x^2 - 12 = 0
+x^2 = 4
+->
+x = 2, x = -2
+
+f'(2) = 0, f'(-2) = 0
+
+so f(x) has critical points at x = 2 and x = -2
+
+[[./img/analyzing_function_with_its_derivative.jpg]]
+
+** Critical points
+
+non endpoint, min or max at x = a ->
+f'(a) = 0
+f'(a) = undefined
+
+but not when the function is also undefined at that point
+
+
+Example: Finding critical points of a function
+
+f(x) = xe^(-2x^2)
+
+From product and chain rule:
+
+f'(x) = d/dx[x]e^(-2x^2) + d/dx[e^(-2x^2)]x
+
+= 1e^(-2x^2) + e^(-2x^2)*(-4x)*x
+
+= e^(-2x^2) * (1 - 4x^2)
+
+we can get it equal to 0 only when (1 - 4x^2) is equal to 0
+
+1 - 4x^2 = 0
+x^2 = 1/4
+x = 1/2, x = -1/2
+
+critical points are at 1/2 and -1/2 
+
+
+
+Example: Finding decreasing interval
+
+f(x) = x^6 - 3x^5
+
+f'(x) = 6x^5 - 15x^4
+
+6x^5 - 15x^4 < 0
+
+3x^4(2x - 5) < 0
+
+(3x^4 < 0 AND 2x - 5 > 0) OR (3x^4 > 0 AND 2x - 5 < 0)
+
+x^4 < 0 will never be less than 0 and x != 0
+
+2x - 5 < 0
+
+x < 5/2
+
+-> the decreasing interval is
+
+x < 0 OR x 0 > x < 5/2
+
+
+
+Example: Finding inceasing interval
+
+g'(x) = x^2 / (x - 2)^3
+
+
+x^2 / (x - 2)^3 > 0
+
+(x - 2)^3 > 0
+
+x > 2
+
+(2, \inf)
+
+
+*** Practice: 
+Find critical points of:
+01. g(x) = x^3 + x^2 + x
+g'(x) = 3x^2 + 2x + 1
+3x^2 + 2x + 1 = 0
+3x(x + 2/3) = -1
+
+It is never undefined or 0
+No critical points
+
+02. h(x) = sqrt(x^2 + 4)
+h'(x) = 1/2(x^2 + 4)^-1/2 * 2x
+
+x = 0 undifined
+
+03. h(x) = e^(2x-6) - e
+h'(x) = e^(2x-6) * d/dx[2x - 6]
+= 2 * e^(2x-6)
+
+2e^(2x-6) = 0 has no solutions and is never undefined
+No critical points
+
+04. h(x) = 4x^2 / x^2 - 1
+h'(x) = (8x * (x^2 - 1)) - (2x * (4x^2)) / (x^2 -1)^2
+= 8x^3 - 8x - 8x^3 / x^4 + 1 
+= -8x / x^4 + 1
+
+x = 0 is undefined
+
+05. f(x) = 2x^3 - 9x^2 + 12x
+f'(x) = 6x^2 - 18x + 12
+6x^2 - 18x + 12 = 0
+6x(x - 3 + 12/6x) = 0
+or
+6(x - 1)(x - 2) = 0
+
+x = 1 and x = 2 
+
+06. h(x) = e^(2x) / x - 3
+h'(x) = 2e^(2x) * (x - 3) - e^(2x) / (x - 3)^2
+= -7e^(2x) + 2x*e^2x = e^(2x)*(2x - 7)  
+
+x = 7/2 is equal to 0
+x = -3 is undefind, but also h(x) is undefined so it is not a critical point 
+
+07.
+
+
+** Finding relative extrema
+
+Relative maximum
+When does g' go from g'>0 to g'<0 (from positive to negative value)
+
+Example: Find revalive extrema of g(x) = x^4 - x^5
+g'(x) = 0 when
+
+4x^3 - 5x^4 = 0
+x^3(4 - 5x) = 0
+
+x^3 = 0, x = 4/5 are critical points
+
+g'(x) = undefined when
+never
+
+Analyze values (graph) of the derivative:
+
+| interval   | value          | direction | 
+|------------+----------------+-----------|
+| (-\inf, 0) | g'(-1) = -9    | dec       |
+| (0, 1)     | g'(1/2) = 3/16 | inc       |
+| (1, \inf)  | g'(1) = -1     | dec       |
+
+Note:
+it may be the case that derivative is 0, but that critical
+point is not an extremum. For example when the value (graph)
+is positive goes to 0 thean back to being positive
+
+|graph            | local exremum |
+|-----------------+---------------|
+| pos -> 0 -> neg | maximum       |
+| neg -> 0 -> pos | minimum       |
+| pos -> 0 -> pos | false         |
+| neg -> 0 -> neg | false         |
+
 
 
 * Pre Calculus
@@ -897,4 +1078,7 @@ Also Binomial Coeficient or n choose k
 
 
 
+
+
+* Cryptography
 
