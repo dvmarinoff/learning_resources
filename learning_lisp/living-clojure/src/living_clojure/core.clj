@@ -581,3 +581,118 @@ who-atom
 (str sb)
 
 ;; practical polymorphism
+;; java    - many types for every situation
+;; clojure - a few types and many functions for them
+;; but still has polymorphism
+
+(defn who-are-you [input]
+  (cond
+    (= java.lang.String (class input))  "String - Who are you?"
+    (= clojure.lang.Keyword (class input)) "Keyword - Who are you?"
+    (= java.lang.Long (class input))    "Number - Who are you?"))
+
+(who-are-you "alice")
+(who-are-you :alice)
+(who-are-you 123)
+(who-are-you true)
+
+;; multimethods
+;; polymorphism on one function
+(defmulti who-are-you class)
+
+(defmethod who-are-you java.lang.String [input]
+  (str "String - Who are you? " input))
+
+(defmethod who-are-you clojure.lang.Keyword [input]
+  (str "Keyword - Who are you? " input))
+
+(defmethod who-are-you java.lang.Long [input]
+  (str "Number - Who are you? " input))
+
+(defmethod :default [input]
+  (str "I don't know - who are you?" input))
+
+(who-are-you "Alice")
+;; if method not defined throws an error
+(who-are-you true)
+
+;; with custom dispatch function
+(defmulti eat-mushroom (fn [height]
+                         (if (< height 3)
+                           :grow
+                           :shrink)))
+
+(defmethod eat-mushroom :grow [_]
+  "Eat the right side to grow.")
+
+(defmethod eat-mushroom :shrink [_]
+  "Eat the left side to shrink.")
+
+(eat-mushroom 1)
+(eat-mushroom 9)
+
+;; protocols
+;; use to elegantly handle polymorphism on groups of functions
+(defprotocol BigMushroom (eat-mushroom [this]))
+
+(extend-protocol BigMushroom
+  java.lang.String
+  (eat-mushroom [this]
+    (str (.toUpperCase this) " mmm tasty!"))
+
+  clojure.lang.Keyword
+  (eat-mushroom [this]
+    (case this
+      :grow "Eat the right side."
+      :shrink "Eat the left side."))
+  java.lang.Long
+  (eat-mushroom [this]
+    (if (< this 3)
+      "Eat the right side to grow."
+      "Eat the left side to shrink.")))
+
+(eat-mushroom "Big Mushroom")
+(eat-mushroom :grow)
+(eat-mushroom 1)
+
+;; defrecords - for data types
+(defrecord Mushroom [color height])
+
+(def regular-mushroom (Mushroom. "white" "2 inches"))
+
+(class regular-mushroom)
+
+;; use .- form for accessing fileds
+(.-color regular-mushroom)
+
+;; interfaces - as combination of protocol and records
+(defprotocol Edible
+  (bite-right-side [this])
+  (bite-left-side [this]))
+
+(defrecord WonderlandMushroom [color height]
+  Edible
+  (bite-right-side [this]
+    (str "The " color " bite makes you grow bigger"))
+  (bite-left-side [this]
+    (str "The " color " bite makes you grow smaller")))
+
+(defrecord RegularMushroom [color height]
+  Edible
+  (bite-right-side [this]
+    (str " The " color " bite tastes bad"))
+  (bite-left-side [this]
+    (str " The " color " bite tastes bad too")))
+
+(def alice-mushroom (WonderlandMushroom. "white" "3 inches"))
+(def reg-mushroom (RegularMushroom. "brown" "1 inch"))
+
+;; real-world example of protocols is implementing different
+;; types of persistance storage. Persist the same data to
+;; a database and S3
+
+;; use deftype if you don't care about the structrure of the data
+;; otherwise use defrecord
+
+;; protocols should be used sparingly. Use pure function or multimethod.
+;; it is easy to move from maps to records later
