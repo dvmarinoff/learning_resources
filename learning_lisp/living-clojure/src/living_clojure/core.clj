@@ -427,7 +427,7 @@ fav-food
 (into (sorted-map) {:b 2 :d 4 :a 1})
 
 ;;;;
-;; Handling Real-World State and Concurrency
+;; 3. Handling Real-World State and Concurrency
 ;;;;
 
 ;; using atoms for independent items
@@ -544,3 +544,40 @@ who-atom
 ;;| Atom  | Syncronous    | Uncoordinated |
 ;;| Ref   | Synchronous   | Coordinated   |
 ;;| Agent | Asynchronous  | Uncoordinated |
+
+;;;;
+;; 4. Java Interop and Polymorphism
+;;;;
+
+(class "caterpillar")
+
+;; using java methods
+(. "caterpillar" toUpperCase)
+(.toUpperCase "caterpillar")
+(.indexOf "caterpillar" "pillar")
+
+;; object creation
+(new String "Hi!")
+(String. "Hi!")
+
+;; importing
+(ns caterpillar.network
+ (:import (java.net InetAddress)))
+
+;; use / for static methods
+(InetAddress/getByName "localhost")
+
+(.getHostName (InetAddress/getByName "localhost"))
+
+;; or without importing
+(java.net.InetAddress/getByName "localhost")
+
+;; doto - macro that allows us to take a Java object and
+;; act on it in succesion with a list of operations
+(def sb (doto (StringBuffer. "Who ")
+          (.append " are")
+          (.append " you?")))
+
+(str sb)
+
+;; practical polymorphism
