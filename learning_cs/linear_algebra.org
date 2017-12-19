@@ -1,0 +1,172 @@
+* Vectors
+
+   vector - has magnitude and direction
+
+   5mph is just magnitude or scalar quontity
+   5mph to each is a vector quontity called speed
+
+   v = (5, 0) = [5, 0] = [5]
+                         [0]
+
+   R^2 is the real two-dimentional coordinate space 
+
+   or all possible real-values 2-tuple
+   a tuple is ordered list of values
+
+   x = [0,0,0]
+   b = [-1,5,3]
+
+   x, b member of R^3
+      
+   R^n - n-dimentional real coordinate space
+
+** Sum of vectors:
+
+   a = [6,-2], b = [-4,4]
+
+   a + b = [6 + (-4), -2 + 4] = [2,2]
+
+   Graphically they need to be aligned (put the tail of b at the head of a)
+   into a triangle, (usualy at the base of the coord sys.) and the
+   hypothenuse is the sum of the two vectors
+
+** Multiplying a vector by scalar 
+   
+   a = [2,1]
+   3 * a = 3 * [2,1] = [6,3]
+   -1 * a = [-2,-1] - it fliped to the opposite direction
+
+** The unit vector
+
+    i = [1,0]  , x
+    j = [0,1]  , y
+
+    v = [2,3] = 2i + 3j
+
+** Parametric representation of lines
+
+    v = [2,1]
+    S = { c v | c member of R }
+    - a set of colinear vectors
+
+   Find the unit vector in the direction of u = (2,7)
+
+   (2,7) / sqrt(2^2 + 7^2) = (2,7) / sqrt(53) =
+   = ( 2/sqrt(53), 7/sqrt(53) )
+
+   Find the component form of v + w:
+   
+   magnitude v = 3, angle = 30 deg
+   (3, 30 deg)
+   
+   magnitude w = 6, angle = 340 deg
+   (6, 340 deg)
+
+   By constructing the right-angled triangle, we have
+   the opposite = y*j, and the adjacent = x*i, where
+   i and j are the unit vectors.
+
+   From soh cah toa:
+   
+   sin(30) = x/3
+   x = 3 * sin(30 deg) = 3 * 1/2 = 3/2
+
+   cos(30) = y/3
+   y = 3 * cos(30) = sqrt(3)/2
+
+   Or more concise:
+   
+   v + w = (v_x + w_x, v_y + w_y)
+   
+   = (3 cos(30) + 6 cos(340)), (3 sin(30) + 6 sin(340))
+
+** Vector dot and cross products
+
+   dot product
+
+   a = (3, 1, 8)
+   b = (4, 2, 3)
+
+   The dot product of the ordered triple is:
+
+   a * b = (3 * 4) + (1 * 2) + (8 * 3) = 38
+
+   When multiplying matrices, it's useful to think of each
+   matrix row and column as an n-tuple:
+
+       c1 c2
+   r1 [ 6  2 ]
+   r2 [ 4  3 ]
+
+   [ r1 * c1    r1 * c2 ]
+   [ r2 * c1    r2 * c2 ]
+
+* Matrices
+
+** Matrix multiplication:
+
+   [2 1] * [1 4]
+   [5 2]   [3 6]
+
+   = [ (2*1 + 1*3)   (2*4 + 1*6) ]
+     [ (5*1 + 2*3)   (5*4 + 2*6) ]
+
+   = [5    14]
+     [11   32]
+
+
+   by finding dot products of rows from left and cols from right:
+
+   1st row times 1st col     1st row times 2nd col
+   2nd row times 1st col     2nd row times 2nd col
+
+
+   - commutative property of multiplication does not hold
+     order matters when we multiply matrices
+
+     A * B != B * A
+
+   - result is not always defined
+
+   We can find the product only if the number of columns
+   in the first matix is equal to the number of rows in
+   the second matrix. The middle to numbers must be equal:
+
+   rows x cols   rows x cols
+
+   2 x 3   and   3 x 2    yes
+   2 x 3   and   2 x 3    no
+
+** Identity matrix 
+
+    1 * x = x   <- identity
+
+    I * A = A
+
+    A = [1 2 3]
+        [4 5 6]
+        [7 8 9]
+
+    [1 0 0]       [1 2 3]
+    [0 1 0] x A = [4 5 6]
+    [0 0 1]       [7 8 9]       
+                  
+   - Multiplicative Inverses
+
+     1/3 * 3 = 1
+     3 * 1/3 = 1
+    
+     All nonzero real numbers have one, but
+     not all matrices have multiplicative inverses
+
+   - Dimensions of identity matrix
+
+     It is always going to be square.
+     From:
+
+     I    x     A      =    A
+     ? x ?      a x b       a x b
+     a x a
+
+     - Cols of 1st = Rows of 2nd
+     - Rows of product = rows of 1st

@@ -1,10 +1,102 @@
 * Statistics
 
-** Counting 
+** Count Outcomes
+
+Example: Car
+
+Engine: 4 cylinder, 6 cylinder
+Color: Red, Green, Blue, White
+
+What is the probability of getting a 6 cylinder white car?
+
+draw the 2 Tree diagrams and see 8 equaly posible outcomes
+
+1/8
+
+or Engine is 1/2 Color is 1/4
+
+1/2 * 1/4 = 1/8
+
+Example: Flower pots
+
+Flower types:
+--------------
+Rose
+Tulip
+Sunflower
+Lily
+
+Pot colors:
+--------------
+Brown
+Yellow
+Green
+
+How many types of flowers and pots put together I can get?
+
+12
+
+4 * 3 = 12
+1/4 * 1/3 = 12
+
+*** Permutation formula
+
+Example: Piople and chairs
+
+5 people, and 5 chairs
+
+People: A B C D E
+
+        5 4 3 2 1   -> How many people you can sit on each chair after you sit the previous one
+Chairs: _ _ _ _ _
+        1 2 3 4 5
+
+Count the number of scenarios/permutations?
+
+Permutations: 5! = 5*4*3*2*1 = 120
+
+But what if we have just 3 chairs?
+
+5 4 3
+_ _ _
+1 2 3
+
+5*4*3 = 60 = 5*4*3*2*1 / 2*1 = 5! / 2! = 5! / (5 - 3)!
+
+Permutations of n people and r chairs:
+
+P(n,r) , n P r = n! / (n - r)!
+
+Don't try to memorize. Always reason it through
+
+*** Zero factorial
+
+0! != 0, but
+
+0! = 1
+
+*** Combinations Formula
+
+A B C D E F
+
+6 5 4 3
+_ _ _ _
+1 2 3 4 
+
+P(n, k) = n! / (n - k)!
+
+1) A B C D   are 2 of the 360 permutaions, 
+2) D A B C   but just one combination of people
+
+number of ways to arrange k things in k spots = k!
+
+C(n, k) = (n! / (n - k)!) / k! = n! / k!(n -k!)
+
+Also Binomial Coeficient or n choose k
 
 ** Probability
 
-* Bayesian Statistics
+*** Bayesian Statistics
 
 by Thomas Bayes (1701 - 1761)
 
@@ -50,4 +142,3 @@ If patient is a girl
 P(Sally has the fly | patient is a girl) = 0.20
 If patient is a boy
 P(Sally has the fly | patient is a boy) = 0 
-
