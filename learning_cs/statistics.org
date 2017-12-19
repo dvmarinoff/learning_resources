@@ -1,0 +1,53 @@
+* Statistics
+
+** Counting 
+
+** Probability
+
+* Bayesian Statistics
+
+by Thomas Bayes (1701 - 1761)
+
+It is major part of probability theory
+Some philosophers think it is the key to understanding
+what it means to think rationaly
+
+Probability:
+chance or likelihood that a proposition is true 
+expresses belief under uncertainty
+
+Prior Probability:
+before new information is available (outcomes in coin case, etc.)
+
+Posterior Probability:
+
+
+Bayes Rule:
+
+P(H|e) = P(e|H) * P(H) / P(e)
+
+Notation:
+P - Probability
+H - Hypothesis
+e - event
+| - conditional probability (probability given event is true)
+
+People often forget about the prior probability of the Hypothesis
+or treat P(H|e) as P(e|H) - base rate fallacy
+
+Example:
+1 student in a class of 20 has the fly.
+Sally is a student.
+
+Prior Probability:
+that Sally has the fly is 1/20
+P(Sally has the fly) = 0.05
+
+Suppose there are 5 girls and 15 boys.
+
+Conditional Probabilities:
+If patient is a girl
+P(Sally has the fly | patient is a girl) = 0.20
+If patient is a boy
+P(Sally has the fly | patient is a boy) = 0 
+

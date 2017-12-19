@@ -643,7 +643,19 @@ is positive goes to 0 thean back to being positive
 | neg -> 0 -> neg | false         |
 
 
+[[./img/critical_point_intro.jpg]]
 
+** Concavity
+
+upwards concavity
+downwards concavity
+
+[[./img/concavity_intro.jpg]]
+
+** Inflection points
+
+point where we change concavity
+from slope dec to slope inc and backwards
 
 
 * Pre Calculus

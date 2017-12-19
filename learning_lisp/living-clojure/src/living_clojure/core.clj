@@ -696,3 +696,5 @@ who-atom
 
 ;; protocols should be used sparingly. Use pure function or multimethod.
 ;; it is easy to move from maps to records later
+
+;;
