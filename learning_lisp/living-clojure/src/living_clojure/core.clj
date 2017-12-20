@@ -749,3 +749,31 @@ who-atom
 ;;;;
 ;; 6. Communication with core.async
 ;;;;
+
+;; allows asynchronous and concurrent communication through channels.
+;; Independent threads of activity can communicate with one another
+
+;; creating a channel
+(def tea-channel (async/chan))
+
+;; creating a bufferd channel
+(def tea-channel (async/chan 10))
+
+;; to generate a class
+(ns living-clojure.async-tea-party
+  (:gen-class)
+  (:require [clojure.core.async :as async]))
+
+;; and add :main <main namespace> to project.clj
+;; lein run
+
+;; creating uberjar
+;; add :aot [<namespace>]
+;; lein uberjar
+;; ->
+;; Compiling async-tea-party.core
+;; Created target/async-tea-party-0.1.0-SNAPSHOT.jar
+;; Created target/async-tea-party-0.1.0-SNAPSHOT-standalone.jar
+
+;; to run the main jar(the second one):
+;; java -jar ./target/async-tea-party-0.1.0-SNAPSHOT-standalone.jar
