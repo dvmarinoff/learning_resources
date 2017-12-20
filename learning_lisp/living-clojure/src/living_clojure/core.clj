@@ -697,4 +697,55 @@ who-atom
 ;; protocols should be used sparingly. Use pure function or multimethod.
 ;; it is easy to move from maps to records later
 
-;;
+;;;;
+;; 5. Leiningen, Projects and Libraries
+;;;;
+
+;; lein new serpent-talk
+
+;; because of compilation to Java
+;; directories and filenames must be with _ (underscore)
+;; namespaces uses - (hyphen)
+
+;; deftest defines a test function
+;; testing provides a context
+;; is provides the assertion
+
+;; lein test
+;; lein test serpent-talk.talk-test
+;; lein test :only serpent-talk.talk-test
+
+;; lein deps :tree
+;; to see deps
+;; add to :dependancies in the project.clj file
+;; and than :require to use a library
+;; :dependencies [[org.clojure/clojure "1.9.0"] [camel-snake-kebab "0.2.4"]]
+;; (:require [camel-snake-kebab.core :as csk])
+;; if you want to run from the command line add -main function
+
+;; NOTE: don't evaluate test section, it is just for reference
+;; talk.clj
+(ns serpent-talk.talk
+  (:require [camel-snake-kebab.core :as csk]))
+
+(defn -main [& args]
+  (println (serpent-talk (first args))))
+
+(defn serpent-talk [input]
+  (str "Serpent! You said: " (csk/->snake_case input)))
+
+;; talk_test.clj
+(ns serpent-talk.talk-test
+  (:require [clojure.test :refer :all]
+            [serpent-talk.talk :refer :all]))
+
+(deftest test-serpent-talk
+  (testing "snake version of the input"
+    (is (= "Serpent! You said: hello_there" (serpent-talk "hello there")))))
+
+;; lein run "Hello pigeon"
+;; -> Serpent! You said: hello_pigeon
+
+;;;;
+;; 6. Communication with core.async
+;;;;
