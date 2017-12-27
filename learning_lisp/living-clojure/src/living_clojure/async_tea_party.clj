@@ -22,19 +22,19 @@
 
 ;; async put with >!, needs a go block
 ;; async get with <!, needs a go block
-(let [tea-channel (async/chan)]
-  (async/go (async/>! tea-channel :cup-of-tea-1))
-  (async/go (println "Thanks for the " (async/<! tea-channel))))
+;;(let [tea-channel (async/chan)]
+;;  (async/go (async/>! tea-channel :cup-of-tea-1))
+ ;; (async/go (println "Thanks for the " (async/<! tea-channel))))
 
 ;; you can use a background loop to continously wait for values
-(def tea-channel (async/chan 10))
+;;(def tea-channel (async/chan 10))
 
-(async/go-loop []
-  (println "Thanks for the " (async/<! tea-channel))
-  (recur))
+;;(async/go-loop []
+;;  (println "Thanks for the " (async/<! tea-channel))
+;;  (recur))
 
-(async/>!! tea-channel :cup-of-tea-2)
-(async/go (async/>! tea-channel :hot-cup-of-tea))
+;;(async/>!! tea-channel :cup-of-tea-2)
+;;(async/go (async/>! tea-channel :hot-cup-of-tea))
 
 ;; reading from multiple channels
 (def tea-channel (async/chan 10))
@@ -57,6 +57,7 @@
 ;; The async tea party project
 (def google-tea-service-chan (async/chan 10))
 (def yahoo-tea-service-chan (async/chan 10))
+(def result-chan (async/chan 10))
 
 ;; use to simulate random wait time(sleep)
 (defn random-add
@@ -73,3 +74,16 @@
   (async/go
     (random-add)
     (async/>! yahoo-tea-service-chan "tea compliments of yahoo")))
+
+(defn request-tea []
+  (request-google-tea-service)
+  (request-yahoo-tea-service)
+  (async/go (let [[v] (async/alts!
+                       [google-tea-service-chan
+                        yahoo-tea-service-chan])]
+              (async/>! result-chan v))))
+
+(defn -main [& args]
+  (println "Requesting tea!")
+  (request-tea)
+  (println (async/<!! result-chan)))

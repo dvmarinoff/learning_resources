@@ -777,3 +777,36 @@ who-atom
 
 ;; to run the main jar(the second one):
 ;; java -jar ./target/async-tea-party-0.1.0-SNAPSHOT-standalone.jar
+
+;;;;
+;; 7. Web
+;;;;
+
+
+
+;;;;
+;; 8. Macros
+;;;;
+
+;; Code is Data
+;; This is a way to do metaprogramming in clojure
+;; Metaprogramming is:
+;; The ability of languages to treat their programs as data.
+;; This allows a program to modify another program, or even its own program
+
+;; In Prcatice:
+;; - Create your own language features yourself
+;; - Make program more consice and readable
+;; - Encapsulate patterns and repetative code and replace it with a macro
+
+;; when is actually a macro as many other clojure forms
+(defmacro when
+  "Evaluates test. If logical true, evaluates body in an implicit do"
+  {:added "1.0"}
+  [test & body]
+  (list 'if test (cons 'do body)))
+
+;; use macroexpand to see what the actual code will be
+(macroexpand-1 '(when (= 2 2) (println "Iy is four!")))
+
+
