@@ -811,7 +811,8 @@ x^(3/4)   = x^(1/4)^3
 ln a/b = ln a - ln b
 
 
-* Cryptography
+* Other Stuff
+
 
 *** Deep learning for NLP 
 
@@ -853,3 +854,159 @@ machine translation,
 quation answering,
 chatbots,
 
+** Quantum Field Theory
+
+*** Is Quantum tunneling faster then light?
+
+Certain properties of an object are fundamentaly uncertain.
+They must be described as a distribution of possible states of being.
+Each specific state has a certain probability of being true when the
+object is observed.
+
+Until a quantum object interacts with something
+all possible states are just real as each other.
+Although not necessaraliy equally likely.
+
+There is a distribution of probabilities for each of an objects's quantum
+properties. That distribution, and the way it changes over time, is coded
+in the object's wave function. The reduction of a fuzzy posibility space
+into a specific measurable property is referred to as the collapse of the
+wave function.
+
+Louis de Broglie(broie) figured out that any material object is really a
+matter wave. It can be described as a wave packet of positioned probability.
+And it has a wavelength - de Broglie wave length, that defines how well
+determined an object's position is.
+A large wavelength means a highly uncertain position, a small wavelength
+means well-defined position. That's true of subatomic particles and it's
+sort of true of anything.
+
+"Observe me and collapse my wave function"
+
+Objects wavelength depends on its momentum (mass times velocity).
+Higher momentum means a smaller wavelength.
+Its the minuscule Plank constant divided by momentum.
+
+\lambda = h / p
+
+Humans are made of several tens of kilograms of thermal moving particles
+and have de Broglie wavelengths a couple of orders of magnitude smaller
+than the Plank wavelength.
+
+"You are everywhere in the universe, but not very much. You are as right
+there as possible to be."
+
+But what about something much smaller?
+
+Say a tightly bound bundle of two protons and two neutrons that we call
+an alpha particle. On it's own this would be a helium nucleus. But these
+bundles also exist as parts of heavier atomic nuclei. There an alpha
+particle is snugly bound into the nucleus by the strong nuclear force.
+
+We can imagine an alpha particle as being like a ball trapped in a steep
+valley of potential energy. It can roll around inside, but unless it has
+a very large kinetic energy, it will never roll over the edges.
+
+[[./img/potential_energy_valley.jpg]]
+
+But quabtum objects aren't at al like balls. Their positions are not well
+defined. As an alpha particle approaches the force barrier of nucleus,
+its wave packet is reflected backwards, ... usualy. That wave packet
+describes a range of possible locations for the approaching particle.
+But that possibility space does not end suddenly at the force barrier.
+Instead, it drops off quickly, exponentially, through the steep walls.
+However it never quite reaches zero. There remains a tiny tail of
+probability outside the nucleus, beyond the reach of the strong nuclear
+force. That means there is a very tiny chance that instead of bouncing
+off the wall, the particle will resolve its position in that unlikely
+outside bit of its posibility space that looks like the particle
+teleporting out of the nucleus.
+
+This is called Quantum Tunneling:
+
+[[./teleporting_out_of_nucleus.jpg]]
+
+When it's an alpha particle is escaping a nucleus this is one of the
+most important mechanisms for radioactive decay.
+
+Quantum tunneling also goes in the other direction.
+
+Protons, neutrons, electrons and alpha particles can quantum tunnel
+into nuclei in various types of fusion and particle capture phenomena.
+Without it stars could not fuse hydrogen into heavy nuclei.
+
+A variety of modern electronics also rely on the tunneling phenomenon,
+including the transistor.
+
+But how quickly the particle moves through this barrier?
+
+As far as we know it's instantaneous. That suggests a velocity faster
+tha light, which sounds problematic. It's actually extreamly hard to
+test this because we can't make clocks accurate enough to time such a
+ridiculously quick event.
+
+The LEGO interferometer that discovered gravitational waves.
+Laser beams are sent down paths at right angles and then brought back
+together. The photon wave packets interact with each other and produce
+an interference pattern that is incredibly sensitive to differences in
+path lengths.
+
+[[./interferometer.jpg]]
+
+If we change the arangement of beam?
+We want to send individual photons instead of lesers. And we want to
+block one of the paths with a very thin reflective barrier.
+
+In the absence of quantum tunneling that barrier should reflect its
+photon 100% of the time. But just like with the alpha particle, as the
+photon approaches the barrier the wave packet defining its possible
+location extends weakly beyond the barrier. About 99% of the time the
+photon is reflected. But 1% of the time it will resolve itself beyond
+the barrier and it will continue onits path.
+
+If those rare tunneling photons really do travel instantaneusly through
+the width of the barrier, then they should arrive at the detector slightly
+ahead of the photon that travels the unimpeded path.
+
+That will be apparent when their wave packets don't line up.
+
+[[./tunneling_paths.jpg]]
+
+For that to work you need to use a second, and perhaps even weirder
+feature of quantum mechanics - quantum entanglement.
+In order to produce these entangled states the path length of the
+interferometer needs to be identical to very high precision.
+
+Tune the path lengths until the weird effects of entanglement emerge,
+and you know that they are equal. At that point, you can get an incredibly
+precise measurement of any differences in photon travel time.
+
+That experiment was already succesfully performed. They found the tunneling
+photon does arrive a tiny bit earlier than its parther. It appears to
+teleport through the barrier and so travel faster than light.
+
+But this apparent violation of relativity only occurs deep within the
+quantum realm.
+
+A particle resolve its location anywhere within the vicinity of its
+de Broglie wavelength. That uncertainty in location allows tunneling.
+But even without barrier this location fuzziness leads to uncertainty in
+the arrival time of the photon. An unimpeded photon could arrive at the
+earlier time of the tunneling photon, because its wave packet includes 
+that in its range of possible positions. When you add the barrier, all
+you are realy doing is reshaping the wave packet, selecting only the
+posibility space of earlier arrival. This can look like an increase in the
+speed of light, but only within the uncertainty range defined by the
+de Broglie wavelength. Between the uncertainty range defined by the
+Heisenberg uncertainty principle.
+
+\delta x \delta p >= h / 2
+
+Which is from where the de Broglie wavelength comes.
+
+Any microscopic object is subject to a very well-defined speed limit.
+But in the quantum realm, Heisenberg uncertainty does seem to allow
+instantaneous motion, and even perhaps causality violation within the
+quantum limits.
+
+** Quantum Mechanics
