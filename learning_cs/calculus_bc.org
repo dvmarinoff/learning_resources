@@ -854,9 +854,12 @@ machine translation,
 quation answering,
 chatbots,
 
+
 ** Quantum Field Theory
 
-*** Is Quantum tunneling faster then light?
+*** Quantum tunneling
+
+Is Quantum tunneling faster then light?
 
 Certain properties of an object are fundamentaly uncertain.
 They must be described as a distribution of possible states of being.
@@ -1008,5 +1011,150 @@ Any microscopic object is subject to a very well-defined speed limit.
 But in the quantum realm, Heisenberg uncertainty does seem to allow
 instantaneous motion, and even perhaps causality violation within the
 quantum limits.
+
+
+*** Planck's Constant 
+
+The Planck's constant defines the size scale at which the familiar physics
+of our macroscopic reality gives way to the weirdness of the quantum world.
+
+The quantum behaivior of the microscopic is observable on all scales of the
+universe. You can see the effect of this quantum behavior and even measure
+the Planck's constant just by observing the color of sunlight.
+
+Zeno's paradox is based on the assumption that space is infinitly divisible.
+To overtake the tortous you need to travel to its previous position
+infinite times.
+
+But that is not true. As you distance to the tortois becomes unthinkably
+small, there arises a quantum uncertainty in your location. It is imposible
+to say whether your location is really behind or in front of the tortoise.
+
+The Heisenberg uncertainty principle describes the smallest distance for
+which an object's location can be meaningfully defined.
+
+The tiny Planck constant, at 6.63 * 10^-34 J_s (Joule seconds) sets the
+scale of the quantum blurriness.
+
+"So it sort of defines a pixel scale to reality"
+
+In many ways it defines the divisibility of the quantum world. The Planck
+constant appears in all equations that describe quantum phenomena:
+
+The Heisenberg Uncertainty principle
+
+The de Broglie wavelength
+
+The Schrodinger equation
+
+The Energy Levels of Electron Orbits
+
+The Relationship between Energy and Frequency of a Photon
+
+It also sets the size of the Planck Length, which is, hypothetically the
+length below which the concept of length loses meaning.
+
+But it can be observed on our scale. It sets the color of sunlight.
+If it were 25% smaller the sun would be violet.
+
+Everithing in the universe glows with its own internal heat.
+Heat is just the energy in the random motion of particles comprising
+an object. Accelerated charges produce electromagnetic radiation - light.
+And so an object made of jiggling charged particles glows. The hotter the
+object is the faster its particles jiggle. And so the avarage frequency of
+the resulting particles of light, of phothons, increases with temperature
+and defines the color that we see.
+
+Sun is yellow because it's 6000 Kelvin surface produces more photons in the
+green yellow part of the elecromagnetic spectrum.
+The blue superstar giant Rigel is 12000 Kelvin.
+Human temperature is around ~310 Kelvin so your heat glow is mostly low
+frequency infrared photons.
+
+By the late 1800's the distribution of brightness with frequency produced
+by hot objects had been mapped in careful experiments that blacked out
+anything but glow of heat. The resulting blackbody spectrum looks like a
+lopsided bell curve.
+
+[[./blackbody_spectrum.jpg]] 
+
+However the deep physics bihind this shape remained a mystery. The key to
+unlocking the mystery lay in finding a mathematical desription for the
+blackbody spectrum.
+
+Rayleigh and Jeans proposed the Equipartition Theorem.
+An object's heat energy will end up juggling all of its particles in all
+the ways that they can be juggled.
+At equilibrium energy is evenly spread between all posible energy states.
+
+The resulting Rayleigh-Jeans law described the blackbody spectrum
+perfectly for low frequancy infrared light, but for higher frequency
+like visible and ultravilet it predicted way too high values, actually
+approaching infinity as frequancy increased.
+
+B_u = u^2 * k * T / c^2
+
+This was called the ultraviolet catastrophy. It meant that something
+was fundamentally wrong with the classical physics that went into the
+Rayleigh-Jeans law.
+
+The problem turned out to be that in classsical physics everything can
+be infinitely divided.
+Their calculation allows particle to vibrate with any amount of energy,
+all the way down to infinitesimally tiny wiggles. When they tried to
+mathematically distribute heat energy to equipartitionates across
+possible energy states, way too much energy got packed into the countless
+very tiny energy states at high frequencies.
+
+Max Planck resolved the catastrohe almost by accident.
+He needed a math 'trick' to count the supposedly infinite energy states.
+Out of frustration he just decided that those particles could only vibrate
+with energies that were a multiple of some minimum energy. He quantized the
+energy states. He set this minimum energy to be the frequency of a
+particle's vibration times a very, very small number, a number that had yet
+to be measured. It became the Planck constant.
+
+[[./planck_constant.jpg]]
+
+
+It limited how much energy those high frequency vibrations could hold and
+decribed the shape of the blackbody spectrum exactly.
+
+Planck's Law
+
+B_u = 2hu / c^2 * 1 / e^(hu/kT) - 1
+
+He expected the contant being just a math 'trick' to cancel out in the
+final equation, but it didn't, it firmly entrenched in the law.
+
+So energy quantization is real.
+
+The constant had yet to be measured, so he just adjusted the value until
+the law matched the observed spectrum.
+
+Later Einstein realized that it is actually light that is quantized.
+
+Those little vibrating particles do have quantized energies, but it is
+because they can only gain or lose energy by absorbing or emitting one
+particle of light at a time. And that light comes in indivisible energy
+packets.
+
+[[./energy_packets.jpg]]
+[[./energy_packets_photon.jpg]]
+
+Planck's discovery was the clue Einstein needed to hypothesize the
+existence of the photon - part wave, part particle carrying a quantum
+of energy equal to the now familiar frequency of the wave times the
+Planck constant.
+
+These discoveries let to the quantum revolutioin of the 1920's.
+
+By defining the shape of the blackbody spectrum the Planck constant can be
+read in the color of the sun and the stars, in the brightness of the
+different colors of the rainbow. And combined with a small handful of other
+fundamental constants, it governs the behavior of everything in the
+space time.
+
+
 
 ** Quantum Mechanics
