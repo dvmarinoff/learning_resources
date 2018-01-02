@@ -1292,8 +1292,60 @@ interpretations that give the wave function a physical reality.
  
 *** Quantum Erasers
 
+Can reality be adjusted after events have occurred?
 
+This is the unsettling implication of the delayed choice quantum eraser
+experiment.
 
-** Quantum Mechanics
+Which Way experiment
 
-*** 
+What if we try to detect through which slit each particle actually travels
+throygh before they produce the famous interference pattern.
+It turns out that any experiment that determines unambiguously which slit
+the particle traverses destroys the pattern.
+Instead particles land in simple clumps, one for each slit, as they were
+traveling as simple particles the whole time. This is even true if you
+place detectors on the far side of the slits after the wave partice thing
+should have already been interfering with itself, just like the wave
+function is collapsing retroactively.
+
+It is impossible to make this measurments without messing up the wave.
+The interference pattern happens because the waves emerging from each slit
+are what we call coherent, which means that the relationship between the
+wave form is emerging from the two slits.
+
+So the locations of peaks and valleys is predictable and stays consistent
+as the waves move forward. But when you place some device in the path of
+eithe wave, you mess with this coherence and so sffecr the pattern that
+reaches the screen. 
+
+A Delayed Choice Quantum Eraser experiment
+
+This experiment made use of a very special type of crystal that absorbs an
+incoming photon, and creates two new photons, each with half the energy of
+the original. These photon are twins and an entangled pair.
+
+[[./quantum_eraser_a.jpg]]
+
+Place this crystal in front of double slit to make coherent entangled pairs
+of any photons passing through. Send one of each pair off to the screen to
+produce our interference pattern and use the other to figure out which slit
+the original photon passed through.
+
+Let's focus on detectors A and B.
+Detector A lights up if the original photon passed through slit A. And
+detector B lights up for slit B. If we run this for a bunch of photons,
+we see that whenever detectors A or B light up, we get a simple pile of
+photons here at the screen. No interference pattern at all.
+As though any knowledge if which way the original photon traveled stops
+it from acting like a wave during its passage through the slits.
+And crazier this experiment was set up so that photons reach A or B after
+their twins reach the screen.
+So a photon lands on the screen to the pattern defoned bt its wave function.
+And then later, its untangled partner reaches detector A or B, and somehow
+retroactively influances the previous landing position. It's like the
+second photon is saying, whoa, whoa someone figured out which slit I came
+through, you better look like you came through that one, too.
+
+But it gets even weirder. The extra C and D are the quantum eraser.
+631 
