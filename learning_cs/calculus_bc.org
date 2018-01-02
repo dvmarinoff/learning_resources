@@ -112,7 +112,8 @@ ex.6:
 lim sin(x) = ? = sin(π) = 0
 x-> π
 
-sin and cos are defined for all real numbers and are continuos
+sin and cos are defined BG
+for all real numbers and are continuos
 over thier entire domain (tan and cot are also continuous), and
 thier limit will be the value of the function at that point 
 
@@ -1157,4 +1158,142 @@ space time.
 
 
 
+*** The Single Particle Double-slit Experiment 
+
+One of the strangest experiments ever observed.
+Illustraits how the quantum world is very different from the large scale
+world of our physical intuition. In fact, it hints that the funcdamental
+nature of reality may not be physical at all.
+
+A rubber duckie bobs up and down in a pool, causing periodic ripples to
+spread out. Some distance away, rhose waves encounter a barrier with two
+gaps cut in it. Most of the wave is blocked, but ripples pass through the
+gaps. When the new ripple start to overlap each other, they produce a
+pattern, called the interferece pattern.
+
+It is due to the fact in some places the peak of the ripple from one gap
+stacks on top of the peak of the other gap, making more extream peak
+and more extream dips when two dips overlap.
+We call this constructive interference.
+
+[[./constructive_interference.jpg]]
+
+But when the peak from one wave encounters the trough from another, they
+cancel out, leaving nothing - destructive interference.
+
+So we have these alternating tracks of wavy and flat water.
+Any type of wave should make interference pattern like this.
+
+A source of light passing through two very thin slits produces bands of
+light and dark stripes, alternating regions of constructive and destructive
+interference.
+
+We know that light is a wave in the electromagnetic field (Maxwell).
+
+But we also know that light comes in indivisible little bundles of
+electromagnetic energy called photons (Einstein).
+
+So each photon is a little bundle of waves, waves of electromagnetic
+field, and each bundle can't be broken into smaller parts. That means
+that each photon should have to decide whether it's going to go through
+one slit or the other. It can't split and then recombine.
+
+[[./laser_emitter.jpg]]
+
+That shouldn't be a problem as long as you have at least two photons.
+But here we get to one of the craziest experimental results in physics.
+
+The interference pattern is seen even if you fire those photons one
+at a time.
+
+This pattern has nothing to do with how each photon's energy gets spread
+out, as was the case with the water wave. Each photon dumos all of its
+energy at a single point. The pattern emerges in the distribution of final
+positions of many completely unrelated photons.
+
+Each photon has no idea where previous photons landed or where future
+photons will land, yet each photon reaches the screen knowing which
+regions are the most likely landing spots and which are the least likely.
+It knows the interference pattern of a pure wave that passed through both
+slits equally and it chooses its landing point based on that.
+
+[[./interference_distribution.jpg]]
+
+Electrons, whole atoms and even whole molecules (buckminsterfullerine a
+molecule of 60 carbon atoms) build up the same sort of interference
+pattern. We have to conclude that each individual electron, atom or
+buckyball travels through both slits as some sort of wave. That wave then
+interact with itself to produce an iterference patterns. Except that here
+the peaks of that pattern are regions where there is more chance that the
+particle will find itself. It looks like a wave of possible undefined
+positions that at some point for some reason, resoves itself into a single
+certain position. We can also see this waviness in position in quantum
+tunneling.
+
+Several quantum properties like momentum, energy, and spin, all display
+similar waviness in different situations. We call the mathematical
+description of this wave-like distribution of properties a "wave function".
+
+Describing the behavior of the wave function is the heart of quantum
+mechanics.
+
+But what does the wave function represent?
+
+We know where the particle is at both ends. It starts its journey at the
+"emitter" andreleases its energy at a well-defined spot on the screen.
+So the particle seems to be more particle-like at either end, but wave-like
+in between. That wave holds the information about all the possible final
+positions of the particle but also about its possible positions at every
+stage in the journey. In fact the wave must map out all possible paths
+that the particle could take. We have this family of could-be trajectories
+from start to finish and for some reason, when the wave reaches the
+screen, it chooses a final location and that implies choosing from these
+possible paths.
+
+Within that misterious span between the creation and the detection, is the
+particle anything more than a space of possibility?
+
+In fact the answers aren't known.
+
+But the various interpretations of quantum mechanics do try.
+
+*** The Copenhagen Interpretation
+
+The Copenhagen interpretation is a view favoured by Heisenberg anf Bohr.
+The wave function doesn't have a physical nature. Instead its comprised
+of pure possibility. A particle traversing the double-slit experiment
+exists only as a wave od possible locations that ultimately encompasses
+all possible paths. It's only when the particle is detected that a
+location and the path it took to get there are decided.
+
+They call this transition from possibility space to a defined set of
+properties "the collapse of the wave function". It tells us that prior to
+the collapse, it's meaningless to try to define a perticle's properties.
+It is almost like the universe is allowing all possibilities to exist
+simultaneously but holds off choosing which actually happedned until
+the last instant. Weirder this possible realities interact with each other.
+That interaction increases the chance that some paths become real and
+decreases the chance of others. There's an interaction between possible
+realities that is seen in the distribution of final positions.
+
+The interference pattern is real, even though the vast majority of paths
+involved in producing the interference never attain reality.
+
+That final choose of the experiment of the universe is fundamentally random
+within the constraints of the final wave function.
+
+The theory of quantum mechanics produces stunningly accurate predictions of
+reality and it is completely consistent with the Copenhagen interpretation.
+
+But this is not the only interpretation that works. There are
+interpretations that give the wave function a physical reality.  
+
+*** The Many Worlds Interpretaion
+ 
+*** Quantum Erasers
+
+
+
 ** Quantum Mechanics
+
+*** 
