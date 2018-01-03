@@ -1348,4 +1348,47 @@ second photon is saying, whoa, whoa someone figured out which slit I came
 through, you better look like you came through that one, too.
 
 But it gets even weirder. The extra C and D are the quantum eraser.
-631 
+Its job is to destroy any information about the path of the photons
+by using beam splitters (half-silvered mirrors) just before A and B.
+They allow 50% of the photons through, while reflecting the other 50%.
+Now you have a new possible outcome. Instead of being reflected to
+detectors A or B, half of the photons end up in detectors C or D.
+But this assuares that if C or D light up, we have no idea which slit that
+photon came from. If we only look at the photons whose twins end up at
+detector C or D, we do see an interference pattern. It looks like the
+simple act of scrambling the "Which Way" information retroactively sends
+the message: "OK. Chill the observer lost the info of which slit we went
+through. It's safe to have gone through both again." It looks like some
+sort of retroactve reality cascade. But better be cautions.
+
+Part of the appeal of the Copenhagen interpretation is that it avoids
+any physical interaction that moves faster than light. When a spread
+out wave function resolves itself into a set of known properties, the
+location of a particle om the double slit screen, somehow the entire
+wave function knows to do this - to collapse at the same instant. But
+if these wave functions are physical, then there is no real instantaneous
+physical interaction.
+
+By contrast a physical interpretation of the wave function, like the
+de Broglie-Bohn pilot wave theory, requires an underlying physicality, a
+set of defines properties that evolves with the wave function.
+
+So-called hidden variables. That's unconftoble, vecause these physical
+properties need to act and change instantly at any distance.
+
+They need to have what we call non-locality.
+
+The delayed choice double slit experiment doesn't tell us wheter the wave
+function is physical or not.
+
+The solution may lie in the facinating phenomenon of the quantum
+entanglement. Enatngled particles are really able to influence each other
+instantaneously and their non-locality doesn't violate causality.
+So perheps they can even affect coherence and decoherence retroactively
+and physically without making a causal mess.
+
+Perhaps this rhing we call observation is just entanglement between the
+observer and the experiment. Perhaps the evolving tapestry of
+entanglement in all its impossible complexity is what really defines
+reality.    
+
