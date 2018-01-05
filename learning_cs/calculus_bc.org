@@ -113,7 +113,8 @@ lim sin(x) = ? = sin(π) = 0
 x-> π
 
 sin and cos are defined BG
-for all real numbers and are continuos
+for all reaBG
+l numbers and are continuos
 over thier entire domain (tan and cot are also continuous), and
 thier limit will be the value of the function at that point 
 
@@ -393,7 +394,7 @@ d/dx[csc(x)] = d/dx[1/sin(x)] = -cos(x)/sin^2(x)
 
 * Existence theorems
 
-if f(x) is continuoue over the closed interval [a,b]
+if f(x) is continuous over the closed interval [a,b]
 
 *** Intermediate Value Theorem
 
@@ -458,7 +459,6 @@ Then:
 \lim_{x\to a} \frac{f(x)}{g(x)} = L
 
 [[./img/l'hopital's_rule.jpg]]
-
 
 ** Minimun and Maximum
 
@@ -606,7 +606,6 @@ x = -3 is undefind, but also h(x) is undefined so it is not a critical point
 
 07.
 
-
 ** Finding relative extrema
 
 Relative maximum
@@ -634,7 +633,7 @@ Analyze values (graph) of the derivative:
 Note:
 it may be the case that derivative is 0, but that critical
 point is not an extremum. For example when the value (graph)
-is positive goes to 0 thean back to being positive
+is positive goes to 0 then back to being positive
 
 |graph            | local exremum |
 |-----------------+---------------|
@@ -655,8 +654,83 @@ downwards concavity
 
 ** Inflection points
 
-point where we change concavity
-from slope dec to slope inc and backwards
+An inflection point is a point on a graph where the slope goes from
+decreasing to increasing, or from increasing to decreasing.
+Point where we change concavity.
+
+You can get them from first derivatives:
+
+When f'(x) crosses the x-axis it is a min or max point for f(x)
+When f'(x) reaches a min or max point it is an inflection point for f(x)
+
+You can get them from second derivatives:
+
+When f''(x) crosses the x-axis
+
+| f''                             | f'                                 | f                                    |
+|---------------------------------+------------------------------------+--------------------------------------|
+| positive +                      | increasing up                      | concave up                           |
+| negative -                      | decreasing down                    | concave down                         |
+| crossing x-axis (changing sign) | extremum point (changes direction) | inflection point (changes concavity) |
+
+*** Second derivative test
+
+If you have:
+h(8) = 5
+h'(8) = 0
+h''(8) = -4
+
+Is (8,5) on f(x) a relative minimum, maximum point or
+there is not enough information?
+
+[[./img/second_derivative_test.jpg]]
+
+
+** Finding Inflection points and Analyzing Concavity
+
+Example:
+Let g(x) = -x^4 +6x^2 - 2x - 3.
+Find intervals where g(x) is concave upwards or downwards?
+
+g'(x) = -4x^3 + 12x - 2
+
+g''(x) = -12x^2 + 12
+
+-12x^2 + 12 = 0
+x^2 = 1
+x = 1
+x = -1 
+
+g''(-2) = -36   (-\inf, -1)   down
+
+g''(0) = 12     (-1, 1)       up
+
+g''(2) = -36    (1, \inf)     down
+
+
+
+Example:
+Let g(x) = 1/4x^4 - 4x^3 + 24x^2.
+For what values of x does the graph of g have an inflection point?
+
+g'(x) = 1x^3 - 12x^2 + 48x
+
+g''(x) = 3x^2 - 24x + 48 
+
+3x^2 - 24x + 48 = 0
+x = 4
+
+But
+f''(0) = 48    (0, 4)    pos
+
+f''(4) = 0     0         0
+ 
+f''(10) = 108  (4, 108)  pos
+
+->
+
+There is no inflection point
+
 
 
 * Pre Calculus
@@ -858,7 +932,8 @@ chatbots,
 
 ** Quantum Field Theory
 
-*** Quantum tunneling
+
+*** Quantum Tunneling
 
 Is Quantum tunneling faster then light?
 
@@ -1257,6 +1332,7 @@ In fact the answers aren't known.
 
 But the various interpretations of quantum mechanics do try.
 
+
 *** The Copenhagen Interpretation
 
 The Copenhagen interpretation is a view favoured by Heisenberg anf Bohr.
@@ -1288,8 +1364,9 @@ reality and it is completely consistent with the Copenhagen interpretation.
 But this is not the only interpretation that works. There are
 interpretations that give the wave function a physical reality.  
 
+
 *** The Many Worlds Interpretaion
- 
+
 *** Quantum Erasers
 
 Can reality be adjusted after events have occurred?
@@ -1392,3 +1469,12 @@ observer and the experiment. Perhaps the evolving tapestry of
 entanglement in all its impossible complexity is what really defines
 reality.    
 
+
+*** Quantum Entanglement
+
+Object permanence (the peekaboo game) is so deeply embeded both in our views
+and classical physics that we never quation it.
+Yet the idea that the universe keeps existing when we are not looking at it,
+is a pretty fundamential implied assumption.  
+This notion that the universe exists independent of the mind of the observer
+is called realism in physics.
