@@ -731,6 +731,30 @@ f''(10) = 108  (4, 108)  pos
 
 There is no inflection point
 
+NOTE:
+Remember to check for candidates
+Remember that there might be inflection point on undefined values
+Remember to check that f''(x) is actually crossing the x-axis
+
+** Graphical Relationship between a function and its derivatives
+
+*** Relationship between f and f'
+
+[[./img/graphical_relation_f_f'.jpg]]
+
+*** Relationship between f and anti-derivative
+
+Anti-derivative
+
+The Anti-derivative of a function is a function whose derivative is that
+function
+
+anti-derivative of f(x) is F(x)
+
+d/dx F(x) = F'(x) = f(x)
+
+[[./img/graphical_relation_f_F.jpg]]
+
 
 
 * Pre Calculus
@@ -740,8 +764,7 @@ There is no inflection point
 
 
 * Trigonometry
-
-*** Radians
+** Radians
 
 Degrees seem to be historic artefact(coinsidance)
 Radians are more rational(neutral, universal)
@@ -757,7 +780,7 @@ c = 2πr
 1 deg   = π / 180
 1 radian = 180 / π
 
-*** Unit circle definitions of sin and cos
+** Unit circle definitions of sin and cos
 
   Unit circle - a circle with radius
 
@@ -855,6 +878,26 @@ c = 2πr
 
  e^iTau = cos(Tau) + i * sin(Tau) = 1 + 0 = 1
 
+** Inverce Trig functions 
+
+sin^-1(x) , arcsin is defined as sin(y) = x   
+
+tan^-1(x) , arcsin is defined as tan(y) = x
+
+
+| \theta    | sin(\theta)                      | cos(\theta)                      | tan(\theta)                      |
+|-----------+----------------------------------+----------------------------------+----------------------------------|
+| arcsin(x) | sin(arcsin(x)) = x               | cos(arcsin(x)) = sqrt(1-x^2)     | tan(arcsin(x)) = x / sqrt(1-x^2) |
+| arctan(x) | sin(arctan(x)) = x / sqrt(1+x^2) | cos(arctan(x)) = 1 / sqrt(1+x^2) | tan(arctan(x) = x                |
+
+d/dx arcsin(x) = 1 / sqrt(1-x^2)
+
+d/dx arccos(x) = - 1 / sqrt(1-x^2)
+
+d/dx arctan(x) = 1 / 1 + x^2 
+
+d/dx arcot(x) = - 1 / 1 + x^2
+
 ** Hyperbolic Trig functions
 
 cosh x = e^x + e^-x / 2
@@ -862,6 +905,7 @@ cosh x = e^x + e^-x / 2
 sinh x = e^x - e^-x / 2
 
 NOTE: read as [kosch] and [sinch]  
+
 
 * Algebra
 
