@@ -1,0 +1,106 @@
+* Electrical Engeneering
+
+** Intro
+*** Current
+
+The story of current starts with the idea of charges, positive and negative
+charge. If they are opposite sign there will be force of attraction between
+them, or else repel them.
+
+- +
+
+< + + >
+
+- > < +
+
+We can get charge from copper and copper wires.
+
+Cu 29 (29 protons inside and 29 electrons outside)
+
+The last orbit has just one electron in it and it is easiest to pull away
+and have it go participate in conduction (electric current).
+
+e-
+
+Silver has the same kind of electron configuration.
+
+If we hook up a source of voltage (battery) to a copper wire, all the loose
+last orbit electron will start moving in the direction of the + source on
+the battery and at the end an electron will come out the - side of the
+battery and make up the difference.
+
+But how do we measure what is heppaning?
+
+count how many e- are passing through a cut in the wire for a second.
+
+Current is reported as the number of charges per unit time passing through
+a boundary.
+
+Current i = charge-/sec
+
+Water and Salt + battery experiment
+
+H2O and Na+Cl-
+
+[[./img/current.jpg]]
+
+
+What is the direction of Current?
+
+positive current direction is opposite to the electron flow
+
+negative current direction is the direction of the electron flow
+
+Ben Franklin make the decision that the positive current is the direction
+of current (nobody knew anything about electrons back then).
+
+Note:
+Electron is discovered by J.J.Thompson in 1897
+
+Conventional Current is this positive direction current.
+
+*** Voltage
+
+Intuition:
+
+As idea it is very similar to Gravity.
+
+If you have a large body of mass on the slopes of a mountain, the potential
+energy it has is going to be dissipated as kinetic energy and it is going to
+roll down the hill.
+
+We can think as voltage being a moutain top and battery delivering e- to the
+top and if you release it it goes through all kinds of capacitors, resistors
+etc. to the + bottom. High mountain high voltage.
+
+We disign circuits by putting stuff in the way of the electron current
+
+[[./img/volatage_intuition.jpg]]
+
+
+** Circuit Analysis
+*** Ideal Circuit Elemements
+
+Resistor R
+
+v = i * R, also known as Ohm's Law
+
+Capacitor C
+
+i = C dv/dt
+C is proportionality canstant
+
+Inductor L
+
+v = L di/dt 
+L proportionality constant is the inductance of the inductor,
+time rate of change of current flowing through the inductor
+
+[[./img/ideal_circuit_elements.jpg]]
+
+Ideal Sources
+
+Constant Voltage source
+Constant Current source
+
+[[./img/ideal_sources.jpg]]
