@@ -821,10 +821,10 @@ Zero-length interval:
 
 Reverse interval (switching bounds):
 
-\int_{a}^{b} f(x) dx = \lim_{n/to \inf} \sum_{i=0}^{n} f(x_i) \delta x, where \delta x = b - a / n
+\int_{a}^{b} f(x) dx = \lim_{n\to \inf} \sum_{i=0}^{n} f(x_i) \delta x, where \delta x = b - a / n
 
 
-\int_{b}^{a} f(x) dx = \lim_{n/to \inf} \sum_{i=0}^{n} f(x_i) \delta x, where \delta x = a - b / n
+\int_{b}^{a} f(x) dx = \lim_{n\to \inf} \sum_{i=0}^{n} f(x_i) \delta x, where \delta x = a - b / n
 
 = - \int_{a}^{b} f(x) dx
 
@@ -839,7 +839,7 @@ y = f(x) + g(x)
 
 \int_{0}^{1} (x^2 + sin(x)) dx = \int_{0}^{1} x^2 dx + \int_{0}^{1} sin(x) dx
 
-[[./img/integrating_suns_of_functions.jpg]]
+[[./img/integrating_sums_of_functions.jpg]]
 
 
 Constant multiple:
@@ -883,7 +883,20 @@ notation:
 
 (the indefinite integral of 2x == the antiderivative of 2x)
 
-** Tundamential Theorem of Calculus
+** Fundamential Theorem of Calculus
+
+"One should never try to prove anything that is not almost obvious"
+- Alexader Grothendieck
+
+integrals are an inverse of derivatives
+
+first part:
+
+[[./img/fundamental_theorem_of_calculus.jpg]]
+
+second part:
+
+[[./img/fundamental_theorem_of_calculus_second_part.jpg]]
 
 
 
