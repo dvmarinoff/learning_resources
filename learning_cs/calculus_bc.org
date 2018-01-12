@@ -899,6 +899,66 @@ second part:
 [[./img/fundamental_theorem_of_calculus_second_part.jpg]]
 
 
+** Indefinite Integral
+
+*** Reverse Power Rule
+
+\int x^n dx = \frac{x^n+1}{n+1} + C
+
+*** Sums
+
+\int [f(x) + g(x)] dx = \int f(x) dx + \int g(x) dx
+
+*** Multiples (Scalars)
+
+\int 4x^8 = 4 * \int x^8
+
+Note: sometimes is better to first rewrite
+
+\int x^2(3x - 1) dx = \int 3x^3 - x^2 = 3x^4/4 - x^3/3 + C
+
+*** Indefinite Integral of 1/x
+
+\int 1/x dx = \int x^-1 = ln(x) + C, but for x != 0 and x > 0
+
+it is undefined for negative values or 0. We need larger domain.
+
+\int ln|x| + C
+
+\int a/x dx = a * ln(x)
+
+*** Indefinite Integral of sin, cos, e
+
+\int sin(t) dt = - cos(t) + C
+
+\int cos(t) dt = sin(t) + C
+
+\int e^a dt = e^a + C
+
+\int (e^a + 1/a) = \int e^a + \int |a| + C 
+
+*** Radicals
+
+\int sqrt[m]{x^n} = \int \frac{x^(n/m + 1)}{n/m + 1} + C
+
+\int (sqrt[m]{x})^n = \int \frac{x^(n/m + 1)}{n/m + 1}
+
+*** Inverse Trig Functions
+
+\int \frac{1}{sqrt(a^2 - x^2)} dx = arcsin(x/a) + C
+
+\int \frac{1}{a^2 + x^2} dx = 1/a arctan(x/a) + C 
+
+** Finding Definite Integrals
+
+*** Reverse Power rule
+
+\int_{-3}^{5} 4 dx = F(5) - F(-3) = 4*5 - (4 * -3) = 22 
+
+F'(x) = 4x
+
+
+
 
 * Pre Calculus
 
