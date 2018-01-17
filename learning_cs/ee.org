@@ -1,5 +1,126 @@
 * Electrical Engeneering
 
+** Silicon (Silizium)
+
+1808 named by Sir Humphry Davy
+
+from latin silix, silicis for flint and -ium for metal
+
+1823 Jons Jocob Berzelius prepared amorohous silicon and is usually given
+credit for discovering the element
+
+Si 
+group: 14(carbon group), periodi: 3, Z=14 
+atomic radius: 111 pm (pico meters 1*10^-12) 
+Van der Waals radius: 210 pm
+electron configuration: [Ne]3s^2 3p^2
+electrons per shell: 2, 8, 4
+
+8 most common in universe by mass
+2 most common in the Earth's crust,
+but rarely occurs as pure element, mostly as silicon dioxide(silica)
+
+Used in steel refining, aluminium-casting, fine chemical industries, and small
+portion of very highly purified silicon is essential to integrated circuits.
+
+
+Monocrystaline silicon is used to produce silicon wafers and silicon oxide is
+used as an insulator both in integrated circuits.
+
+Polycrystaline silicon is used in photovoltaic
+
+It is exelant semiconductor, can withstand highest temperatures and greatest
+electrical activity without suffering avalanche breakdown(an electron avalanche
+is created when heat produces free electron holes, which in turn pass more
+current, which produces more heat). In addition the insulating silicon oxide is
+easy to produce and is not soluble in water, which gives it great advantage
+over other elements as germanium.
+
+The entire manufacturing process, from start to packaged chips takes 6-9 weeks,
+but as of 2017 regarding 14/10/7nm it can take up to 12-15 weeks (3-4 months).
+
+** Transistors
+
+basically an on/off switch
+
+It has 4 electron on its outer layer and forms thethrahidrons
+
+Doping - is injecting other elements into silicon to make it conductable
+
+N Doping - injects element with more electrons like 5 so free electrons are
+available
+
+P Doping - injecting Phosphorus with 3 electrons so that holes(practicaly
+positive charges) are left
+
+Introducing voltage will make electicity flow or stop depending on the source
+positionig + and -. This can be simulated with PNP transistor.
+
+When we talk about the size of a transistor we mean the size of the
+gate/barrier that passes or blocks the flow of electrons.
+
+When it gets down to a few atoms the effects of quantum mechanics must be
+considered. At that scale electrons might start to quantum tunnel through the
+barrier, which makes for very unreliable transistor.
+
+That can be initialy avoided by selecting elements with smaller atom radius,
+but eventually the challenge is in engeneering a high enough barrier.
+
+One other option is embracing quantum mechanics and using this behaviour to
+build possibly quantum computers, which may be very well suited to certain type
+of task (like breaking encryption or making it unbreakable).
+
+
+
+** Limits to computaion
+
++-------+----+--------+
+| milli | m  | 10^-3  |
+| micro | mu | 10^-6  |
+| nano  | n  | 10^-9  |
+| pico  | p  | 10^-12 |
+| femto | f  | 10^-15 | 
+
+Production in industry:
+
++---------+-------+
+| 10  mun | 1971  |
+| 1   mun | 1985  |
+| 130 nm  | 2001  |
+| 32  nm  | 2010  |
+| 22  nm  | 2012  |
+| 14  nm  | 2014  |
+| 10  nm  | 2017  |
+| 7   nm  | ~2018 |
+| 5   nm  | ~2020 |
+
+Concept demos in industry and research:
+
+6nm transistor in 2002 by IBM
+5nm transistor in 2003 by NEC
+3nm transistor in 2006 by KAIST(Korea) and NNFC(US)
+
+3x10 atoms transistor in 2008 by UK reseachers usinig graphene
+
+7 atoms of 4nm transistor in 2010 by Australlian researchers
+
+1 atom transistor 360 pn in 2012 was fabricated (first invented in 2004 Karlsruhe)
+
+5nm test chips in 2015 bf IMEC and Cadence fabricated
+5nm node FET concept in 2015 by Intel
+1nm transistor gate in 2016 by Berkeley (MoS_2)
+
+Note: check out Reversable Computation
+It is trying to create a new way of physical and logical computing with very
+tiny power usage.
+
+input  2 + 2
+output 4
+
+during computation information is lost and inputs are no longer known
+most energy is used 
+
+
 ** Intro
 *** Current
 
