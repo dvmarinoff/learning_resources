@@ -978,23 +978,23 @@ If we have f(x, y) = x^2 ... , the color tells us the size of the
 output, and the lines, called contour lines, tell us which inputs
 all share a constant output value.
 
-[[../img/contour_plot.jpg]]
+[[./img/contour_plot.jpg]]
 
 Surfaces in 3d space are mapping 2d input that moves into 3d
 (Parametric surfaces).
 
-[[../img/surfaces_in3d_space.jpg]]
+[[./img/surfaces_in3d_space.jpg]]
 
-[[../img/mapping0.jpg]]
+[[./img/mapping0.jpg]]
 
-[[../img/mapping1.jpg]]
+[[./img/mapping1.jpg]]
 
 Vector field is where every input point is associated with some kind
 of vector which is the output of the function there.
 
 In this case 2d input to 2d vector.
 
-[[../img/vector_field.jpg]]
+[[./img/vector_field.jpg]]
 
 And also understanding functions as transformations of space is a
 great way to connect multivariable calculus with linear algebra.
@@ -1043,9 +1043,9 @@ If y = \pi / 2
 f(x, \pi/2) = cos(x)sin(\pi/2) = cos(x) * 1
 looks like the graph of cos(x)
 
-[[../img/slice0.jpg]]
-[[../img/slice1.jpg
-]][[../img/slice3.jpg]]
+[[./img/slice0.jpg]]
+[[./img/slice1.jpg]]
+[[./img/slice2.jpg]]
 
 
 
