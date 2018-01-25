@@ -960,6 +960,95 @@ F'(x) = 4x
 
 
 
+* Multivariable Calculus
+
+** Thinking about Multivariable Functions
+
+f(x) = x^2
+
+f(x, y) = x^2 + y
+
+Output can be a vector. You can think of it as a point in space.
+f(x, y) = [3x 2y]
+
+These functions can be visualized in just 2 dimentions, where we
+visualize the entire input space in associated color with each point.
+
+If we have f(x, y) = x^2 ... , the color tells us the size of the
+output, and the lines, called contour lines, tell us which inputs
+all share a constant output value.
+
+[[../img/contour_plot.jpg]]
+
+Surfaces in 3d space are mapping 2d input that moves into 3d
+(Parametric surfaces).
+
+[[../img/surfaces_in3d_space.jpg]]
+
+[[../img/mapping0.jpg]]
+
+[[../img/mapping1.jpg]]
+
+Vector field is where every input point is associated with some kind
+of vector which is the output of the function there.
+
+In this case 2d input to 2d vector.
+
+[[../img/vector_field.jpg]]
+
+And also understanding functions as transformations of space is a
+great way to connect multivariable calculus with linear algebra.
+
+There is a huge value in analogy between 2d and 3d, beacause as soon as
+you start to compare 2d and 3d, you start to see patterns for how it
+could extend to other dimensions that you can't neccessarily visualize.
+
+Every point in 2d space can be given a pair of numbers like (1, 3) that
+serve as instructions. Also you can think of the reverse. Every time
+that you have a pair of things you know that you should be thinking 2d.
+In 3d there is a similar dichotomy between triplets of things and
+points in 3d space. Same thing for vectors.
+
+3d graphs:
+
+f(x) = x^2
+output is parabola
+
+f(x, y) = x^2 + y^2
+inputs live on tha x, y plane 
+output is a surface that look like 3d parabola
+
+if we modify the function to:
+f(x, y) = 1/2(x^2+ y^2)
+the hight of every poit will be cut in half
+
+Interpreting graphs with slices:
+
+f(x, y) = cos(x)sin(y)
+
+the graph is a bumpy 3d wave like surface.
+If will take x = 0 we have a slice with a plane that sits on the x origin
+If we cut the graph along that plane and draw a line over that spot
+we get a line that looks like the sinosuidal wave.
+
+If x = 0:
+f(0, y) = cos(0)sin(y) = 1*sin(y)
+and we are left only with the sin(y) function
+
+If y = 0:
+f(x, 0) = cos(y) * sin(0) = 0
+everything looks like a constant function at 0, just a line along the x.
+
+If y = \pi / 2
+f(x, \pi/2) = cos(x)sin(\pi/2) = cos(x) * 1
+looks like the graph of cos(x)
+
+[[../img/slice0.jpg]]
+[[../img/slice1.jpg
+]][[../img/slice3.jpg]]
+
+
+
 * Pre Calculus
 
 # Trigonometry
