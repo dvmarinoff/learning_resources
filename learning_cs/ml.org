@@ -1,10 +1,222 @@
-* Lecture 01: Intro to ML
+TODO: append here the full notes from Andrew Ng Machine Learning
+Course, and move the python manual to separate file
 
-* Lecture 02: Linear and Logistic Regression
+* Machine Learning
 
-* Lecture 03: Python
+* Week 1
 
-** Conditionals
+** Intro
+
+Arthur Samuel (1959): field of study that gives computers the
+ability to learn without being exolicitly programmed.
+
+in the '50 he wrote a checkers playing program that was able
+by just playing 10's of 1000's of games to learn over time
+and eventualy became much better than him.
+
+Tom Mitchell (1998): a computer is said to learn from experience
+E with respect to some task T and some performance measure P,
+if its performance on T, as measured by P, improves with
+experience E.
+
+Definition:
+
+Example with checkers:
+E ::= the experience of playing many games
+T ::= the task of playing the game
+P ::= the probability of winning the next game
+
+if P to do T increases as E increases it is machine learning
+
+
+Machine learning algorithms:
+
+Supervised learning
+Unsupervised learning
+Reinforced learning
+Recommender systems
+
+It is important to know the tools, but it is even more important
+to know how to use them.
+
+*** Supervised learning
+
+Problem: Predict housing prices
+
+y = price
+x = size
+
+So do you want to fit a linear or quadratic function, beacause
+diff in price may be significant?
+
+Supervised leraning means that we give the algorithm a data set
+in which the "right answers" were given and it just needs to
+produce more of them.
+
+Regression problem means we are tring to predict a continuous
+value output(the price x in this case).
+
+Classification problem means we are tring to prodict a discreet
+valued output.
+
+In those kind of problems we need as many as features to prodict
+on as possible. The Support Vector Machine algorithm helps with
+a neat math trick that allows a computer to deal with even an
+infinite number of features.
+
+*** Unsupervised learning
+
+Unsupervised learning is used where we don't have the labels
+for the data and we are tring to find some structure in it.
+
+Clustering algorithm will try to structure the data as clusters.
+
+Problem: Google News topic clusters
+
+One story leeds to others on the same topic.
+
+Other problem domains:
+
+Organise computing clusters
+Social network analysis
+Market segmentation
+Astronomical data analysis
+
+Problem: Cocktail party problem
+Person 1     Microphone 1
+Person 2     Microphone 2
+
+Task: separate voices of both persons
+
+
+Two microphones set at different distances(locations) in a
+room with people similtaniously talking. Voice overlap in
+a different way in each output(always mixed to a speech noice).
+The algorithm will sum the outputs and we can clearly
+distinguish each persons speech.
+
+A difficult problem solved by researchers with just one line
+of code:
+
+[W, s, v] = svd((repmat(sum(x.*x,1), size(x,1),1).*x)*x');
+
+** Model and Cost Function
+
+m = number of training examples
+x = "input" variable /features
+y = "output" variable / "target" variable
+
+(x, y) = one training example(row in the table)
+(x^i, y^i) = i-th training example
+
+| Size (x) | Price (y) |
++----------+-----------+
+| 2104     | 460       |
+| 1412     | 232       |
+| 1534     | 315       |
+| ...      | ...       |
+
+x^1 = 2014
+y^1 = 460
+
+Training set -> Learning Algorithm -> h() (Hypothesis)
+
+Size h(Predicted price);
+h :: Size x-> Predicted Price y
+
+h maps from x to y
+
+h_\theta (x) = \theta_0 + \theta_1 x
+
+h(x) = a + bx
+
+shorthand: h(x)
+\theta 's are parameters of the model
+
+Linear regression: where we use linear function as h(x)
+
+Cost function: will help us fit the best h(x) to our data
+
+In the housing price problem this is the best straight line that
+fits the data. We need to minimize \theta_0 and \theta_1 so that
+the difference between h(x) and y is small(or the difference
+between the predicted value and the target in the data set is
+small).
+
+minimize J(\theta_0, \theta_1) = (1/2 * 1/m) * \Sum_{i=1}^{m} (h(x) - y)^2
+
+minimize the sum of the squared avarage error
+
+The squared error cost function works well for regression.
+
+
+** Gradient Discent
+
+a very common general algorithm used to minimize functions.
+
+Outline of the problem:
+We have some function J(\theta_0, \theta_1)
+We want to minnimaze it.
+
+Start with some \theta_0, \theta_1
+Keep changing \theta_0, \theta_1 to reduce J(\theta_0, \theta_1)
+until we hopefully end up at a minimum
+"We spin 360deg around us, choose the steepest way down and take a
+small baby step into that direction, then repeat until you converge
+into some minimum."
+
+
+x = \theta_0
+y = \theta_1
+z = J(\theta_0, \theta_1)
+
+repeat until convergence {
+    \theta_j := \theta_j - \alpha d/d\theta_j J(\theta_0, \theta_1)
+    (for j = 0 and j = 1)
+}
+
+temp0 := \theta_0 - \alpha d/d\theta_0 J(\theta_0, \theta_1)
+temp1 := \theta_1 - \alpha d/d\theta_1 J(\theta_0, \theta_1)
+
+\theta_0 := temp0
+\theta_1 := temp1
+
+Note: remember to always update the parameters \theta_0 and \theta_1
+simultaniously(ater the calculation not during it);
+
+\alpha - is a number known as the learning rate, which difeince the size of the
+step that we take downhill.
+
+d/d\theta_j J(\theta_0, \theta_1) - is the derivative term. When at an local
+optimum slope is 0. And as we approach a local minimum the steps will
+authomatically became smaller.
+
+[[./img/gradient_discent.jpg]]
+
+Gradient discent for Linear Regression
+
+the cost function for the linear regression is going to be a bow shaped
+function(a convex function). I t does not have any local optima, just the
+global optima.
+
+"batch" gradient discent - at every step we are looking at all the training
+examples.
+
+NOTE: Normal equations method is a numeric method to solve for the minimum
+using linear algebra, but it does not scale as good as gradiaent discent.
+
+
+
+
+
+
+* Other
+
+** Octave Reference
+
+** Python Reference
+
+*** Conditionals
 
 if cond1:
     do()
@@ -13,7 +225,7 @@ ifel cond2:
 else:
     do()
 
-** Loops:
+*** Loops:
 
 >>> knights = {'gallahad': 'the pure', 'robin': 'the brave'}
 >>> numbers = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -24,31 +236,28 @@ else:
 
 >>> for i in range(10): do()
 
-
-** Collections:
+*** Collections:
 
    Seqs are mutable(list) and immutable(tuple, range)
 
-*** tuple
+**** tuple
 
 >>> t = (1,2,3,4)
 
     immutable,
     collection
- 
     - packing and unpacking
 
 >>> t = 12345, 54321, 'hello!'
 >>> x, y, z = t
 
 
-*** list
+**** list
 
 >>> l = [1,2,3,4]
 
     mutable,
     more like array or vector or linked-list?
-    
     - methods:
       .append(x)                - adds at the end
       .extend(iterable)
@@ -95,15 +304,12 @@ Out[]: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 >>> squares = list(map(lambda x: x**2, range(10)))
 
     - reduce:
-
->>> 
+>>>
 
     - filter:
+>>>
 
->>> 
-
-
-*** dict
+**** dict
 
 >>> tel = {'jack': 4098, 'sape': 4139}
 
@@ -121,12 +327,12 @@ Out[]: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     .items()
     .pop(key[,default])
     .popitem()             - remove arbitrary
-    .update([other])       - overwrites existing 
+    .update([other])       - overwrites existing
 
 >>> dict([('sape', 4139), ('guido', 4127), ('jack', 4098)])
 >>> dict(sape=4139, guido=4127, jack=4098)
 
-*** set
+**** set
 
 >>> basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
 
@@ -139,16 +345,16 @@ Out[]: True
 Out[]: {'a', 'r', 'b', 'c', 'd'} # unique letters in a
 
 
-*** range
+**** range
 
 >>> range(1,10)
 
     range(start, stop, step)
-    
+
     it is useful, because it is more efficient. Values are generated only when needed
     lazy seq
 
-*** Common Seq Operations
+**** Common Seq Operations
 
     x in s 	              True if an item of s is equal to x, else False
     x not in s 	          False if an item of s is equal to x, else True
@@ -164,7 +370,7 @@ Out[]: {'a', 'r', 'b', 'c', 'd'} # unique letters in a
     s.count(x)
 
 ** Functions:
-    
+
 - argument lists
 - keyword arguments
 - default arguments
@@ -177,53 +383,11 @@ a,b,c = abc(): return a, b, c
 - recur
    no tco!?
 
-
 ** Decorators
-
 ** OOP
-    
 ** Generators
-   
-* Lecture 04:   
 
-* Lecture 05:
-
-* Lecture 06: ... data exploration, feature enfineering
-
-
-
-* Andrew Ng Machine Learning at Coursera
-
-** Week 01.
-
-*** Definition
-
-    Example with checkers:
-    E ::= the experience of playing many games
-    T ::= the task of playing the game
-    P ::= the probability of winning the next game
-
-    if P to do T increases as E increases it is machine learning
-    
-    Probability Task Experience 
-    
-*** Supervised learning
-
-    Task: Housing price prediction
-    
-    y price, x size
-
-    Straight line(linear function) or quadratic function
-    150 usd                           200 usd
-
-    Supervised means that 'right answers' were given, and the goal
-    is to produce more 'right answers'
-
-    Regression problem - tring to predict continuous valued output (the price)
-
-    Classification problem - tring to predict a discrete valued output (0 or 1)
-
-*** Unsupervised learning 
+*** Unsupervised learning
 
     The data set has no 'right answers'/labels given,
     we have to find the structure into the data
@@ -235,57 +399,45 @@ a,b,c = abc(): return a, b, c
     Task: Market Segmentation
     Task: Astronomical data analysis
 
-    Clustering algorithm - tries to find clusters in data
+** Deep learning for NLP
 
-    Problem: Cockteail party
-    Person 1     Microphone 1
-    Person 2     Microphone 2
+    Traditional machine learning uses more 'hard-coded' methods and requires
+    experienced and deeply knowlegable domain specialists to code them.
+    Deep learning uses vectors as more efficient and simpler abstraction
+    in order to turn tml on its head.
 
-    Task: separate voices of both persons
+    Representations of language
 
-*** Model and Cost Function
-    
-**** Linear Regression with one variable
+    |           |      TML         |    DL   |
+    +-----------+------------------+---------+
+    | phonology | all phonemes     | vectors |
+    | morphology| all morphemes    | vectors |
+    | words     | one-hot encoding | vectors |
+    | syntax    | phrase rules     | vectors |
+    | semantics | lambda calculus  | vectors |
 
-    Task: Housing prices
+    NOTE: one-hot encoding (uses matrix, not very efficient)
 
-    Trainig Set ---> Learning Algorithm ---> h(x) ---> prediction of y
+    |     | The | cat | sat | on | the | mat |
+    | The |  1  |  0  |  0  |  0 |  1  |  0  |
+    | cat |  0  |  1  |  0  |  0 |  0  |  0  |
+    ...
 
-    h is function from x to y
+    Applications
 
-    Cost function - we can use to measure the accuracy of h()
-    or how to 'fit the best line into the data'
+    Easy: spell checking, synonym suggestions, keyword search
+    easy to bruteforce with tml
 
-    This is like a fancy avarage function of all results of h()
-    The difference between the predicted value and the actual value
-    Also Squared error or Mean squared error function
+    Intermediate:
+    reading level,
+    extracting information,
+    predicting next word,
+    classification
 
-    Hypothesis: h (x) = T0 + T1x
-
-    Ti - parameters of the model
-
-    Ex.:
-
-    Hypothesis:      hT(x) = T0 T1x
-
-    Parameters:      T0, T1
-
-    Cost Function:   J(T0, T1) = 1/2m SUM m i=1 (hT(x^(i)) - y^(i))^2
-
-    Goal:            minimize J(T0, T1)
-                      T0, T1
-
-*** Gradient descent
-
-A general algorithm for minimizing the cost function J.
-It is general and used all over the place in ml
-
-
-* Neural Networks
-
-** Intro
-
-
+    Complex:
+    machine translation,
+    quation answering,
+    chatbots,
 
 ** RNN (Recurrent Neural Networks)
 
@@ -297,8 +449,6 @@ RNNs allow to operate over sequances of vectors
 
 RNNs might be just unreasonably effective,
 despite them being considered hard to train
-
-
 
 Input Sequence Vectors <-> State Vectors -> Output Sequence Vectors
 

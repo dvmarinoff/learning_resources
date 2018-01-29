@@ -39,7 +39,7 @@ and in this case the limit does not exist from that direction
 *** Over a point
 f is continuos when x=a if and only if
 
-lim f(x) = f(a) 
+lim f(x) = f(a)
 x->a
 
 *** Over an interval
@@ -60,7 +60,7 @@ x->a            x->a
 lim( f(x) + g(x) ) = L + M     | Sum
 x-> a
 
-lim ( f(x) - g(x) ) = L - M    |  
+lim ( f(x) - g(x) ) = L - M    |
 x->a
 
 lim ( f(x) * g(x) ) = L * M    | Product
@@ -86,14 +86,14 @@ x->2
 
 ex.5:
 
-lim x + 1/ sqrt(x + 5) - 2 = ?    | 0/0 
+lim x + 1/ sqrt(x + 5) - 2 = ?    | 0/0
 x-> -1
 
 g(x) = x + 1/ sqrt(x + 5) - 2 =
 
 = (x + 1 / sqrt(x + 5) - 2) * (sqrt(x + 5) + 2 / sqrt(x + 5) + 2) =
 
-= (x + 1)(sqrt(x + 5) + 2) / x + 5 - 4 = sqrt(x + 5) + 2 , x !0= -1  
+= (x + 1)(sqrt(x + 5) + 2) / x + 5 - 4 = sqrt(x + 5) + 2 , x !0= -1
 
 f(x) = sqrt(x + 5) + 2
 f(x) = g(x) for all x != 1
@@ -117,13 +117,13 @@ for all reaBBG
 G
 l numbers and are continuos
 over thier entire domain (tan and cot are also continuous), and
-thier limit will be the value of the function at that point 
+thier limit will be the value of the function at that point
 
 
-lim tan(x) = lim sin(x)/cos(x) = 0 / -1 = 0 
+lim tan(x) = lim sin(x)/cos(x) = 0 / -1 = 0
 x-> π
 
-lim cot(x) = lim cos(x)/sin(x) = 
+lim cot(x) = lim cos(x)/sin(x) =
 x-> π
 
 sin π = sin(π/2 + π/2) = cos π/2 = 0
@@ -154,7 +154,7 @@ x->a            x->a
    x->a
 
 *** lim sin(x)/x
-    x-> 0      
+    x-> 0
 
 
 
@@ -166,9 +166,10 @@ x->a            x->a
 
 1) The 'instantanious' rate of change
 
-2) Derivatives are about looking at tiny changes to some quontity
+2) Derivatives arBG
+e about looking at tiny changes to some quontity
 and how that relates to a resulting tiny change in another quontity
- 
+
 3) derivative is equal to the slope of a line tangent to the graph
 at a single point
 
@@ -178,7 +179,7 @@ the slope of a curve is always changing at each point
 
 f(b) - f(a) / b - a
 
-- derivative 
+- derivative
 
 f'(x) = \frac{df}{dx} = \lim_{x\to\0} = \frac{f(x+h) - f(x)}{h}
 
@@ -194,8 +195,8 @@ f is not differebtiable if:
 1) if f not continuous at x = a, then f is not differentiable
 2) if f have vertical tangent at x= a f is not differentiable at x = 0
 3) 'sharp turn' - as we approach the point from left or right slope of tangent is different
-   
-f(x) = abs(x) is not differentiable at the point of the 'sharp turn' 
+
+f(x) = abs(x) is not differentiable at the point of the 'sharp turn'
 
 - tangent line equation
 
@@ -218,7 +219,7 @@ where m is the slope and b is the y intercept
 or
 
 (y-y1) / (x - x1) = b
- 
+
 - Local linearity
 
 The concept:
@@ -250,10 +251,10 @@ L(x) = f(4) + f'(4)*(x-4)
 
 From Power rule:
 f'(x) = 1/2 * x^-1/2
-f'(4) = 1/4 
+f'(4) = 1/4
 
 L(4.36) = f(4) + f'(4)*(4.36 - 4)
-= 2 + 1/4 * 0.36 
+= 2 + 1/4 * 0.36
 = 2 + 0.09
 = 2.09
 
@@ -265,7 +266,7 @@ $ \sqrt{4.36} = 2.088061 $
 
 *** Basic rules
 
-1) Constant rule 
+1) Constant rule
 
 f(x) = k
 -> f'(x) 0
@@ -294,7 +295,7 @@ d/dx sin = cos
 
 d/dx cos = -sin
 
-*** Derivative of e^x and ln(x) 
+*** Derivative of e^x and ln(x)
 
 d/dx [sin x] = cos x
 d/dx [cos x] = -sin x
@@ -378,9 +379,9 @@ h(x) = x^2
 
 d/dx[tan(x)] = d/dx[sin(x)/cos(x)] = 1/cos^2(x) = sec^2(x)
 
-d/dx[cot(x)] = d/dx[cos(x)/six(x)] = -1/sin^2(x) = -csc^2(x) 
+d/dx[cot(x)] = d/dx[cos(x)/six(x)] = -1/sin^2(x) = -csc^2(x)
 
-d/dx[sec(x)] = d/dx[1/cos(x)] = sin(x)/cos^2(x) 
+d/dx[sec(x)] = d/dx[1/cos(x)] = sin(x)/cos^2(x)
 
 d/dx[csc(x)] = d/dx[1/sin(x)] = -cos(x)/sin^2(x)
 
@@ -453,7 +454,7 @@ and
 
 and
 
-\lim_{x\to a} \frac{f'(x)}{g'(x)} = L 
+\lim_{x\to a} \frac{f'(x)}{g'(x)} = L
 
 Then:
 
@@ -518,7 +519,7 @@ we can get it equal to 0 only when (1 - 4x^2) is equal to 0
 x^2 = 1/4
 x = 1/2, x = -1/2
 
-critical points are at 1/2 and -1/2 
+critical points are at 1/2 and -1/2
 
 
 
@@ -560,7 +561,7 @@ x > 2
 (2, \inf)
 
 
-*** Practice: 
+*** Practice:
 Find critical points of:
 01. g(x) = x^3 + x^2 + x
 g'(x) = 3x^2 + 2x + 1
@@ -584,7 +585,7 @@ No critical points
 
 04. h(x) = 4x^2 / x^2 - 1
 h'(x) = (8x * (x^2 - 1)) - (2x * (4x^2)) / (x^2 -1)^2
-= 8x^3 - 8x - 8x^3 / x^4 + 1 
+= 8x^3 - 8x - 8x^3 / x^4 + 1
 = -8x / x^4 + 1
 
 x = 0 is undefined
@@ -596,14 +597,14 @@ f'(x) = 6x^2 - 18x + 12
 or
 6(x - 1)(x - 2) = 0
 
-x = 1 and x = 2 
+x = 1 and x = 2
 
 06. h(x) = e^(2x) / x - 3
 h'(x) = 2e^(2x) * (x - 3) - e^(2x) / (x - 3)^2
-= -7e^(2x) + 2x*e^2x = e^(2x)*(2x - 7)  
+= -7e^(2x) + 2x*e^2x = e^(2x)*(2x - 7)
 
 x = 7/2 is equal to 0
-x = -3 is undefind, but also h(x) is undefined so it is not a critical point 
+x = -3 is undefind, but also h(x) is undefined so it is not a critical point
 
 07.
 
@@ -625,7 +626,7 @@ never
 
 Analyze values (graph) of the derivative:
 
-| interval   | value          | direction | 
+| interval   | value          | direction |
 |------------+----------------+-----------|
 | (-\inf, 0) | g'(-1) = -9    | dec       |
 | (0, 1)     | g'(1/2) = 3/16 | inc       |
@@ -700,7 +701,7 @@ g''(x) = -12x^2 + 12
 -12x^2 + 12 = 0
 x^2 = 1
 x = 1
-x = -1 
+x = -1
 
 g''(-2) = -36   (-\inf, -1)   down
 
@@ -716,7 +717,7 @@ For what values of x does the graph of g have an inflection point?
 
 g'(x) = 1x^3 - 12x^2 + 48x
 
-g''(x) = 3x^2 - 24x + 48 
+g''(x) = 3x^2 - 24x + 48
 
 3x^2 - 24x + 48 = 0
 x = 4
@@ -725,7 +726,7 @@ But
 f''(0) = 48    (0, 4)    pos
 
 f''(4) = 0     0         0
- 
+
 f''(10) = 108  (4, 108)  pos
 
 ->
@@ -758,7 +759,7 @@ d/dx F(x) = F'(x) = f(x)
 
 
 
-* Accumulation and Rienmann Sums 
+* Accumulation and Rienmann Sums
 
 ** Definite Integral
 
@@ -848,7 +849,7 @@ y = f(x)
 
 y = s * f(x)
 
-\int_{a}^{b} s * f(x) dx = s * \int_{a}^{b} f(x) dx 
+\int_{a}^{b} s * f(x) dx = s * \int_{a}^{b} f(x) dx
 
 [[./img/integrating_scaled_function.jpg]]
 
@@ -935,7 +936,7 @@ it is undefined for negative values or 0. We need larger domain.
 
 \int e^a dt = e^a + C
 
-\int (e^a + 1/a) = \int e^a + \int |a| + C 
+\int (e^a + 1/a) = \int e^a + \int |a| + C
 
 *** Radicals
 
@@ -947,13 +948,13 @@ it is undefined for negative values or 0. We need larger domain.
 
 \int \frac{1}{sqrt(a^2 - x^2)} dx = arcsin(x/a) + C
 
-\int \frac{1}{a^2 + x^2} dx = 1/a arctan(x/a) + C 
+\int \frac{1}{a^2 + x^2} dx = 1/a arctan(x/a) + C
 
 ** Finding Definite Integrals
 
 *** Reverse Power rule
 
-\int_{-3}^{5} 4 dx = F(5) - F(-3) = 4*5 - (4 * -3) = 22 
+\int_{-3}^{5} 4 dx = F(5) - F(-3) = 4*5 - (4 * -3) = 22
 
 F'(x) = 4x
 
@@ -1015,7 +1016,7 @@ f(x) = x^2
 output is parabola
 
 f(x, y) = x^2 + y^2
-inputs live on tha x, y plane 
+inputs live on tha x, y plane
 output is a surface that look like 3d parabola
 
 if we modify the function to:
@@ -1046,6 +1047,65 @@ looks like the graph of cos(x)
 [[./img/slice0.jpg]]
 [[./img/slice1.jpg]]
 [[./img/slice2.jpg]]
+
+Contour plots:
+
+The idea is that we take a nd graph slice it with planes that are all
+parallel to the x, y plane and represent values of z like:
+z = -1, z = -2, z = 0, z = 1, z = 2
+Now we draw the lines where this planes touch the surface of the graph
+and squish them down flat on to the x, y plane. Now we have something
+2d that still represents some of the outputs of our function.
+
+Small step between lines means steepness, larger distances between lines
+are much more shallow.
+
+In the coloring warmer colors are high values while cooler colors are
+lower values.
+
+Parametric curves:
+
+Consider: f(t) = [tcos(t) tsin(t)]
+1 parameter functions that output 2d vector
+parameter is fancy for input
+
+f(0) = [0 0]
+f(\pi/2) = [0 \pi/2]
+
+We get a spiral pattern.
+
+Parametric surfaces:
+
+f(t,s) = [3cos(t) + cos(t)cos(t), 3sin(t) + sin(t)cos(t), sin(s)]
+
+2d input to 3d output
+
+f(0, \pi) = [2, 0, 0]
+
+Suppose ew keep s to be a constant value and let t vary freely.
+In this case we get a circle surface on the x, y.
+
+If we do the opposite and keep just t a constant, we get another
+circle surface on the z axis.
+
+If we let them both run freely we get the z axis circle to becaome a 3d
+surface circumventing the x, y surface. End result is a torus(doughnut).
+
+Vector fields:
+
+come up all the time in physics, fluid flow, electrodynamics.
+It is a way of visualizing a function that hace the same number of
+dimentions in their input as in their outpus.
+
+f(x, y) = [y^3 - 9y, x^ - 9x]
+
+You have 2d in input and 2d in output so it must be in 4d.
+Instead we can look only the input.
+
+
+
+
+
 
 
 
@@ -1089,12 +1149,12 @@ c = 2πr
   cos Theta = Opposite/Hypotenuse = b / 1 = b
 
   The point (a,b) on the circle gives us the sin and cos of Theta
-  
-  
+
+
   tangens, cosecant, secant and cotangent:
 
-  tan T = sin T / cos T = opposite / adjacent 
-  
+  tan T = sin T / cos T = opposite / adjacent
+
   csc T = 1 / sin T = hypotenuse / opposite = h / a
 
   sec T = 1 / cos T = hypothenuse / adjacent = h / b
@@ -1109,7 +1169,7 @@ c = 2πr
   sin 60 = sqrt(3)/2
   sin 90 = 1
 
-|   T  | sin T | cos T | 
+|   T  | sin T | cos T |
 |------+-------+-------|
 |  0   |   0   |   1   |
 | π/2  |   1   |   0   |
@@ -1135,7 +1195,7 @@ c = 2πr
   sin^2(x) = (1 - cos(2x)) / 2
   cos^2(x) = (1 + cos(2x)) / 2
   tan^2(x) = (1 - cos(2x)) / (1 + cos(2x))
-  
+
 
 
   [[./img/sine_cosine_identities_symmetry.jpg]]
@@ -1143,36 +1203,36 @@ c = 2πr
 *** Features of sinusoidal functions
 
     - midlane:
-      
+
     - amplitude:
       how far does the function vary from the midline
 
     - period:
       how much to change x to go to the same point in the cycle
- 
+
 *** Tau or Pi
 
  π = c / d = c / 2r
- 
+
  Eulers formula:
 
  e^iT = cos(T) + sin(T)
 
  Eulers identity:
 
- e^iπ + 1 = 0  
- 
+ e^iπ + 1 = 0
+
  Tau = c / r = 2π = 6.283185...
 
  C = Tau * r
- 
+
  π/2 = Tau/4 radians
 
  e^iTau = cos(Tau) + i * sin(Tau) = 1 + 0 = 1
 
-** Inverce Trig functions 
+** Inverce Trig functions
 
-sin^-1(x) , arcsin is defined as sin(y) = x   
+sin^-1(x) , arcsin is defined as sin(y) = x
 
 tan^-1(x) , arcsin is defined as tan(y) = x
 
@@ -1186,7 +1246,7 @@ d/dx arcsin(x) = 1 / sqrt(1-x^2)
 
 d/dx arccos(x) = - 1 / sqrt(1-x^2)
 
-d/dx arctan(x) = 1 / 1 + x^2 
+d/dx arctan(x) = 1 / 1 + x^2
 
 d/dx arcot(x) = - 1 / 1 + x^2
 
@@ -1196,7 +1256,7 @@ cosh x = e^x + e^-x / 2
 
 sinh x = e^x - e^-x / 2
 
-NOTE: read as [kosch] and [sinch]  
+NOTE: read as [kosch] and [sinch]
 
 
 * Algebra
@@ -1220,595 +1280,3 @@ x^(3/4)   = x^(1/4)^3
 ** Properties of logarithms
 
 ln a/b = ln a - ln b
-
-
-* Other Stuff
-
-
-*** Deep learning for NLP 
-
-Traditional machine learning uses more 'hard-coded' methods and requires
-experienced and deeply knowlegable domain specialists to code them.
-Deep learning uses vectors as more efficient and simpler abstraction
-in order to turn tml on its head.
-
-Representations of language
-
-|           |      TML         |    DL   |
-+-----------+------------------+---------+
-| phonology | all phonemes     | vectors |
-| morphology| all morphemes    | vectors |
-| words     | one-hot encoding | vectors |
-| syntax    | phrase rules     | vectors |
-| semantics | lambda calculus  | vectors |
-
-NOTE: one-hot encoding (uses matrix, not very efficient)
-
-|     | The | cat | sat | on | the | mat |
-| The |  1  |  0  |  0  |  0 |  1  |  0  |
-| cat |  0  |  1  |  0  |  0 |  0  |  0  |
-...
-
-Applications
-
-Easy: spell checking, synonym suggestions, keyword search
-easy to bruteforce with tml
-
-Intermediate:
-reading level,
-extracting information,
-predicting next word,
-classification
-
-Complex:
-machine translation,
-quation answering,
-chatbots,
-
-
-** Quantum Field Theory
-
-
-*** Quantum Tunneling
-
-Is Quantum tunneling faster then light?
-
-Certain properties of an object are fundamentaly uncertain.
-They must be described as a distribution of possible states of being.
-Each specific state has a certain probability of being true when the
-object is observed.
-
-Until a quantum object interacts with something
-all possible states are just real as each other.
-Although not necessaraliy equally likely.
-
-There is a distribution of probabilities for each of an objects's quantum
-properties. That distribution, and the way it changes over time, is coded
-in the object's wave function. The reduction of a fuzzy posibility space
-into a specific measurable property is referred to as the collapse of the
-wave function.
-
-Louis de Broglie(broie) figured out that any material object is really a
-matter wave. It can be described as a wave packet of positioned probability.
-And it has a wavelength - de Broglie wave length, that defines how well
-determined an object's position is.
-A large wavelength means a highly uncertain position, a small wavelength
-means well-defined position. That's true of subatomic particles and it's
-sort of true of anything.
-
-"Observe me and collapse my wave function"
-
-Objects wavelength depends on its momentum (mass times velocity).
-Higher momentum means a smaller wavelength.
-Its the minuscule Plank constant divided by momentum.
-
-\lambda = h / p
-
-Humans are made of several tens of kilograms of thermal moving particles
-and have de Broglie wavelengths a couple of orders of magnitude smaller
-than the Plank wavelength.
-
-"You are everywhere in the universe, but not very much. You are as right
-there as possible to be."
-
-But what about something much smaller?
-
-Say a tightly bound bundle of two protons and two neutrons that we call
-an alpha particle. On it's own this would be a helium nucleus. But these
-bundles also exist as parts of heavier atomic nuclei. There an alpha
-particle is snugly bound into the nucleus by the strong nuclear force.
-
-We can imagine an alpha particle as being like a ball trapped in a steep
-valley of potential energy. It can roll around inside, but unless it has
-a very large kinetic energy, it will never roll over the edges.
-
-[[./img/potential_energy_valley.jpg]]
-
-But quabtum objects aren't at al like balls. Their positions are not well
-defined. As an alpha particle approaches the force barrier of nucleus,
-its wave packet is reflected backwards, ... usualy. That wave packet
-describes a range of possible locations for the approaching particle.
-But that possibility space does not end suddenly at the force barrier.
-Instead, it drops off quickly, exponentially, through the steep walls.
-However it never quite reaches zero. There remains a tiny tail of
-probability outside the nucleus, beyond the reach of the strong nuclear
-force. That means there is a very tiny chance that instead of bouncing
-off the wall, the particle will resolve its position in that unlikely
-outside bit of its posibility space that looks like the particle
-teleporting out of the nucleus.
-
-This is called Quantum Tunneling:
-
-[[./teleporting_out_of_nucleus.jpg]]
-
-When it's an alpha particle is escaping a nucleus this is one of the
-most important mechanisms for radioactive decay.
-
-Quantum tunneling also goes in the other direction.
-
-Protons, neutrons, electrons and alpha particles can quantum tunnel
-into nuclei in various types of fusion and particle capture phenomena.
-Without it stars could not fuse hydrogen into heavy nuclei.
-
-A variety of modern electronics also rely on the tunneling phenomenon,
-including the transistor.
-
-But how quickly the particle moves through this barrier?
-
-As far as we know it's instantaneous. That suggests a velocity faster
-tha light, which sounds problematic. It's actually extreamly hard to
-test this because we can't make clocks accurate enough to time such a
-ridiculously quick event.
-
-The LEGO interferometer that discovered gravitational waves.
-Laser beams are sent down paths at right angles and then brought back
-together. The photon wave packets interact with each other and produce
-an interference pattern that is incredibly sensitive to differences in
-path lengths.
-
-[[./interferometer.jpg]]
-
-If we change the arangement of beam?
-We want to send individual photons instead of lesers. And we want to
-block one of the paths with a very thin reflective barrier.
-
-In the absence of quantum tunneling that barrier should reflect its
-photon 100% of the time. But just like with the alpha particle, as the
-photon approaches the barrier the wave packet defining its possible
-location extends weakly beyond the barrier. About 99% of the time the
-photon is reflected. But 1% of the time it will resolve itself beyond
-the barrier and it will continue onits path.
-
-If those rare tunneling photons really do travel instantaneusly through
-the width of the barrier, then they should arrive at the detector slightly
-ahead of the photon that travels the unimpeded path.
-
-That will be apparent when their wave packets don't line up.
-
-[[./tunneling_paths.jpg]]
-
-For that to work you need to use a second, and perhaps even weirder
-feature of quantum mechanics - quantum entanglement.
-In order to produce these entangled states the path length of the
-interferometer needs to be identical to very high precision.
-
-Tune the path lengths until the weird effects of entanglement emerge,
-and you know that they are equal. At that point, you can get an incredibly
-precise measurement of any differences in photon travel time.
-
-That experiment was already succesfully performed. They found the tunneling
-photon does arrive a tiny bit earlier than its parther. It appears to
-teleport through the barrier and so travel faster than light.
-
-But this apparent violation of relativity only occurs deep within the
-quantum realm.
-
-A particle resolve its location anywhere within the vicinity of its
-de Broglie wavelength. That uncertainty in location allows tunneling.
-But even without barrier this location fuzziness leads to uncertainty in
-the arrival time of the photon. An unimpeded photon could arrive at the
-earlier time of the tunneling photon, because its wave packet includes 
-that in its range of possible positions. When you add the barrier, all
-you are realy doing is reshaping the wave packet, selecting only the
-posibility space of earlier arrival. This can look like an increase in the
-speed of light, but only within the uncertainty range defined by the
-de Broglie wavelength. Between the uncertainty range defined by the
-Heisenberg uncertainty principle.
-
-\delta x \delta p >= h / 2
-
-Which is from where the de Broglie wavelength comes.
-
-Any microscopic object is subject to a very well-defined speed limit.
-But in the quantum realm, Heisenberg uncertainty does seem to allow
-instantaneous motion, and even perhaps causality violation within the
-quantum limits.
-
-
-*** Planck's Constant 
-
-The Planck's constant defines the size scale at which the familiar physics
-of our macroscopic reality gives way to the weirdness of the quantum world.
-
-The quantum behaivior of the microscopic is observable on all scales of the
-universe. You can see the effect of this quantum behavior and even measure
-the Planck's constant just by observing the color of sunlight.
-
-Zeno's paradox is based on the assumption that space is infinitly divisible.
-To overtake the tortous you need to travel to its previous position
-infinite times.
-
-But that is not true. As you distance to the tortois becomes unthinkably
-small, there arises a quantum uncertainty in your location. It is imposible
-to say whether your location is really behind or in front of the tortoise.
-
-The Heisenberg uncertainty principle describes the smallest distance for
-which an object's location can be meaningfully defined.
-
-The tiny Planck constant, at 6.63 * 10^-34 J_s (Joule seconds) sets the
-scale of the quantum blurriness.
-
-"So it sort of defines a pixel scale to reality"
-
-In many ways it defines the divisibility of the quantum world. The Planck
-constant appears in all equations that describe quantum phenomena:
-
-The Heisenberg Uncertainty principle
-
-The de Broglie wavelength
-
-The Schrodinger equation
-
-The Energy Levels of Electron Orbits
-
-The Relationship between Energy and Frequency of a Photon
-
-It also sets the size of the Planck Length, which is, hypothetically the
-length below which the concept of length loses meaning.
-
-But it can be observed on our scale. It sets the color of sunlight.
-If it were 25% smaller the sun would be violet.
-
-Everithing in the universe glows with its own internal heat.
-Heat is just the energy in the random motion of particles comprising
-an object. Accelerated charges produce electromagnetic radiation - light.
-And so an object made of jiggling charged particles glows. The hotter the
-object is the faster its particles jiggle. And so the avarage frequency of
-the resulting particles of light, of phothons, increases with temperature
-and defines the color that we see.
-
-Sun is yellow because it's 6000 Kelvin surface produces more photons in the
-green yellow part of the elecromagnetic spectrum.
-The blue superstar giant Rigel is 12000 Kelvin.
-Human temperature is around ~310 Kelvin so your heat glow is mostly low
-frequency infrared photons.
-
-By the late 1800's the distribution of brightness with frequency produced
-by hot objects had been mapped in careful experiments that blacked out
-anything but glow of heat. The resulting blackbody spectrum looks like a
-lopsided bell curve.
-
-[[./blackbody_spectrum.jpg]] 
-
-However the deep physics bihind this shape remained a mystery. The key to
-unlocking the mystery lay in finding a mathematical desription for the
-blackbody spectrum.
-
-Rayleigh and Jeans proposed the Equipartition Theorem.
-An object's heat energy will end up juggling all of its particles in all
-the ways that they can be juggled.
-At equilibrium energy is evenly spread between all posible energy states.
-
-The resulting Rayleigh-Jeans law described the blackbody spectrum
-perfectly for low frequancy infrared light, but for higher frequency
-like visible and ultravilet it predicted way too high values, actually
-approaching infinity as frequancy increased.
-
-B_u = u^2 * k * T / c^2
-
-This was called the ultraviolet catastrophy. It meant that something
-was fundamentally wrong with the classical physics that went into the
-Rayleigh-Jeans law.
-
-The problem turned out to be that in classsical physics everything can
-be infinitely divided.
-Their calculation allows particle to vibrate with any amount of energy,
-all the way down to infinitesimally tiny wiggles. When they tried to
-mathematically distribute heat energy to equipartitionates across
-possible energy states, way too much energy got packed into the countless
-very tiny energy states at high frequencies.
-
-Max Planck resolved the catastrohe almost by accident.
-He needed a math 'trick' to count the supposedly infinite energy states.
-Out of frustration he just decided that those particles could only vibrate
-with energies that were a multiple of some minimum energy. He quantized the
-energy states. He set this minimum energy to be the frequency of a
-particle's vibration times a very, very small number, a number that had yet
-to be measured. It became the Planck constant.
-
-[[./planck_constant.jpg]]
-
-
-It limited how much energy those high frequency vibrations could hold and
-decribed the shape of the blackbody spectrum exactly.
-
-Planck's Law
-
-B_u = 2hu / c^2 * 1 / e^(hu/kT) - 1
-
-He expected the contant being just a math 'trick' to cancel out in the
-final equation, but it didn't, it firmly entrenched in the law.
-
-So energy quantization is real.
-
-The constant had yet to be measured, so he just adjusted the value until
-the law matched the observed spectrum.
-
-Later Einstein realized that it is actually light that is quantized.
-
-Those little vibrating particles do have quantized energies, but it is
-because they can only gain or lose energy by absorbing or emitting one
-particle of light at a time. And that light comes in indivisible energy
-packets.
-
-[[./energy_packets.jpg]]
-[[./energy_packets_photon.jpg]]
-
-Planck's discovery was the clue Einstein needed to hypothesize the
-existence of the photon - part wave, part particle carrying a quantum
-of energy equal to the now familiar frequency of the wave times the
-Planck constant.
-
-These discoveries let to the quantum revolutioin of the 1920's.
-
-By defining the shape of the blackbody spectrum the Planck constant can be
-read in the color of the sun and the stars, in the brightness of the
-different colors of the rainbow. And combined with a small handful of other
-fundamental constants, it governs the behavior of everything in the
-space time.
-
-*** The Single Particle Double-slit Experiment 
-
-One of the strangest experiments ever observed.
-Illustraits how the quantum world is very different from the large scale
-world of our physical intuition. In fact, it hints that the funcdamental
-nature of reality may not be physical at all.
-
-A rubber duckie bobs up and down in a pool, causing periodic ripples to
-spread out. Some distance away, rhose waves encounter a barrier with two
-gaps cut in it. Most of the wave is blocked, but ripples pass through the
-gaps. When the new ripple start to overlap each other, they produce a
-pattern, called the interferece pattern.
-
-It is due to the fact in some places the peak of the ripple from one gap
-stacks on top of the peak of the other gap, making more extream peak
-and more extream dips when two dips overlap.
-We call this constructive interference.
-
-[[./constructive_interference.jpg]]
-
-But when the peak from one wave encounters the trough from another, they
-cancel out, leaving nothing - destructive interference.
-
-So we have these alternating tracks of wavy and flat water.
-Any type of wave should make interference pattern like this.
-
-A source of light passing through two very thin slits produces bands of
-light and dark stripes, alternating regions of constructive and destructive
-interference.
-
-We know that light is a wave in the electromagnetic field (Maxwell).
-
-But we also know that light comes in indivisible little bundles of
-electromagnetic energy called photons (Einstein).
-
-So each photon is a little bundle of waves, waves of electromagnetic
-field, and each bundle can't be broken into smaller parts. That means
-that each photon should have to decide whether it's going to go through
-one slit or the other. It can't split and then recombine.
-
-[[./laser_emitter.jpg]]
-
-That shouldn't be a problem as long as you have at least two photons.
-But here we get to one of the craziest experimental results in physics.
-
-The interference pattern is seen even if you fire those photons one
-at a time.
-
-This pattern has nothing to do with how each photon's energy gets spread
-out, as was the case with the water wave. Each photon dumos all of its
-energy at a single point. The pattern emerges in the distribution of final
-positions of many completely unrelated photons.
-
-Each photon has no idea where previous photons landed or where future
-photons will land, yet each photon reaches the screen knowing which
-regions are the most likely landing spots and which are the least likely.
-It knows the interference pattern of a pure wave that passed through both
-slits equally and it chooses its landing point based on that.
-
-[[./interference_distribution.jpg]]
-
-Electrons, whole atoms and even whole molecules (buckminsterfullerine a
-molecule of 60 carbon atoms) build up the same sort of interference
-pattern. We have to conclude that each individual electron, atom or
-buckyball travels through both slits as some sort of wave. That wave then
-interact with itself to produce an iterference patterns. Except that here
-the peaks of that pattern are regions where there is more chance that the
-particle will find itself. It looks like a wave of possible undefined
-positions that at some point for some reason, resoves itself into a single
-certain position. We can also see this waviness in position in quantum
-tunneling.
-
-Several quantum properties like momentum, energy, and spin, all display
-similar waviness in different situations. We call the mathematical
-description of this wave-like distribution of properties a "wave function".
-
-Describing the behavior of the wave function is the heart of quantum
-mechanics.
-
-But what does the wave function represent?
-
-We know where the particle is at both ends. It starts its journey at the
-"emitter" andreleases its energy at a well-defined spot on the screen.
-So the particle seems to be more particle-like at either end, but wave-like
-in between. That wave holds the information about all the possible final
-positions of the particle but also about its possible positions at every
-stage in the journey. In fact the wave must map out all possible paths
-that the particle could take. We have this family of could-be trajectories
-from start to finish and for some reason, when the wave reaches the
-screen, it chooses a final location and that implies choosing from these
-possible paths.
-
-Within that misterious span between the creation and the detection, is the
-particle anything more than a space of possibility?
-
-In fact the answers aren't known.
-
-But the various interpretations of quantum mechanics do try.
-
-
-*** The Copenhagen Interpretation
-
-The Copenhagen interpretation is a view favoured by Heisenberg anf Bohr.
-The wave function doesn't have a physical nature. Instead its comprised
-of pure possibility. A particle traversing the double-slit experiment
-exists only as a wave od possible locations that ultimately encompasses
-all possible paths. It's only when the particle is detected that a
-location and the path it took to get there are decided.
-
-They call this transition from possibility space to a defined set of
-properties "the collapse of the wave function". It tells us that prior to
-the collapse, it's meaningless to try to define a perticle's properties.
-It is almost like the universe is allowing all possibilities to exist
-simultaneously but holds off choosing which actually happedned until
-the last instant. Weirder this possible realities interact with each other.
-That interaction increases the chance that some paths become real and
-decreases the chance of others. There's an interaction between possible
-realities that is seen in the distribution of final positions.
-
-The interference pattern is real, even though the vast majority of paths
-involved in producing the interference never attain reality.
-
-That final choose of the experiment of the universe is fundamentally random
-within the constraints of the final wave function.
-
-The theory of quantum mechanics produces stunningly accurate predictions of
-reality and it is completely consistent with the Copenhagen interpretation.
-
-But this is not the only interpretation that works. There are
-interpretations that give the wave function a physical reality.  
-
-
-*** The Many Worlds Interpretaion
-
-*** Quantum Erasers
-
-Can reality be adjusted after events have occurred?
-
-This is the unsettling implication of the delayed choice quantum eraser
-experiment.
-
-Which Way experiment
-
-What if we try to detect through which slit each particle actually travels
-throygh before they produce the famous interference pattern.
-It turns out that any experiment that determines unambiguously which slit
-the particle traverses destroys the pattern.
-Instead particles land in simple clumps, one for each slit, as they were
-traveling as simple particles the whole time. This is even true if you
-place detectors on the far side of the slits after the wave partice thing
-should have already been interfering with itself, just like the wave
-function is collapsing retroactively.
-
-It is impossible to make this measurments without messing up the wave.
-The interference pattern happens because the waves emerging from each slit
-are what we call coherent, which means that the relationship between the
-wave form is emerging from the two slits.
-
-So the locations of peaks and valleys is predictable and stays consistent
-as the waves move forward. But when you place some device in the path of
-eithe wave, you mess with this coherence and so sffecr the pattern that
-reaches the screen. 
-
-A Delayed Choice Quantum Eraser experiment
-
-This experiment made use of a very special type of crystal that absorbs an
-incoming photon, and creates two new photons, each with half the energy of
-the original. These photon are twins and an entangled pair.
-
-[[./quantum_eraser_a.jpg]]
-
-Place this crystal in front of double slit to make coherent entangled pairs
-of any photons passing through. Send one of each pair off to the screen to
-produce our interference pattern and use the other to figure out which slit
-the original photon passed through.
-
-Let's focus on detectors A and B.
-Detector A lights up if the original photon passed through slit A. And
-detector B lights up for slit B. If we run this for a bunch of photons,
-we see that whenever detectors A or B light up, we get a simple pile of
-photons here at the screen. No interference pattern at all.
-As though any knowledge if which way the original photon traveled stops
-it from acting like a wave during its passage through the slits.
-And crazier this experiment was set up so that photons reach A or B after
-their twins reach the screen.
-So a photon lands on the screen to the pattern defoned bt its wave function.
-And then later, its untangled partner reaches detector A or B, and somehow
-retroactively influances the previous landing position. It's like the
-second photon is saying, whoa, whoa someone figured out which slit I came
-through, you better look like you came through that one, too.
-
-But it gets even weirder. The extra C and D are the quantum eraser.
-Its job is to destroy any information about the path of the photons
-by using beam splitters (half-silvered mirrors) just before A and B.
-They allow 50% of the photons through, while reflecting the other 50%.
-Now you have a new possible outcome. Instead of being reflected to
-detectors A or B, half of the photons end up in detectors C or D.
-But this assuares that if C or D light up, we have no idea which slit that
-photon came from. If we only look at the photons whose twins end up at
-detector C or D, we do see an interference pattern. It looks like the
-simple act of scrambling the "Which Way" information retroactively sends
-the message: "OK. Chill the observer lost the info of which slit we went
-through. It's safe to have gone through both again." It looks like some
-sort of retroactve reality cascade. But better be cautions.
-
-Part of the appeal of the Copenhagen interpretation is that it avoids
-any physical interaction that moves faster than light. When a spread
-out wave function resolves itself into a set of known properties, the
-location of a particle om the double slit screen, somehow the entire
-wave function knows to do this - to collapse at the same instant. But
-if these wave functions are physical, then there is no real instantaneous
-physical interaction.
-
-By contrast a physical interpretation of the wave function, like the
-de Broglie-Bohn pilot wave theory, requires an underlying physicality, a
-set of defines properties that evolves with the wave function.
-
-So-called hidden variables. That's unconftoble, vecause these physical
-properties need to act and change instantly at any distance.
-
-They need to have what we call non-locality.
-
-The delayed choice double slit experiment doesn't tell us wheter the wave
-function is physical or not.
-
-The solution may lie in the facinating phenomenon of the quantum
-entanglement. Enatngled particles are really able to influence each other
-instantaneously and their non-locality doesn't violate causality.
-So perheps they can even affect coherence and decoherence retroactively
-and physically without making a causal mess.
-
-Perhaps this rhing we call observation is just entanglement between the
-observer and the experiment. Perhaps the evolving tapestry of
-entanglement in all its impossible complexity is what really defines
-reality.    
-
-
-*** Quantum Entanglement
-
-Object permanence (the peekaboo game) is so deeply embeded both in our views
-and classical physics that we never quation it.
-Yet the idea that the universe keeps existing when we are not looking at it,
-is a pretty fundamential implied assumption.  
-This notion that the universe exists independent of the mind of the observer
-is called realism in physics.

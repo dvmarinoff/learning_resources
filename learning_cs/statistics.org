@@ -81,11 +81,11 @@ A B C D E F
 
 6 5 4 3
 _ _ _ _
-1 2 3 4 
+1 2 3 4
 
 P(n, k) = n! / (n - k)!
 
-1) A B C D   are 2 of the 360 permutaions, 
+1) A B C D   are 2 of the 360 permutaions,
 2) D A B C   but just one combination of people
 
 number of ways to arrange k things in k spots = k!
@@ -105,7 +105,7 @@ Some philosophers think it is the key to understanding
 what it means to think rationaly
 
 Probability:
-chance or likelihood that a proposition is true 
+chance or likelihood that a proposition is true
 expresses belief under uncertainty
 
 Prior Probability:
@@ -141,4 +141,4 @@ Conditional Probabilities:
 If patient is a girl
 P(Sally has the fly | patient is a girl) = 0.20
 If patient is a boy
-P(Sally has the fly | patient is a boy) = 0 
+P(Sally has the fly | patient is a boy) = 0
