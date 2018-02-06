@@ -170,3 +170,10 @@
 
      - Cols of 1st = Rows of 2nd
      - Rows of product = rows of 1st
+
+
+[[./img/lnalg1.jpg]]
+
+[[./img/lnalg2.jpg]]
+
+[[./img/lnalg3.jpg]]

@@ -102,9 +102,9 @@ of code:
 
 ** Model and Cost Function
 
-m = number of training examples  
-x = "input" variable /features  
-y = "output" variable / "target" variable  
+m = number of training examples
+x = "input" variable / features 
+y = "output" variable / "target" variable
 
 (x, y) = one training example(row in the table)  
 (x^i, y^i) = i-th training example  
@@ -215,7 +215,7 @@ multivariable linear regression:
 
 h_\theta (x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + ... + \theta_n x_n
 
-h_\theta (x) = (transpose [\theta_0 ... \theta_n]) x [x_0 ... x_n] = \theta^T x
+h_\theta (x) = (transpose [\theta_0; \theta_1; ... \theta_n]) x [x_0; x_1; ... x_n] = \theta^T x
 
 x_j^i = value of feature j in i-th training example (col)
 x^i = i-th trainig example (row)
