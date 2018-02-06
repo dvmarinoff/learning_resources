@@ -143,7 +143,7 @@ the difference between h(x) and y is small(or the difference
 between the predicted value and the target in the data set is
 small).
 
-minimize J(\theta_0, \theta_1) = (1/2 * 1/m) * \Sum_{i=1}^{m} (h(x) - y)^2
+minimize J(\theta_0, \theta_1) = (1/2 * 1/m) * \sum_{i=1}^{m} (h(x) - y)^2
 
 minimize the sum of the squared avarage error
 
