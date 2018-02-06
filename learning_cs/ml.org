@@ -149,6 +149,8 @@ minimize the sum of the squared avarage error
 
 The squared error cost function works well for regression.
 
+[[./img/cost_function_full.jpg]]
+
 ** Gradient Discent
 
 a very common general algorithm used to minimize functions.
