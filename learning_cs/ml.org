@@ -149,7 +149,6 @@ minimize the sum of the squared avarage error
 
 The squared error cost function works well for regression.
 
-
 ** Gradient Discent
 
 a very common general algorithm used to minimize functions.
@@ -206,7 +205,324 @@ NOTE: Normal equations method is a numeric method to solve for the minimum
 using linear algebra, but it does not scale as good as gradiaent discent.
 
 
+* Week 2
 
+** Multiple Features
+
+multivariable linear regression:
+
+h_\theta (x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + ... + \theta_n x_n
+
+h_\theta (x) = (transpose [\theta_0 ... \theta_n]) x [x_0 ... x_n] = \theta^T x
+
+x_j^i = value of feature j in i-th training example (col)
+x^i = i-th trainig example (row)
+m = length of training examples (rows)
+n = length of features (cols)
+
+Think of i and j as the counters in a nested loop i is outer j is inner.
+i loops the outer layer of training examples and j loops each example
+training features.
+
+Note: x_0 = 1 and \theta is n+1 dimentional vector (meaning that they are
+passed to the function as one paramter - the vector)
+
+gradient descent for multiple variables:
+
+n >= 1
+
+Repeat {
+    \theta_j := \theta_j - \alpha 1/m \sigma_{i=1}^{m}(h_\theta(x^i) - y^i)x_j^i
+    (simultaneously update \theta_j for j=0,...,n)
+}
+
+[[./img/gradient_discent_multiple_features.jpg]]
+
+
+Feature scaling:
+make sure features are on a similar scale
+E.g.
+x_1 = size(0-200 feet^2)
+x_2 = number of bedrooms(1-5)
+
+Will result in a very tall and skinny contour plot, which requires much
+more work to be done by gradient discent.
+So we better scale the features:
+
+x_1 = size (feet^2) / 2000
+x_2 = number of bedrooms / 5
+
+This will result in less skewed and more circle like contours, which
+are much more easy for gradient discent.
+
+Get every feature into approximatly a -1 <= x_i <= 1 range
+
+Mean normalization:
+replace x_i with x_i - \mu_i to make features have approximately zero mean
+(Do not apply to x_0 = 1). E.g.
+
+x_1 = size - 1000 / 2000
+x_2 = #bedrooms - 2 / 5
+
+-0.5 <= x_1 <= 0.5
+-0.5 <= x_2 <= 0.5
+
+x_i = x_i - \mu_i / S_i
+
+where \mu_i is the avarage value of x_i in the training set
+and S_i is the range (max - min) or standart deviation.
+
+Learning Rate (\alpha):
+
+How to make sure that gradient discent is working correctly?
+J(\theta) should decrease after every iteration.
+Check the J, iterations graph.
+It also possible to use automatic convergence test. Declare convergence if
+J(\theta) decreases by less than 10^-3 in one iteration.
+
+Possible solutions:
+If J(\theta) is increasing or first decreasing a then increasing try using
+smaller \alpha to avoid overshooting the minimum.
+But if it is too small it will take many steps to converge.
+To choose \alpha try: 0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1
+try 3x bigger values until you choose the best largest one.
+
+Features and polynomial regression:
+
+NOTE: it is even more important to scale your data when different features
+may be of the form x_1^2 x_2^3 ...
+
+** Computing Parameters Analytically
+
+Normal equation:
+for some linear regression problems will give us a much better way to
+solve for optimal value of the parameters \theta. 
+
+
+the X matrix and the y matrix:
+
+[[./img/normal_equation.jpg]]
+
+The formula for minimizing J(\theta):
+\theta = (X^T X)^-1 X^T y
+
+where X^T = X transposed and X^-1 = inverse of X
+
+To compute in octave:
+
+pinv(X' * X) * X' * y
+
+
+NOTE: feature scaling is not needed in normal equation method
+
+When to use what?
+
+Gradient discent:
+Works well even when n is large(number of features)
+Need to choose \alpha
+Needs many iterations
+
+Normal equation:
+No need to choose \alpha
+Don't need to iterate
+Need to compute (X^T X)^-1 and n x n invertion is O(n^3)
+Slow if n is very large (n = 10000 may be too much)
+
+Noninvertability:
+
+What X^T X is non-invertable?
+
+pinv - compute seudo-inverse
+inv - compute inverse
+
+May be because of:
+Redundant features(linearly dependent).
+E.g.
+x_1 = size in feet^2
+x_2 = size in m^2
+
+Too many features
+m <= n
+
+
+** OCTAVE Quickstart guide
+
+1 == 2 % false
+1 ~= 2 % not
+a = 3
+a = 3; % semicolon supressing output
+b = 'hi';
+
+a = pi;
+a
+
+disp(a)
+disp(sprintf('2 decimals: %0.2f', a)); % like c formating
+
+format long a
+
+A = [1 2; 3 4; 5 6]
+v = [1 2 3];
+w = ones(1,3); % 0 0 0
+w = zeros(1,3); % 1 1 1
+w = rand(1,3);
+w = randn(1,3);
+% drawn from gaussian distribution with mean 0 and variance
+% or standart deviation equal to 1
+
+plot(w)
+
+
+eye(4) % identity matrix 4 x 4
+
+help eye % to see help for eye command
+
+A = [1 2; 3 4; 5 6]
+size(A); % ans = 3 2
+sz = size(A);
+size(sz); % 1 2
+
+size(A, 1); % size of 1st dimention
+
+v = [1 2 3 4];
+length(v); % size of the longest dimention
+
+load featuresX.dat
+load priceY.dat
+load('featuresX.dat')
+
+who % prints variables in memory
+featuresX % will display the features from the file
+whos % will list with more info like size and class
+
+clear featuresX % to remove variables from memory
+
+save hello.mat v; % will save the value of v from memory to the file hello.mat
+
+clear % will clear all memory
+
+A(3,2); % ans = 6
+A(2,:); % everiting in the second row
+A(:,2); % everithing in the second col
+A([1 3], :); % get rows 1 and 3 and give all cols from them
+A([1 3], 1); % but give only 1st col
+
+A(:,2) = [10; 11; 12]; % will assaign to the second col of A
+A = [A, [100; 101; 102]]; % will append another col
+C = [A B]; % will concatenate A and B into C, with B next to A
+C = [A; B]; % will concatenate them with A on top of B
+
+A * C % matrix multiplication
+A .* B % element wise multiplication
+A .^ 2 % element wise squaring of A
+1 ./ v % element wise reciprocal
+1 ./ A
+log(v) % element wise log
+exp(v) % exponentiation of each element
+abs(v) % element wise absolute value
+-v % the same as -1 * v
+
+v + ones(length(v), 1); % add 1 to each elememt
+v + 1
+v .+ 1
+
+A' % transpose A
+
+a = [1 15 2 0.5];
+
+max(a); % ans = 15
+
+[value, index] = max(a); % will assaign the value and the index of the max
+
+a < 3 % element wise comparison ans = 1 0 1 1
+find(a < 3); % will return the positions of the < 3 elements
+
+A = magic(3); % all rows and cols sum up to the same number
+
+sum(A); % sum all the col elements of A
+prod(A); % product of all the col elements in A
+sum(sum(A)) % to get sum of the cols twice
+sum(A, 1); % sum every col in A
+sum(A, 2); % sum every row in A
+
+A .* eye(3) % will return just the diagonal elements(else fill with 0s)
+sum(sum(A .* eye(3))); % to sum the diagonal
+sum(sum(A .* flipud(eye(3)))); % to sum up the left to right diagonal
+
+pinv(A); % inverts a matrix
+
+floor(a);
+ceil(a);
+
+rand(3); % 3 x 3 random matrix
+
+max(A, [], 1); % take the col wise max value
+max(A, [], 2); % take the row wise max value
+
+A(:); % will turn A into a vector
+max(max(A));
+max(A(:));
+
+Plotting:
+
+t = [0:0.01:0.98]; % create range from 0 to 0.98 with step 0.01
+y1 = sin(2*pi*4*t);
+y2 = cos(2*pi*4*t);
+plot(t, y1);
+plot(t, y2);
+
+hold on;
+
+plot(t, y2, 'r');
+xlabel('time');
+ylabel('value');
+legend('sin', 'cos');
+title('plot of sin and cos');
+
+print -dpng 'sin_cos_plt.png'
+close
+figure(1); plot(t, y1);
+figure(2); plot(t, y2);
+
+subplot(1,2,1); % divides plot a 1x2 grid, access first element
+axis([0.5 1 -1 1]);
+% x axis will range from 0.5 to 1, while y axis from -1 to 1
+clf % clears a figure
+
+imagesc(A); % will plot a colormap of the matrix A
+imagesc(A), colorbar, colormap gray; % , is used to chain commands
+
+Functions and Control Statements:
+
+for i=1:4,
+    v(i) = 2^i;
+end;
+
+i = 1;
+while true,
+    v(i) = 999;
+    i = i + 1;
+    if i == 6,
+        break;
+    end;
+end;
+
+if i == 1,
+    disp('1');
+elseif i == 2,
+    disp('2');
+else
+    disp('not 1 or 2');
+end;
+
+funciton squareThisNumber(x)
+    x * x
+end
+
+Vectorization:
+
+representing comutation with linear algebra instead of loops may speed
+up calculations, but may also take much more memory.
 
 
 

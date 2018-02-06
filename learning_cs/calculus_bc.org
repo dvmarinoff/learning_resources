@@ -162,6 +162,7 @@ x->a            x->a
 
 * Derivatives
 
+
 ** Intro to derivatives
 
 1) The 'instantanious' rate of change
@@ -960,6 +961,55 @@ F'(x) = 4x
 
 
 
+* Series
+
+** Infinite sequences
+
+** Partial Sums
+
+
+Example: Finding formula for nth member of a sequence.
+The nth partial sum of the series \sigma_{n=1}^{\inf}
+is given by S_n = n + 1 / n + 10 Write a rule for a_n.
+
+a_1 + a_2 + a_3 + ... + a_n-1 + a_n
+
+S_n-1 = n - 1 + 1 / n - 1 + 10 = n/n+9 
+
+a_n = S_n - S_n-1 = n+1/n+10 - n/n+9
+
+simplified to: 9/(n+9)(n+10)
+
+
+Example: Finding member of a sequence with given partial sum formula.
+The nth partial sum of the series \sigma_{n=1}^{\inf} a_n
+is given by S_n = n^2+1/n+1. What is a_7.
+
+a_7 = S_7 - S_6
+
+The 7th member = sum to the 7th - sum to the 6th
+
+
+Infinite Series as a limit to partial sums:
+
+Given an infinite series S and formula for a partial sum S_n does the
+series converge or diverge?
+
+S = \sigma_{n=1}^{\inf} = a_1 + a_2 + ...
+
+S_n = 2n^3 / (n+1)(n+2)
+
+The sum S can be expressed as the limit as n approaches \inf of the
+partial sum. Imagine a sequence of partial sums.
+
+S = \lim_{n\to\inf} S_n
+
+\lim_{n\to\inf} 2n^3/(n+1)(n+2) = \frac{2n}{1 + 3/n + 2/n^2}
+
+The nominator is going to grow to \inf while the denominator to 1.
+The series will diverge.
+
+
 
 * Multivariable Calculus
 
@@ -1094,19 +1144,211 @@ surface circumventing the x, y surface. End result is a torus(doughnut).
 Vector fields:
 
 come up all the time in physics, fluid flow, electrodynamics.
-It is a way of visualizing a function that hace the same number of
+It is a way of visualizing a functions that have the same number of
 dimentions in their input as in their outpus.
 
-f(x, y) = [y^3 - 9y, x^ - 9x]
+f(x, y) = [y^3 - 9y, x^3 - 9x]
 
-You have 2d in input and 2d in output so it must be in 4d.
-Instead we can look only the input.
+You have 2d in the input and 2d in the output so it must 4d
+visualization. Instead what we do , we look only in the input space.
+Only in the x, y plane. For each individual input point (like (1,2))
+we are going to consider the vector that it outputs and attach that
+vector to the point.
+
+f(1,2) = [-10 -8]
+
+We scale down the resulting vectors. Color may hint length of the vectors
+where warm is long and cold is shorter.
+
+You can describe flow of liquids with vector fields. The speed and
+direction of a particle are described by the vector it is crossing
+over.
+
+Keeping the density coresponds to the concept of divergence.
 
 
 
+** Derivatives of Multi-variable functions
+
+*** Partial derivatives
+
+f(x) = x^2
+df/dx(2) = 2*2^1
+
+
+f(x,y) = x^2 y + sin(y)
+
+NOTE: Notetion gets really confusing due the too many options available
+most of them verbose and counter intuitive.
+
+df/dx(x, y)
+uses now the del simbol:
+\partial f / \partial x(x, y)
+
+also (with physics package):
+\pdv f/ \pdv y(x, y)
+
+f_y'(x) = f_x = df/dx
 
 
 
+Computing the partial derivative at a point:
+
+df/dx(1,2) and df/dy(1,2)
+
+df/dx(1,2) = x^2 * 2 + sin(2) | at x=1
+
+= 4x + 0 = 4
+
+df/dy(1,2) = 1^2 * y + sin(y) | at y=2
+
+= y + cos(y)
+
+
+Graphical understanding of the partial derivatives:
+
+f(x,y) = x^2 y + sin(y)
+
+df/dx(-1,1) = 2xy = -2*-1*1 = -2
+df/dy(-1,1) = x^2 + cos(y) = 1+0.9998... ~ 2
+
+Treating y as a constant is basically like slicing the whole graph with a
+plane that represents the constant y value. Sliding the plane along the
+y axis represents the various y values.
+In our example function if we cut the graph at that plane and draw the
+line we get all the points on the graph where y = 1.
+
+[[./img/graphical_partial_f_of_xy.jpg]]
+[[./img/graphical_partial_dfdx.jpg]]
+[[./img/graphical_partial_dfdy.jpg]]
+
+Formal definition:
+
+\frac{\partial f}{\partial y}(a,b)= \lim_{h\to 0} \frac{f(a, b+h)}{h} - f(a, b)
+
+Symetry of second partial derivatives:
+
+Schwarz's theorem if the second partial derivatives are
+continuous at the relevant point than f_xy = f_yx.
+
+f(x,y) = sin(x)y^2
+
+f_x = cos(x)y^2
+f_y= sin(x)2y
+
+f_xx = -sin(x)y^2
+f_xy = cos(x)2y
+f_yx = cos(x)2y
+f_yy = 2sin(x)
+
+*** Gradient and partial derivatives
+
+Gradient:
+
+\nabla f = [f_x f_y]
+\nabla f = [df/dx df/dy]
+
+You can think of it as the full derivative, because it combines the
+partial derivatives in a vector.
+
+This function that outputs a vector can nicely be visualized with a vector
+field. 
+
+f(x, y) = x^2 + y^2
+
+\nabla f(x, y) =[2x 2y]
+
+The output can be represented with a vectors pointing away from the
+origin. The reason for that is if you have any given input point (x, y)
+then the vector that that input point represents is [x, y], but the ouput
+vector is [2x 2y], 2 times bigger(we attach the output vector to the tip
+of the input vector, it has the same direction, but is twice as long).
+
+We can use this gradient field to tell the direction of steepest ascent.
+The length of the gradient vector tells you the steepness of the direction
+of steepest ascent. In this case alway from the origin.
+
+[[./img/gradient_graphs1.jpg]]
+[[./img/gradient_graphs2.jpg]]
+[[./img/gradient_graphs3.jpg]]
+
+Gradient and Contour maps:
+
+f(x,y) = xy
+
+
+If the vector is crossing a contour line, it's perpendicular to that
+contour line.
+Lets zoom in on a region and draw the contour lines for f=2 and f=2.1.
+We know that the vector points in the direction of steepest ascent.
+If we imagine all the possible vectors at that point the quastion 
+
+Gradient is always perpendicular to gradient lines.
+
+[[./img/gradient_contour_maps.jpg]]
+
+
+Directional derivative:
+
+f(x,y) = x^2 * y
+
+v = [-1; 2]
+w = [a; b]
+
+The directional derivative uses a vector to represent the small nudges
+in x and y directions. The small nudge is h that is approaching 0.
+
+hv = [-h; 2h]
+
+\nabla_v f(i\vec{a}) = \lim_{h\to 0} \frac{f(\vec{a} + h\vec{v}) - f(\vec{a})}{h}
+
+
+When you take a small nudge in the direction of that vector, what is
+the resulting change to the output?
+
+The formula for computing the directional derivative is:
+
+\nabla_v f(x,y) = df/dv = \partial_v = a(df/dx) + b(df/dy)
+= [a; b] . [df/dx; df/dy] = w . \nabla f
+
+The last one is more flexible for many dimentions that are contained in
+the vector w.
+
+\nabla_v f(x,y) = [-1; 2].[df/dx; df/dy] = -1(df/dx) + 2(df/dy)
+
+NOTE: the directional derivative is the dot product of the directional
+vector and the gradient. The directional vector contains the scalars
+for the nudges in all the dimentions. The gradient is the vector with
+all the partial derivatives for all dimentions.
+
+NOTE: use the unit vector (absolute value) when you think of slope
+to normalize: frac{\nabla f . v}{||\vec(v)||}
+When you are moving in the direction of the gradient, the rate at which the
+function changes is given by the magnitude of the gradient.
+
+
+*** Differentiating parametric curves
+
+Vector-valued functions intro:
+
+We are given the curve C: x = x(t), y = y(t), a <= t <= b
+We are describing a curve using 2 parametric equations.
+
+Vector-valued functions are in some ways a replacement for traditional
+parameterization to describe a curve.
+
+
+\vec{r}(t) is a position vector = x(t)*\hat{i} + y(t)*\hat{j}
+
+\vec{r}(a) = x(a)*\hat{i} + y(a)*\hat{j}
+
+[[./img/vector-valued_functions_intro.jpg]]
+
+Vector-valued function differetiation:
+
+\vec{r}(t) = x(t)*\hat{i} + y(t)*\hat{j}, a <= t <= b (a curve between a and b)
+
+[d/dx; d/dy] \vec{r}(t) = 
 
 
 * Pre Calculus
