@@ -162,7 +162,6 @@ x->a            x->a
 
 * Derivatives
 
-
 ** Intro to derivatives
 
 1) The 'instantanious' rate of change
@@ -1287,7 +1286,6 @@ Gradient is always perpendicular to gradient lines.
 
 [[./img/gradient_contour_maps.jpg]]
 
-
 Directional derivative:
 
 f(x,y) = x^2 * y
@@ -1300,7 +1298,8 @@ in x and y directions. The small nudge is h that is approaching 0.
 
 hv = [-h; 2h]
 
-\nabla_v f(i\vec{a}) = \lim_{h\to 0} \frac{f(\vec{a} + h\vec{v}) - f(\vec{a})}{h}
+\nabla_v f(i\vec{a}) = \lim_{h\to 0} \frac{f(\vec{a} + h\vec{v}) -
+f(\vec{a})}{h}
 
 
 When you take a small nudge in the direction of that vector, what is
@@ -1349,6 +1348,35 @@ Vector-valued function differetiation:
 \vec{r}(t) = x(t)*\hat{i} + y(t)*\hat{j}, a <= t <= b (a curve between a and b)
 
 [d/dx; d/dy] \vec{r}(t) = 
+
+TODO: finish vector valued functions
+
+** Multivariable Chain Rule
+
+f(x,y) = x^2 * y
+
+x(t) = cos(t)
+
+y(t) = sin(t)
+
+f(x(t), y(t))
+
+You can think of t as just living on a number line, then x and y which
+is just a plane, and then you have the output the value of f.
+This composition of functions is taking a single point on t and moving it
+over to 2d space and then from there, our multivariable function takes
+that back down to 1d. It seems in this case we can treat it as a single
+variable function and apply the regular product and chain rule.
+
+d/dx f(cos(t), sin(t)) = (cos(t))^2 * sin(t)
+= (cos(t))^2 * cos(t) + 2cos(t)sin(t) * -sin(t)
+= F_y * dy/dt + F_x * dx/dt
+
+F_y = 2xy
+F_x = x^2
+dx/dt = -sin(t)
+dy/dt = cos(t)
+
 
 
 * Pre Calculus
