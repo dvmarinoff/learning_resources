@@ -1377,6 +1377,24 @@ F_x = x^2
 dx/dt = -sin(t)
 dy/dt = cos(t)
 
+[[./img/multivariable_chain_rule_simple.jpg]]
+
+It becomes simpler if we take f as a vector valued function.
+It is a dot product between the vector containing the partial derivatives
+and the vector containing the ordinary derivatives. And they are both
+special vectors. The gradiaent of f and the right one is the derivative
+of v with respect to t.
+
+\vec{v}(t) = [ x(t); y(t) ]
+
+dv/dt = [ dx/dt ; dy/dt ]
+
+F_x*dx/dt + F_y*dy/dt = [ F_x; F_y ] . [ dx/dt; dy/dt ] = \nable f . \vec{v}'(t)
+
+And the more formal rule is:
+
+\nabla f(\vec{v}(t)).\vec(v)'(t)
+
 
 
 * Pre Calculus
