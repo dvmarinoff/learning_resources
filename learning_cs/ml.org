@@ -402,7 +402,7 @@ g(z) = 1 / 1 + e^-z
 which is known as a sigmoid function(logistic funciton).
 If we put does 2 equations together we get: 
 
-h_\theta(x) = 1 / 1 + e^{-\theta^T x}
+h_\theta(x) = 1 / 1 + e^{-\theta^{T} x}
 
 The sigmoid funciton crosses y at 0.5 and has asimptotes at y=0 and y=1.
 
@@ -421,14 +421,14 @@ P(y=0|x;\theta) = 1 - P(y=1|x;\theta)
 The decision boundry is a property of the hypotesis and the parameters
 of the hypothesis and not a property of the dataset.
 
-Predict that y=1 if \theta^T x >= 0
+Predict that y=1 if \theta^{T} x >= 0
 
-h\theta(x)=g(\theta\_0 + \theta\_1 x\_1 + \theta\_2 x\_2)
+h\theta(x)=g(\theta_{0} + \theta_{1} x_{1} + \theta_{2} x_{2})
 
--3 + x_1 + x_2 >= 0
-x_1 + x_2 >= 3
+-3 + x_{1} + x_{2} >= 0
+x_{1} + x_{2}>= 3
 
-x_1 + x_2 = 3 corresponds to the h\theta(x) = 0.5
+x_{1} + x_{2} = 3 corresponds to the h_{\theta}(x) = 0.5
 
 [[./img/decision_boundary.jpg]]
 
@@ -437,7 +437,7 @@ Non-linear decision boundary:
 if we add polynomial terms to the hypothesis we can get a more
 complex funciton to fit on our classifier.
 
-x_1^2 + x_2^2 = 1 is the equation for a circle with radius 1, and it can
+x_{1}^{2} + x_{2}^{2} = 1 is the equation for a circle with radius 1, and it can
 fit y = 1 outside the circle and y = 0 inside the circle.
 
 [[./img/nonlinear_decision_boundary.jpg]]
@@ -455,7 +455,7 @@ How do we fit the parameters \theta?
 
 We need to rewrite the cost function.
 
-Cost(h_\theta(x), y) = 1/(h_\theta(x) - y)^2
+Cost(h_{\theta}(x), y) = 1/(h_{\theta}(x) - y)^{2}
 
 But because of the sigmoid function in logistic regression our cost is
 now a non convex function and those are hard to optimize.
@@ -526,11 +526,11 @@ multiple binary classifications.
 Train a logistic regression classifier h_\theta^i(x) for each class i
 to predict the probability that y = i. max_i h_\theta^i(x).
 
-h_\theta^1(x)
+h_{\theta}^{1}(x)
 
-h_\theta^2(x)
+h_{\theta}^{2}(x)
 
-h_\theta^3(x)
+h_{\theta}^{3}(x)
 
 [[./img/onevsall_multiclass_classifier.jpg]]
 
@@ -553,7 +553,7 @@ new examples.
 To avoid:
 try to reduce the number of features
 regularization - keep all the features, but reduce magnitude/values of
-parameters \theta_j
+parameters \theta_{j}
 
 *** Regularization
 
@@ -564,20 +564,20 @@ terms by increasing the their cost.
 For example by making a n^4 (high order polynomial) function more like
 n^2 (quadratic):
 
-\theta_0 + \theta_1 * x_1 + \theta_2 * x_2^2 + \theta_3 * x_3*3 + \theta_4 *
-x_4^4
+\theta_{0} + \theta_{1} * x_{1} + \theta_{2} * x_{2}^{2} + \theta_{3} * x_{3}*3
++ \theta_{4} * x_{4}^{4}
 
-a + b^2 + c^3 + d^4
+a + b^{2} + c^{3} + d^{4}
 
 Again we don't want to eliminate these features because they are important
 for our model, but we can increase their cost:
 
-(\sum_{i=1}^{m} (a + b^2)) + 1000*c^2 + 1000*d^2
+(\sum_{i=1}^{m} (a + b^{2})) + 1000*c^{2} + 1000*d^{2}
 
 if we don't know which parameters to shrink we can use the \lambda
 and summation over all of them:
 
-\lambda \sum_{i=1}^{n} \theta\_j\^2
+\lambda \sum_{i=1}^{n} \theta_{j}^{2}
 
 if we set the value of \lambda too high it will
 if we set it to 0 this will eliminate the effect of the parameters and
