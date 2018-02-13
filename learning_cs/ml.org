@@ -434,7 +434,171 @@ x_1 + x_2 = 3 corresponds to the h\theta(x) = 0.5
 
 Non-linear decision boundary:
 
+if we add polynomial terms to the hypothesis we can get a more
+complex funciton to fit on our classifier.
+
+x_1^2 + x_2^2 = 1 is the equation for a circle with radius 1, and it can
+fit y = 1 outside the circle and y = 0 inside the circle.
+
 [[./img/nonlinear_decision_boundary.jpg]]
+
+*** Cost Function
+
+We have a training set of m examples and it is represented with a feature
+vector that is R^{n+1} and has the zero feature x_0 = 1, and because it
+is a classification problem our training set has the property that y is
+0 or 1.
+
+How do we fit the parameters \theta?
+
+[[./img/logistic_reg_cost_problem.jpg]]
+
+We need to rewrite the cost function.
+
+Cost(h_\theta(x), y) = 1/(h_\theta(x) - y)^2
+
+But because of the sigmoid function in logistic regression our cost is
+now a non convex function and those are hard to optimize.
+
+When the algorithm predicts h(x) is y it is going to pay a cost:
+
+-log(h(x))       if y was 1 and
+-log(1 - h(x))   if y was 0
+
+[[./img/log_cost_function.jpg]]
+
+Cost = 0 if y=1, h(x)=1
+But as h(x) \to 0 Cost \to \inf
+
+
+[[./img/log_cost_function_y0.jpg]]
+
+Turns out there is a way to simplify our function and compress
+the 2 conditional cases into one:
+
+[[./img/simplified_cost_function.jpg]]
+
+
+Gradient descent for logistic regression:
+
+[[./img/gradient_descent_logistic_regression.jpg]]
+
+
+*** Advaced Optimization
+
+Optimization algorithms:
+- Gradient Descent
+- Conjugate gradient
+- BFGS
+- L-BFGS
+
+The last 3 use more and more sophisticated strategies to minimaze the
+cost function. They have more clever inner loop called line search
+algorithm that tries out automatically different values for the
+learning rate alpha and picks to ultimate one. They also converge
+much faster through other optimizations.
+
+Advatages:
+- no need ti manually pick \alpha
+- ofden faster than gradient descent
+Disadvantages:
+- more complex
+
+[[./img/advanced_optimization.jpg]]
+
+for linear regression:
+
+[[./img/advanced_optimization_linear_regression.jpg]]
+
+for logistic regression:
+
+[[./img/advanced_optimization_logistic_regression.jpg]]
+
+
+** Multiclass Classification
+
+Email foldering/tagging: Work, Friends, Family, Hobby
+
+y = [ 1: "Work"; 2: "Friends"; 3: "Family"; 4: "Hobby"];
+
+One vs All(Rest) classification method turns multiclass a problem into
+multiple binary classifications.
+Train a logistic regression classifier h_\theta^i(x) for each class i
+to predict the probability that y = i. max_i h_\theta^i(x).
+
+h_\theta^1(x)
+
+h_\theta^2(x)
+
+h_\theta^3(x)
+
+[[./img/onevsall_multiclass_classifier.jpg]]
+
+
+
+** Overfitting
+
+*** The Problem of Overfitting
+
+Underfitting is when the  algorithm has "high bias", stong preconceptions
+about the data. It is trying to fit a line to a more complex set.
+
+Overfitting is when the algorithm has "high variance", the space of
+possible hypothesis is too large and we don't have enough data to constrain
+it to give us a good hypothesis.
+In other words if we have too many features, the learned hypothesis may
+fit the training set very well J(\theta) ~ 0, but fail to generalize to
+new examples.
+
+To avoid:
+try to reduce the number of features
+regularization - keep all the features, but reduce magnitude/values of
+parameters \theta_j
+
+*** Regularization
+
+When we have too many terms in our hypothesis function it may start to
+overfit. To solve this we can try to reduce the weight of some of those
+terms by increasing the their cost.
+
+For example by making a n^4 (high order polynomial) function more like
+n^2 (quadratic):
+
+\theta_0 + \theta_1 * x_1 + \theta_2 * x_2^2 + \theta_3 * x_3*3 + \theta_4 *
+x_4^4
+
+a + b^2 + c^3 + d^4
+
+Again we don't want to eliminate these features because they are important
+for our model, but we can increase their cost:
+
+(\sum_{i=1}^{m} (a + b^2)) + 1000*c^2 + 1000*d^2
+
+if we don't know which parameters to shrink we can use the \lambda
+and summation over all of them:
+
+\lambda \sum_{i=1}^{n} \theta\_j\^2
+
+if we set the value of \lambda too high it will
+if we set it to 0 this will eliminate the effect of the parameters and
+make them equal to 0, which is underfitting (maybe a straight line or
+something).
+
+
+[[./img/hypothesis_regularization_of_terms_cost_1.jpg]]
+
+
+
+
+
+Gradient Descent
+
+[[./img/regularization_linear_regression_gd.jpg]]
+
+
+Normal Equation
+
+[[./img/regularization_linerar_regression_normal_equation.jpg]]
 
 
 
