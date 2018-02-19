@@ -185,7 +185,7 @@ temp1 := \theta_1 - \alpha d/d\theta_1 J(\theta_0, \theta_1)
 Note: remember to always update the parameters \theta_0 and \theta_1
 simultaniously(ater the calculation not during it);
 
-\alpha - is a number known as the learning rate, which difeince the size of the
+\alpha - is a number known as the learning rate, which difines the size of the
 step that we take downhill.
 
 d/d\theta_j J(\theta_0, \theta_1) - is the derivative term. When at an local
@@ -416,6 +416,17 @@ P(y=0|x;\theta) + P(y=1|x;\theta) = 1
 
 P(y=0|x;\theta) = 1 - P(y=1|x;\theta)
 
+The sigmoid function squishes the number line between 0 and 1. It is also
+known as the logistic curve. Very negative inputs end up close to zero
+and very positive inputs end up close to 1, and it just steadily
+increases around the input 0.
+For modern neural networks the ReLU is used, because it is easier to
+train(Rectified Linear Unit). It takes a max of 0 and the other input.
+If it  passes a certain treshold it would be the identity function.
+But if it did not than it would just not be activated so be 0.
+It happens to learn much faster then with the sigmoid function.
+
+
 *** Decision Boundary
 
 The decision boundry is a property of the hypotesis and the parameters
@@ -564,8 +575,7 @@ terms by increasing the their cost.
 For example by making a n^4 (high order polynomial) function more like
 n^2 (quadratic):
 
-\theta_{0} + \theta_{1} * x_{1} + \theta_{2} * x_{2}^{2} + \theta_{3} * x_{3}*3
-+ \theta_{4} * x_{4}^{4}
+\theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2}^{2} + \theta_{3}x_{3}^{3} + \theta_{4}x_{4}^{4}
 
 a + b^{2} + c^{3} + d^{4}
 
@@ -575,9 +585,15 @@ for our model, but we can increase their cost:
 (\sum_{i=1}^{m} (a + b^{2})) + 1000*c^{2} + 1000*d^{2}
 
 if we don't know which parameters to shrink we can use the \lambda
-and summation over all of them:
+regularization parameter and summation over all of them:
 
 \lambda \sum_{i=1}^{n} \theta_{j}^{2}
+
+What the \lambda parameter does is to control the trade off between our to
+goals. The goal of fitting the training set well by using more and more
+complex parameter terms in our hypothesis and the goal of keeping the
+hypothesis simple and the parameters small so we avoid overfitting.
+
 
 if we set the value of \lambda too high it will
 if we set it to 0 this will eliminate the effect of the parameters and
@@ -600,6 +616,157 @@ Normal Equation
 
 [[./img/regularization_linerar_regression_normal_equation.jpg]]
 
+
+
+* Non-linear hypothesis (Neural Networks I)
+
+** Motivations
+
+When you want to apply a logistic regression to a more complex data set
+you may add a lot of noni-linear features. So we include a lot of
+polynomial terms in the hypothesis. But even when we consider just 2
+features x_{1} and x_{2} this gets complex. What if we have a 100 features
+and we want to use most of them.
+
+n = 100;
+
+asymptotically the number of quadratic features grows roughly as:
+O(n*{2}),  but is actually closer to n^{2}/2. This may end up
+overfitting and is computationaly expansive.
+On the other end we may just include the quadratic features:
+x_{1}^{2}, x_{2}^{2}, x_{3}^{2}, ... , x_{100}^{2}
+those might be too little and it will underfit.
+If we add the cubic features this will grow O(n^{3}).
+
+Example: Computer Vision
+
+a grid of pixel intensity values
+
+50x50 pixel images -> n = 2500 pixels, and n = 7500 pixels if RGB
+
+x = [ pixel 1; pixel 2; ... pixel 2500; ];
+
+Quadratic features for n = 2500, will be 2500^{2}/2 ~ 3 million features
+
+Complex non-linear hypothesis are one of the advantages of neural
+network algorithms.
+
+** Model Representation
+
+parameters are called weights,
+sigmoid function is called activation function,
+
+Input Layer -> Hidden Layer -> Output Layer -> h_{\theta}(x)
+
+a_{i}^{(i)} = "activation" of unit i in layer j
+
+\theta^{j} = matrix of weights controlling function mapping from layer
+j to layer j + 1
+
+
+[[./img/logistic_unit.jpg]]
+
+[[./img/neural_network_model1.jpg]]
+
+Froward propagation: vectorized implementation
+
+x = [x_{0}; x_{1}; x_{2}; x_{3}];
+
+z^{(2)} = [z_{1}^{2}; z_{2}^{2}; z_{3}^{2}; z_{4}^{2};];
+
+z^{(2)} = \Theta^{(1)}.a^(1)
+
+a^{(2)} = g(z^{(2)})
+
+where g() is the activation function applied element-wise
+
+add a_{0}^(2) = 1, now:
+
+z^{(3)} = \Theta^(2).a^{(2)}
+
+h_{\Theta}(x) = a^{(3)} = g(z^{(3)})
+
+a_{3}^{(2)} =g(z_{3}^{2}) 
+
+
+** Activation Functions for Neural Networks
+
+When it comes to neural networks the sigmoid and the ReLU are know
+as activation functions. They help by introducing non-linearity to
+our model. Linear equations are easy to solve but they are limited
+in their complexity. Neural Networks are considered Universal
+Function Approximators, that mean they can compute any function,
+and any procees can be represented as function computation.
+If we use just linear function s our multi layered network we
+behave like a single layered, because summing those layers would
+give us just another linear function.
+With Non-linear activation functions the mapping of the input to the
+output is non-linear and we also want it to be differentiable so we
+can perform the backpropagation optimization strategy where we find
+a non-linear error gradient to learn complex behavior.
+
+Input * weight + bias -> Activate?
+
+- Sigmoid
+
+f(x) = 1 / 1 + e^{-x} 
+
+    Disadvatages:
+
+        - Vanishing and exloding gradients
+        
+        when neuron activation saturates close to 0 or 1 the gradient at
+        these regions is very close to zero during backpropagation this
+        local gradient will be multiplied by the gradient of this gate
+        output for the whole objective so if the local gradient is treally
+        small it will make the gradient slowly vanish and close to no
+        signal will flow through the neuron to its weights and recursevely
+        to its data.
+
+        - Output is not zero centered
+        
+        starts 0 and ends up 1, so the value after the function will be
+        positive and that makes the gradient of the weights become either
+        all positive or all negative. This makes the gradient updates go
+        too far in different directions which makes optimization harder.
+
+        - Slow convergence
+
+- Tanh(Hyperbolic Tangent Function)
+
+f(x) = (2 / 1 + e^{-2x}) -1
+
+with asymtotes around -1 and +1
+
+It squoshes the real number into a range between -1 and +1. So its ouput
+is zero centered. Which makes optimization easier. But also suffers from
+the vanishing gradient problem.
+    
+- ReLU(Rectified Liner Unit)
+
+R(x) = max(0, x);
+
+value is 0 when x < 0 and linear with a slope of 1 when x > 0.
+It is the most simple solution and does not require expensive computations
+and avoids the vanishing gradient problem.
+It had 6x improvement in convergence over Tanh.
+It is only used for the hidden layers, the output layer should use a
+soft max function for classification since it gives probabilities for
+different classes and a linear function for regression since the signal
+goes through unchanged.
+One problem that ReLU has is that some units can be fragile during
+training, meaning a big gradient flowing through a ReLU neuron could
+cause a weight update that makes it never activate on any data point
+again so than gradients flowing through it will always be 0 froma that
+point on.
+So a variant was introduced called Leaky ReLU. Instead of the function
+being 0 when x < 0, it has a small negative slope.
+Max out is another popular variant. It ois a generalizaed form of both
+ReLU and Leaky ReLU, but it doubles the number of parameters for each
+neuron so there is a trade off.
+
+In summary use ReLU on the hidden layers and on the output Soft Max for
+classification or a linear function for regression.
 
 
 
@@ -773,7 +940,7 @@ else
     disp('not 1 or 2');
 end;
 
-funciton squareThisNumber(x)
+function squareThisNumber(x)
     x * x
 end
 
@@ -1030,3 +1197,51 @@ Input Sequence Vectors <-> State Vectors -> Output Sequence Vectors
 They are Turing-Complete
 If training vanilla neural nets is optimization over functions,
 training recurrent nets is optimization over programs
+
+
+* Statistics Review
+
+Example: xs = [2, 4, 8, 10, 12];
+
+- Mean (\mu): 7.2
+the sum of the population / by the size of the polulation
+
+- Median: 8
+just the number in the middle of a sorted population
+
+- Variance (\sigma^{2}): 13.76
+avarage of the squared difference from the mean
+
+- Standart Deviation (\sigma): 3.71
+square root from the variance
+
+how spread the numbers are
+
+The formula:
+
+\sigma = sqrt(1/n \sum_{i=0}^{n} (x_{i} - \mu)^{2})
+
+
+The code:
+
+function variance(xs)
+    n = size(xs, 1);
+    μ = sum(xs) / n;
+    sum(map(x -> (μ - x)^2, xs)) / n;
+end
+
+function standartDeviation(xs)
+    sqrt(variance(xs));
+end
+
+or with lambdas:
+
+n(xs) = size(xs, 1);                              # size of the population
+mu(xs, n) = sum(xs) / n;                          # mean avarage
+var(xs, μ, n) = sum(map(x -> (μ - x)^2, xs)) / n; # variance
+stdd(xs, μ) = sqrt(var2(xs));                     # standart deviation(population)
+
+stdd(xs, mu(xs, n(xs)));                          # compute standart deviation 
+
+
+
