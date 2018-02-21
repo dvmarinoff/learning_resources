@@ -1395,6 +1395,63 @@ And the more formal rule is:
 
 \nabla f(\vec{v}(t)).\vec(v)'(t)
 
+** Curvarture
+
+Intuition:
+
+Think of steering wheel, path curvarture and turning radius of a car.
+The turning radius will be very big with slightly turned steering wheel
+and the curvarture will be very small.
+
+\Kapa = Radius of curvarture
+
+\Kapa = 1 / R 
+
+||T_{i}|| = the unit tangent vector
+s = arc lenght
+
+The Unit tangent vector changes rapidly with high curves.
+
+- The radius of a curvarture at a point is loosly speaking the radius of a
+circle which fits the curve most snugly at that point.
+
+- the curvarture, denoted \kapa, is 1 / the radius of the curvarture.
+
+- in formulas curvarture is defined as the magnitude of the derivative of
+a unit tangent vector function with respect to arc length
+
+\kapa = || dT/ds ||
+
+- the unit tangent vector tells you which direction you are moving, and
+the rate at which it changes with respect to small steps ds along the
+curve is a good indication of how quickly you are turning.
+
+[[./img/curvarture.png]]
+
+Let \vec{S}(t) be a function that defines a curve in the xy-plane.
+
+\vec{S}(t) = [ x(t); y(t)]
+
+\vec{s}(t) = [t - sin(t); 1 - cos(t)];
+
+is the same as the parametric equation:
+
+x(t) = t - sin(t)
+
+y(t) = 1 - cos(t)
+
+Computing curvarture:
+
+- step 1: Find a unit tangent vector
+
+define a vector-valued function T(t), which takes in the same parameter and
+returns a unit vector which is tangent to the curve at the point \vec{s}(t).
+
+- step 2: Find dT/ds
+
+||dT/ds|| = ||dT/dt|| / ||d\vec{s}/dt|| 
+
+
 
 
 * Pre Calculus

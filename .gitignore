@@ -1,6 +1,7 @@
 **/*.swp
 garbige/
 .idea
+.ipynb_checkpoints/
 .sass-cache
 **/*.jpeg
 **/*.png

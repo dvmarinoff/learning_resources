@@ -711,6 +711,8 @@ Input * weight + bias -> Activate?
 
 f(x) = 1 / 1 + e^{-x} 
 
+f'(x) = e^{-x} / (1 + e^{-x})^{2} 
+
     Disadvatages:
 
         - Vanishing and exloding gradients
@@ -744,7 +746,11 @@ the vanishing gradient problem.
     
 - ReLU(Rectified Liner Unit)
 
-R(x) = max(0, x);
+f(x) = max(0, x);
+
+if x > 0 f'(x) = 1
+
+if x <= 0 f'(x) = 0
 
 value is 0 when x < 0 and linear with a slope of 1 when x > 0.
 It is the most simple solution and does not require expensive computations
