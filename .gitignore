@@ -3,9 +3,6 @@ garbige/
 .idea
 .ipynb_checkpoints/
 .sass-cache
-**/*.jpeg
-**/*.png
-**/*.svg
 **/node_modules
 **/bower_components
 **/*.jar
