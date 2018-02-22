@@ -694,18 +694,30 @@ XOR/XNOR
 
 x_{1}, x_{2} are binary(0 or 1) input features
 
-y = x_{1} XOR x_{2},\\
-    x_{1} XNOR x_{2},\\
-    NOT (x_{1} XOR x_{2})\\
-
-#+BEGIN_VERSE
-y = x_{1} XOR x_{2}
-    x_{1} XNOR x_{2}
+y = x_{1} XOR x_{2},
+    x_{1} XNOR x_{2},
     NOT (x_{1} XOR x_{2})
-#+END_VERSE
 
+Simple Example:
 
+x_{1}, x_{2} \in {0,1}, y = x_{1} AND x_{2}
 
+[[./img/AND_1layered_nn.png]]
+
+\Theta_{10}^{(1)} = -30;
+\Theta_{11}^{(1)} = +20;
+\Theta_{12}^{(1)} = +20;
+
+h_{\theta}(x) = g(\Theta_{10}^{(1)} + \Theta_{11}^{(1)}x_{1} + \Theta_{12}^{(1)}x_{2})
+
+h_{\theta}(x) = g(-30 + 20x_{1} + 20x_{2})
+
+| x_{1} } | x_{2} | h_{theta}(x)|
+|---------+-------+-------------|
+|    0    |   0   |      0      |
+|    0    |   1   |      0      |
+|    1    |   0   |      0      |
+|    1    |   1   |      1      |
 
 
 
@@ -1264,7 +1276,7 @@ end
 
 or with lambdas:
 
-#+BEGIN_SRC
+#+BEGIN_SRC julia
 n(xs) = size(xs, 1);                              # size of the population
 mu(xs, n) = sum(xs) / n;                          # mean avarage
 var(xs, μ, n) = sum(map(x -> (μ - x)^2, xs)) / n; # variance

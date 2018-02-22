@@ -1454,6 +1454,123 @@ returns a unit vector which is tangent to the curve at the point \vec{s}(t).
 
 
 
+
+
+** Jacobian
+
+Jacobian matrix:
+
+[2 -3; 1 1] [x; y] = [2x + (-3)y; 1x + 1y]
+
+Linear transformation:
+
+[1; 0], [0; 1]
+
+[2 -3; 1 1] [1; 0] = [2 + 0; 1 + 0] = [2; 1]
+
+[2 -3; 1 1] [0; 1] = [0 + (-3); 0 + 1] = [-3; 1]; 
+
+grean vector lands at (2,1), and that corresponds very directly with the
+fact that the first column of the matrix is [2;1] and similarly the red
+vector lands at the coordinates [-3; 1], which is the second column.
+
+[[./img/linear_transformation1.png]]
+[[./img/linear_transformation2.png]]
+
+A transformation is linear if it satisfies the properties:
+
++ L(a * \vec{v}) = a * L(\vec{v})
+
+(the lin tran of scalar * vector must = scalar * lin tran of the vector)
+
++ L(\vec{v} + \vec{w}) = L(\vec{v}) + L(\vec{w})
+
++ L([x; y]) = L(x * [1; 0] + y * [0; 1])
+
+x * L([1; 0]) + y * L([0; 1])
+
+after the transformation the point (2,1) ends up at (1; 3)
+that is the vector [2 ihat; 1 jhat] ends up still being [2 ihat; 1 jhat]
+The basis vectors keep their relation linear after the trnsformation.
+
+Local linearity for a multivariable function:
+
+A lot of the concepts in multi-variable calculus are all about ideas
+originally from lenear algebra and transferring those to apply to
+nonlinear problems.
+
+f([x; y]) = [x + sin(y); y + sin(y)]
+
+when we apply the transformation it gets really wavy and curly, this is
+not at all a linear transformation. You must store not just 4 numbers
+but a lot more information to know where everything goes.
+
+But lets simplify it and just look at the point
+
+[\pi/2; 0] = [\pi/2 + sin(0); \pi/2 + sin(\pi/2)] = [\pi/2; 1] ~ [1.57; 1]
+
+[[./img/nonlinear_transformation0.png]]
+
+so the point moves just 1 unit up.
+But this function has a nice property called local linearity.
+If we zoom down enough the grid around the point starts to
+look more like linear. Zoomed enough it approximates linear 
+transformation. Same as with slopes and derivatives.
+
+[[./img/local_linearity_multii-variable_calculus.png]]
+
+The Jacobian matrix:
+
+we are zooming at the point (-2, 1)
+
+[\partial f_{1}/\partial x   \partial f_{1}/\partial y;
+ \partial f_{2}/\partial x   \partial f_{2}/\partial y]
+
+don't take the function, evaluate it at that point. When you evaluate
+each of the partial derivatives at that point you a 2x2 matrix that is
+going to represent the linear transformation that this location looks
+like ones you have zoomed in. This matrix is called the Jacobian matirix.
+It is fundamentally supposed to represent what a transformation looks
+like when you zoom in near a specific point.
+
+Computing the Jacobian matrix:
+
+f([x; y]) = [x + sin(y); y + sin(y)]
+
+at point (-2, 1)
+
+[\partial f_{1}/\partial x   \partial f_{1}/\partial y;
+ \partial f_{2}/\partial x   \partial f_{2}/\partial y]
+
+compute the partial derivatives and plug in the values:
+
+[1 cos(y); cos(x) 1] = [1 cos(1); cos(-2) 1] = [1 0.54;-0.42 1]
+
+The Jacobian determinant:
+
+det([3 1; 0 2]) = 3*2 - 1*0 = 6
+
+You compute it by the diagonals, but there is a geometric intuition.
+You can think of the determinant as a measure of how much this
+transformation streches or squishes space. How the unit square(the one
+composed by the unit vectors) gets stretched out.
+
+By factor of 6 in our example.
+
+[[./img/determinant0.png]]
+[[./img/determinant1.png]]
+
+
+det([1 cos(y); cos(x) 1]) = 1 * 1 - cos(y) * cos(x) = 1 - (cos(-2) * cos(1))
+= 1 - (-0.42 * 0.54) = 1 + 0.227 = 1.227
+
+The are tend to get stretched by factor of 1.227 around the point (-2,1)
+
+"A way to think of multi dimentional space as linear space with
+certain approximations and keeping the factor of change the determinant"
+
+
+
 * Pre Calculus
 
 # Trigonometry
