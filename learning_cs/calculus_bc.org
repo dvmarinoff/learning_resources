@@ -1420,7 +1420,7 @@ circle which fits the curve most snugly at that point.
 - in formulas curvarture is defined as the magnitude of the derivative of
 a unit tangent vector function with respect to arc length
 
-\kapa = || dT/ds ||
+\kapa = \|| dT/ds \||
 
 - the unit tangent vector tells you which direction you are moving, and
 the rate at which it changes with respect to small steps ds along the
@@ -1449,9 +1449,63 @@ returns a unit vector which is tangent to the curve at the point \vec{s}(t).
 
 - step 2: Find dT/ds
 
-||dT/ds|| = ||dT/dt|| / ||d\vec{s}/dt|| 
+\||dT/ds\|| = \||dT/dt\|| / \||d\vec{s}/dt\|| 
 
 
+
+** Laplacian (la-pla-si-an)
+
+An operator in the same way that the divergence, the gradient, or the
+curl, or even just the derivative are operators. Things that take a
+function and give you another function. 
+
+f(x, y)
+
+\bigtriangleup f(x,y) = \nabla . \nabla f
+
+use this big triangle up symbol for notation.
+
+It is like second derivative, because the way it is defined is you take
+the divergence of the gradient of f.
+
+div(grad f)
+
+\nabla . \nabla f
+
+take the vector field that represents the gradient. Think of it as a
+fluid in which the vectors point the derection of movement. These
+vectors point in the direction of steepest ascend and the places
+where they group are maxima. The places where they diverge from are
+valleys, minima. So low divergence mean maximum point, high divergence
+mean minimum point. 
+
+So this Laplasian operator is like a measure how mush of a minimum is
+this (x, y) point.
+
+Analogius to the  second derivate when it is positive it is minimum.
+
+Computation:
+
+First find the gradient then multiply by the function
+
+f(x, y) = 3 + cos(x/2) * sin(y/2)
+
+[d/dx; d/dy] . f[df/dx; df/dy] = [d/dx; d/dy] . [1/2(-sin(x/2))*sin(y/2); cos(x/2)*1/2*cos(y) ] 
+
+= (1/2 * 1/2 * -cos(x/2) * sin(y/2)) + (1/2 * 1/2 * -sin(y/2) * cos(x/2))
+
+That is the divergence of the gradient field.
+
+Explicit Laplacian Formula:
+
+f(x_{1}, x_{2}, ..., x_{n})
+
+\bigtriangleup f = [\partial/\partial x_{1}, ... , \partial/\partial x_{n}] .
+[\partialf/\partialx_{1}, ..., \partialf/\partialx_{1}] =
+\sum_{j=1}^{n} \partial/\partialx_{j} * \partialf/\partialx_{j} = 
+\sum_{j=1}^{n} \partial^{2}f/\partial x_{j}^{2}
+
+Harmonic functions:
 
 
 
@@ -1523,8 +1577,8 @@ The Jacobian matrix:
 
 we are zooming at the point (-2, 1)
 
-[\partial f_{1}/\partial x   \partial f_{1}/\partial y;
- \partial f_{2}/\partial x   \partial f_{2}/\partial y]
+[\partialf_{1}/\partialx   \partialf_{1}/\partialy;
+ \partialf_{2}/\partialx   \partialf_{2}/\partialy]
 
 don't take the function, evaluate it at that point. When you evaluate
 each of the partial derivatives at that point you a 2x2 matrix that is
