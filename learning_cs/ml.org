@@ -672,21 +672,41 @@ Froward propagation: vectorized implementation
 
 x = [x_{0}; x_{1}; x_{2}; x_{3}];
 
-z^{(2)} = [z_{1}^{2}; z_{2}^{2}; z_{3}^{2}; z_{4}^{2};];
+z^{(2)} = [z_{1}^{(2)}; z_{2}^{(2)}; z_{3}^{(2)}; z_{4}^{(2)};];
 
-z^{(2)} = \Theta^{(1)}.a^(1)
+z^{(2)} = \Theta^{(1)}.a^{(1)}
 
 a^{(2)} = g(z^{(2)})
 
 where g() is the activation function applied element-wise
 
-add a_{0}^(2) = 1, now:
+add a_{0}^{(2)} = 1, now:
 
-z^{(3)} = \Theta^(2).a^{(2)}
+z^{(3)} = \Theta^{(2)}.a^{(2)}
 
 h_{\Theta}(x) = a^{(3)} = g(z^{(3)})
 
-a_{3}^{(2)} =g(z_{3}^{2}) 
+a_{3}^{(2)} =g(z_{3}^{(2)}) 
+
+** Applications
+
+XOR/XNOR
+
+x_{1}, x_{2} are binary(0 or 1) input features
+
+y = x_{1} XOR x_{2},\\
+    x_{1} XNOR x_{2},\\
+    NOT (x_{1} XOR x_{2})\\
+
+#+BEGIN_VERSE
+y = x_{1} XOR x_{2}
+    x_{1} XNOR x_{2}
+    NOT (x_{1} XOR x_{2})
+#+END_VERSE
+
+
+
+
 
 
 ** Activation Functions for Neural Networks
@@ -711,7 +731,7 @@ Input * weight + bias -> Activate?
 
 f(x) = 1 / 1 + e^{-x} 
 
-f'(x) = e^{-x} / (1 + e^{-x})^{2} 
+f'(x) = e^{-x} / (1 + e^{-x})^{2}
 
     Disadvatages:
 
@@ -1230,6 +1250,7 @@ The formula:
 
 The code:
 
+#+BEGIN_SRC julia
 function variance(xs)
     n = size(xs, 1);
     μ = sum(xs) / n;
@@ -1239,15 +1260,17 @@ end
 function standartDeviation(xs)
     sqrt(variance(xs));
 end
+#+END_SRC
 
 or with lambdas:
 
+#+BEGIN_SRC
 n(xs) = size(xs, 1);                              # size of the population
 mu(xs, n) = sum(xs) / n;                          # mean avarage
 var(xs, μ, n) = sum(map(x -> (μ - x)^2, xs)) / n; # variance
 stdd(xs, μ) = sqrt(var2(xs));                     # standart deviation(population)
 
 stdd(xs, mu(xs, n(xs)));                          # compute standart deviation 
-
+#+END_SRC
 
 
