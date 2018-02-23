@@ -1407,7 +1407,7 @@ and the curvarture will be very small.
 
 \Kapa = 1 / R 
 
-||T_{i}|| = the unit tangent vector
+\||T_{i}|| = the unit tangent vector
 s = arc lenght
 
 The Unit tangent vector changes rapidly with high curves.
@@ -1451,6 +1451,49 @@ returns a unit vector which is tangent to the curve at the point \vec{s}(t).
 
 \||dT/ds\|| = \||dT/dt\|| / \||d\vec{s}/dt\|| 
 
+
+
+
+** Curl
+
+Intuition:
+
+Again think of the vector field as a liquid, with molecules moving along //
+the vector they are attached to at that point. In our example you may //
+start to notice regions where a counterclockwise rotation is forming, //
+here the curl is positive. Whereas, if it is clockwise rotation the curl //
+is negative. If there is no specific rotation, some points come from the //
+top right others from the bottom left, but there is no net rotation, //
+those are regions with 0 curl.
+
+2d curl formula:
+
+\vec{v}(x, y) = [P(x, y); Q(x, y)]
+
+2d-Curl \vec{v} (x, y) > 0
+
+\partial P / \partial y < 0
+
+\partial Q / \partial x > 0
+
+[[./img/2d_curl0.png]]
+
+so the more it looks like the described above perfect setting the more
+the value of the 2d-curl in the formula below is positive:
+
+2d-curl \vec{v}(x, y) = \partial Q / \partial x -  \partial P / \partial y 
+
+Computing from the formula:
+
+\vec{v}(x, y) = [P(x, y); Q(x, y)] = [y^{3} - 9y; x^{3} - 9x]
+
+2d-curl \vec{v}(x, y) = 3x^{2} - 9 - (3y^{2} - 9)
+
+if x = 3, y = 0
+
+= 27 - 9 - 9 = 27
+
+which is a positive number and we have a counter-clockwise rotation
 
 
 ** Laplacian (la-pla-si-an)
@@ -1501,13 +1544,27 @@ Explicit Laplacian Formula:
 f(x_{1}, x_{2}, ..., x_{n})
 
 \bigtriangleup f = [\partial/\partial x_{1}, ... , \partial/\partial x_{n}] .
-[\partialf/\partialx_{1}, ..., \partialf/\partialx_{1}] =
-\sum_{j=1}^{n} \partial/\partialx_{j} * \partialf/\partialx_{j} = 
+[\partial f/\partialx_{1}, ..., \partial f/\partial x_{1}] =
+\sum_{j=1}^{n} \partial/\partial x_{j} * \partial f/\partial x_{j} = 
 \sum_{j=1}^{n} \partial^{2}f/\partial x_{j}^{2}
 
 Harmonic functions:
 
+A Harmonic function is a one where the Laplacian is equal to 0.
 
+\bigtriangleup f(x,y) = \nabla . \nabla f(x, y) = 0
+
+So it must have second derivative = 0
+
+f''(x) = 0,
+
+and if we integrate:
+
+f'(x) = c
+
+f(x) = cx + k
+
+we get a linear function.
 
 
 ** Jacobian
