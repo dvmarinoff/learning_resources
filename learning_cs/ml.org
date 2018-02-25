@@ -714,12 +714,37 @@ h_{\theta}(x) = g(-30 + 20x_{1} + 20x_{2})
 
 | x_{1} } | x_{2} | h_{theta}(x)|
 |---------+-------+-------------|
-|    0    |   0   |      0      |
-|    0    |   1   |      0      |
-|    1    |   0   |      0      |
-|    1    |   1   |      1      |
+|    0    |   0   | g(-30) ~ 0  |
+|    0    |   1   | g(-10) ~ 0  |
+|    1    |   0   | g(-10) ~ 0  |
+|    1    |   1   | g(+10) ~ 1  |
 
 
+NOT x_{1}
+
+[[./img/not_gate.png]]
+
+h_{\theta}(x) = g(10 -20x_{1})
+
+| x_{1} | h_{\theta}(x) |
+|-------+---------------|
+|   0   | g(+10) ~ 1    |
+|   1   | g(-10) ~ 0    |
+
+[[./img/xnor_multi_layered_nn.png]]
+
+
+** Multiclass Classification
+
+It is an extention of the one vs all method. To classify data into
+multiple classes, we let our hypothesis function return a vector of
+values. 4 classes and 4 output units    
+
+n = number of classes
+
+h_{\theta}(x) \in R^{n}
+
+[[./img/multiclass_classification.png]]
 
 ** Activation Functions for Neural Networks
 
@@ -805,6 +830,42 @@ neuron so there is a trade off.
 
 In summary use ReLU on the hidden layers and on the output Soft Max for
 classification or a linear function for regression.
+
+
+
+* Neural Networks Learning (Neural Networks 2) 
+
+** Cost Function
+
+{ (x^{(1)}, x^{(1)}), (x^{(2)}, x^{(2)}), ...,  (x^{(m)}, x^{(m)}) }
+
+L = total number of layers in the network
+
+s_{l} = number of units (neurons, not counting bias unit) in layer l 
+
+Binary classificarion:
+
+y  \in {0, 1}
+
+1 output unit
+
+
+Multi-class classification(K classes)
+
+y \in R^{K} E.g. [1;0;0;0], [0;1;0;0], [0;0;1;0], [0;0;0;1]
+
+K output units
+
+h_{\theta}(x) \in R^{K}
+
+S_{l} = K, (K >= 3)
+
+
+Cost Function:
+
+it is going to be a generalization of the one we used for logistic regression
+
+[[./img/cost_functin_nns.png]]
 
 
 
