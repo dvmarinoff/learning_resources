@@ -867,6 +867,61 @@ it is going to be a generalization of the one we used for logistic regression
 
 [[./img/cost_functin_nns.png]]
 
+** Backpropagation Algorithm
+
+we need to compute:
+
+J(\Theta)
+
+\partial / \partial \Theta_{ij}^{(l)} J(\Theta)
+
+[[./forward_propagation.png]]
+
+
+we first do the forward propagation and then we need to compute:
+
+\delta_{j}^{(l)} = "error" of node j in layer l
+
+For each output unit (layer L=4) compute:
+
+\delta_{j}^{(4)} = a_{j}^{(4)} - y_{j}
+
+also as vectors:
+
+\delta^{(4)} = a_^{(4)} - y
+
+hypothesis - the y value
+
+\delta^{(3)} = ((\Theta^{(3)})^{T} \delta^{(4)} .* g'(z^{(3)}))
+
+\delta^{(2)} = ((\Theta^{(2)})^{T} \delta^{(3)} .* g'(z^{(2)}))
+
+
+where g'(z^{(j)}) can be computed vectorized as:
+
+a^{(j)} .* (1 - a^{(j)})
+
+[[./img/backpropagation0.png]]
+
+
+\Delta_{ij}^{(l)} = \Delta_{ij}^{(l)} + a_{j}^{(l)} \delta_{i}^{(l+1)}
+
+can be vectorized to:
+
+\Delta^{(l)} = \Delta^{(l)} + \delta^{(l+1)} (a^{(l)})^{T}
+
+finally we go outside the body of the loop and we have 2 cases:
+if j != 0
+if j = 0, this is the bias term, and we don't have regularization here
+
+[[./img/backpropagation1.png]]
+
+
+
+Intuition for Backpropagation:
+
+
+
 
 
 ** OCTAVE Quickstart guide

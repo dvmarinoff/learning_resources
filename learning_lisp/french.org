@@ -31,22 +31,48 @@ Il est calme       [иле калм]
 Elle mange
 Le chat est noir  [лю шате ноар]
 
+Nous sommes calmes [ну сом калм] - we are calm
+Nous sommes riches [ну сом риж] - we are rich
+Nous avons une pomme [нузавун жун пом] - we have a red apple
+Nous mangeons le pomme [ну монжон ля пом] - we are eating the apple
+Nous avons un chat [ну завун зун ша]
+
+Vous etes riches [вузе т ришъ] - you are rich
+Vous avez un livre [вузаве а ливр] - you have a book
+Vous mangez une orange [ву монже норонж]
+Vous etes une femme [вузет ? ун фам]
+
+J'ecris [ж кри]    - I am writing
+J'ecris une lettre [ж кри ун летр]
+J'aime les hommes calmes [жем лизом калм]
 
 la pomme   [ля пом]   - the apple
 l'homme    [льо м]    - the man
+les hommes [лезом]    - the men
 rouge      [ружъ]     - red
 riche      [риш]      - rich
 est        [е]        - is
 Tu es      [тю ис]    - you are
-une orange [ун оранж] - an orange
+une orange [ун оронж] - an orange
 un enfant  [ън ънфо]  - a child
 Vous       [ву]       - you
 Il         [ил]       - he, it
 Elle       [ел]       - she
-а          [a]        - has, have
+Nous       [ну]       - we
+sommes     [сом]      - are , we are
+etes       [ет]       - are , you are
+sont       [со]       - are , they are 
+а          [a]        - has, have , he/she/it has
+avons      [авон]     - have , we have
+avez       [аве]      - have , you have
 et         [e]        - and, plus
 la robe    [ля роб]   - the dress
+les robes  [ле роб]   - the dresses
 le chat    [лю ша]    - the cat
 un chat
-calme      [кал м]     - calm
+calme      [кал м]    - calm
 noir       [ноар]     - black
+la lettre  [ля летр]  - the letter
+Un livre   [а ливр]   - the book
+ecris      [екри]     - write/writing
+
