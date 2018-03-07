@@ -960,6 +960,44 @@ F'(x) = 4x
 
 
 
+* Differential Equations
+
+** Intro
+
+Differential equations are very useful for modeling and simulating phenomena
+and understanding how they operate.
+
+y'' + 2y' = 3y
+
+f''(x) + 2f'(x) = 3f(x)
+
+d^{2}y/dx^{2} + 2 * dy/dx = 3y
+
+The solution to differential equation is a function, or a class of functions.
+Not just a value or a set of values.
+
+Example: A particle moves along a straight line. Its speed is inversely
+proportional to the square of the distance, S it has traveled.
+
+S = distance, dS/dt = Speed
+
+dS/dt = k/S^{2}, which is a differential equation
+
+
+
+** Separable equations
+
+We have the equation:
+
+dy/dx = -x/ye^{x}^{2}
+
+We need a solution that goes through the point (0,1)
+Hint: separate the ys and dys on one hand and integrate
+
+
+
+
+
 * Series
 
 ** Infinite sequences

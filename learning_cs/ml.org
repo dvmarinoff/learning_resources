@@ -831,8 +831,6 @@ neuron so there is a trade off.
 In summary use ReLU on the hidden layers and on the output Soft Max for
 classification or a linear function for regression.
 
-
-
 * Neural Networks Learning (Neural Networks 2) 
 
 ** Cost Function
@@ -1034,6 +1032,8 @@ floor(a);
 ceil(a);
 
 rand(3); % 3 x 3 random matrix
+randperm(N,M) - raw vector of a random permutaion of '1:N',
+M is unique entries to return
 
 max(A, [], 1); % take the col wise max value
 max(A, [], 2); % take the row wise max value

@@ -1,0 +1,339 @@
+////
+// Unix history
+////
+-OS developed at Bell Labs(1969-1971)
+-Rewritten in C, so it can be portable(originaly in assembly)
+-C is made specifically for making portable programs for Unix
+-Unix spreads outside AT&T(1975) after anti-trust case.
+-Branches and improvments(1977-present)
+	-Open source: BSD, Linux
+	-Closed source: Solaris, AIX, HP/UX
+	-Mixed source: Mac OS X
+"Unix" now means a "Unix-like system"
+-Mobile devices are Unix -
+	-iOS, Android
+
+-Mac OS X:
+	-BSD Unix + NeXTSTEP + Apple code = Darwin
+Darwin is the the "under the hood" Unix of OS X
+Access Unix directly fromthe command line using Terminal
+
+-Differenc in power and control
+
+//Terminal application
+echo 'Hello World'
+
+UpArrow and DownArrow to go through previous commands
+Ctrl + a - moves cursor to start of line
+Ctrl + e - moves cursor to end of line
+Tab - autocomplete
+Tab + Tab - show list of possible matches
+Alt + ~ - Cycle between Terminal windows
+
+//Command structure
+command	options	argument
+
+options and arguments are optional
+options could be a List:
+ls -l -a -h Desktop
+ls -lah Desktop	- short for the latter
+options sometimes have argumenton their own:
+banner -w 50 'Hello World!'
+width: 50
+
+//Kernel and shells
+-kernel - core of the OS
+	- allocates time and memory to programs
+	- OS X uses Mach kernel
+-shell  - Outer layer of OS
+	- interacts with user
+	- sends requests to kernel
+
+Shells:
+- sh - Thompson Shell(1971)
+- sh - Bourne Shell(1977)
+- csh - C Shell(1979)
+- tcsh - Tabbed C Shell(1979)
+- ksh - Korn Shell(1982)
+- bash - Bourne-Again Shell(1987)
+- zsh - Z Shell(1990)
+
+Moving around shells:
+echo $Shell	- show default shell
+echo $0		- show current shell
+sh		- to bourne shell
+bash		- to bash shell
+exit		- exit current shell
+
+Shell can nest.
+
+//Unix manual pages
+man + what you want to look up in the manual
+f	- forward
+Space	- forward
+b	- backwards
+q	- quit
+
+man -k banner	- show what banner does
+
+/*File system basics*/
+//working directory - the dirctory where we are now, where commands are issuied
+
+pwd	- present working directory
+/	- root
+-listing files and directories -
+ls	- list directories
+ls -l	- list directories vertical
+ls -la	- list all directories and files
+ls -lah - returns sixe in human readable format
+
+.	- reference to current directory
+..	- reference to parent directory
+.files	- configuration files
+
+-	- file
+d	- directory
+l	- link
+
+//moving around the filesystem
+cd + path to directory
+cd ..		- go to parent directory
+cd ../..	- go back two levels
+cd ~		- to home directory
+cd -		- last directory
+/		- represent absolute path, root
+Ctrl + a	- beginning of line
+Ctrl + e	- end of line
+
+/Users/Someone	- absolute path
+Users/Someone	- relative path
+
+//file system organization
+/	- Root
+/bin	- Binaries, programs
+/sbin	- System binaries, system programs
+/dev 	- Devices: hard drive, keyboard, mouse, etc.
+/etc	- System configurations
+/home 	- User home directories
+/lib	- Libraries of code
+/tmp	- Temporary files
+/var	- Various, mostly files system uses
+/usr	- User programs, tools and libraries (not files)
+/usr/bin
+/usr/etc
+/usr/lib
+/usr/local
+
+/*Working with files and directories*/
+//naming files
+- avoid /\*&%$|^~<> and most other symbols
+- use A-Z, a-z, 0-9, period, underscore, hyphen(do not start withthis one)
+- stick with lowercase
+- escape spaces with \ or " "
+- file endings
+
+//creating files
+- touch	- updates file access if it exists else creates it
+- use text editor
+
+//UNIX text editors
+ed - earlier
+vi - visual editing mode
+vim - vi improved
+GNU Emacs - Macros to automate work
+pico -
+nano - basic features, easy to use
+
+//reading files
+cat	- concatenate
+more	- paginated output, can not go backwards
+less	- backward scrolling, better memory use
+g	- go to the top of the document
+G	- go to the end of the document
+which	- return path to file
+
+head	- display lines from beginning of a file
+tail	- display lines from end of a file
+tail -f	- 'follow' the tail of a file
+
+tail -f /var/log/system_log
+tail -f /varlog/apache2/access_log
+
+//creating directoies
+mkdir testdir
+
+mkdir testdir/test1	- will work if testdir exist
+mkdir -p testdir/test1/test2	- parent option for creating multuple directories
+-v	- verbose, return feedback
+-vp
+
+//moving and renaming files and directories
+mv newtextfile.txt testdir/newfile.txt	- moving
+mv newfile.txt testdir/new_file.txt	- also for renaming
+
+options:
+-n	- no overwriting
+-f	- force overwriting
+-i	- interactive overwriting, 'ask me'
+-v	- verbose
+
+//coping
+cp new_file.txt newer_file.txt
+
+options:
+-R	- recursive copy
+
+//deleting
+rm somefile.text 	- removes it permanantly, does not sends it first to the trash
+rmdir folder		- removes non-empthy dirs
+rm -r /path/		- removes dirs
+
+//hard links
+ln  filetolink hardlink name/pathtofile 	- reference to the file, that do not break,
+											 if file is moved or deleted
+
+//symbolic links - 'sym link'
+ln -s filetolink symlink	- reference a file or a directory path,
+						  	 break when file is moved
+
+//searching
+find path expression
+find ~/Documents -name "someimage.jpg"
+
+	- wildcard characters
+????	- any one character
+*		- zero or more characters (glob)
+[] 		- any character in the brackets
+
+"index.????"
+"index.*"
+"*.html"
+"index[123].html"
+"file?[123].html"
+
+-and -not -path *Preferences* 	- excludes from search
+
+// create permenent alias
+- craete a file .bash_aliases in users home directory
+
+- examples:
+
+alias ll='ls- la'
+
+alias c='clear'
+
+- Archives
+    > unzip file.zip -d dest/
+    > tar -xvf file.tar dest/
+    > tar -xzvf file.tar.gz dest/
+    > tar -xjvf file.tar.bz2 dest/
+
+- GUI
+    > xdg-open <name-of-default-user-program>
+
+- SHELL
+    - turn on shell mode
+    CTRL + ALT +F1
+
+    - see pdf in console (not working ok)
+    less file.pdf
+    pdftotext file.pdf
+
+    - system
+    sudo poweroff
+    sudo reboot
+
+- Scripting
+
+    - chmod -
+    chmod options permissions filname
+
+        - permissions:
+            user group others
+
+            read, write, execute, no permission
+            4     2      1        0
+            chmod u=rwx,g=rx,o=r myfile
+            chmod 754
+
+            chmod +x - to make file executable
+
+    -
+    which bash - will locate bash on the system
+    /bin/bash
+
+    the first line is not read as a comment, it defines the interpreter
+    ./hello_world.sh
+    #!/bin/bash
+    STRING="Hello World!"
+    echo $STRING
+
+    chmod +x hello_world.sh
+    ./hello_world.sh
+    Hello World!
+
+    - global local variables
+
+    #!/bin/bash
+    VAR="global variable"
+    function bash {
+        local VAR="local variable"
+        echo $VAR
+    }
+    echo $VAR
+    bash
+
+    - passing arguments
+
+    #predefined variables
+    echo $1 $2 $3 ' -> $1 $2 $3'
+////
+// Bash
+////
+
+// Inception
+
+- shell program is one that provides users with an interface to interact with other programs
+- The main difference between bash and most other programs is that unlike them, bash was not programmed to perform a certain task
+- The bash shell is a binary program that runs either interactively or non-interactively, usually in a text-based interface
+ provided by a terminal emulator program
+- generally runs in text-based interface, so a terminal emulation is needed
+    - rxvt, xterm, gnome-terminal, konsole, Terminal, cmd.exe, Console 2, mintty
+
+- to check if bash is running
+echo "$BASH_VERSION"
+--------------------------
+ssh <ip address>
+password:
+screen
+mail -s Hello <email>
+Hello lhunath,
+
+How are you today?
+-------------------------
+- in a terminal, many terminal-based programs can run simultaneously, forming a chain through which
+your input and their output flows
+
+- a program generally lives on a disk and when started the kernel loads it's pre-written instructions(it's code)
+by creating a process for the program to work in. A process relays the program instructions to the kernel
+
+- file descriptors - a process also has a few hooks to the outside world via file descriptors
+ These are essentially plugs we use to connect processes to files, devices or other processes.
+ They are identified by numbers. The first three are standart.
+
+    - standart input - File descriptor 0. Most processes receive their input.
+    - standart output - File sescriptor 1.
+    - standart error - File descriptor 2. Most processes send their error and information messages.
+     Bash uses it not only for errors, but information messages.
+
+     If a program needs its output to go to another program's input, as opposed to your display,
+     it will instruct the kernel to connect its standard output to the other program's standard input.
+     Now all the information it sends to its standard output file descriptor will flow into the other
+     program's standard input file descriptor. These flows of information between files,
+     devices and processes are called streams
+
+- stream - is information (specifically, bytes) flowing through the links between files, devices and processes
+ in a running system. They can transport any kind of bytes, and the receiving end can only consume their bytes
+ in the order they were sent.
+
+// Commands and Arguments
