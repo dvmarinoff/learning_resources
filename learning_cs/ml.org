@@ -1375,7 +1375,6 @@ The formula:
 
 \sigma = sqrt(1/n \sum_{i=0}^{n} (x_{i} - \mu)^{2})
 
-
 The code:
 
 #+BEGIN_SRC julia
@@ -1401,4 +1400,22 @@ stdd(xs, μ) = sqrt(var2(xs));                     # standart deviation(populati
 stdd(xs, mu(xs, n(xs)));                          # compute standart deviation 
 #+END_SRC
 
+** Kullerback-Leibler Divergence
+
+very often we will replace observed data or a complex distributions with a
+simpler, approximating distribution. KL Divergence helps us to measure just
+how much information we lose when we choose an approximation.
+
+H = entropy = with log_{2} "the minimum number of bits to encode our
+information"
+
+D_{KL} = Kullerback-Leibler Divergence = with log_{2} "how many bits of
+information we expect to lose"
+
+H = - \sum_{i=1}^{N} p(x_{i})log p(x_{i})
+
+D_{KL}(p||q) = \sum_{i=1}^{N} p(x_{i})(log p(x_{i}) - log q(x_{i}))
+
+
+NOTE: negative log probability is like a scale for rarity
 

@@ -142,3 +142,5 @@ If patient is a girl
 P(Sally has the fly | patient is a girl) = 0.20
 If patient is a boy
 P(Sally has the fly | patient is a boy) = 0
+
+
