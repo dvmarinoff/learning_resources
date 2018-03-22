@@ -1,0 +1,69 @@
+## Mathematical Data Types
+
+### Sets
+
+Informally, a set is a bunch of objects, known as elements, that can be just
+about anything: numbers, points in space, other sets. Order of elements is not
+significant. Elements are unique.
+
+$$ A = { red, blue, green } $$ 
+$$ B = { {a,b}, {a,c}, {b,c} } $$ 
+
+For larger or infinite sets:
+
+$$ D ::= {1,2,4,8,16,...}  \text{ the powers of 2 } $$
+
+$$ e \in S $$
+
+asserts that e is an element of set S.
+
+- Some popular sets are:
+
+$$ \emptyset \text{ the empty set } $$
+$$ \N \text{ nonnegative integers } $$
+$$ \Z \text{ integers } $$
+$$ \Q \text{ rational numbers } $$
+$$ \R \text{ real numbers } $$
+$$ \C \text{ complex numbers } $$
+
+- Comparing sets:
+
+$$ S \subseteq T $$
+
+S is a subset of T and and every element of S is also in T.
+Think of the symbol $ \subseteq  $ as rounded $ \leq $.
+
+$$ S \subset T $$
+
+S is strict subset of T - they are not equal.
+
+- Operations:
+
+Union of sets A and B, denoted $ A \cup B $:
+
+$$ x \in A \cup B \text{ iff } x \in A \text{ OR } x \in B $$
+
+Intersection of A and B, denoted A \cap B:
+
+$$ x \in B \text{ iff } x \in A \text{ AND } x \in B $$
+
+Set difference of A and B, denoted A - B:
+
+$$ x \in A - B \text{ iff } x \in A \text{ AND } x \notin B $$
+
+### Sequences
+
+### Functions
+
+A function assaigns an element of one set, called the domain, to an element of
+another set, called the codomain:
+
+$$ f : A \to B  $$
+
+$$ f(x) = \frac{1}{x^{2}} $$
+
+$$ f(P, Q) = [P \text{ IMPLIES } Q]  $$
+
+
+###
+

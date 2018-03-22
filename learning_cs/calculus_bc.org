@@ -867,20 +867,20 @@ G(8) = \int_{-3}^{8} g(t) dt
 
 derivative:
 
-d/dx[x^2] = 2x
+d/dx[x^{2}] = 2x
 
-d/dx[x^2 + 1] = 2x
+d/dx[x^{2} + 1] = 2x
 
-d/dx[x^2 + \pi] = 2x
+d/dx[x^{2} + \pi] = 2x
 
 antiderivative:
 What is 2x the derivative of?
 
-x^2, x^2 + 1, x^2 + \pi, x^2 + "some constant term"
+x^{2}, x^{2} + 1, x^{2} + \pi, x^{2} + "some constant term"
 
 notation:
 
-\int 2x dx = x^2 + a
+\int 2x dx = x^{2} + a
 
 (the indefinite integral of 2x == the antiderivative of 2x)
 
@@ -889,7 +889,9 @@ notation:
 "One should never try to prove anything that is not almost obvious"
 - Alexader Grothendieck
 
-integrals are an inverse of derivatives
+integrals are an inverse of derivatives. If you take the derivative of
+the Anti-derivative you get the function. The theorem connects
+diferential and integral calculus.
 
 first part:
 
@@ -898,6 +900,7 @@ first part:
 second part:
 
 [[./img/fundamental_theorem_of_calculus_second_part.jpg]]
+
 
 
 ** Indefinite Integral
