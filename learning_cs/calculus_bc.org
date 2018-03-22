@@ -2,14 +2,11 @@
 
 ** ex.1: Limit
 
-lim f(x) = 4
-x->3
+\lim_{x\to 3} f(x) = 4
 
-lim f(x) = 4
-x->3-
+\lim_{x \to 3-} f(x) = 4
 
-lim f(x) = 4
-x->3+
+\lim_{x \to 3+} f(x) = 4
 
 - the limit of f of x as x approaches 3 is 4
 - the limit as we approach from the left is 4
@@ -17,15 +14,13 @@ x->3+
 
 ** ex.2: Right and Left
 
-lim f(x) = -4
-x->3-
+\lim_{x\to 3-} f(x) = -4
 
-lim f(x) = 1
-x->3+
+\lim_{x\to 3+} f(x) = 1
 
 - the function is discontinuos at x = 3,
 - we have 2 limits from right and left, but
-- the limit at x->3 does not exist
+- the limit at x\to 3 does not exist
 
 - the value of a function is not the same as the limit of the function
 - we predict the limit by approximating infinitly close to the value,
@@ -39,8 +34,7 @@ and in this case the limit does not exist from that direction
 *** Over a point
 f is continuos when x=a if and only if
 
-lim f(x) = f(a)
-x->a
+\lim_{x\to a} f(x) = f(a)
 
 *** Over an interval
 
@@ -49,27 +43,22 @@ f is cont. over every point in that interval
 
 f is cont. over [a,b] if and only if
 
-lim f(x) = f(a) and lim f(x) = f(b)
-x->a+               x->b-
+\lim_{x\to a+} f(x) = f(a) and \lim_{x\to b-} f(x) = f(b) 
 
 ** Properties of Limits
 
-lim f(x) = L    lim g(x) = M
-x->a            x->a
+\lim_{x\to a} f(x) = L   \lim_{x\to a} g(x) = M
 
-lim( f(x) + g(x) ) = L + M     | Sum
-x-> a
+\lim_{x\to a}( f(x) + g(x) ) = L + M     | Sum
 
-lim ( f(x) - g(x) ) = L - M    |
-x->a
+\lim_{x\to a} ( f(x) - g(x) ) = L - M    |
 
-lim ( f(x) * g(x) ) = L * M    | Product
-x->a
+\lim_{x\to a} ( f(x) * g(x) ) = L * M    | Product
 
-lim ( f(x) / g(x) ) = L / M    | Difference
+\lim_{x\to a} ( f(x) / g(x) ) = L / M    | Difference
 
-lim f(g(x)) = lim f( lim g(a) )| Composition
-x->a
+\lim_{x\to a} f(g(x)) = lim f( lim g(a) )| Composition
+
 
 
 ** Limits by substitution, factoring and rationalizing
@@ -81,56 +70,47 @@ f(x) = x^2 + x - 6 / x - 2 = (x + 3)(x - 2) / (x - 2) = x + 3 , x != 2
 f(x) { x + 3     , x != 2
      { undefined , x = 2
 
-lim f(x) = ?
-x->2
+\lim_{x\to 2} f(x) = ?
 
 ex.5:
 
-lim x + 1/ sqrt(x + 5) - 2 = ?    | 0/0
-x-> -1
+\lim_{x\to -2} x + 1/ sqrt(x + 5) - 2 = ?    | 0/0
 
-g(x) = x + 1/ sqrt(x + 5) - 2 =
+g(x) = x + 1/ sqrt{x + 5} - 2 =
 
-= (x + 1 / sqrt(x + 5) - 2) * (sqrt(x + 5) + 2 / sqrt(x + 5) + 2) =
+= (x + 1 / sqrt{x + 5} - 2) * (sqrt{x + 5} + 2 / sqrt{x + 5} + 2) =
 
-= (x + 1)(sqrt(x + 5) + 2) / x + 5 - 4 = sqrt(x + 5) + 2 , x !0= -1
+= (x + 1)(sqrt{x + 5} + 2) / x + 5 - 4 = sqrt{x + 5} + 2 , x !0= -1
 
-f(x) = sqrt(x + 5) + 2
+f(x) = sqrt{x + 5} + 2
 f(x) = g(x) for all x != 1
 
-lim g(x) = 4
-x-> -1
+\lim_{x\to -1} g(x) = 4
 
 
-(a + b)(a - b) = a^2 - b^2
+(a + b)(a - b) = a^{2} - b^{2}
 
 
 ** Limits of trigonometric functions
 
 ex.6:
 
-lim sin(x) = ? = sin(π) = 0
-x-> π
+\lim_{x\to \pi} sin(x) = ? = sin(\pi) = 0
 
-sin and cos are defined BG
-for all reaBBG
-G
-l numbers and are continuos
+sin and cos are defined for all real numbers and are continuos
 over thier entire domain (tan and cot are also continuous), and
 thier limit will be the value of the function at that point
 
 
-lim tan(x) = lim sin(x)/cos(x) = 0 / -1 = 0
-x-> π
+\lim_{x\to \pi} tan(x) = lim sin(x)/cos(x) = 0 / -1 = 0
 
-lim cot(x) = lim cos(x)/sin(x) =
-x-> π
+\lim_{x\to \pi} cot(x) = lim cos(x)/sin(x) =
 
-sin π = sin(π/2 + π/2) = cos π/2 = 0
-sin(π) = 0
+sin \pi = sin(\pi/2 + \pi/2) = cos \pi/2 = 0
+sin(\pi) = 0
 cos(0) = 1
-cos(π) = -1
-cos(π/2) = 0
+cos(\pi) = -1
+cos(\pi/2) = 0
 
 
 Note: 0/0 is undetermined form -> the limit may still exist
@@ -147,16 +127,11 @@ The math vertion for functions
 
 f(x) <= g(x) <= h(x)
 
-lim f(x) = L    lim h(x) = L
-x->a            x->a
+\lim_{x\to a} f(x) = L    \lim_{x\to a} h(x) = L
 
--> lim g(x) = L
-   x->a
+-> \lim_{x\to a} g(x) = L
 
-*** lim sin(x)/x
-    x-> 0
-
-
+*** \lim_{x\to 0} sin(x)/x
 
 
 
@@ -1009,7 +984,7 @@ Hint: separate the ys and dys on one hand and integrate
 
 
 Example: Finding formula for nth member of a sequence.
-The nth partial sum of the series \sigma_{n=1}^{\inf}
+The nth partial sum of the series \sum_{n=1}^{\inf}
 is given by S_n = n + 1 / n + 10 Write a rule for a_n.
 
 a_{1} + a_{2} + a_{3} + ... + a_{n-1} + a_{n}
@@ -1890,6 +1865,8 @@ x^{n}/x^{m}   = x^{n-m}
 1/(x^{n})   = 1 * x^{-n}
 
 x^{(3/4)}   = x^{(1/4)}^{3}
+
+\sqrt[3]{x} = x^{1/3}
 
 ** Properties of logarithms
 
