@@ -880,9 +880,66 @@ second part:
 
 ** Indefinite Integral
 
+
+** Improper Integral
+
+Improper integrals are definite integrals that cover an unbounded area.
+- one of the end points is unbounded
+
+\int_{1}^{\inf} 1/x^{2} dx = \lim_{b\to\inf}\int_{1}^{b} 1/x^{2} dx
+
+- endpoints are finite, but the integrated function is undounded
+
+\int_{0}_{1} 1/sqrt{x} dx = \lim_{a\to 0+}\int_{a}_{1} 1/sqrt{x} dx
+
+When our unbound area is finite, that is there exists such a limit
+we say the integrak is convergent, else it is divergent.
+
+So when a bound is \inf use limits:
+
+Example:
+
+\int_{1}^{\inf} 1/x^{2} dx
+
+= \lim_{n\to\inf} \int_{1}^{n} 1/x^{2} dx
+
+= \lim_{n\to\inf}[-1/x] = \lim_{n\to\inf} [1-1/n] = 1
+
+In this case we say that the integral is convergent.
+
+
+
+What if both bounds are \inf?
+
+Example:
+
+\int_{-\inf}^{\inf} 250/(25+x^{2})
+
+= \int_{-\inf}^{0} f(x) dx + \int_{0}^{\inf} f(x) dx
+
+= \lim_{n\to -\inf}\int_{n}^{0} f(x) dx + \lim_{m\to\inf}\int_{0}^{m} f(x) dx
+
+= 50\pi (with trig substitution)
+
+
+
+Divergent improper integral:
+
+Example:
+
+y = 1/x
+
+\int_{1}^{\inf} 1/x dx = \lim_{n\ti\inf}\int_{1}^{n} 1/x dx
+
+= \lim_{n\to\inf} ln(|x|) = \lim_{n\to\inf} ln(n) - ln(1) = \lim_{n\to\inf} ln(n) = \inf
+
+This integral is divergent.
+
+
+
 *** Reverse Power Rule
 
-\int x^{n} dx = \frac{x^{n+1}}{n+1} + C
+\int x^{n} dx = \frac{x^{n+1}}{n+1} + C iff n != -1
 
 *** Sums
 
@@ -937,6 +994,33 @@ it is undefined for negative values or 0. We need larger domain.
 F'(x) = 4x
 
 
+** u-substitution
+
+basically it is unwinding the chain rule. A trick to ease the transforamtions.
+
+\int (3x^{2} + 2x)e^{(x^{3} + x^{2})} dx
+
+u = x^{3} + x^{2}
+
+dx du/dx = (3x^{3} + 2x) dx
+
+= \int e^{u} du = e^{u} + c = e^{(x^{3} + x^{2})} + c
+
+
+Example:
+[[./img/u-subtitution_mult_by_constatnt.jpg ]]
+
+Defining u:
+
+d/dx[ f(g(x)) ] = f'(g(x)) * g'(x)
+
+[[./img/u-substitution_logarithmic_function.jpg]]
+
+u-substitution: two ways to account for the limits of definite integrals
+
+[[./img/u-substitution_definite_integrals.jpg]]
+
+
 
 * Differential Equations
 
@@ -960,6 +1044,9 @@ proportional to the square of the distance, S it has traveled.
 S = distance, dS/dt = Speed
 
 dS/dt = k/S^{2}, which is a differential equation
+
+
+
 
 
 

@@ -390,14 +390,14 @@ Instead we want to use Logistic Regression, which despite of the name
 is one of the most popular and used classification algoritms.
 
 in lineear regression the model was:
-h_\theta(x) = \theta^T x
+h_\theta(x) = \theta^{T} x
 
 for logistic regression we want only to midify it:
-h_\theta(x) = g(\theta^T x)
+h_\theta(x) = g(\theta^{T} x)
 
 where
 
-g(z) = 1 / 1 + e^-z
+g(z) = 1 / 1 + e^{-z}
 
 which is known as a sigmoid function(logistic funciton).
 If we put does 2 equations together we get: 
@@ -506,12 +506,12 @@ Optimization algorithms:
 The last 3 use more and more sophisticated strategies to minimaze the
 cost function. They have more clever inner loop called line search
 algorithm that tries out automatically different values for the
-learning rate alpha and picks to ultimate one. They also converge
+learning rate alpha and picks the best one. They also converge
 much faster through other optimizations.
 
 Advatages:
-- no need ti manually pick \alpha
-- ofden faster than gradient descent
+- no need to manually pick \alpha
+- often faster than gradient descent
 Disadvantages:
 - more complex
 
@@ -863,6 +863,12 @@ Cost Function:
 
 it is going to be a generalization of the one we used for logistic regression
 
+- the double sum simply adds up the logistic regression costs calculated for
+each cell in the output layer
+- the triple sum simply adds up the squares of all the individual \Theta s in
+- the entire network.
+- the i in the triple sum does not refer to training example i
+
 [[./img/cost_functin_nns.png]]
 
 ** Backpropagation Algorithm
@@ -871,7 +877,7 @@ we need to compute:
 
 J(\Theta)
 
-\partial / \partial \Theta_{ij}^{(l)} J(\Theta)
+all \partial / \partial \Theta_{ij}^{(l)} J(\Theta)
 
 [[./forward_propagation.png]]
 
