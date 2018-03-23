@@ -1008,6 +1008,7 @@ dx du/dx = (3x^{3} + 2x) dx
 
 
 Example:
+
 [[./img/u-subtitution_mult_by_constatnt.jpg ]]
 
 Defining u:
