@@ -1021,9 +1021,77 @@ u-substitution: two ways to account for the limits of definite integrals
 
 [[./img/u-substitution_definite_integrals.jpg]]
 
+** Integration by Parts
+
+Integration by parts is reversing the Product Rule:
+
+\int f(x)*g'(x) dx = f(x)*g(x) - \int f'(x)*g(x) dx
+
+Use when you have a product of two functions and you can take the derivative of
+one and the antiderivative of the other without making things more complicated.
+
+[[./img/integration_by_parts_graph.jpg]]
+
+Examples:
+
+\int x * cos(x) dx = x*sin(x) - \int 1 * cos(x) dx = x * sin(x) + cos(x)
 
 
-* Differential Equations
+\int ln(x) dx = \int ln(x) * 1 = x*ln(x) - \int 1/x * x dx = x * ln(x) - x
+
+
+\int x^{2} e^{x} dx = x^{2}e^{x} - \int 2x e^(x) dx =
+= x^{2}e^{x} - 2(xe^{x} - e^{x}) = x^{2}e^{x} - 2xe^{x} + 2e^{x}
+
+2 \int x e^{x} dx = x e^{x} - \int 1e^{x} = xe^{x} - e^{x}  
+
+
+\int e^{x}cos(x) dx = e^{x}sin(x) - \int e^{x}sin(x) dx
+
+\int e^{x}sin(x) dx = -e^{x}cos(x) + \int e^{x}cos(x) dx
+
+\int e^{x}cos(x) dx = e^{x}sin(x) + e^{x}cos(x) - \int e^{x} cos(x) dx
+
+add \int e^{x}cos(x) dx to both sides:
+
+(2\int e^{x}cos(x) dx) / 2 = (e^{x}sin(x) + e^{x}cos(x)) / 2
+
+\int e^{x}cos(x) dx = ( e^{x}sin(x) + e^{x}cos(x) ) / 2
+
+
+\int_{0}^{\pi} x cos(x) dx = x sin(x) + \int 1 * -sin(x) dx
+
+x sin(x) + cos(x) = (\pi sin(\pi)) - (0 sin(0) + cos(0)) = -1 - (1) = -2
+
+
+** Partial fraction expansion to evaluate integral
+
+
+
+** Avarage value of a function
+
+Over a closed interval:
+
+[[./img/average_value_over_closed_interval.jpg]]
+
+Mean value theorem for integrals:
+
+if f(x) is continuous over [a,b] and diferentiable over (a,b) there exists
+some number n, such as a < n < b AND f'(n) = (f(b) - f(a))/ (b - a)
+
+meaning: f'(n) equals the slope of the line connecting a and b
+
+Now see that those 2 are identical:
+
+f'(n) = f(b)-f(a) / b-a  ===  \int_{a}^{b} f'(x) dx / b-a
+
+g(x) = f'(x)
+
+g(n) = 1 / (b-a) \int_{a}^{b} g(x) dx
+
+
+
+Differential Equations
 
 ** Intro
 
