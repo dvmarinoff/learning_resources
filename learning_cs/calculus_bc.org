@@ -1091,7 +1091,7 @@ g(n) = 1 / (b-a) \int_{a}^{b} g(x) dx
 
 
 
-Differential Equations
+* Differential Equations
 
 ** Intro
 
@@ -1852,6 +1852,83 @@ The are tend to get stretched by factor of 1.227 around the point (-2,1)
 "A way to think of multi dimentional space as linear space with
 certain approximations and keeping the factor of change the determinant"
 
+
+*
+
+** Multvariable Maxima and Minima
+
+You may want to maximaze a profit function or minimaze a cost function.
+
+In 3d space:
+Find a point where the tangent plane has no slope. At this point the
+gradient is equal to a zero vector. This is a maxima, minima or a saddle point. 
+
+[[./img/multivariable_maxima_and_minima.jpg]]
+
+Saddle points:
+
+Consider the graph of f(x,y) = x^{2} - y^{2}.
+
+\partial f/ \partial x = 2x, \partial f/ \partial y = 2y
+
+(x,y) = (0,0)
+
+At that point we have a tangent plane that is flat, but if we cut the
+graph at each line it looks like a maximum point at y and it looks like
+a miminum point at x. At x it is a u shaped up faceing parabola and at
+y it is an upside down parabola. Looks like the x and y directions
+disagree.
+
+Second derivative test:
+
+In sigle variable calculus if f'' < 0 it is a maximum if f'' > 0 it is
+a minimum else if 0 it is undetermined.
+
+Second partial derivative test:
+
+In multivariable world it is similar. We look for the gradient to be
+the zero vector. 
+
+f(x,y) = x^{4} - 4x^{2} + y^{2}
+
+f_{x} = 4x^{3} - 8x = 4x(x^{2} - 2) = 0
+f_{y} = 2y = 0
+
+y = 0
+x = 0, x = \pm \sqrt{2}
+
+(0,0), (sqrt{2}, 0), (-sqrt(2), 0)
+
+[[./img/second_partial_derivative1.jpg]]
+[[./img/second_partial_derivative2.jpg]]
+[[./img/second_partial_derivative3.jpg]]
+
+the second partial derivative with respect to x is:
+
+\partial^{2}f/\partial x^{2} = 12x^{2} - 8
+
+if we plug in \sqrt{2} we get positive concavity, meaning it looks
+like local a minimum:
+
+12\sqrt{2} - 8 = 16
+
+12 * 0 - 8 = -8
+
+For just x it looks like: Max, Min, Min
+
+But the second partial derivative with respect of y is:
+
+\partial^{2}f/\partial y^{2} = 2
+
+meaning that there is positive concavity everywhere. Both directions
+agree about the 2 minimums but disagree about the 1st point:
+
+x: Max, Min, Min
+
+y: Min, Min, Min
+
+But to make full conclusion we need to take into account the mixed
+term: \partial^{2}f/\partial y \partial{x}
 
 
 * Pre Calculus
