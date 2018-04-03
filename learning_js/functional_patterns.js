@@ -4,14 +4,20 @@ var R = require('rambda');
 // RECURSION
 ////
 
-// recursive implementation looks like math definition
+// Recursive implementations look a lot like math definitions, they preserve intuition,
+// save us from the horrors of global state management (which is even worse when you
+// consider that js is using closures over blocks, and freely mutable dynamic variables).
 var fibR = function (n) {
     if(n < 1) return 1;
     return fibR(n - 1) + fibR(n - 2);
 };
 
-// but without tail call optimization is limited by the frame stack
-// and is slower than imperative implementation
+// Infortunatly in the real world recursion is rarely optimal.
+// Without tail call optimization it is limited by the frame stack,
+// it is slower than the imperative implementation,
+// and without some clever garbidge collection by the vm it will
+// use much more memory.
+// Iterative example implementations:
 var fibI = function (n) {
     if(n === 0) return 0;
     if(n === 1) return 1;
@@ -26,36 +32,6 @@ var fibI = function (n) {
     return current;
 };
 
-
-// console.log('R: ' + fibR(6) + ' I: ' + fibI(6));
-
-// not tail recursive
-var factR = function (n) {
-    if(n === 0) return 1;
-    return n * factR(n - 1);
-};
-
-// What is tail position?
-// return x * fact(x - 1) -> not tail position
-// function foo () { bar(); } -> not in tail position
-// var a = () => f() || g(); -> only g in tail position (result of f is needed)
-// var a = x => x ? f() : g(); -> both in tail position
-
-// tail recursive
-var factTR = function (n) {
-    function recur (n, acc) {
-        if(n === 0) return acc;
-        return recur(n - 1, n * acc);
-    }
-    return recur(n, 1);
-};
-
-// tail recursive with default
-var factTRD = function (n, acc = 1) {
-    if(n <= 1) return acc;
-    return factTRD(n - 1, n * acc );
-};
-
 var factI = function (n) {
     if(n === 0) return 1;
     var fact = n;
@@ -66,11 +42,60 @@ var factI = function (n) {
     return fact;
 };
 
+// console.log('R: ' + fibR(6) + ' I: ' + fibI(6));
+
+// Tail-call optimization is a remedy for the stack over usage problem
+// with recursive implementations and by 2015 it is included in ecmascript 6,
+// but not yet implemented for most browsers (just apple).
+
+// But what is it?
+// It is about the format of the last call of the function. It has to
+// obey surtain rules in order to help the vm know what is happening.
+// The last call must be in "tail position". Here are some samples:
+
+// return x; -> tail position
+// return f(x); -> tail position
+// return x * fact(x - 1); -> not tail position
+// function foo () { bar(); } -> not in tail position
+// var a = () => f() || g(); -> only g in tail position (result of f is needed)
+// var a = x => x ? f() : g(); -> both in tail position
+
+// this is not tail recursive
+var factR = function (n) {
+    if(n === 0) return 1;
+    return n * factR(n - 1);
+};
+
+// but this is tail recursive
+var factTR = function (n) {
+    function recur (n, acc) {
+        if(n === 0) return acc;
+        return recur(n - 1, n * acc);
+    }
+    return recur(n, 1);
+};
+
+// tail recursive with default params
+var factTRD = function (n, acc = 1) {
+    if(n <= 1) return acc;
+    return factTRD(n - 1, n * acc );
+};
+
 // console.log('factTR(100) -> ' + factTR(100));
 
-// reduce over lazy seq (not lazy in this case)
+// Until the time tail call optimization gets implemented in all major browsers we can use
+// the encapsulated recursive functions that are already there: map, filter, reduce, foreach.
+// Here is a classical functional style implementation of factorial as a reduce over a sequence.
+
+// reduce over lazy seq (well not lazy in this case, but maybe someday js will have that too):
 var factF = n => Array.from({ length:n }, (v, k) => k + 1).reduce( (acc, x) => acc * x );
 
+// Which one to use?
+// map preserves dimentions, while reduce ..., well it reduces dimentions:
+[1,2,3,4].map(x => x + 1);            // -> [2,3,4,5]
+[1,2,3,4].reduce((acc,x) => acc + x); // -> 10
+
+// TODO:
 // tramplines
 // continuation-passing style
 
