@@ -1741,6 +1741,9 @@ we get a linear function.
 
 ** Jacobian
 
+"A way to think of multi dimentional space as linear space with
+certain approximations and keeping the factor of change the determinant"
+
 Jacobian matrix:
 
 [2 -3; 1 1] [x; y] = [2x + (-3)y; 1x + 1y]
@@ -1849,13 +1852,58 @@ det([1 cos(y); cos(x) 1]) = 1 * 1 - cos(y) * cos(x) = 1 - (cos(-2) * cos(1))
 
 The are tend to get stretched by factor of 1.227 around the point (-2,1)
 
-"A way to think of multi dimentional space as linear space with
-certain approximations and keeping the factor of change the determinant"
 
 
 *
 
-** Multvariable Maxima and Minima
+** Quadratic approximations
+
+*** The Hessian matrix [he-shan]
+
+organizes all second partial derivatives inyo a matrix,
+its determinant is the formula for the second partial derivative test
+
+notation is: H(f), Hf, or H_{f}
+
+- it only makes sense for scalar-valued functions
+- the object H_{f} is a matrix with functions as entries,
+meant to be evaluated at some point (x_{0}, y_{0}, \dots)
+You may call it a matrix-valued function.
+
+Hessian determinant:
+
+[[./img/hessian_determinant.jpg]]
+
+Computing the Hessian:
+
+f(x,y) = x^{3} - 2xy - y^{6} at point (1,2)
+
+first partial derivatives:
+
+f_{x} = 3x^{2} - 2y
+
+f_{y} = -2x - 6y^{5}
+
+second partial derivatives:
+
+f_{xx} = 6x
+
+f_{xy} = -2
+
+f_{yx} = -2
+
+f_{yy} = -30y^{-4}
+
+H_{f}(x,y) = [ f_{xx} f_{xy}; f_{yx} f_{yy}] = [ 6x -2; -2 -30y^{4}] = [6 -2;
+-2 -480]
+
+det(H_{f}) = 6 * (-480) - (-2)*(-2) = -2884
+
+
+
+
+
+** Multivariable Maxima and Minima
 
 You may want to maximaze a profit function or minimaze a cost function.
 
@@ -1900,8 +1948,6 @@ x = 0, x = \pm \sqrt{2}
 (0,0), (sqrt{2}, 0), (-sqrt(2), 0)
 
 [[./img/second_partial_derivative1.jpg]]
-[[./img/second_partial_derivative2.jpg]]
-[[./img/second_partial_derivative3.jpg]]
 
 the second partial derivative with respect to x is:
 
@@ -1916,6 +1962,8 @@ like local a minimum:
 
 For just x it looks like: Max, Min, Min
 
+[[./img/second_partial_derivative2.jpg]]
+
 But the second partial derivative with respect of y is:
 
 \partial^{2}f/\partial y^{2} = 2
@@ -1927,8 +1975,29 @@ x: Max, Min, Min
 
 y: Min, Min, Min
 
+[[./img/second_partial_derivative3.jpg]]
+
 But to make full conclusion we need to take into account the mixed
-term: \partial^{2}f/\partial y \partial{x}
+term: \partial^{2}f/\partial y \partial x
+
+H = f_{xx}(x_{0},y_{0})f_{yy}(x_{0}, y_{0}) - f_{xy}(x_{0}, y_{0})^{2}
+
+if H < 0, then (x_{0}, y_{0}) is a saddle point
+
+if H > 0, then  (x_{0}, y_{0}) is either a maximum or a minimum point and:
+
+    if f_{xx}(x_{0},y_{0}) < 0, (x_{0},y_{0}) is a local maximum
+
+    if f_{xx}(x_{0},y_{0}) > 0, (x_{0},y_{0}) is a local minimum
+
+    (you can use f_{yy}(x_{0},y_{0} instead)
+
+if H = 0, we do not have enough information to tell
+
+Loose intuition:
+
+[[./img/second_derivative_intuition.jpg]]
+
 
 
 * Pre Calculus
