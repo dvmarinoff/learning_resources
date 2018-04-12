@@ -9,12 +9,12 @@ une fille [унъ fil]  - a girl
 une, un - a
 le, la, l' - the
 
-Je suis un garson [ж суи ън гарсон]
-Je suis une famme [ж суи унъ фам]
-Je suis rouge     [ж суи ружъ]
-Je suis riche     [ж суи риш]
-Je suis un enfant [ж суиън ънфо]
-Je suis un homme calmе [ж суиъ ном кал м]
+Je suis un garson [жъ суи ън гарсон]
+Je suis une famme [жъ суи унъ фам]
+Je suis rouge     [жъ суи ружъ]
+Je suis riche     [жъ суи риш]
+Je suis un enfant [жъ суиън ънфо]
+Je suis un homme calmе [жъ суиъ ном кал м]
 
 La pomme est rouge [ля пом е руж]
 Tu es un garson    [тю ис а гарсо]
@@ -44,7 +44,7 @@ Vous etes une femme [вузет ? ун фам]
 
 J'ecris [ж кри]    - I am writing
 J'ecris une lettre [ж кри ун летр]
-J'aime les hommes calmes [жем лизом калм]
+J'aime les hommes calmes [жем лезом калм]
 
 la pomme   [ля пом]   - the apple
 l'homme    [льо м]    - the man
@@ -76,3 +76,92 @@ la lettre  [ля летр]  - the letter
 Un livre   [а ливр]   - the book
 ecris      [екри]     - write/writing
 
+* Pronanciation tips
+
+Je     [жъ]  - I
+J'ai   [же]  - I have
+J'aime [жем] - I like
+
+* Grammar
+
+** Tenses
+
+
+
+* News
+
+les Etats-Unis [ле зета зюни] - The United States
+election presidentielle [ун елексион президонсиел] - presidential election
+elire [елие] - to elect
+elu [елю] - elected
+remporter [ром пор те] - to win (can't stand alone as a phrase)
+grand electeur [гронт електор] - elector, electoral collage
+la Maison Blanche [ля мезон бланш] - The White House
+
+
+le peuple american [лъо поп американ] - the american people
+Je le felicite [жо ля филисит ] - I congratulate
+
+
+J'ai une pensee pour Hillary Clinton avec laquelle j'ai eu a travailler durant
+la presidence Obama. 
+
+Cette election americaine ouvre une periode d'incertitude.
+Je dois l'aborder avec lucidite et clarte.
+Les Etats-Unis constituent un partenair de tout premier pian pour la France.
+Et ce qui est jeu, c'est la paix, c'est le lutte contre le terrorisme, c'est la
+situation au Moyen-Orient, ce sont les relations economiques et c'est la
+preservation de la planete.
+
+Sur tous ces sujets j'engagerai sans tarder une discussion avec la nouvelle
+administration americaine
+
+* Phrase book
+
+Comment vous appelez-vous [комо'н ву запале ву] -What is your name?
+Je m'appelle [жъ ма пел] - My name is
+Enchante [О шон те] - Enchanted, Nice to meet you
+Enchante Madame/Mossue
+J'ai passe un bon moment [же пасе ъ'н бо момо]
+
+
+Allons-y! [ало'н зи] - Let's go!
+Qu'est-ce que c'est? [кес кю се] - What is this?
+C'est un arbe. [сет ун арб'р] - This is a tree.
+C'est une voiture. [сет унъ воатюр] - This is a car.
+
+Qu'est que je vois? [кес кю жъ воа] - What do I see?
+Je vois un arbre. [жъ воа ун арбр] - I see a tree.
+
+Je vois un velo. [жъ воа ън велю] - I see a bike.
+C'est un tres beau velo. [сет ън тре бо велю] - It's a very beautiful bike.
+
+
+C'est normal, quoi. [се нормал куа] - This is quite normal. (quoi is used for emphasis)
+C'etait genre trop bien. [се те жанр троп бя] - It was, like, amazing.
+se casser [се касе] - to go separate ways, to split up
+On se casse? [он се кас] - Let's get out of here.
+casse-toi [кас тоа] - get lost
+final [финалмо] - finaly
+
+
+A quoi tu penses? [а куа тю понс] - What are you thinking about?
+Qu'est-ce que tu penses de ce film? [кес кю те понс десе филм]
+
+Salut [салю] - Hi
+Salut. Comment ca va? [салю комон'т сава] - Hey. How you doin?
+Salut, a la prochaine. [салю а ля прошен] - Bye, see you next time.
+Bonsoir [бонсоа]
+Bonsoir tout te monde! [бонсоа тю люмонд] - Good evening everyone!
+S'il vous plait. [сил ву пле] - Please.
+D'accord [дако] - ok
+Exusez-moi. [екскюзе моа] - Excuse me.
+Merci. [мерси] - Thank you.
+Merci beaucoup. [мерси боку] - Thanks a lot.
+De rien. [до рия] - You are welcome.
+Merci. De rien.
+
+Bonjour. Je m'appelle _. Enchante(e). Comment ca va?
+
+A bientot. [а бия 'н ту] - see you soon.
+Je suis desole(e). [жъ суи дезоле] - ups I am sorry.
