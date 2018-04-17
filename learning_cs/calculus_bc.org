@@ -2350,4 +2350,12 @@ x^{(3/4)}   = x^{(1/4)}^{3}
 
 ** Properties of logarithms
 
-ln a/b = ln a - ln b
+| Name              | Rule                                  |
+|-------------------+---------------------------------------|
+| The product rule  | log_{b}(MN) = log_{b}(M) + log_{b}(N) |
+| The quotient rule | log_{b}(M/N) = log_{b}(M) - log_b(N)  |
+| The power rule    | log_{b}(M^{p}) = p log_{b}(M)         |
+
+Change of base:
+
+log_{b}(a) = log_{x}(a) / log_{x}(b)
