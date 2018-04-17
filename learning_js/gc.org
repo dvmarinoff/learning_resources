@@ -1,0 +1,69 @@
+* The Model of Computation (JS)
+
+
+* Memory
+
+
+
+* The GC
+
+Definition:
+
+Automatic "freeing" of unused memory without the need for
+"explicit intervention" on the side of the developer.
+
+- PRO: allocation is faster then malloc()
+- CON: long pauses (even over a minute) are possible
+
+Terminology:
+
+cells/objects - managable memory
+heap          - memory for random order object allocation
+mutator       - the program
+root          - stack and register
+pointer       - from one object to another
+live set      - memory accesible from the roots
+garbidge      - unaccesible memory
+
+
+** Comparison
+
+*** Reference Counting
+
+- PRO: garbidge is reclaimed immediatly.
+- PRO: garbidge collection pauses are similar, minimal if you can defer
+updating the "free space" data structure.
+
+- CON: reference counts need to be adjusted on most pointer write operation.
+- CON: free space is never compacted.
+- CON: because free space is not compacted, a "free space" data structure
+must be maintained which increases allocation and deallocation costs.
+- CON: cyclic garbidge is not collected, unless the application breaks the
+cycle by hand.
+- CON: updating reference counts in a multi-threaded app is extra expensive.
+
+*** Mark-and-Sweep
+
+- PRO: no pointer write overhead
+- PRO: cyclic data is collected
+- PRO: storage management concurency bottlenecks can ne avoided(apart from GC)
+
+- CON: stop-the-world garbidge collection
+- CON: free space is never compacted
+- CON: because free space is not compacted, a "free space" data structure
+must be maintained which increases allocation and deallocation costs.
+
+*** Mark-Sweep-Compact
+
+- PRO: no pointer write overhead
+- PRO: cyclic data is collected
+- PRO: storage management concurrence bottlenecks can be easily avoided (apart
+  from GC)
+- PRO: free space is compacted so allocation is cheap
+
+- CON: stop-the-world garbidge collection
+- CON: the compact phase is rather expensive
+
+*** Generative, Compact
+
+** GC in JS
