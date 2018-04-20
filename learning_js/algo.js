@@ -66,8 +66,8 @@ var searching = (function () {
     const middle = (start, end) => {
         return Math.floor(((end - start) / 2) + start);
     }
-    //  binarySearch :: Int, Int, Int, [Int] -> Int
-    var binarySearch = function (x, start, end, arr) {
+    //    binarySearch :: Int, Int, Int, [Int] -> Int
+    const binarySearch = function (x, start, end, arr) {
         let m = middle(start, end);
         // console.log(x, m, start, end, arr); // uncomment to log steps
         if(x == arr[m]) {

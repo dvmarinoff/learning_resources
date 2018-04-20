@@ -1,11 +1,4 @@
-* The Model of Computation (JS)
-
-
-* Memory
-
-
-
-* The GC
+* Garbidge Collectors (GCs)
 
 Definition:
 
@@ -24,6 +17,145 @@ root          - stack and register
 pointer       - from one object to another
 live set      - memory accesible from the roots
 garbidge      - unaccesible memory
+
+
+Use cases that need GC:
+
+- Example:
+
+#+BEGIN_SRC ruby
+
+i = 0
+while i < N:
+    i += 1
+    doSomething(i)
+
+#+END_SRC
+
+- dynamic allocation
+
+- defragmentation of memory
+
+GCs are very hard to compare:
+- It depends on the language, the application, etc.
+- Asympthotic doesn't work, because constants are very important $ c n log(n) $
+- CPU cache (and virtual memory somethimes) is also very important.
+
+** GC Algorithms:
+
+*** Reference Coiunting
+
+Every object has a counter (which is int),adding pointer increments the
+counter, removing a pointer decrements the counter. When counter reaches 0
+we release the object from memory.
+
+CONS:
+- Sounds simple, but cycles are a problem that leads to memory leaks.
+- Weak-refs, various algorithms exists, but none works in all cases.
+- It has a trade-off between pauses and determinism when releasing big objects.
+
+*** Mark and Sweep
+
+When memory is over, it loops over the roots and recursively marks evething it
+can reach (true bit). When it is done it scans linearly the whole memory
+(objects are oreder in the heap) and deallocates everthing that is unreachable (false bit).
+
+CONS:
+- It gathers the cycles, its economic on Memory and CPU,
+- but has big pauses,
+- nondeterministick, (we don't know when the memory will be released)
+- cache misses, (it has to jump randomly in memory)
+- needs more memory than reference counting, (needs ~30% free space)
+- linear to heap, (it takes linear time to scan big heap memory 16GB will make it
+slow)
+
+*** Mark and Compact
+
+Very similar, it marks everthing, moves objects to the holes we have from
+marking and we update the pointers.
+
+Active Memory and Forwardind Addredsses
+
+Cheap allocation, defragments memory
+
+CONS:
+- lenear to heap size
+- copy is slow
+- pointers are not entirly free and need special management
+
+*** Copy
+
+Divides the Heap in two parts, allocates in one of the halfs and when it is
+full it allocates everthing that is reachable to the other half and deallocates
+the first half.
+
+Cheap allocation, defragmentation of memory, linear to just the live objects
+not the whole Heap.
+
+CONS:
+- 50% space, makes it very expensive to memory
+- coping objects is slow
+
+** Classification
+
+- Stop the world vs. Incremental vs. Parallel vs. Concurrent
+
+Only Concurrent GC does not stop the program, but it is very hard to implement,
+because while the GC is marking objects, the mutator(the program) may be
+changing things much faster than the the GC. GCs are rarly entirly concurrent,
+but mostly concurrent with small pauses.
+
+- Conservative vs. Precise
+
+
+- Generational GCs
+
+Weak generational hypothesis: Most objects die young.
+
+It divides the Heap to young and old objects, and periodically
+collects only the young(minor sweep) objects. And on larger periods
+it makes a major cycle where it collects the old objects.
+
+Write barrier caches pointers from old to young objects to prevent them
+from being collected. All old to young pointers go in a remembered set,
+which is used as a root on the next minor collection (cycle).
+
+** Languages
+
+- perl: reference counting, no cycle detection
+
+- php: referene counting, full cycle detection
+
+- python: reference counting, Almost full cycle detection, uses some
+  generations, finalizers are a big problem (__del__)
+
+- ruby: Mark and Sweep, incremental, conservative
+
+- java: it has 4 of them just for the HotSpot implemenation
+    - Serial GC: Stop the world copy for young deneration, and Stop the world
+      mark/compact for old generation.
+    
+    - Parallel GC: Same but parallel.
+    
+    - ConcMarkSweep GC: Stop the world copy for young generation, mostly
+      concurrent, non-compacting mark-sweep for old generation, fallback
+      to stop the world compacting full collection
+
+    - G1 GC: the newest one(2013). Stop the world copy for young generation,
+    Mostly concurrent marking old generation, stop the world mostly incremental
+    compacting for old generation, fallback to stop the world compaction
+
+- c/c++: Boehm-Demers GC
+
+- ruby 2.0 and 2.1: copy-on-write friendly, generational gc, but the c++ macros
+    RARRAY_PTR() is a problem and it must be removed, but that will break most
+    c native extansions. Shady and sunny objects for the solution, each time
+    the problematic RARRAY_PTR() is called it now has to intead mark the object
+    as shady (no longer garantees the write barrier for that object it no
+    longer can o into an old generation).
+
+- javascript: ?
+
 
 
 ** Comparison
@@ -64,6 +196,6 @@ must be maintained which increases allocation and deallocation costs.
 - CON: stop-the-world garbidge collection
 - CON: the compact phase is rather expensive
 
-*** Generative, Compact
 
-** GC in JS
+* The Model of Computation (JS)
+
