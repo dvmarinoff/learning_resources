@@ -670,6 +670,121 @@ This notion that the universe exists independent of the mind of the observer
 is called realism in physics.
 
 
+** NOTES
+
+*** Physics of Life
+
+To understand life we need to understand Entropy. The universe tends toward
+disorder, decay and equilibrium. A hot cup of coffe will tend towards the same
+temperature as the room, and the hot, dense of our universe must expand.
+Starts always burn out, black holes eveporate. The particles that make up any
+system all have some degree of random motion. That random motion tends to drive
+the system towards the most common arrangement of particles. Such a random
+disordered unspecial arrangement is a high entropy state. Interesting
+arrangenments like thermal energy being concentrated in your cup of coffe or
+all the matter in the observable universe being crunched into an infiniteky
+dense point are low entropy. They are highly specific configurations that
+almost never happen by chance. So entropy is sort of a measure of the
+boringness of a system, the commonness of the arrangement of particles.
+The second law of thermodynamics tells us that a closed system will only
+increase in entopy. The universe will only get more boring. But there is one
+type of system that seems to resist the second law of thermodynamics and
+maintain low entropy. That system is life. Life has a very low internal entropy
+because its structure is extremely specific and non-random. The molecular
+machinery of even a single cell defies belief. Not only is life stunningly
+complex, but that complexity increases over extremly long time scales, in fact
+over eons. Naively, this presentation and increase in order appears to
+contradict the second law of thermodynamics entropy appears to either stay
+constant or decrease. The Earth's biosphere, at least, becomes less boring
+over time. But there is no violation of the second law. It tells us that
+'closed' systems must increase in entropy. So a system's unable to exchange
+energy with the outside environment. But living organisms and indeed the
+Earth's biosphere are not closed. Both receive energy from outside.
+Ultimetly, that source of energy is the sun. Its light warms the atmosphere
+in the oceans and powers photosynthesis at the bottom of the foos chain,
+driving a complex chain of nutrient synthesis that ends with whatever you had
+for dinner last night. On the other hand the system  of the Earth plus the Sun
+is encreasing in entropy. Life acts to reduce its own internal entropy by
+increasing the entropy of its surroundings. This was first pointed out by
+Ludwig Boltzmann, who described life as a struggle for entropy, more accuratly
+agains entropy, or for negative entropy. Erwin Schrodingen, in his 1944 book
+"What is Life", describes life as a process feeding on negative entropy.
+Life absorbs order and it ejects disorder into its surroundings. The type of
+order that life feeds on can be thougth of as free energy. By free energy, we
+understand special out-of-equilibrium energy sources like a cuo of coffee or
+the sun. Another way to say this is that life feeds on energy gradients.
+When two systems with very different energy densities come into contact,
+energy must flow. Life feeds on that flow. In fact the importance of energy
+gradients to life can help us understand the actual origin of life and its
+precursors. The origin of life on Earth isn't known. We think it started
+with a  self-replicating molecule similar to RNA. Following that synthesis,
+evolution took hold, and the first protocell and then first true living cell
+pulled itself together. LUCA the last universal common ancestor. But where on
+Earth that happened. Perhaps it was in tidal pools or around deep sea
+hydrothermal vents or even on the undersurface of Earth's ice caps. These
+environments share a critical property. Thay sit at persistent energy
+gradients. The water of tidal pools is both cooled by the Earth and the ocean
+and warmed by the sun. Around deep see vents, the searing gases from Earth's
+hot interior meet the frigit water of the ocean depths. Beneath the thick ice
+caps, there is the transition between the solid and liquid phases of water.
+These are places struggling to return to equilibrium. These systems are doing
+their best to obey the second law of thermodynamics by redistributing their
+energy as evenly and randomly as they can. Heat energy fows from hot to cold,
+seeking a uniform temperature, but energy is also dispersed into every form it
+can take consistent with the laws of physiscs. Some of that energy gets
+distributed into chemical bonds as simple molecules form via every chemical
+reaction that's possible given the available raw materials. As those molecules
+form, new channels open up for distributing energy into the chemical bonds
+of increasingly complex molecules. Normally, this local rise in complexity
+would all cease when the system reaches thermal equilibrium, energy is
+perfectly evenly distributed and new molecules break apart exactly as often as
+they are formed. But when our energy source is flowing into a much larger
+reservoir, why, the oceans, for example then equilibrium is never reavhed.
+Complexity can increase indefinitly as a byproduct of the system striving to
+redistribute the endless gradient in energy. And at some point, natural
+selection takes over. Molecules self-catalyze. They help drive the very
+reactions that create more of the same. Molecules better at that process become
+more abundant, and at some point, they become true self-replicators and
+eventually, they become life. But even life and self-replication might be a
+very natural part of the same thermodynamic drive to dissipate energy.
+If you think about it, living things are incredible heat dissipation,
+entropy-maximizing machenes. The most random possible form for energy
+is thermal radiation, and the lower the energy of its component photons,
+the higher the entropy.
+
+A plant absorbs the concentrated ultraviolet light from the sun and reprocesses
+it into a much higher entropy infrared heat glow. Animals consume high-energy
+density packats of matter called food and convert it to lower energy density
+waste as well as that same infrared heat glow. Life is great at dissipating
+energy, and more generally, it may be that self-replicating systems are the
+best possible energy dissipators of all. This is a new idea proposes by MIT
+biophysicist Jeremy England ("Statistical Physics of Self-Replication"), who
+puts the thermodynamics of life on more solid theoretical grounds. He's
+demonstrated mathematically that self-replicating molecules and simple-cell
+life are extreamly good at shredding heat in the act of reproduction.
+Self-replication randomizes the environment, even if each new replicator is
+highly ordered. And it is not just life that does this. Consider a perfectly
+streamlined or laminar flow of some fluid. This organized flow is disrupted
+by introducing turbulence. The laminar flow has a lower entropy than the
+turbulent flow because there are fewer ways to rearrange the particles in the
+former while preserving its global properties. The transition from laminar to
+turbulent, while the global structure is disrupted, substructure develops.
+Waves and vortices have their own complex and regular structures, but they
+ultimately serve to dissipate the flow. Any given eddy taken separately has a
+lower internal entropy than its chaotic surroundings, but the source of that
+local incidence of low entropy is the streamline flow that it formed in.
+And those turbulant eddies ultimately serve to increase the entropy of the
+greater flow. So diven a much larer source of order, the global process of
+dissipation of that order results in eddied of low entropy. Life appears to be
+just such an eddy. In the case of life, the original source of extreame low
+entropy is the Big Bang itself. In the process of redistributing energy into
+the most random possible state, little eddies of order, like galaxies, starts,
+planets, and life naturally arise. These blips in order are actually serving
+the second law helping the universe disperse its early extreame low entropy
+state. So everyone is a little eddy of roder, a momentary fluctuation of
+interesting but ultimately, in service of the spread of disorder and dullness,
+an agent in the inexorable trend to maximaze the entropy of space-time.
+
 
 
 * EE from khanacademy
