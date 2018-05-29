@@ -6,14 +6,14 @@ var sorting = (function () {
         arr[y] = arr[x];
         arr[x] = b;
         return arr;
-    }
+    };
     //    insert :: Int, [Int] -> [Int]
     const insert = (i, arr) => {
         if( arr[i] > arr[i+1] ) {
             return insert(i-1 , swap(i, i+1, arr));
         }
         return arr;
-    }
+    };
     //    insertionSort :: Int, Int, [Int] -> [Int]
     const insertionSort = (i, len, arr) => {
         console.log(arr); // uncomment to log sorting steps
@@ -65,7 +65,7 @@ var searching = (function () {
     //    middle :: Int, Int -> Int
     const middle = (start, end) => {
         return Math.floor(((end - start) / 2) + start);
-    }
+    };
     //    binarySearch :: Int, Int, Int, [Int] -> Int
     const binarySearch = function (x, start, end, arr) {
         let m = middle(start, end);
@@ -85,7 +85,7 @@ var searching = (function () {
 
     return {
         binarySearch: binarySearch
-    }
+    };
 }());
 
 ;(function () {
@@ -106,27 +106,27 @@ var searching = (function () {
 var digitOperations = (function () {
     'use strict';
     // Big Integer with arithmetic on digits in array
-    const add = (x, y) => x => y => x + y
-    const inc = add(1)
-    const sum = (acc, x) => acc + x
-    const product = (acc, x) => acc * x
-    const absDiff = (x, y) => Math.abs(x - y)
+    const add = (x, y) => x => y => x + y;
+    const inc = add(1);
+    const sum = (acc, x) => acc + x;
+    const product = (acc, x) => acc * x;
+    const absDiff = (x, y) => Math.abs(x - y);
 
-    const pos = x => x > 0
-    const neg = x => x < 0
-    const zero = x => x === 0
+    const pos = x => x > 0;
+    const neg = x => x < 0;
+    const zero = x => x === 0;
     const ifEl = (predicate, onTrue, onFalse) => predicate ? onTrue : onFalse;
 
     var toFixedFraction = (x, y) => {
         if(y < 21) return (x / y).toFixed(y);
         return (x / y).toFixed(20) + ( [...Array(y - 20)].reduce( (acc, _) => acc + '0', 0) );
-    }
+    };
 
-    var range = N => [...Array(N)].map(Number.call, Number)
-    var range1 = N => Array(N).fill().map( (e, i) => i + 1 )
+    var range = N => [...Array(N)].map(Number.call, Number);
+    var range1 = N => Array(N).fill().map( (e, i) => i + 1 );
     var range2 = N => Array.from({ length: N }, (v, k) => k + 1 );
-    var rangeRand = N => [...Array(N)].map(Number.call, Math.random)
-    var randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
+    var rangeRand = N => [...Array(N)].map(Number.call, Math.random);
+    var randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 
 //     function getRandomIntInclusive(min, max) {
@@ -145,18 +145,18 @@ var digitOperations = (function () {
     var sumDigits = (x=0, y=0, carry=0) => {
         let sum = x + y + carry;
         return Result(sum);
-    }
+    };
     //  subDigits :: Int, Int, Int, -> Result
     var subDigits = (x=0, y=0, carry=0) => {
         let sub = x - y - carry;
         return Resulf(sub);
-    }
+    };
 
     //  productDigits :: Int, Int, Int -> Result
     var productDigits = (x=1, y=1, carry=0) => {
         let product = (x * y) + carry;
         return Result(product);
-    }
+    };
 
     var sumIntArrays = (x=[0], y=[0], c=0, i=0, acc=[]) => {
         if(i === x.length) {

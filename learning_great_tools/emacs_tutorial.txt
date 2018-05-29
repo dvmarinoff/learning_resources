@@ -190,3 +190,22 @@ to fix fonts for Ubuntu 16.10:
 
 git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git ~/.fonts/adobe-fonts/source-code-pro
 fc-cache -f -v ~/.fonts/adobe-fonts/source-code-pro
+
+SPC 1 - switch to window 1
+SPC 2 - switch to window 2
+SPC TAB - switch to the previous buffer in that window
+
+SPC w d - kill a window
+
+SPC f f - open files menu
+    C-h - up a folder
+    C-l - open a folder
+    C-j - up
+    C-k - down
+
+SPC s s - search in a file
+
+SPC f f <type file path and name> - to create a new file
+
+M-/ - cycle snippet completions
+    

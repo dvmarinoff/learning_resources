@@ -1,0 +1,163 @@
+** Sorting (Insertion Sort, Merge Sort)
+
+*** Why?
+
+Many problems like searching become easy when items are sorted.
+
+- Finding a medien for example:
+
+unsorted array A[0:n] -> sorted array B[0:n]
+
+B[n/2] = medien
+
+- Binary Search:
+
+if A[0:n] is sorted we are lookig for specific item k in log time
+
+The simplest paradigm for Divide and Conquer
+
+- Data compression:
+
+sort items and automatically find the duplicates to eliminate
+
+- Computer Graphics
+
+You want to render front to back, so you need items sorted
+Sometimes (to account for transperancy) you need it sorted back to front
+
+*** Insertion Sort
+
+For i = 1, 2, \dots, n
+insert A[i] into sorted array A[0:i-1]
+by pairwise swaps down to the correct possition
+
+[5,2,4,6,1,3] -> [2,5,4,6,1,3] -> [2,4,5,6,1,3] -> [2,4,5,6,1,3]
+-> [1,2,4,5,6,3] -> [1,2,3,4,5,6]
+
+5 is first so it is sorted, we start from 2 where is the key.
+The key moves left to rigth and swaps.
+
+\Theta (n) steps (key positions)
+Each step is \Theta (n) compares and swaps
+But if you are comparing entities and not numbers, the swap function migth
+be more complex and require more steps.
+
+In case Compares are more expensive than Swaps we have:
+\Theta (n^2) compares cost
+
+If we replace pairwise swaps with binary search we get \Theat (n log n)
+
+*** Merge Sort
+
+Divide and Conquer, recursive algorithm
+
+A -> split to -> L and R -> sort -> L' and R' -> merge -> to sorted A'
+
+[[./img/6006/merge_sort.jpg]]
+
+size n -> 2 unsorted size n/2 -> 2 sorted size n/2 -> size n
+
+
+Merge: assumes two sorted arrays as input
+
+L' = [20,13,7,2] and R' = [12,11,9,1]
+
+Think of it as a two finger algorithm:
+Start at one end and compare 2 elements from L' and R'
+Move the smallest to the sorted array. Repeat.
+
+>> compare 1 and 2
+>> move 1 to sorted array
+>> compare 2 and 9
+>> move 2 to sorted array
+>> compare 7 and 9
+>> move 7 to sorted array
+>> \dots
+
+[[./img/6006/merge_routine.jpg]]
+
+The merge routine does most of the job and is \Theta (n)
+The overall complexity of the algorithm is \Theta (n log n)
+
+Thm.: Merge sort is \Theta (n log n)
+
+Proof: 
+
+By looking at the merge routine we can construct a recurrence that looks
+like this.
+Complexity: T(n) = C_{1} + 2T(n/2) + C * n,
+
+where C_{1} is the divide step, 2T(n/2) is the recursive part, and C*n is
+the merge part 
+
+C*n -> C*n/2 C*n/2 -> C*n/4 C*n/4 C*n/4 C*n/4 -> \dots -> C \dots C
+
+the number of levels is 1+log(n), the number of leaves is n
+and you're doing the same amount of work C*n at each level:
+
+T(n) = C*n * (1 + log(n)) = \Theta (n * log n)
+
+[[./img/6006/merge_sort_complexity.jpg]]
+
+Merge sort needs \Theta (n) auxilary space for (L,R) and (L',R'),
+Insertion sort (in place sort) needs \Theta (1) auxilary space
+Consider this if you need to sort like billion of items.
+There is an advanced in place merge sort algorithm, but is inpractical
+with its worse running time.
+
+In python:
+
+Merge sort is: 2.2 * n * log(n) ms
+Insertion sort is: 0.2 * n^{2} ms 
+
+In C:
+Insertion Sort is: 0.01 * n^{2} ms  
+
+
+*** Recurrencies
+
+T(n) = 2T(n/2) + C*n^{2}
+
+C*n^{2} -> C*n^{2}/4 + C*n^{2}/4 
+-> C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16
+
+1+log(n) levels, n leaves,
+
+work at leval 1: C*n^{2}
+work at leval 2: C*n^{2}/2
+work at leval 3: C*n^{2}/4
+\dots
+work at leval 1+log(n): C*n
+
+top level C*n^{2} dominates, complexity is \Theta (n^{2})
+
+T(n) = 2T(n/2) + \Theta (1) or C
+
+C -> C + C -> C + C + C + C -> \dots -> n * C
+
+work at leval 1: C
+work at leval 2: 2C
+work at leval 3: 4C
+\dots
+work at leval 1+log(n): nC
+
+the bottom level n * C dominates, complexity is \Theta (n)
+
+** Heaps and Heap Sort
+
+Heap as example implementaion of priority queue, and base for sorting algorithm
+known as Heap Sort.
+
+*** Priority Queue
+
+Implements a set S of elements, each of elements associated with a key.
+Operations: pick max or min, delete, insert, change
+
+insert(S, x)   : insert element x into set S
+
+max(S)         : return element of S with a largest key
+
+extract_max(S) : as max(s), but also removes it from S
+
+increase_key(S,x,k) : increase the value of x's key to k
+
