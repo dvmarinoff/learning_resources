@@ -65,5 +65,140 @@ $$ f(x) = \frac{1}{x^{2}} $$
 $$ f(P, Q) = [P \text{ IMPLIES } Q]  $$
 
 
-###
 
+
+## Number Theory
+
+study of the integers: 0, 1, 2, 3, ...
+It is widely used in cryptography (the study and practice of hiding numbers).
+
+# Graph Theory
+
+Def: A graph G is a pair of sets (V, E) where
+V is a nonempty set of items called vertices or nodes and
+E is a set of 2 item subsets of V called edges.
+
+graphs with no vertices are not allowed
+graphs with no edges are ok
+
+Def: two nodes $ x_{i}, x_{j} $ are adjacent if $ { x_{i}, x_{j} } \in E $
+(meaning they are connected by edge).
+
+Def: An edge $ e = { x_{i}, x_{j} } $ is incident to its end points $ x_{i},
+x_{j} $.
+
+Def: The number of edges incident to a node is called the degree of the node.
+
+deg(x_{5}) = 3
+
+Def: A graph is simple if it has no loops or multiple edges.
+Loop is an edge that connects a node only to itself.
+Multiedge is we have 2 edges that are the same, they connect the same
+endpoints.
+
+
+
+Case 1: Opposite gender partners
+74% Univercity of Chicago
+233% ABC News
+
+Nodes are men and women, edges are partners
+
+Men   | * * * *
+Women | * * * *
+
+V     ~ 300
+V_{m} ~ 147.5
+V_{w} ~ 152.4
+E     = ?
+
+Def:
+A_{m} = average number of opposite gender partners for men
+A_{w} = average number of opposite gender partners for women
+
+What is A_{m} / A_{w}?
+
+A_{m} = sum of the degrees divided by the number of nodes
+      = cardinality of the Edges over cardinality of the set of all men
+
+$ A_{m} = frac{\sum^{k \in V_{m}} deg(x)}{V_{m}} = \frac{\nmid E
+\nmid}{\nmid V_{m} \nmid} $
+
+$ \frac{A_{m}}{A_{w}} = \frac{ \frac{\nmid E \nmid}{ \nmid V_{m} \nmid }
+}{\frac{\nmid E \nmid}{ \nmid V_{w} \nmid }} = \frac{\nmid V_{m} \nmid}{\nmid
+V_{w} \nmid} = 1.0325 = 3.25% $
+
+
+
+Case 2: scheduling exams at mit and princeton
+
+Def: Graph Coloring Problem: Given a graph G and K colors assign color to each
+node so adjacent nodes get different colors.
+
+Def: The minimum number of colors that you need is called the chromatic  number
+of the graph. It's an NP-complete problem. Needs exponential time to check.
+
+Basic Graph Coloring Algorithm: for graph G (V, E)
+1. order the nodes from V_{1} to V_{n}
+2. order the colors from C_{1} to C_{m}
+3. process the nodes one at a time
+for i=1...n
+    Assign the lowest legal color to V_{i}
+
+Different orderings of the nodes results in different number of colors used.
+If you start from largest degrees you may use less colors.
+This is an exmple of Greedy Algorithm. You do the best you can at each step.
+
+Thm: If every node in a graph G has degree <= d, then
+Basic Graph coloring uses at most d + 1 colors for G.
+
+Proof: By Induction
+
+1. Induction hypothesis: P(n)
+
+2. Base case: n = 1 -> 0 edges, d = 0, 1 color = d + 1
+
+3. Inductive step:
+Assume P(n) i s true for the induction.
+Let G = (V,E) be any n + 1 node graph.
+Let d = max degree in G.
+
+Order the nodes V_{1}, V_{2}, \dots, V_{n}, V_{n + 1}
+
+# III. Counting
+
+## Sums and Asymptotics
+
+Summary:
+Collection of rules and methods for fincding closed form expresions for
+commonly-occuring sums and product and asymptotics which is used to express
+how a quantity such as running time grow with the size of input.
+
+$ 1 + 2 + 3 + \dots + n = \frac{n(n + 1)}{2} $
+
+The left-hand side expressed concisly is:
+
+$ \sum_{i=1}^{n} i $,
+
+but the right-hand size is not on;y concise, but also easier to evaluate.
+It reveals properties such as the growth rate of the sum. Such expressions are
+called closed forms.
+
+$ 1+x+x^{2}+x^{3} \dots + x^n = \frac{1 - x^{n+1}}{1 - x} $
+
+is another example with a geometric sum
+
+Methods for sums work with products, since any product can be converted into a
+sum by taking its logarithm.
+
+
+## Cardinality Rules
+
+Summary:
+the rules(theorems) for determining cardinality of sets and applications
+
+## Generating Functions
+
+# IV. Probability
+
+# V. Recurrences

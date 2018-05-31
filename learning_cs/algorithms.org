@@ -161,3 +161,36 @@ extract_max(S) : as max(s), but also removes it from S
 
 increase_key(S,x,k) : increase the value of x's key to k
 
+*** Heap
+ 
+An array visualized as a nearly complete binary tree.
+
+[16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
+
+10 elements is not 15, so it is not a full binary tree
+index 1 is the root of the tree, 2 and 3 are the children of 1
+
+- Heap as a tree:
+
+root of  tree: 1st element (i=1)
+
+parent(i) = i/2
+
+left(i) = 2i, right(i) = 2i + 1
+
+A Heap must keep the Heap property correct:
+- Max-Heap property: the key of a node is >= the key of its children
+- Min-Heap property: the key of a node is <= the key of its children
+
+Heap operations:
+
+build_max_heap : produces the max heap from an unordered array
+
+max_heapify(A, i) : correct a single violation of the heap property in
+                    a subtree' s root
+
+[[./img/6006/min_heap.jpg]]
+
+Given the asumption that the trees rooted at left(i) and right(i) are
+max-heaps the complexity of the max_heapify is bound by the heigth of
+the tree and the tree is nearly balanced binary tree => \Theta (\log n)
