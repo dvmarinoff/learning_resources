@@ -184,6 +184,23 @@ install which key for key binding tips
 C-j - expand abbreviation in emmet-mode
 M-x run-skewer
 
+;; MAGIT
+
+SPC g s - open ststus buffer
+
+;; in status buffer
+c c - open a commit message buffer
+b b - checkout branch
+b c - creae branch
+f f - fetch changes
+s   - on a file: stage file
+S   - stage all
+u   - on a staged file: unstage
+
+;; commit msg editing buffer
+, c - commit the changes
+
+
 ;; SPACEMACS
 
 to fix fonts for Ubuntu 16.10:
