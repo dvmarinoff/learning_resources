@@ -200,6 +200,7 @@ u   - on a staged file: unstage
 ;; commit msg editing buffer
 , c - commit the changes
 
+p u - to push to origin master
 
 ;; SPACEMACS
 
@@ -225,4 +226,4 @@ SPC s s - search in a file
 SPC f f <type file path and name> - to create a new file
 
 M-/ - cycle snippet completions
-    
+

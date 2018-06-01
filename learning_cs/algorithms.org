@@ -189,8 +189,9 @@ build_max_heap : produces the max heap from an unordered array
 max_heapify(A, i) : correct a single violation of the heap property in
                     a subtree' s root
 
-[[./img/6006/min_heap.jpg]]
 
 Given the asumption that the trees rooted at left(i) and right(i) are
 max-heaps the complexity of the max_heapify is bound by the heigth of
 the tree and the tree is nearly balanced binary tree => \Theta (\log n)
+
+[[./img/6006/min_heap.jpg]]
