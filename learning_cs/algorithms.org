@@ -274,7 +274,7 @@ Illustrated with a toy problem about runway scheduling.
 3. we want to reserve a request for landing with landing time t
 4. Add t to the set of R if no other landings are scheduled within k minutes
 
-We want the operations in: \O (log n) time, where R = n
+We want the operations in: O (log n) time, where R = n
 
 Example:
 
@@ -284,12 +284,12 @@ The problem: no convenient DS for the insert and search OPS
 
 | DS                  | insert    | check     | append          | sort            |
 |---------------------+-----------+-----------+-----------------+-----------------|
-| Sorted list         | \O(n)     | \O(1)     | \Theta(n log n) | \Theta(n log n) |
-| Sorted array        | \Theta(n) | \O(log n) |                 |                 |
-| Unsorted list/array |           | \O(n)     |                 |                 |
-| Min-Heap            | \O(log n) | \O(n)     |                 |                 |
-| Dict/Set            | \O(1)     | \Omega(n) |                 |                 |
-| BST                 | \O(h)     | \O(log n) |                 |                 |
+| Sorted list         | O(n)      | O(1)      | \Theta(n log n) | \Theta(n log n) |
+| Sorted array        | \Theta(n) | O(log n)  |                 |                 |
+| Unsorted list/array |           | O(n)      |                 |                 |
+| Min-Heap            | O(log n)  | O(n)      |                 |                 |
+| Dict/Set            | O(1)      | \Omega(n) |                 |                 |
+| BST                 | O(h)      | O(log n)  |                 |                 |
 
 **** Binary Search Tree:
 
@@ -299,22 +299,22 @@ right(x).
 
 What makes a tree a BST is the property that it satisfies the invariant:
 
-#+BEGIN
+#+BEGIN_SRC
 for any node x, for all nodes y in the left subtree of x, key(y) <= key(x)
 for all nodes y, in the right subtree of x key(y) >= key(x)
-#+END
+#+END_SRC
 
 [[./img/6006/binary_search_tree_insert.jpg]]
 
 But do we have a solution?
 
-insertion with check is \O (h) time, where h is the height of the tree
+insertion with check is O (h) time, where h is the height of the tree
 and h = n is possible
 
 Other operations:
 
-find_min() is \O (h)
-next_layer(x) is \O (h)
+find_min() is O (h)
+next_layer(x) is O (h)
 
 **** Augmented Binary Tree
 
