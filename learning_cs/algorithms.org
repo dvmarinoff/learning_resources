@@ -68,6 +68,7 @@ Think of it as a two finger algorithm:
 Start at one end and compare 2 elements from L' and R'
 Move the smallest to the sorted array. Repeat.
 
+#+BEGIN_SRC
 >> compare 1 and 2
 >> move 1 to sorted array
 >> compare 2 and 9
@@ -75,6 +76,7 @@ Move the smallest to the sorted array. Repeat.
 >> compare 7 and 9
 >> move 7 to sorted array
 >> \dots
+#+END_SRC
 
 [[./img/6006/merge_routine.jpg]]
 
@@ -118,10 +120,10 @@ Insertion Sort is: 0.01 * n^{2} ms
 
 *** Recurrencies
 
+#+BEGIN_SRC
 T(n) = 2T(n/2) + C*n^{2}
 
-C*n^{2} -> C*n^{2}/4 + C*n^{2}/4 
--> C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16
+C*n^{2} -> C*n^{2}/4 + C*n^{2}/4 -> C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16
 
 1+log(n) levels, n leaves,
 
@@ -142,6 +144,7 @@ work at leval 2: 2C
 work at leval 3: 4C
 \dots
 work at leval 1+log(n): nC
+#+END_SRC
 
 the bottom level n * C dominates, complexity is \Theta (n)
 
