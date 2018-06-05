@@ -227,3 +227,21 @@ SPC f f <type file path and name> - to create a new file
 
 M-/ - cycle snippet completions
 
+C-x C-t - transpose lines (switch lines)
+SPC x t c - transpose the current char with the previous one
+SPC x t w - transpose the current word with the previous one
+SPC x t l - transpose the current line with the previous one
+
+SPC x J - move line down
+SPC x K - move line up
+
+C-x z - repeat last command
+
+;; MULTIPLE CURSORS
+
+SPC s e - to enter iedit
+n, N - to cycle items
+
+;; Rectangles
+
+C-x r t - to edit selection (top-left to bottom-right) as a rectangle

@@ -6,13 +6,13 @@ Many problems like searching become easy when items are sorted.
 
 - Finding a medien for example:
 
-unsorted array A[0:n] -> sorted array B[0:n]
+unsorted array xs[0:n] -> sorted array B[0:n]
 
 B[n/2] = medien
 
 - Binary Search:
 
-if A[0:n] is sorted we are lookig for specific item k in log time
+if xs[0:n] is sorted we are lookig for specific item k in log time
 
 The simplest paradigm for Divide and Conquer
 
@@ -27,8 +27,10 @@ Sometimes (to account for transperancy) you need it sorted back to front
 
 *** Insertion Sort
 
+In place sorting algorithm, in \Theta (n log n)
+
 For i = 1, 2, \dots, n
-insert A[i] into sorted array A[0:i-1]
+insert xs[i] into sorted array xs[0:i-1]
 by pairwise swaps down to the correct possition
 
 [5,2,4,6,1,3] -> [2,5,4,6,1,3] -> [2,4,5,6,1,3] -> [2,4,5,6,1,3]
@@ -45,13 +47,13 @@ be more complex and require more steps.
 In case Compares are more expensive than Swaps we have:
 \Theta (n^2) compares cost
 
-If we replace pairwise swaps with binary search we get \Theat (n log n)
+If we replace pairwise swaps with binary search we get \Theta (n log n)
 
 *** Merge Sort
 
 Divide and Conquer, recursive algorithm
 
-A -> split to -> L and R -> sort -> L' and R' -> merge -> to sorted A'
+xs -> split to -> L and R -> sort -> L' and R' -> merge -> to sorted xs'
 
 [[./img/6006/merge_sort.jpg]]
 
@@ -163,7 +165,7 @@ increase_key(S,x,k) : increase the value of x's key to k
 
 *** Heap
  
-An array visualized as a nearly complete binary tree.
+xsn array visualized as a nearly complete binary tree.
 
 [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
 
@@ -176,9 +178,9 @@ root of  tree: 1st element (i=1)
 
 parent(i) = i/2
 
-left(i) = 2i, right(i) = 2i + 1
+get_left(i) = 2i, right(i) = 2i + 1
 
-A Heap must keep the Heap property correct:
+xs Heap must keep the Heap property correct:
 - Max-Heap property: the key of a node is >= the key of its children
 - Min-Heap property: the key of a node is <= the key of its children
 
@@ -186,12 +188,144 @@ Heap operations:
 
 build_max_heap : produces the max heap from an unordered array
 
-max_heapify(A, i) : correct a single violation of the heap property in
+max_heapify(xs, i) : correct a single violation of the heap property in
                     a subtree' s root
 
 
-Given the asumption that the trees rooted at left(i) and right(i) are
+Given the asumption that the trees rooted at get_left(i) and right(i) are
 max-heaps the complexity of the max_heapify is bound by the heigth of
 the tree and the tree is nearly balanced binary tree => \Theta (\log n)
 
+**** max_heapify pseudocode:
+
+#+BEGIN_SRC ruby
+
+def max_heapify (xs, i)
+  left = get_left(i)
+  right = get_right(i)
+
+  if left <= heap_size(xs) and xs[left] > xs[i]
+    largest = left
+  end
+
+  if right <= heap_size(xs) and xs[right] > xs[largest]
+    largest = right
+  end
+
+  unless largest == i
+    exchange(xs[i], xs[largest])
+    max_heapify(xs, largest)
+  end
+end
+#+END_SRC
+
+#+BEGIN_SRC ruby
+
+# build_max_heap :: [Int] -> [Int]
+def build_max_heap(xs)
+  middle = xs.size / 2
+  
+  middle.downto(1) do |i|
+    max_heapify(xs, i)
+  end
+end
+
+#+END_SRC
+
+**** Analysis:
+
+Total amount of work in the loop of max_heapify is the sum:
+
+n/4(1 c) + n/8(2 c) + n/16(3 c) + \dots + 1(log(n) c)
+
+Set n/4 = 2^{k} and simplify:
+
+c 2^{k}( 1/2^{0} + 2/2^{1} + 3/2^{2} + \dots + (k + 1)/2^{k} )
+
+bounded by a constant -> build_max_heap() is \Theta (n)
+
+*** Min-Heap
+
 [[./img/6006/min_heap.jpg]]
+
+*** Heap Sort
+
+turn unordered array into a max-heap and do extract max
+
+Sorting strategy:
+1. build Max Heap from unordered array
+2. find maximum element A[1]
+3. swap elements A[n] and A[1], now max element is at the end of the array
+4. discard node n from heap (by decrementing heap size number)
+5. new root may violate max heap property, but its children are max heaps.
+Run max_heapify to fix this
+6. go to step 2 unless heap is empty
+
+** Binary Search Trees, BST Sort 
+
+binary search is fundamental divide and conquer paradigm and there is a DS
+associated with it called binary search tree.
+
+Illustrated with a toy problem about runway scheduling.
+
+**** Runway reservation system:
+1. single runway airport
+2. build for reservations for future landings
+3. we want to reserve a request for landing with landing time t
+4. Add t to the set of R if no other landings are scheduled within k minutes
+
+We want the operations in: \O (log n) time, where R = n
+
+Example:
+
+[[./img/6006/runway_scheduling_example.jpg]]
+
+The problem: no convenient DS for the insert and search OPS
+
+| DS                  | insert    | check     | append          | sort            |
+|---------------------+-----------+-----------+-----------------+-----------------|
+| Sorted list         | \O(n)     | \O(1)     | \Theta(n log n) | \Theta(n log n) |
+| Sorted array        | \Theta(n) | \O(log n) |                 |                 |
+| Unsorted list/array |           | \O(n)     |                 |                 |
+| Min-Heap            | \O(log n) | \O(n)     |                 |                 |
+| Dict/Set            | \O(1)     | \Omega(n) |                 |                 |
+| BST                 | \O(h)     | \O(log n) |                 |                 |
+
+**** Binary Search Tree:
+
+unlike the heap which is just an array and we have to visualize it being a
+tree, the BST is an actual tree that has pointers - parent(x), left(x) and
+right(x).
+
+What makes a tree a BST is the property that it satisfies the invariant:
+
+#+BEGIN
+for any node x, for all nodes y in the left subtree of x, key(y) <= key(x)
+for all nodes y, in the right subtree of x key(y) >= key(x)
+#+END
+
+[[./img/6006/binary_search_tree_insert.jpg]]
+
+But do we have a solution?
+
+insertion with check is \O (h) time, where h is the height of the tree
+and h = n is possible
+
+Other operations:
+
+find_min() is \O (h)
+next_layer(x) is \O (h)
+
+**** Augmented Binary Tree
+
+Client changes its mind and now we have a new requirement:
+Be able to compute Rank(t) = how many planes are scheduled to land at times <=t
+
+What lands before t?
+1. Walk down the tree to find desired time
+2. Add in the nodes that are smaller
+3. Add in the subtrees size to the left
+
+
+** AVL Trees, AVL Sort
+
