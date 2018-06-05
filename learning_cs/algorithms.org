@@ -120,25 +120,26 @@ Insertion Sort is: 0.01 * n^{2} ms
 
 *** Recurrencies
 
-#+BEGIN_SRC
+
 T(n) = 2T(n/2) + C*n^{2}
 
-C*n^{2} -> C*n^{2}/4 + C*n^{2}/4 -> C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16
+$ C*n^{2} -> C*n^{2}/4 + C*n^{2}/4 -> C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16 $
 
 1+log(n) levels, n leaves,
-
+#+BEGIN_SRC
 work at leval 1: C*n^{2}
 work at leval 2: C*n^{2}/2
 work at leval 3: C*n^{2}/4
 \dots
 work at leval 1+log(n): C*n
+#+END_SRC
 
 top level C*n^{2} dominates, complexity is \Theta (n^{2})
 
 T(n) = 2T(n/2) + \Theta (1) or C
 
 C -> C + C -> C + C + C + C -> \dots -> n * C
-
+#+BEGIN_SRC
 work at leval 1: C
 work at leval 2: 2C
 work at leval 3: 4C
