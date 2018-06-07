@@ -554,5 +554,156 @@ take numbers out of buckets strating from bottom (1st number in array) ->
 
 7. remove the leading zeros
 
+** Haching I: Chaining
 
+*** Dictionary
 
+ADT maintaining a set of items, each with a key. Perhaps the most popular
+data structure is CS.
+
+- build into most languages
+- databases use tree search or hashing
+- compilers and interpreters(mostly old ones)
+- network routers, network server, virtual memory
+- substring search
+- string commonalities
+- cryptography
+
+OPS:
+
+- insert(item) - add item to set
+- delete(item) - remove item from set
+- search(key)  - return item with key if it exists
+
+We assume items have distinct keys.
+
+Balanced BSTs solve in O(\log n) time per op.
+Our goal is O(1) per operation.
+
+**** Direct Access Table
+
+Items stored in an array indexed by keys(random access)
+
+Problems:
+1. keys must be nonnegative Integers (or using two arrays, Integers),
+it is hard to associate something with an Integer
+2. large key range -> large space - e.g. one key of 2^{256} is not good,
+it is gigantic memory hog
+
+Solutions:
+
+Solution to 1 is prehashing:
+
+maps keys to nonnegative Integers
+
+- In theory, possible because keys are finite -> set of keys is countable
+- In Python: hash(object), where object is a number, string, tuple, etc. or
+object implementing \__hash__, maps the thing to an Integer
+- In theory, x = y -> hash(x) = hash(y)
+- Python applies some heuristics for practicality: for example,
+hash('\0B') = 64 = hash('\0\0C')
+- Object's key should not change while in table (else cannot find it anymore)
+- No mutable objects like lists 
+
+Solutions to 2 is hashing:
+
+We have a giant key space \U and if we store it in the direct access table,
+this will also be giant, so we want to map it using a hash function h down
+to some smaller set m the size of our hash table. Then there is a subset
+of \U with keys that are actualy stored in the dictionary. That set changes.
+The idea is that we would like m to be around n, m = \Theta(n), so will use
+linear space O(n).
+
+The problem is that in this case space m will be too small and there might
+be collisions.
+
+- Reduce universe \U of all keys(say, Integers) down to reasonable size m for table
+- idea: m ~ n = # keys stored in dictionary
+- hash function h: \U -> { 0, 1,..., m - 1 }
+- two keys k_{i}, k_{j} \in K collide if h(k_{i}) = h(k_{j})
+
+How do we deal with collisions?
+1. Chaining
+2. Open addressing
+
+*** Chaining   
+
+If you have colliding items, just store them in a linked list.
+
+- The search must go through the whole linked list T[h(key)]
+- Worst case: all n keys hash to same slot -> \Theta(n) per op
+In the case of hashing randomization helps to keep you well away from the
+worst case analysis.
+
+[[./img/6006/hashing_with_chaining.jpg]]  
+
+Expected cost of insert/delete/search is O(1 + \alpha)
+
+*** Simple Uniform Hashing
+
+An assumption (cheating): each key is equally likely to be hashed to any
+slot of table, independant of where other keys are hashed.
+
+let n = # keys stored in table,
+let m = # slots in table
+
+load factor \alpha = n/m = expected # keys per slot = expected length of a chain
+
+Performance:
+
+This implies that running time for search is \Theta(1 + \alpha), where the 1
+comes from appling the hash function and random access to the slot whereas
+the \alpha comes from searching the list. This is equal to O(1) if
+\alpha = O(1), i.e., m = \Omega(n)
+
+*** Hash Functions
+
+We cover 3 methods to achieve the above performance:
+
+**** Division Method:
+
+h(k) = k mod m, gives you a umber between 0 and m-1
+
+In most situation it is a bad choice.
+It can be practical when m is prime, but not too close to power of 2 or 10.
+But it is inconvenient to find a prime number, and division is slow.
+
+**** Multiplication Method:
+
+h(k) = [(a * k) mod 2^{w}] >> (w - r)
+
+, where >> means shift right
+, w is w bit machine from models of computations
+
+where a is random, k is w bits, and m = 2^{r}. This is practical when a is
+odd and 2^{w-1} < a < 2^{w} and a is not too close to 2^{w-1} or 2^{w}.
+
+Multiplication and bit extraction are faster than division.
+But in theory this method is also bad.
+
+**** Universal Hashing
+
+Now for the cool one.
+
+For example:
+
+h(k) = [(ak + b) mod p] mod m,
+
+where a and b are random \in {0,1,\dots,p-1}, and p is a large prime (> |\U|)  
+
+This implies that for worst case keys k_{1} != k_{2}
+the probability of 2 them colliding is 1/m:
+
+Pr_{a,b}{event X_{k_{1}k_{2}}} = Pr_{a,b}{h(k_{1}) = h(k_{2})} = 1/m
+
+This implies that:
+
+E_{a,b}[# collisions with k_{1}] = E[\sum_{k_{2}} X_{k_{1}k_{2}}]
+
+= \sum_{k_{2}} E[X_{k_{1}k_{2}}]
+
+= \sum_{k_{2}} Pr{ X_{k_{1}k_{2}} = 1}
+
+= n/m = \alpha
+
+** Hashing II: Table Doubling, Karp-Rabin
