@@ -123,7 +123,7 @@ Insertion Sort is: 0.01 * n^{2} ms
 
 T(n) = 2T(n/2) + C*n^{2}
 
-$ C*n^{2} -> C*n^{2}/4 + C*n^{2}/4 -> C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16 $
+C*n^{2} -> C*n^{2}/4 + C*n^{2}/4 -> C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16 + C*n^{2}/16
 
 1+log(n) levels, n leaves,
 #+BEGIN_SRC
@@ -322,7 +322,7 @@ next_layer(x) is O (h)
 
 **** Augmented Binary Tree
 
-Client changes its mind and now we have a new requirement:
+Client adds new requirement:
 Be able to compute Rank(t) = how many planes are scheduled to land at times <=t
 
 What lands before t?
@@ -332,4 +332,227 @@ What lands before t?
 
 
 ** AVL Trees, AVL Sort
+
+BSTs support insert, delete, min, max, next_larger, etc in O(h) time, where
+h = length of the longest path from root to leaf (down).
+In the worst case for BSTs h = n, and they are more like a list.
+A tree is balanced if h = O(log n)
+
+height of a node = length (# edges) of longest downward path to a leaf
+
+*** AVL trees (Adel'son-Vel'skii & Landis 1962)
+
+Using the formula we can store the heigths of the nodes for free:
+max(height(left_child), height(right_child)) + 1
+
+Our goal is to keep the heights small.
+
+nil childs are -1, so by the formula: max(-1,-1) + 1 = 0
+
+For every node, require heights of left and right children to differ by at
+most +-1 each node stores its height like subtree size or just diffrence 
+in heights.
+
+wosrt case is when the right subtree has height 1 more than the left for
+every node.
+
+N_{h} = min # nodes in an AVL
+
+N_{0(1)} = O(1)
+
+N_{h} = 1 + N_{h-1} + N_{h-2}, <=
+(The root = 1) + (right subtree = h - 1) + (left subtree = h - 2)
+
+looks a lot like fibonachi, just remove the 1
+
+=> N_{h} > F_{h} = \varphi^{h}/sqrt{5}
+
+> 1 + 2 * N_{h-2} > 2 * N_{h-2} = \Theta(2^{h/2})
+
+h < 2 \log_{2}(n) => \Theta(log n) 
+
+How do we maintain the property?
+
+AVL insert:
+1. Simple BST insert
+2. work your way up tree, restoring AVL property(and updating heights)
+
+Rotation: 
+
+Left rotate:
+
+[[./img/6006/avl_left_rotate.jpg]]
+
+Right rotate:
+
+[[./img/6006/avl_right_rotate.jpg]]
+
+
+*** AVL Sort
+
+very powerful way to sort in O(n log n)
+
+- insert n items - \Theta(n log n)
+- in-order traversal - \Theta(n)
+
+** Counting Sort, Radix Sort, Lower Bounds for Sorting and Searching
+
+We start with a Thm, a proof and a counter example. We argue that the lower
+bound for searching is \Omega(\log(n)) and for sorting is \Omega(n \log n),
+but we see that we can get away with just n for some special cases. 
+
+*** Claims:
+
+1. searching among n preprocessed items requires \Omega (log n) time:
+binary search, AVL tree search are optimal
+
+2. sorting n items requires \Omega(n log n):
+mergesort, heap sort, AVL sort are optimal
+
+*** Comparison Model
+
+A new model of computation useful for proving lower bounds.
+
+- Lets restrict the kind of operations to be only comparisons:
+( <, <=, >, >=, = ), only binary answer yes or no. 
+ 
+- All input items are black boxes, we don't know what they arei(ADTs).
+
+- Time cost is only the # comparisons
+
+**** Decision Tree
+
+If know that our algorithm is only comparing items we can draw all the
+possible things that an algorithm can do.
+Any comparison algorithm can be viewed/specified as a tree of all possible
+comparison outcomes and resulting output, for a particular n.
+
+Example: binary search for n = 3
+
+1. internal nodes = binary decisions
+2. leafs = algorithms is done(output)
+3. root-to-leaf path = algorithm execution
+4. path length (depth) = running time
+5. height of tree = worst-case running time
+
+Binary decision tree is more powerful than comparison model,
+and lower bounds extend to it
+
+[[./img/6006/decision_tree.jpg]]
+
+*** Lower Bounds
+    
+**** Searching lower bounds
+
+Thm:
+Given n preprocessed items, meaning we get sorting or structuring in a heap
+for free, to find a given item among them in comparison model requires
+\Omega(\log(n)) in worst case.
+
+Pf:
+Decision tree is binary and it must have >=n leaves, one for each answer.
+-> height >= \log(n)
+
+1. # leaves >= # possible answers >= n
+2. decision tree is binary
+3. -> height >= log \Theta(n) = log n \pm \Theta(1)
+
+**** Sorting lower bounds
+
+A[i] < A[j] -> Yes or No
+
+Decision tree is binary and # leaves is atleast the # of possible answers
+(answer may appear in several leaves) = n!
+
+-> height is >= \log(n!)
+
+Use Sterling formula or Sum to proove that it is n \log(n)
+
+1. leaf specifies answer as permutation: A[3] <= A[1] <= A[9] <= \dots 
+2. all n! are possible answers
+3. # leaves >= n!
+   
+4. in fact \log(n!) = n \log(n) - O(n) via Sterlings formula:
+
+-> height >= \log(n!)
+= \log(1 * 2 * \dots * (n - 1) * n)
+= \sum_{i=1}^{n} \log(i)
+>= \sum_{i=1}^{n/2} \log(i)
+>= \sum_{i=1}^{n/2} \log(n/2)
+= n/2 * \log(n) - n/2
+= \Omega(n \log n)
+
+n! ~ \sqrt{2 \pi n}(n/e)^{n} -> \log(n!) ~ n \log(n) - O(n)
+
+*** Linear-Time Sorting (special case for sorting Integers)
+
+Lets use the RAM model here. We can do more than only comparisons.
+
+\O(n \sqrt{\log \log n}) is the best algorithm here, but when n is small
+it is possible to do it in linear time.
+
+**** Counting Sort:
+
+[3,5,7,5,5,3,6]
+
+1. Count the items     
+
+[3, 3, 5, 5, 5, 6, 7]
+
+2. \dots
+
+Those kind of algorithms sort only Integers, but those Integers can carry
+other stuff with them.
+
+#+BEGIN_SRC 
+L = array of k empty lists
+
+for j in n
+  L[key(A[j])].append(A[j])
+
+output = []
+
+for i in k
+  output.extend(L[i])
+
+#+END_SRC
+
+**** Radix Sort: 
+
+For sorting numbers. Sorts the numbers from least to most significant digit.
+
+we need n buckets and k passes over the numbers,
+where k is the # digits of the bigest number.
+
+xs = [10, 15, 1, 60, 5, 100, 25, 60]
+
+1. find largest number -> 100
+2. count # digits in largest number -> 3
+3. right pad the rest of the numbers ->
+
+[010, 015, 001, 060, 005, 100, 025, 060]
+
+4. pass 1: sort by using the 1st digit only ->
+
+[010,060,100,050], [001], [], [],[],[015,005,025], [], [], [], []
+
+take numbers out of buckets strating from bottom (1st number in array) ->
+
+[010,060,100,050,001,015,005,025]
+
+5. pass 2: sort by using the 2st digit only ->
+
+[100,001,005], [010,015], [025], [], [],[050], [060], [], [], [] ->
+
+[100,001,005,010,015,025,050,060]
+
+6. pass 3: sort by using the 3st digit only ->
+
+[001,005,010,015,025,050,060], [100], [], [], [], [], [], [], [], [] ->
+
+[001,005,010,015,025,050,060,100]
+
+7. remove the leading zeros
+
+
 
