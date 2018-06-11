@@ -657,8 +657,10 @@ the \alpha comes from searching the list. This is equal to O(1) if
 \alpha = O(1), i.e., m = \Omega(n)
 
 *** Hash Functions
-
-We cover 3 methods to achieve the above performance:
+A good hash function satisfies the assumption of simple uniform hashing:
+each key is equally likely to hash to any  of the m slots, independantly
+of where any other key has hashed to. This is hard to check, because we
+rarely know the distibution from which the keys are drawn.
 
 **** Division Method:
 
@@ -707,3 +709,332 @@ E_{a,b}[# collisions with k_{1}] = E[\sum_{k_{2}} X_{k_{1}k_{2}}]
 = n/m = \alpha
 
 ** Hashing II: Table Doubling, Karp-Rabin
+
+How to choose m, so that it is \Theta(n), -> \alpha is \Theta(1)?
+
+Idea:
+Start small with a constant (power of 2 is ok) and grow (or shrink)
+as necessary. When m > n grow the table. You need to allocate the memory
+and rehash.
+
+Grow table: m -> m'
+- make table of size m'
+- build new hash h' function
+- rehash
+
+#+BEGIN ruby
+
+table.each { |item| table_prime.insert(item) }
+
+#+END_SRC
+
+For every item in the table you have to look at every slot, so you have to
+pay O(m) to visit every slot, O(n) to visit all those lists and m' to build
+the new table -> \Theta(n + m + m') -> \Theta(n)
+
+Rehashing:
+To grow or shrink, table hash function must change (m, r).
+-> must rebuild hash table from scratch
+-> \Theta(n + m) time = \Theta(n) if m = \Theta(n)
+
+*** Table Doubling
+
+How much to grow the table?
+
+m' = 2m, is ok,
+
+you have to think about the cost of insertion here, because every time you
+do this you add O(n) cost to the usual O(1) cost.
+
+If we grow too little, say each step cost is big:
+- m' = m + 1 ?
+-> rebuild every step
+-> n inserts cost \Theta(1 + 2 + \dots + n) = \Theta(n^{2})
+
+If we double m:
+- m'= m * 2? m = \Theta(n) still (r +=1 )
+-> rebuild at insertion 2^{i}
+-> n inserts cost \Theta(1 + 2 + 4 + 8 + \dots + n), where n is the next power of 2
+-> = \Theta(n)
+
+Now some inserts cost O(n), but all other inserts are O(1),
+so we say that insertion is O(1) "on average". From here comes the idea of
+amortization.
+
+*** Amortization
+
+Amortized Analisys:
+You spread out the higher cost so that it is cheap on average.
+
+- operation has amortized cost T(n) if k operations cost <= k * T(n)
+- "T(n) amortized" roughly means T(n) "on average", averaged over all ops.
+- e.g. inserting into a hash table takes O(1) amortized time.
+
+Deletion:
+
+What happens when we have to shrink the table?
+
+1. if m = n/2 then shrink to m/2
+
+The problem is that this will trigger a cycle of shrinking and growing.
+8 items + 1 -> you grow to 16, 9 - 1 -> you shrink to 8, and you pay O(n).
+
+2. if m = n/4 then shrink to m/2
+
+amortazied time is \Theta(1), and you maintaon the invariant n <= m <= 4n 
+
+Also O(1) expected as is.
+- space can get big with respect to n e.g. n x insert, n x delete
+- solution when n decreases to m/4, shrink to half the size
+-> O(1) amortized cost for both insert and delete
+
+Note: It is possible to get rid of the amortized and do it in wosrt case
+constant time. When the table is getting full, start building on the side
+a new table that is twicw the size and every time you insert into the main
+table you move 5 items to the new table(or big enough constant), so by the
+time the main is full you switch imidiatly to the new table.
+Useful in real-time sysytems.
+
+Back to hashing:
+
+maintain m = \Theta(n) -> \alpha = \Theta(1) -> support search in O(1)
+expected time (assuming simple uniform or universal hashing)
+
+Resizable Arrays:
+
+- same trick solves Python "list" (array)
+- -> list.append and list.pop are O(1) amortized
+
+*** Karp-Rabin Algorithm:
+
+**** Substring Matching:
+
+Lets first examine the problem of substring matching:
+Given 2 strings s and t, does s occur as a substring of t?
+(and if so, where and how many times)
+
+E.g. s = 6.006 and t = your entire INBOX ('grep' on UNIX) 
+
+Simple Algorithm:
+
+#+BEGIN_SRC 
+
+any(s == t[i:i + len(s)])
+    for i in (len(t) - len(s))
+
+#+END_SRC
+
+- O(|s|) time for each substring comparison
+-> O(|s| * (|t| - ||s)) time = O(|s| * |t|), potentialy quadratic
+
+If we use hashing we can get it down to linear time O(|s| + |t|).
+We are looking for rolling window of t always of size s, and each time we
+want to know is it the same as s, we check instead of the strings a hash
+function of the strings. The Universe of strings is big, but if we can hash
+it down to some reasonable size, something that fits in a word
+(models of computation), we can compare those 2 words, hash values are
+equal, whether there is a collision in the table. This will be O(1) per op.
+
+
+**** Rolling Hash ADT:
+
+We can try doing this with a rolling hash, but we need a DS for this.
+- Given a rolling hash value r we want op append(c) a character at the end
+of x,
+- and operation skip(c) to delete the first char of x (assuming it is c)
+- r() is op to give hash value of x = h(x)
+
+Karp-Rabin string matching algorithm:
+
+- compute hash function of s
+- compute hash function of first s chars of t
+- check if those hashes are equal,
+- if not add 1 char at the end, delete 1 char from the beginning
+
+#+BEGIN_SRC ruby
+
+rs # rolling hash of r
+rt # rolling hash of t
+
+s.each { |c| rs.append(c) }
+
+t.each { |c| rt.append(c) }
+
+if rs() == rt()
+  [s.size..t.size].each do |i|
+    rt.skip(t[i - s.size])
+    rt.append(t[i])
+    if rs() == rt()
+
+    end
+  end
+end 
+
+#+END_SRC
+
+- Compare h(s) == h(t[i:i + len(s)])
+- if hash values match, likely so do strings
+  - can check s == t[i:i + len(s)] to be sure ~ cost O(|s|)
+  - if yes, found match - done
+  - if no, happend with probability < 1/|s| -> expected cost is O(1) per i
+- need suitable hash function
+- expected time = O(|s| + |t| * cost(h))
+  - naively h(x) costs |x|
+  - we'll achive O(1)!
+  - idea: t[i:i + len(s)] ~ t[i+1 : i+1 + len(s)]
+
+
+TODO: can't get good explanation of the whole algorithm from the lecture,
+or the book, research and make one.
+
+
+
+** Hashing III: Open Addressing, Criptographic Hashing
+
+*** Open Addressing   
+
+    Another approach to collisions:
+
+Make a hash and probe for place if not make new hash and probe again.
+
+- no chaining, instead all items are stored in table
+- one item per slot -> m>=n
+- hash function specifies order of slots to probe(try) for a key
+(for inseart/search/delete), not just one slot.
+We want to design a function h, with property that for all k \in U:
+
+h: U \cross {0,1,\dots,m - 1} -> {0,1,\dots,m - 1}
+
+universe of keys --- trial count --- slot in table
+
+{ h(k,0), h(k,1), \dots, h(k,m-1) }
+
+i.e. if you keep trying h(k,i) for every increasing i, you will
+hit all slots of the table.
+
+
+insert(k,v): Keep probing until an empty slot is found.
+
+search(k): As long as the slots you encounter by probing are occupied
+by keys != k, keep probing until you either encounter k or find an
+empty slot.
+
+delete(): can't just find item and remove its slot,
+you have to replace item with special flag "Delete Me", which insert
+treats as None, but Search doesn't.
+
+*** Probing Strategies 
+
+**** Linear Probing
+     h(k,i) = (h'(k') + i) mod m, where h'(k) is ordinary hash function
+     
+Like street parking. The problem is clustering, consecuitive group of
+occupied slots as cluster become longer, it gets more likely to grow
+further. Can be shown that for 0.01 < \alpha < 0.99 say, clusters of
+size \Theta(\log n).
+
+**** Double Hashing
+     h(k,i) = (h_{1}(k) + i * h_{2}(k)) mod m,
+
+where h_{1}(k) and h_{2}(k) are 2 ordinary hash functions
+
+actually hit all slots (permutation) if h_{2}(k) is relatively prime
+to m for all k.
+
+e.g. m = 2^{r} make h_{2}(k) always odd
+
+*** Uniform Hashing Assumption
+    Each key is equally likely to have any one of the m! permutations
+as its probe sequence. Not really true, but double hashing may come
+close.
+
+Suppose we have used open addressing to insert n items into table
+of size. Under the uniform hashing assumption the next operation
+has expected cost of <= 1/(1-\alpha), where \alpha = n/m (<1).
+
+\alpha = 90% -> 10 expected probes
+
+
+Pf:
+Suppose we want to insert an item with key k. Suppose that the item is
+not in the table.
+- probability first probe successful:
+
+m-n/m =: p
+
+(n bad slots, m total slots, and first probe is uniformly random)
+
+- if first probe fails, probability second probe succesful:
+
+m-n/m-n >= m-n/n = p
+
+- if 1st and 2nd probe fail, probability 3rd probe successful:
+
+m-n/m-2 >= m-n/m = p
+
+(since two bad slots already found, m - n good sots remain and the
+3rd probe is uniformly random over the m - 2 total slots left)
+
+- \dots
+  
+-> Every trial, success with probability at least p.
+Expected number of trials for success:
+
+1/p = 1/1-\alpha
+
+-> search and delete takes time O(1/1-\alpha)
+
+
+*** Open Adressing vs. Chaining
+    - Open AddressingL better cache performance (better memory usage,
+no pointers needed)
+
+    - Chaining: less sensitive to hash functions (OA requires extra
+care to avoid clustering) and the load factor \alpha (OA degrades
+past 70% or so and in any event cannot support values larger than 1)
+
+*** Cryptographic Hashing
+
+**** Properties
+     - One-Way(OW): infeasible, given y \in \R {0,1}^{d} to find any x s.t.
+h(x) = y. This maens that if you choose a random d-bit vector, it is hard
+to find an input to the hash that produces that vector. This involves
+"inverting" the hash function.
+
+     - Collision-resistance (CR): Infeasable to find x, x', s.t. x!=x' and
+h(x) = h(x'). This is a collision, two input values have the same hash.
+
+     - Target collision-resistance (TCR): infeasible given x to find
+x' = x s.t. h(x) = h(x').
+
+TCR is weaker than CR. If a hash function satisfies CR, it automatically
+satisfies TCR. There is no implication relationship between OW and CR/TCR.
+
+
+**** Applications
+
+     - password storage: Store h(PW), not PW on computer. When user inputs PW,
+compute h(PW') and compute against h(PW). The property required of the hash
+function is OW. The adversary does not know PW or PW' so TCR or CR is not
+really required. Of cource, if many many passwords have the same hash, it is
+a problem, but a small number of collisions is ok.
+
+     - file modification detector: for each file F, store h(F) securely.
+Check if F is modified by recomputing h(F). The property that is required
+is TCR, since the adversary wins if he is able to modify F without changing
+h(F).
+
+     - digital signitures: in public key cryptography, Alice has a public
+key PK_{A} and a private key SK_{A}. Alice can sign a message M using her
+private key to produce \sigma = sign(SK_{A}, M). Anyone who knows Alice's
+public key PK_{A} and verify Alice's signature by checking that
+verify(M, \sigma, PK_{A}) is true. The adversary wants to forge a signiture
+that verifies. For large M it is easier to sign h(M) rather than M, i.e.,
+\sigma = sign(SK_{A}, h(M)). Property is CR. We don't want an adversary
+to ask Alice to sign x and then claim she signed x', where h(x) = h(x').
+
+**** Implementaions
+
+Cryptographic hash functions are significantly more complex than those
+used in hash tables. Think of it as a regular hash running many, many
+times with pseudo-random permutations interspersed.
