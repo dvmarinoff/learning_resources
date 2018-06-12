@@ -1038,3 +1038,325 @@ to ask Alice to sign x and then claim she signed x', where h(x) = h(x').
 Cryptographic hash functions are significantly more complex than those
 used in hash tables. Think of it as a regular hash running many, many
 times with pseudo-random permutations interspersed.
+
+** Numerics I: Integer Arithmetic, Karasuba
+
+*** Irrationals
+Every once in a while you will have a situation where you want to
+compute with numbers much longer than 64 bits(the word length in
+today's standart computer). You want to find precisely the weight
+of a nutrino, literaly 100 decimal digits.
+
+with k bits you can represent 2^{k} values, but their range will
+depend on the system you are using:
+
+Unsigned: 0 to 2^{k} - 1,
+Signed: -2^{k-1} to 2^{k-1}-1
+
+2^{64} = 18_446_744_073_709_551_616 -> 
+
+What if you want the \sqrt{2} to million digits or \pi, how do
+you do that on a computer?
+In cryptograpy(RSA) you have to deal with really bbig prime
+numbers, that are 1000 of bits long and do division and
+multiplication on them.
+
+Pythagoras discovered that a square's diagonal and its side are
+incommensurable, you could not expressed the ratio as a rational
+number - ratio of Integers(Babylonians and Indeans new about this
+before him, but he gets credited for the Pythagoras Theorem).
+
+All is Number - the Pythagorean religion.
+
+He didn't like the \sqrt{2}, because he could not express it as a
+number and called it "speechless". They tried to find patterns in
+Irrationals, but could not succeed(this would be better than p =np).
+Irrational numbers were evil.
+
+\sqrt{2} = 1.414_213_562_373_095_048_801_688_724_209_698_078_569_671_875
+
+**** Digression - Catalan numbers:
+
+How many ways to select 2 balls from a box contining 9 balls?
+
+n choose k -> 9 choose 2 -> n!/n!(n - k)! = 9!/9!(9-2)! = 9*8/2*1 = 36
+
+How many ways to choose a 3-topping pizza based on 10 toppings menu?
+
+10 choose 3 = 10!/7!3! = 10*9*8/3*2*1 = 120
+
+Cardinality of the set P of balanced parentheses string are recursively
+defined as:
+- \lambda \in P, where \lambda is the empty string
+- If \alpha, \beta \in P, then (\alpha)\beta \in P
+
+Every nonempty balanced paren string can be optained via Rule 2 from a
+unique \alpha, \beta pair. For Example: (()) () ()
+
+**** Enumeration
+C_{n}: number of balanced parentheses strings with exactly n pairs of
+parentheses. C_{0} = 1 empty string
+
+C_{n+1}? Every string with n + 1 pairs of parentheses can be obtained
+in a unique way via Rule 2.
+
+One paren pair comes explicitly from the rule.
+kpairs from \alpha, n - k pairs from \beta
+
+C_{n+1} = \sum_{k=0}^{n} C_{k}C_{n-k}, n >= 0
+
+*** Newton's Method
+
+Find root of f(x) = 0, through succesive approximation e.g., f(x) = x^{2} - a
+
+x_{i+1} = x_{i} - f(x_{i}) / f'(x_{i})
+
+Square roots:
+
+f(x) = x^{2} - a
+
+x_{i+1} = x_{i} - (x_{i}^{2} - a)/2x_{i} = (x_{i} + a/x_{i}) / 2
+
+a = 2
+
+x_{0} = 1.000000000
+x_{1} = 1.500000000
+x_{2} = 1.416666666
+x_{3} = 1.414215686
+x_{4} = 1.414213562
+
+Quadratic convergence, # digits doubles
+
+
+*** High Precision Computation
+
+\sqrt{2} to d-digit precision: 1.414213562373 } d digits
+
+
+High Precision Multiplication
+
+
+*** Karatsuba's Method
+
+[[./img/6006/karatsubas_method.jpg]]
+
+    TODO: finish it
+
+** Graphs I: Breadth First Search
+
+*** Graphs
+
+Graph G = (V,E)
+- V = set of vertices,
+- E = set of edges, vertex pairs
+  - ordered pair -> directed graph
+  - unordered pair -> undirected graph
+
+[[./img/6006/graphs.jpg]]
+
+How do you represent a graph like this for an algorithm?
+If you just use arrays for the 2 sets, you will need O(n) to just find
+the neighbours of a.
+
+Graph Search is used in exploration problems:
+- find a path from start vertex s to a desired vertex
+- visit all vertices or edges of graph, or only those reachable from s
+
+Applications:
+- web crawling, indexing pages on the internet
+- social networking, friends and friends of friends
+- garbidge collection
+- checking mathematical conjectures
+- solving puzzles and games
+
+*** Pocket Cube
+
+Consider a 2 by 2 by 2 Rubik's cube.
+
+Configuration Graph:
+- vertex for each possible state
+- edge for each basic move(90 degree turn) from one state to another
+- undirected: moves are reversible
+
+Diameter of a graph ("God's Number" or worst case of moves needed to solve)
+
+The best way to compute it is to construct this graph one layer at a time
+until you are done and then you know what the diameter is. The trouble is
+the layers in between grow exponentially, at some point it decreases, but
+getting over this exponential hump is really hard. Even for 3 by 3 by 3
+they used a lot of tricks to speed up the algorithm, but in the end it is
+esentially a breadth-first search.
+
+11 for 2 by 2 by 2,  
+20 for 3 by 3 by 3,  
+\Theta(n^{2} / \log n) for n by n by n
+
+the # vertices = 8! * 3^{8} = 264_539_520, where 8! comes from having
+8 cubelets in arbitrary positions and 3^{8} comes as each cubelet has
+3 possible twists.
+
+This can be divided by 24 if we remove cube symmetries and further
+divided by 3 to account for actually reachable configurations, there
+are 3 connected components.
+
+*** Graph Representations: DS
+
+**** Adjacency Lists
+
+There is one representation called adjacency list with many variations.
+
+You have an array called Adj of size V, each element is a pointer to a
+linked list. The idea si that this array is indexed by a vertex.
+It cound be index by nubers or by hashable objects in which case Adj
+is a hash table. For every vertex you store its neighbours, namely the
+verteces you can reach by one step.
+
+Algorithms must run in O(V + E) time.
+
+Array Adj of V linked lists
+- for each vertex u \in V, Adj[u] stores u's neighbors,
+{v \in V | (u,v) \in E}.
+(u, v) are just outgoing edges if directed
+
+[[./img/6006/graph_list_representation.jpg]]
+
+- in Python:
+Adj = dictionary of list/set values;
+vertex = any hashable object (int, tuple)
+
+- advantage: multiple graphs on same vertices
+
+**** Implicit Graphs
+
+Adj(u) is a function - compute local structure on the fly(Rubik's Cube).
+This requires "Zero" space. Really useful for the case of Rubik's cubes.
+
+**** Object-oriented Variations
+
+- object for each vertex u
+- u.neighbors = list of neighbors, Adj[u]
+
+If you want just one graph from the sets of vertecies and edges.
+
+**** Incidence Lists
+
+- can also make edges objects
+
+[e.a] -> e -> [e.b]
+
+- u.edges = list of outgoing edges from u
+- advantages: store edge data without hashing
+
+*** Breadth-First Search
+
+We want to visit all the nodes reachable from given s \in V,
+in O(V + E) time.    
+
+Explore graph level by level from s
+- level 0 = {s}
+- level i = vertices reachable by path of i edges but not fewer
+- build level i > 0 from level i-1 by tryin all outgoing edges,
+but ignoring vertices from previous levels
+
+Breadth-First-Search Algorithm:
+
+Pseudocode based on ruby:
+#+BEGIN_SRC ruby
+
+def bfs(v, adj, s)
+
+  level = { s: 0 }
+  parent = { s: nil }
+  i = 1
+  frontier = [s] # previous level, i-1
+  
+  while frontier
+    next = []    # next level. i
+
+    frontier.each do |u|
+      
+      adj.each do |v|
+        if v not in level # not yet seen
+          level[v] = i    # number = level[u] + 1 
+          parent[v] = u
+          next.append(v)
+        end   
+      end
+    end
+
+    frontier = next
+    i = i + 1
+end 
+
+#+END_SRC
+
+Analysis:
+
+Vertex V enters next and then frontier only once, because level[v]
+then set.
+
+Base case: v = s -> Adj[v] looped through only once
+
+time = \sum_{u \in V} Adj[V] = { E for directed graph; 2E for undirected
+
+-> O(E) time, O(V+E) to also list vertices unreachable from v(not assigned level)
+
+Shortest Paths:
+
+the pointers to parent form the shortest paths.
+
+- for every vertex v, fewer edges to get from s to v is:
+  
+{ level[v] if v assigned level; \inf else (no path)
+
+- parent pinters from shortest-path tree = union of such a shortest
+path for each v -> to find shortest path,
+
+take v, parent[v], parent[parent[v]], etc until s (or None)
+
+** Graphs II: Depth-First Search
+
+This is like exploring a maze.
+- follow path until you get stuck
+- backtrack along breadcrumbs until reach unexplored neighbor
+- recursively explore
+- careful not to repeat a vertex
+
+#+BEGIN_SRC ruby
+
+parent = { :start => nil }
+
+def dfs_visit(verteces, adj, start)
+  adj[start].each do |vertex|
+    unless parent.has_key?(vertex)
+      parent[vertex] = start
+      dfs_visit(vertices, adj, vertex)   
+    end
+  end
+end
+
+def dfs(vertices, adj)
+  parent = {}
+  vertices.each do |s|
+    unless parent.has_key?(s)
+      parent[s] = nil
+      dfs_visit(verteces, adj, s);
+    end
+end
+
+#+END_SRC
+
+**** Edge Classification
+
+- to compute this classification (back or not), mark nodes for duration
+they are "on the stack"
+- only tree and back edges in undirected graph
+
+*** Analysis
+
+- dfs_visit gets called with a vertex s only once, because then
+parent[s] set -> time in dfs_visit = \sum_{s \in V} Adj[s] = O(E)
+
+- dfs outer loop adds just O(V) -> O(V+E) time
+
+
