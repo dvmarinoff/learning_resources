@@ -618,7 +618,7 @@ Normal Equation
 
 
 
-* Non-linear hypothesis (Neural Networks I)
+* Week 4: Non-linear hypothesis (Neural Networks I)
 
 ** Motivations
 
@@ -831,7 +831,7 @@ neuron so there is a trade off.
 In summary use ReLU on the hidden layers and on the output Soft Max for
 classification or a linear function for regression.
 
-* Neural Networks Learning (Neural Networks 2) 
+* Week 5: Neural Networks Learning (Neural Networks 2) 
 
 ** Cost Function
 
@@ -1111,236 +1111,7 @@ up calculations, but may also take much more memory.
 
 
 
-* Other
-
-** Octave Reference
-
-** Python Reference
-
-*** Conditionals
-
-if cond1:
-    do()
-ifel cond2:
-    do()
-else:
-    do()
-
-*** Loops:
-
->>> knights = {'gallahad': 'the pure', 'robin': 'the brave'}
->>> numbers = [1, 2, 3, 4, 5, 6, 7, 8]
-
->>> for k, v in knights.items(): print(k, v)
-
->>> for x in numbers: print(x)
-
->>> for i in range(10): do()
-
-*** Collections:
-
-   Seqs are mutable(list) and immutable(tuple, range)
-
-**** tuple
-
->>> t = (1,2,3,4)
-
-    immutable,
-    collection
-    - packing and unpacking
-
->>> t = 12345, 54321, 'hello!'
->>> x, y, z = t
-
-
-**** list
-
->>> l = [1,2,3,4]
-
-    mutable,
-    more like array or vector or linked-list?
-    - methods:
-      .append(x)                - adds at the end
-      .extend(iterable)
-      .insert(i, x)
-      .remove(x)                - remove first by value
-      .pop([i])                 - if no arg, returns last
-      .clear()
-      .index(x[,start[,end]])   - return 0-based index of value
-      .count
-      .sort
-      .reverse
-      .copy
-      del a[i:j]                - removes by index at pos or range
-
-    - as stacks:
-      with .append() and .pop()
-
-    - as queues:
-      with .append() and .pop(0)
-
-    - list comprehensions:
-
->>> [x**2 for x in range(10)]
->>> [x for x in vec if x >= 0]
->>> [(x, x**2) for x in range(6)]
-
->>> # flatten a list using a listcomp with two 'for'
-
->>> vec = [[1,2,3], [4,5,6], [7,8,9]]
->>> [num for elem in vec for num in elem]
-
-Out[]: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-    - queues: better use collections deque
-
->>> from collections import deque
->>> queue = deque(["Eric", "John", "Michael"])
->>> queue.append("Terry")           # Terry arrives
->>> queue.append("Graham")          # Graham arrives
->>> queue.popleft()
-
-    - map:
-
->>> squares = list(map(lambda x: x**2, range(10)))
-
-    - reduce:
->>>
-
-    - filter:
->>>
-
-**** dict
-
->>> tel = {'jack': 4098, 'sape': 4139}
-
-    classical hash map
-
-    - methods:
-    d[key]                 - to access by key
-    del d[key]             - remove
-    .iter(d)               - return an iterator over the keys of the dictionary
-    .clear()
-    .copy()
-    .get(key[,default])    - get value else default value
-    .keys()
-    .values()
-    .items()
-    .pop(key[,default])
-    .popitem()             - remove arbitrary
-    .update([other])       - overwrites existing
-
->>> dict([('sape', 4139), ('guido', 4127), ('jack', 4098)])
->>> dict(sape=4139, guido=4127, jack=4098)
-
-**** set
-
->>> basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
-
-    like math sets
-
->>> 'orange' in basket
-Out[]: True
-
->>> a = set('abracadabra')
-Out[]: {'a', 'r', 'b', 'c', 'd'} # unique letters in a
-
-
-**** range
-
->>> range(1,10)
-
-    range(start, stop, step)
-
-    it is useful, because it is more efficient. Values are generated only when needed
-    lazy seq
-
-**** Common Seq Operations
-
-    x in s 	              True if an item of s is equal to x, else False
-    x not in s 	          False if an item of s is equal to x, else True
-    s + t 	              the concatenation of s and t
-    s * n or n * s 	      equivalent to adding s to itself n times
-    s[i] 	                ith item of s, origin 0
-    s[i:j] 	              slice of s from i to j
-    s[i:j:k] 	            slice of s from i to j with step k
-    len(s) 	              length of s
-    min(s) 	              smallest item of s
-    max(s) 	              largest item of s
-    s.index(x[, i[, j]]) 	index of the first occurrence of x in s (at or after index i and before index j)
-    s.count(x)
-
-** Functions:
-
-- argument lists
-- keyword arguments
-- default arguments
-
-- destructuring
-
-a,b,c = abc(): return a, b, c
-
-
-- recur
-   no tco!?
-
-** Decorators
-** OOP
-** Generators
-
-*** Unsupervised learning
-
-    The data set has no 'right answers'/labels given,
-    we have to find the structure into the data
-
-    Task: Google News group stories
-    Task: Genomics shared by individuals
-    Task: Organize computer clusters
-    Task: Social networks
-    Task: Market Segmentation
-    Task: Astronomical data analysis
-
-** Deep learning for NLP
-
-    Traditional machine learning uses more 'hard-coded' methods and requires
-    experienced and deeply knowlegable domain specialists to code them.
-    Deep learning uses vectors as more efficient and simpler abstraction
-    in order to turn tml on its head.
-
-    Representations of language
-
-    |           |      TML         |    DL   |
-    +-----------+------------------+---------+
-    | phonology | all phonemes     | vectors |
-    | morphology| all morphemes    | vectors |
-    | words     | one-hot encoding | vectors |
-    | syntax    | phrase rules     | vectors |
-    | semantics | lambda calculus  | vectors |
-
-    NOTE: one-hot encoding (uses matrix, not very efficient)
-
-    |     | The | cat | sat | on | the | mat |
-    | The |  1  |  0  |  0  |  0 |  1  |  0  |
-    | cat |  0  |  1  |  0  |  0 |  0  |  0  |
-    ...
-
-    Applications
-
-    Easy: spell checking, synonym suggestions, keyword search
-    easy to bruteforce with tml
-
-    Intermediate:
-    reading level,
-    extracting information,
-    predicting next word,
-    classification
-
-    Complex:
-    machine translation,
-    quation answering,
-    chatbots,
-
-** RNN (Recurrent Neural Networks)
+* RNN (Recurrent Neural Networks)
 
 Vanila NNs and Convolutional NNs have constrained API
 They operate over fixed:
@@ -1353,10 +1124,42 @@ despite them being considered hard to train
 
 Input Sequence Vectors <-> State Vectors -> Output Sequence Vectors
 
-
 They are Turing-Complete
 If training vanilla neural nets is optimization over functions,
 training recurrent nets is optimization over programs
+
+
+
+
+They are simple models giving high quality results. Way easier to train
+then expexted.
+
+It is all about Sequences.
+
+vNNs and cNNs have fixed size of input, output, and fixed amount of
+computational steps(# layers). That sometimes might be constraining.
+
+rNNs operate over sequences of vectors in the input, the output or both
+
+image -> text  
+text -> sentiment  
+text -> text  
+video frame <-> label  
+
+combine input with state with a fixed(but learned) function to produce
+new state. -> running rNNs is optimization over programs (not functions)
+
+They are widely applicable. Even if your data is not in the form of
+sequences, you can still formulate and train models that learn to
+process it sequentially.
+
+You input vector x and they output vector y which is influenced not only
+by the current input, but also by the entire history of inputs.
+
+
+
+
+
 
 
 * Statistics Review
@@ -1424,4 +1227,5 @@ D_{KL}(p||q) = \sum_{i=1}^{N} p(x_{i})(log p(x_{i}) - log q(x_{i}))
 
 
 NOTE: negative log probability is like a scale for rarity
+
 
