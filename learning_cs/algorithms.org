@@ -1041,6 +1041,28 @@ times with pseudo-random permutations interspersed.
 
 ** Numerics I: Integer Arithmetic, Karasuba
 
+*** Digression: Machine Epsilon - \epsilon_{mach}
+
+\epsilon_{mach} is difined as the smallest number such that 1 + \epsilon_{mach} > 1.
+It is the difference between 1 and the next nearest number representable
+as a machine number.
+
+In a hypothetical word that stores 8 bits:
+- 1st bit - is used for the sign of the number
+- next 3 bits - for the biased exponent
+- last 4 bits - for the magnitude of the mantissa.
+
+1_{10} = [0,0,1,1,0,0,0,0]
+
+The next number in the binary word would be:
+
+1.0625_{10} = [0,0,1,1,0,0,0,1]
+
+\epsilon_{mach} = 0.0625 
+
+It is the upper bound on the absolute relative true error in
+representation of a number x.
+
 *** Irrationals
 Every once in a while you will have a situation where you want to
 compute with numbers much longer than 64 bits(the word length in
@@ -1352,11 +1374,58 @@ end
 they are "on the stack"
 - only tree and back edges in undirected graph
 
-*** Analysis
+**** Analysis
 
 - dfs_visit gets called with a vertex s only once, because then
 parent[s] set -> time in dfs_visit = \sum_{s \in V} Adj[s] = O(E)
 
 - dfs outer loop adds just O(V) -> O(V+E) time
 
+*** Cycle Detection
 
+Graph G has a cycle <-> DFS has a back edge
+
+- before visit to v_{i} finishes will visit v_{i+1} and finish:
+will consider edge (v_{i}, v_{i+1}) -> visit v_{i+1} now or already did
+
+- before visit to v_{0} finishes, will visit v_{k} and did't before
+
+- before visit to v_{k} (or v_{0}) finishes, will see (v_{k}, v_{0})
+as back edge
+
+** Shortest Paths I: Intro
+
+Shortest way to drive from A to B
+Problem on a weighted graph G(V,E) W: E -> R
+
+Two algorithms:
+- Dijkstra     : O(V log V + E), assumes non-negative edge weights
+- Bellman Ford : O(V E), is a genral algorithm
+
+V = vertices (strict intersections)
+E = edges (street, roads); directes edges (one way roads)
+W(U,V) = weight of edge from u to v (distance, toll)
+
+path p = < v_{0}, v_{1}, \dots, v_{k} >
+(v_{i}, v_{i+1}) \in E for 0 <= i <= k
+
+w(p) = \sum_{i=0}^{k-1} w(v_{i}, v_{i+1})
+
+*** Weighted Graphs
+
+v_{0} - p -> v_{k} ,
+means p is a path from v_{0} to v_{k}.
+(v_{0} is a path from v_{0} to v_{0} of weight 0)
+
+Shortest path weight from u to v as:
+
+\delta(u, v) = { min { w(p): u - p -> v } if \exists path; \inf else unreachable }
+
+ 
+
+
+*** General Approach
+
+*** Negative Edges
+
+*** Optimal Substructure
