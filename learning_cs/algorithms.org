@@ -1,3 +1,5 @@
+* 6.006 - Introduction to Algorithms
+
 ** Sorting (Insertion Sort, Merge Sort)
 
 *** Why?
@@ -1429,3 +1431,107 @@ Shortest path weight from u to v as:
 *** Negative Edges
 
 *** Optimal Substructure
+
+* 6.851 - Advaced Data Structures
+
+** Persistent Data Structures
+   data structures where we keep all information about past states. They
+are part of the larger class of temporal data structures.
+
+Usually we deal with data structure updates by mutating something in
+existing data structure: either its data or the pointers that organize it.
+In this process we lose information about previous states. Persistant
+data structures do not lose any information.
+
+It is possible to transform a plain data structure into a persistent one
+with asymptotically minimal extra work or space overhead.
+
+A recurring theme in this area is that the model is cruicial to the
+results.
+
+Partial and full persistance correnspond to time travel with a branching
+universe model.
+
+Two groups of temporal DSs:
+- persistence - branching universe, you never destroy, just create new.
+- retroactivity - 'back to the future', change in past reflects present. 
+
+*** Pointer Machine Model of DSs
+    Corresponds to OOP. Here we think of DSs as collections of nodes of
+a bounded size with entries for data. Each piece of data in the node can
+be either actual, or a pointer to a node. The primitive operations
+allowed in this model are:
+
+- x = new Node()
+- x = y.field
+- x.field = y
+- x = y + z
+- destroy(x),
+
+where x, y, z are names of nodes or fields in them.
+You have a root node and always work relative to the it.
+
+DSs implementable with these shape constraints and operations include
+linked lists and binary search trees, and in general corresponds to
+struct's in C or objects in Java. An example of DS not in this group
+would be a one with variable size such as an array.
+
+*** Definitions of Persistence
+
+1. Partial Persistence (Deja Vu) - we may query any previous version of
+the DS, but we may only update the latest version. Implies linear ordering
+on the versions. Ops:
+- read(var, version);
+- newversion = write(var, val);
+2. Full Pesistence (branching universe) - both updates and queries are
+allowed on any version of the DS. The versions form a branching tree. Ops:
+- read(var, version);
+- newversion = write(var, version, val);
+3. Confluent Persistence (Sliders, Merging Universies) - in addition to
+the previous ops, we allow combination ops to combine input of more then
+one previous version to output a new single version. Combinations of
+versions induce a direct acyclic graph on the verion graph. Ops:
+- read(var, verison);
+- newversion = write(var, version, val);
+- newversion = combine(var, val, version1, version2);
+4. Functional Persistence - from fp, where objects are immutable.
+The nodes in this model are likewise immutable: revisions do not alter the
+existing nodes in the DS, but create new ones instead. Okasaki book.
+
+The difference between functional persistence and the rest is we have to
+keep all the previous versions. The only allowed internal operation is to
+add new nodes. 
+
+[[./img/6851/persistence.jpg]]
+
+*** Partial Persistence
+    Is it possible to implement partial persistence efficiently?
+    Yes. Assuming pointer machine memory model and restricting in-degree
+    of data nodes to be O(1).
+    
+    Any pointer-machine DS with a constant # pointers to any node
+    (in-degree, pointers out and into a node) can be transformed into 
+    another DS that is partially persistent with O(1) amortized factor
+    overhead and O(1) space per change in the DS.
+
+    Pf.:
+    - store back pointers:
+      When you have a pointer out to a node, you want a back pointer that
+      points back, so you know where all the pointers came from.
+    - store mods. to fields of DS (log modifications):  
+      if p is the in-degree to a node, we allow 2p modifications stored
+      - modification(version, field, value):
+        - version that got changed
+        - field that got changed
+        - value it got changed to
+     
+To read node.field at version v look at mods. with version <= v
+The hard part is how do you change a field, because there might not be a
+room in the mods structure.
+To set node.field = x, we check if there is any space in mods. we just
+add a mod. Else if the node is full we need to make a new node' with all
+the mods applied. 
+
+
+
+    
