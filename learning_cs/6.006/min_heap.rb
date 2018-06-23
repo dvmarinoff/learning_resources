@@ -16,6 +16,7 @@ class MinHeap
   def getParentIndex(i)
     (i - 1) / 2
   end
+
   def getLeftChild(i)
     @xs[getLeftChildIndex(i)]
   end
@@ -61,6 +62,7 @@ class MinHeap
     x = @xs[0]
     @xs[0] = @xs[@size - 1]
     @size -1;
+
     heapifyDown()
 
     x
@@ -75,7 +77,7 @@ class MinHeap
   def heapifyDown
     i = 0
 
-    while hasLeftChild(i) do
+    while hasLeftChild(i)
       smallerChildIndex = getLeftIndex(i)
 
       if hasRightChild(i) && rightChild(i) < leftChild(i)
@@ -94,7 +96,7 @@ class MinHeap
   def heapifyUp
     i = size - 1
 
-    while hasParent(i) && parent(i) > @xs[i] do
+    while hasParent(i) && parent(i) > @xs[i]
       swap(getParentIndex(i), i)
       i = getParentIndex()
     end
@@ -116,3 +118,4 @@ puts "#{3} #{mh.getParent(2)}"
 puts "#{8} #{mh.getParent(5)}"
 puts "#{8} #{mh.getParent(6)}"
 
+mh.heapifyUp

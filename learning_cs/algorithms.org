@@ -153,8 +153,12 @@ the bottom level n * C dominates, complexity is \Theta (n)
 
 ** Heaps and Heap Sort
 
-Heap as example implementaion of priority queue, and base for sorting algorithm
-known as Heap Sort.
+O(n lg n) running time, sorting in place algorithm introducing new
+design technique: using a DS to manage information. The heap DS is
+useful for heapsort and as efficient priority queue.
+
+Note: Heap is also used to refer to the garbage-collected storage
+that langs like Java and Lisp provide. 
 
 *** Priority Queue
 
