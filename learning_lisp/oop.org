@@ -1,0 +1,429 @@
+* Uncle Bob - SOLID Principles of Object Oriented and Agile Design
+
+** Summary
+The growth demands on the industry puts it in a situation where it is
+garanteed that half of the professionals will lack enough experience(and/or
+discipline). There is a lot of bad code and it's symptoms are that it is
+rigid and fragile. The reason for bad code is coupling. OO is useful not
+because it models the real world, but because (comparatively to c) it gives
+us a convenient way to do polymorphism. Here are some OO principals to help
+you avoid angry c level management:
+*** Single-Responsibility
+A class should have one and only one reason to change.
+
+#+BEGIN_SRC ruby
+class AuthenticationsUser
+  def authenticate(email, password)
+    if MatchesPasswords.new(email, password).matches?
+      do_some_authentication
+    else
+      raise NotAllowedError
+    end
+  end
+end
+
+class MatchesPasswords
+  def initialize(email, password)
+    @email = email
+    @password = password
+  end
+
+  def matches?
+    user = find_from_db(:user, @email)
+    user.encrypted_password == encrypt(@password)
+  end
+end
+#+END_SRC
+
+*** Open/Closed
+A module should be open for extention, but closed for modification
+(Polymorphic calls)
+
+#+BEGIN_SRC ruby
+
+class Report
+  def body
+    generate_report_stuff
+  end
+  
+  def print(formatter: JSONFormatter.new)
+    formatter.format body
+  end
+end
+
+report = Report.new
+report.print(formatter: XMLFormatter.new)
+
+#+END_SRC
+
+*** Liskov Substitution
+Subtypes must be substitutable for their base types
+
+#+BEGIN_SRC ruby
+
+class Animal
+  def walk
+    do_some_walkin
+  end
+  
+  def run
+    raise NotImplementedError
+  end
+end
+
+class Cat < Animal
+  def run
+    run_like_a_cat
+  end
+end
+#+END_SRC
+
+*** Interface Segregation
+No client should be forced to depend on methods it does not use
+
+#+BEGIN_SRC ruby
+class Computer
+  def turn_on
+    # turn on the computer
+  end
+  
+  def type
+    # type on the keyboard
+  end
+  
+  #def change_hard_drive
+  #  moved to ComputerInternals
+  #end
+end
+
+class ComputerInternals
+  def change_hard_drive
+    # opens the computer body
+    # and changes hard drive
+  end
+end
+class Programmer
+  def usa_computer
+    @computer.turn_on
+    @computer.type
+  end
+end
+
+class Technician
+  def fix_computer
+    # @computer.change_hard_drive
+    @computer_internals.change_hard_drive
+  end
+end
+#+END_SRC
+
+*** Dependancy Inversion
+Abstractions should not depend upon details.
+Details should depend upon abstractions.
+
+#+BEGIN_SRC ruby
+class Report
+  def initialize
+    @body = "whatever"
+  end
+
+  def print(formatter: JsonFormatter.new)
+   formatter.generate @body
+  end
+end
+
+class JsonFormatter
+  def generate(body)
+    # convert the body arg into json
+  end
+end
+class XmlFormatter
+  def generate(body)
+    # convert the body arg into xml
+  end
+end
+
+class CsvFormatter
+  def generate(body)
+    # convert the body arg into csv
+  end
+end
+#+END_SRC
+
+** Talk 
+*** Intro: H2O looks like Mickey Mouse
+
+Opens up with popular physics and interacts with audience. 
+
+How many of you are programmers?
+What's water?
+What's the chemical formula?
+What does the molecule look like?
+
+The Water molecule looks like Micky Mouse and is made of 2 atoms hydrogen
+and 1 oxygen, with angle 103 degrees, for quantum mechanical reasons
+having to do with god knows what.
+
+Why those 3 atoms stick together?
+Before you answer think what those 3 atoms are?
+(counts charge in protons and elecrons in each atom - result is negative charge)
+
+These 3 atoms should repel each other!
+If you get the electrons moving fast, they will group close to the
+positive charges(between the protons).
+
+The molecule wants to stick to anything that have charge.
+(your hand, dirt, ..., the thin water - baloon trick)
+
+*** Motivation: growth rate of the industry and programmers experience 
+
+After 6 mins suddenly cuts to the main topic:
+We have to abondon this topic and talk about ...
+
+What's goes wrong with softwere?
+
+How many of you have been a programmer for a:
+- year?
+- 5 years?
+- 10 year?
+- 15 years?
+
+Each time cuts in half. Why this interesting halving?
+What is the population of programmers? - Probably 100 million.
+How many programmers in 1970? - 15 thousand.
+How many in 1960? - couple of hundred, and they weren't either programmers
+but hardwere developers.
+Think about that progression in time? It has a doubling rate in 5 years.
+Half the programmers have less than 5 years experience. (always)
+
+How do we deal with the fact in our industry we are stuck in an exponential
+curve that garantees perpetual inexperience?
+
+How many of you have been slowed down by really bad code?
+
+We know bad code slows us down, why do we write it? We had to go 'fast'?
+You don't go fast by writing bad code, by rushing, by tearing through the
+code and just making it work and releasing it as fast as you can.
+You wanna go fast you do a good job.
+
+*** Coupling is what makes bad code
+
+What are the simptoms of bad softwere?
+- Its confuzing. Good code should explane itself.
+- When modify something and something else breaks.
+- You must modify massive amounts of other code to come back into
+consistency with the new modification.
+
+After many week you have touched evry single module in the system and you
+are finaly done. Boss asks you:
+"What the heck took you so long?"
+And you utter the imortal words of every softwere developer:
+"Oh, it was a lot more complicated than I thought."
+
+- Rigidity - bad dependancies, systems that are coupled
+- Fragility - code breaks in many places
+- ?         - the desirable parts of the code are so coupled to the
+undesirable parts that you can not use it
+
+The common tread in all of those flaws is coupling.
+The bulk of softwere design is managing dependancies. Figuring out were
+to put code and cutting the dependancies.
+
+How do you do that?
+
+Let M and N be modules. N has a function f. M calls f.
+Which of these modules knows about the other?
+Flow of control goes from M to N. M knows about N.
+How do we know it?
+If N changes M has to. The compiler knows.
+
+So if the high level modules know about the low level modules the rule
+for inversion of control is violated.
+Do you want your high level policy poluted with high level detail?
+That is what makes code hard to read.
+
+Imagine a tree of modules rooted at the most high level one called Main,
+each new layer is calling the layer below. Flow is from high to low.
+ 
+Main -> M -> N -> O -> Very low level module ...
+
+If high level modules depend on lower level modules down the dependancy
+tree, a change to detail affects high level policy.
+
+*** Why do we use OO?
+
+What is OO? What are Objects? Why is it part of every language?
+
+- From 1980 t0 1985 objective-c was the only OO option.
+Brad Cox invented objective-c. Why? He was a Smalltalk programmer, someone
+make him program in c, he hated it, he wrote alittle preprocessor infront
+of c, gave it some smalltalk attributes. 
+
+- then Bjarne Stroustrup wrote the c++ programming language, and all c
+devs moved to it.
+
+Why all languages now are OO?
+- Encapsulation
+- Inheritance
+- Polymorphism
+
+But c had perfect encapsulation? You just have to forward declare your
+variables in a header file and noboby can see anything, but your function
+signitures. Objects skrewed that up, c++ put all the variables in a header
+file and we had to invent the public, private, protected keyword hacks. 
+OO weakened encapsulation. 
+
+Do we had inheritance in c?
+Unions, take 2 ds, give them common elements and changes them only at the
+end, then cast pointers from one to the other and pass them around inside
+functions just like polymorphic objects.
+
+c++ made it more convenient and added multiple inheritance.
+
+But it desappered in Java, because a solution to the diamond problem would
+make the compiler too complicated. So they inveted the interface.
+It is just an Abstract Class with Abstract methods.
+
+In dynamic languages you can have polymorphism without inheritance.
+It is only used to inherit behavior in variables.
+
+Do we had a polymorphism in c? Yes sort of. But it was dangerous as hell.
+Here c++ gave cheap, easy, safe polymorphism.
+
+*** Polymmorphism inverts the flow of control
+
+How do we solve the M -> N module dependancy with OO?
+
+We put an interface in between, M use it to calls f, N will derive from
+that interface. And now the compile time dependancy points against the
+flow of control. This is what polymorphis is. It gives you the ability
+to create one module calling another and yet have the compile time
+dependancy point against the flow of control.
+
+*** Class design principles (SOLID)
+
+- SRP: the single responsibility principle
+- OCR: the open/close principle
+- LSP: the liskov substitution principle
+- ISP: the interface segregation principle
+- DIP: the dependancy inversion principle
+
+*** Single responsibility principle
+
+A class  should have one, and only one reason to change.
+
+Example:
+Payroll -> Employee[CalcPay(), ReportHours(), WriteEmployee()]
+
+How many sources of change?
+This class has 3 different responsibilities to 3 different actors.
+It is possible to add a new feature to one and break the others.
+They change at different times, for different reasons, based on the
+interest of different people in the organization(the C-level guys).
+
+How do we get those 3 methods in 3 different classes? 
+
+Payrol -> Employee[CalcPay()] <- (ReportWriter) AND (Employee Repository)
+
+They now depend on Employee, change in CalcPay will affect them.
+
+IEmployee[CalcPay] -> Employee[CalcPay]
+
+or single class that im[plements all 3 methods but has 3 different base
+classes one with each of the methods.
+
+or 3 classes one with each method and put a fasade object that delegates
+to them...
+
+*** Open/Closed principle
+
+Modules should be open for extension, but closed for modification.
+
+You should be able to change what the model does(its behavior) without
+changing the module. Polymorphic calls. 
+
+Ex 1: the problem
+
+enum ShapeType {circle, square}
+Shape {enum ShapeType itsType;}
+Circle[DrawCircle()]
+Square[DrawSquare()]
+DrawAllShapes[DrawAllShapes()] <- Shape, Circle, Square  
+
+Ex 2: the OO lie:
+
+IShape[Draw()]
+ISquare[Draw()]
+ICircle[Draw()]
+DrawAllShapes[DrawAllShapes()] <- IShape
+
+DrawAllShapes loops through a list of shapes and calls their draw method
+without knowing anything about shapes. We can add Oval, or change a shape,
+no hunt for switch statements.
+
+What does this protect us from? New shapes being added, but our customers
+don't want new shapes they want for all the squares to be drawn 1st and
+all the circles 2nd. 
+
+Had we known that ahead of time maybe we could had invented an abstraction
+to proctect us against the ordering of the shapes.
+
+One of the great flaws of OO is that in order for OO to protect you from the
+customer you have to know what the customer is goning to do and the customer
+is always going to do the other thing.
+
+Instead we implement the simplest thing we possibly can, ant than we are
+going to get it out infront of the customer as soon as we possibly can,
+and ask the customer to change it. This give you a clue where the axis of
+change in our application is.
+
+*** Liskov Substitution Principle 
+
+Derived classes must be usable through the base class interface, without
+the need for the user to know the difference.
+
+Abstract Server <- Client, Concrete Server 
+
+The Square/Rectangle problem.
+We have a Rectangle, we need to add Square, square is a rectangle, but
+with only one field and method. It cannot inherit from Rectangle.
+
+
+Rectangle[height,width, SetHeight(), SetWidth]
+
+Square[?]
+
+This is not the right relationship, because that's not a square or
+rectangle that's a piece of code. The classes only represent the things
+they do not share the relationships of the things.
+
+The inheritance relation ship is not a isA relationship, it really is just
+a the redeclaration of functions and variables in the subscope.
+
+How do we fix that problem?
+This is vaiolation of the principle, because square is not substitutable
+with rectangle. (typeof statements are symptom for this)
+
+*** Interface segregation principle
+
+When a client depends upon a class that contains interfaces that the
+client does not use, but that other clients do use, then that client will
+be affected by the changes that those other clients force upon the class
+
+*** Dependancy Inversion
+
+Abstractions should not depend upon details. Details should depend upon
+abstractions.
+
+covered in the first part of the talk.
+
+
+* Uncle Bob - Functional Programming
+
+Opens up with popular phisics example:
+Why is there Air? Where did it come from? What it is made of?
+3/4 Nytrogen 1/4 Oxygen + CO2 + Others
+
+Nytrogen came from ammonia, Oxygen came from plants,
+
+
