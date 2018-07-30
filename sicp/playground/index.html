@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+    </head>
+    <body>
+    </body>
+    <script>
+     const range = function(a, b, next) {
+         return [...Array(b - a + 1).keys()].map( x => next(x));
+     };
+
+     const sum = function(term, a, next, b) {
+         return range(a, b, next).reduce((acc, x) => {
+             return acc + term(x);
+         });
+     };
+
+     const identity = x => x;
+     const square = x => x * x;
+     const inc = x => x + 1;
+
+     const sumInt = function(a, b) {
+         return sum(identity, a, inc, b);
+     };
+
+     const sumSq = function(a, b) {
+         return sum(square, a, inc, b);
+     };
+
+     console.log(sumInt(1,10));
+     console.log(sumSq(1,4));
+    </script>
+</html>

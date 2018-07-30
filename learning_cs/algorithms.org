@@ -1,5 +1,4 @@
 * 6.006 - Introduction to Algorithms
-
 ** Sorting (Insertion Sort, Merge Sort)
 
 *** Why?
@@ -335,7 +334,6 @@ What lands before t?
 1. Walk down the tree to find desired time
 2. Add in the nodes that are smaller
 3. Add in the subtrees size to the left
-
 
 ** AVL Trees, AVL Sort
 
@@ -892,7 +890,6 @@ end
 
 TODO: can't get good explanation of the whole algorithm from the lecture,
 or the book, research and make one.
-
 
 
 ** Hashing III: Open Addressing, Criptographic Hashing
@@ -1539,3 +1536,4 @@ the mods applied.
 
 
     
+

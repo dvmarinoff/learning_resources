@@ -186,7 +186,7 @@ M-x run-skewer
 
 ;; MAGIT
 
-SPC g s - open ststus buffer
+SPC g s - open status buffer
 
 ;; in status buffer
 c c - open a commit message buffer
@@ -200,7 +200,8 @@ u   - on a staged file: unstage
 ;; commit msg editing buffer
 , c - commit the changes
 
-p u - to push to origin master
+p p - push to remote
+p u - push upstream
 
 ;; SPACEMACS
 
@@ -221,8 +222,32 @@ SPC f f - open files menu
     C-j - up
     C-k - down
 
+;; movement
+w - move forward to beggining of word
+e - move forward to end of word
+b - move backward to beginning of word
+
+[[ - go to previous function
+]] - go to next function
+
+C-u - go up a page
+C-d - go down a page
+
+$ - go to end of line
+G - go to end of file
+
+;; editing
+u - undo
+C-r - redo
+g ; - go to last place edited
+"ay - yank into register
+"ap - paste from register
+SPC r y - show previous things you've yanked
+
+;; search
 SPC s s - search in a file
 
+;; other
 SPC f f <type file path and name> - to create a new file
 
 M-/ - cycle snippet completions
@@ -245,3 +270,8 @@ n, N - to cycle items
 ;; Rectangles
 
 C-x r t - to edit selection (top-left to bottom-right) as a rectangle
+
+;; Comments
+gcc - comment line
+g c + vim motion - comment sections of code
+g c - in Visual mode toggle comment

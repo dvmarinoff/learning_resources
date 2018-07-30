@@ -418,12 +418,50 @@ abstractions.
 covered in the first part of the talk.
 
 
-* Uncle Bob - Functional Programming
+* Uncle Bob - Functional Programming or the failure of state
 
+*** Intro: Oxygen took a lot of time to appear free
 Opens up with popular phisics example:
 Why is there Air? Where did it come from? What it is made of?
 3/4 Nytrogen 1/4 Oxygen + CO2 + Others
 
 Nytrogen came from ammonia, Oxygen came from plants,
+Oxygen is very rear, it doe not want to be free it combines with other
+elements like Iron. For the first 3 billion years of history of life on
+Earth, every Oxygen atom emited by a plant got grab by an Iron atom and
+fell to the bottom of the sea. Only 1 billion years ago Oxygen began to
+accumulate in the atmosphere.
+
+*** State, Recursion, Tail-call optimization
+
+What is state?
+
+1; // is a value
+int x = 1; // x is an id that has a value
+x = x + 1; // now x has changed state
+
+The identifier will identify value, but you have no idea what that value
+is. The identifier has a state not a value.
+
+Example with for loop in C, rewritten with no loop, and then with recursion.
+
+Memory usage is a problem with recursion in C. But tail-call optimizaion is
+a technique invented in the 1950's, why the jvm and .net do not support it.
+
+*** SICP
+it  gives no appologies, goes at light speed, concept after concept.
+They go through basic algorithms, queueing structures, stacking structures,
+symbol tables, message passing, all kinds of stuff.
+
+Suddenly they stop and excuse themselves for that they have to introce an
+assaignment statement.
+
+They substituted function calls with their implementaions. Assaignment
+breaks this model by introducing the concept of time. Assaignmnet
+statement separates the code above the assignment from the code below in
+time.
+
+y = f(x), will remain the same no matter what time it is.
+
 
 
