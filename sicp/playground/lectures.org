@@ -304,6 +304,7 @@ const averageDamp = function(fn) {
 
 ** 2a.3
 "... play with higher-order procedures ..."
+"functions map values, procedures compute functions"
 
 Newtons Method:
 To find a $y$ such that $f(y) = 0$ 
@@ -311,11 +312,104 @@ start with a guess, $y_{0}$
 
 $$ y_{n+1} = y_{n} - \frac{f(y_n)}{f'(y_{n})} $$
 
+You need a function that is to be approximated in the form of $f(y) = 0$.
+For example if you need the square root of x you can use $f(y)= x - y^{2}$
+which is $x-y^{2} = 0$ or $y = \sqrt{x}$. And now you can use the newton's
+method for approximating the value of the equation, which will be the
+square root of x.
 
+It is again looking for a fixed point of some procedure. It is more
+complicated with those derivatives, but still you want to find the value
+of y that will return the same value out of the function.
+
+Top-down approach:
+start by math concept, write a name for something, then worriey how to
+implement it. Wishful thinking is essential to good engeneering(or cs).
 #+BEGIN_SRC scheme
 (define (sqrt x)
   (newton (lambda (y) (- x (square y)))))
+
+(define (newton f guess)
+  (define df (deriv f))
+  (fixed-point
+    (lambda (x) (- x (/ (f x) (df x))))
+    guess))
+
+(define deriv
+  (lambda (f)
+    (lambda (x) (/ (- (f (+ x dx))
+                      (f x))
+                    dx))))
+
+(define dx 0.000001)
 #+END_SRC
+
+
+#+BEGIN_SRC javascript
+const dx = 0.000001;
+
+const sqrt = function(x) {
+    return newton( y => x - square(y), 1);
+};
+
+const newton = function(fn, guess) {
+    let df = deriv(fn);
+    return fixed-point( x => x - (fn(x) / df(x)), 1);
+};
+
+const deriv = function(fn) {
+    return function(x) {
+        return (fn(x+dx) - fn(x)) / dx;
+    };
+};
+#+END_SRC
+
+Chris Strachey, ligicion one of the grandfathers of cs.
+Envented denotational semantics. Great advocate of making procedures first
+class citizens:
+- to be named by variables
+- to be passed as arguments to procedures
+- to be returned as values of procedures
+- to be incorporated into data structures
+
+** 2B Compound Data
+
+There was an absraction barrier between sqrt and good-enuf.
+When we are building things we devorce the part of building things from
+the task of implementing the parts. When you are building a complex
+system you set a lot of abstraction barriers at a lot of levels.
+Now we will do the same for data.
+
+- the system has primitive data
+- the system has  means of combination for data(glue to build more
+- complicated, compound data from primitive data)
+- a methodology for abstraction
+
+Again the key idea is to build the system in layers and set abstraction
+barriers that isolate the details at the lower layers from those in the
+higher layers(so they can easily be someone elses' concern).
+
+We will build a calculating system:
+
+$$ \frac{1}{2} + \frac{1}{4} = \frac{3}{4},
+\frac{3}{4} + \frac{2}{3} = \frac{1}{2}$$
+
+$$ \frac{n_{1}}{d_{1}} + \frac{n_{2}}{d_{2}} = \frac{n_{1}d_{2}+n_{2}d_{1}}{d_{1}d_{2}},
+\frac{n_{1}}{d_{1}} + \frac{n_{2}}{d_{2}} = \frac{n_{1}n_{2}}{d_{1}d_{2}} $$
+
+Note that the system does not include rational numbers. Will will use the
+strategy of wishful thinking.
+
+Lets imagine that we have procedures that act like those:
+#+BEGIN_SRC scheme
+;; cloud is someting that has n and d
+(make-rat n d) -> <cloud>
+
+(numer <cloud>) -> n
+
+(denom <cloud>) -> d
+#+END_SRC
+
 
 
 # template
