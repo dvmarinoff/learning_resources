@@ -275,7 +275,7 @@ processing system that oscillates and you want to damp put these
 oscillations. The average is avariging the last two values of something that
 oscillates.
 
-Average-damp is a special procidure that will take a procedure as its arg
+Average-damp is a special procedure that will take a procedure as its arg
 and a procedure as its value.
 #+BEGIN_SRC scheme
 (define (sqrt x)
@@ -290,7 +290,7 @@ and a procedure as its value.
 
 #+BEGIN_SRC javascript
 const sqrt = function(x) {
-    return fixedPoint(averageDamp( y => x / y)(1));
+    return fixedPoint(averageDamp( y => x / y), 1);
 };
 
 const averageDamp = function(fn) {
@@ -403,12 +403,150 @@ strategy of wishful thinking.
 Lets imagine that we have procedures that act like those:
 #+BEGIN_SRC scheme
 ;; cloud is someting that has n and d
-(make-rat n d) -> <cloud>
+(make-rat n d) -> <cloud> ;; constructor
 
-(numer <cloud>) -> n
+(numer <cloud>) -> n      ;; selector
 
-(denom <cloud>) -> d
+(denom <cloud>) -> d      ;; selector
 #+END_SRC
+
+
+#+BEGIN_SRC scheme
+(define (+rat x y)
+  (make-rat 
+    (+ (* (numer x) (denom y))
+       (* (numer y) (denom x)))
+    (* (denom x) (denom y))))
+    
+(define (*rat x y)
+  (make-rat
+    (* (numer x) (numer y))
+    (* (denom x) (denom y))))
+#+END_SRC
+
+I assume, by wishful thinking that a had a new kind of data
+object and ways of creating those objects, a constructor, and
+ways to get the parts out with selectors.
+
+You want to carry the numerator and denominator around together
+all the time.
+
+The name of this game is that we'd like the programming language
+to express the concepts that we have in our heads, like rational
+numbers are things that you can add and then take that result and
+multiply them.
+
+#+BEGIN_SRC scheme
+(*rat (+rat x y) (+rat z w))
+#+END_SRC
+
+
+
+Now let's look at the other problem. We need a glue for data
+objects that allows us to put things together.
+
+- list stucture
+- pairs
+- cons, operator
+- box and pointer notaion
+
+#+BEGIN_SRC scheme
+(cons x y) ;; constructs a pair with x first and y second part
+
+(car p)    ;; selects the first part of the pair
+
+(cdr p)    ;; selects the second part of the pair
+#+END_SRC
+
+
+#+BEGIN_SRC scheme
+(define (make-rat n d)
+  (cons n d))
+
+(define (numer x)
+  (car x))
+
+(define (denom x)
+  (cdr x))
+#+END_SRC
+
+
+#+BEGIN_SRC scheme
+(define A (make-rat 1 2))
+
+(define B (make-rat 1 4))
+
+(define ans (+rat A B))
+
+(numer ans) ;; -> 6
+(demon ans) ;; -> 8
+#+END_SRC
+
+We need to reduce it to lowest terms. Lets redifine make-rat:
+
+#+BEGIN_SRC scheme
+(define (make-rat n d)
+  (let ((g (gcd n d)))
+    (cons (/ n g)
+          (/ d g))))
+#+END_SRC
+
+Now we have a full system for rational numbers.
+the abstruction barrier is between the operations +rat, *rat, -rat
+and the pairs, between the use and the representation.
+
+Use: +rat, *rat, -rat  
+
+Abstraction layer: make-rat, numer, denom  
+
+Representation: pairs  
+
+Data abstruction: a programming methodology of setting up data
+objects by postulating constructors and selectors to isolate use
+from representation.
+
+But why are we doing all of this? We can write it with less code.
+#+BEGIN_SRC scheme
+(define (+rat x y)
+  (cons (+ (* (car x) (cdr y))
+           (* (car y) (cdr x)))
+        (* (cdr x) (cdr y))))
+#+END_SRC
+
+The most important principal in sorcery is if you know the name of
+the spirit you get control over it. In cs if you have the name of
+the thing you get control over it. If we write it this way we lose
+control. In system like that you don't have the idea about
+rational number as a conceptual entity.
+
+But what is the advantage of isolation?
+You might want to have alternative representations:
+For example when you make rational number you may just cons it.
+
+#+BEGIN_SRC scheme
+(define (make-rat n d)
+  (cons n d))
+
+(define (number x)
+  (let ((g (gcd (car x) (cdr x))))
+    (/ (car x) g)))
+
+(define (numer x)
+  (let ((g (gcd (car x) (cdr x))))
+    (/ (cdr x) g)))
+#+END_SRC
+
+But there are 3 ways to do it. Which one is better?
+
+In general the way you'd like to retain flexibility is to never
+make up our mind about anything until you are forced to do it.
+The problem is, there is a very narrow line between deferring
+decisions and outright procrastination. You want to make progress,
+but also never be bound by the consequences of your decisions.
+Data abstruction is one way of doing this. We used wishful
+thinking. We gave a name to the decision.
+We gave a name to the decision of how we are going to do it, and
+then continuing as if we made the decision.
 
 
 
