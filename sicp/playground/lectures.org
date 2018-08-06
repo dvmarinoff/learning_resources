@@ -587,6 +587,15 @@ Points in a plane.
               (ycor (seg-start s)))))
     (sqrt (+ (square dx)
              (square dy)))))
+             
+(define (+vect v1 v2)
+  (make-vector
+    (+ (xcor v1) (xcor v2))
+    (+ (ycor v1) (ycor v2))))
+    
+(define (scale s v)
+  (make-vector (* s (xcor v))
+               (* s (ycor v))))
 #+END_SRC
 
 line -> point -> number
@@ -641,8 +650,171 @@ The point is it could work this way and it wouldn't make any
 difference to the system at all.
 We are going to blur the line between data and procedure. 
 
+Procedures can be objects. We can write it this way:
+#+BEGIN_SRC scheme
+(define make-vector cons)
+(define xcor car)
+(define ycor cdr)
+
+(define make-segment cons)
+(define seg-start car)
+(define seg-end cdr)
+
+(make-seg (make-vector 2 3)
+          (make-vector 5 1))
+#+END_SRC
+
+Closures are the thing that allows us to start building up
+complexity, that didn't trap us in pairs.
+
+The set of data objecys in Lisp is closed under the operation
+of forming pairs. (Like in Fortarn you can put numbers and chars,
+in an array, but not make array of arrays)
+
 ** 3A.1 Henderson Escher Example
 
+There are many ways to represent sequances with pairs.
+Lisp has a particular convention for representing a sequance of
+things as essentially a chain of pairs. And that is called a list.
+
+#+BEGIN_SRC scheme
+;; [1, pointer-next] -> [2, pointer-next] -> [3, nil]
+
+(cons 1
+  (cons 2)
+    (cons 3
+      (cons 4 nil)))
+
+;; a short hand for cons cons ...
+(define 1-to-4 (list 1 2 3 4))
+
+(car 1-to-4)             ;; -> 1
+(car (cdr 1-to-4))       ;; -> 2
+(car (cdr (cdr 1-to-4))) ;; -> 3
+
+(scale-list 1-to-4)
+
+;; cdr-ing a down a list
+(define (scale-list s l)
+  (if (null? l)
+      null
+      (cons (* (car l) s)
+            (scale-list s (cdr l)))))
+
+(scale-list 10 '(1 2 3 4))
+
+;; but you should be using higher order functions
+(define (map p l)
+  (if (null? l)
+      null
+      (cons (p (car l))
+            (map p (cdr l)))))
+            
+(define (for-each proc list)
+  (cond ((null? list) "done")
+        (else (proc (car list))
+              (for-each proc
+                        (cdr list)))))
+
+(define (scale-list s l)
+  (map (lambda (item) (* item s))
+       l))
+#+END_SRC
+
+#+BEGIN_SRC javascript 
+const map = function(fn, xs) {
+    if(null === xs) { return null };
+    return cons( fn(car(xs)), map(fn, (cdr xs)) );
+};
+
+const forEach = function(proc, list) {
+    if(null === list) { return "done"; }
+    proc(car(list));
+    return forEach(proc, cdr(list)); 
+};
+#+END_SRC
+
+** 3A.2
+
+Meta-linguistic abstraction: tackling complexity in engineering
+design is to build a suitable powerful language.
+
+When you think about a language yu think in the terms of
+- Primitives
+- Means of combination
+- Means of abstruction
+
+You take those bigger things that you build and put black boxes
+around them and use them and use them as elements in building
+something even more complicated.
+
+The basic is a rectangle. It is specified by an origin + horiz +
+vert verteces.
+
+#+BEGIN_SRC scheme
+(define (make-rect) ())
+(define (horiz) ())
+(define (vert) ())
+(define (origin) ())
+
+#+END_SRC
+
+There is a transformation that maps from the basis square to the
+rectangle.
+
+#+BEGIN_SRC scheme
+(define (coord-map rect)
+ (lambda (point)
+   (+vert
+     (+vert (scale (xcor point)
+                   (horiz rect))
+            (scale (ycor point)
+                   (vert rect)))
+     (origin rect))))
+
+(define (make-picture seglist)
+  (lambda (rect)
+    (for-each
+      (lambda (s)
+        (drawline
+          ((coord-map rect) (seg-start s))
+          ((coord-map rect) (seg-end s))))
+      seglist)))
+#+END_SRC
+
+** 3A.3
+
+
+
+
+
+** 3B.1 Symbolic Differentiation Quotation
+
+In order to make a system more robust, it has to be insensitive to
+small changes, that is a small change in the problem should lead
+to only a small change in the solution. Instead of solving a
+particular problem at every level of decomposition of the problem
+at subproblems, where you solve the class of problems, which are a
+neighborhood of the particular problem you are tring to solve.
+The way you do that is by introducing a language at that level of
+detail in which the solutions to that class of problems is
+representable in the language. Therefore when you change makes
+small changes to the problem ou are tring to solve, you generally
+have to make only small local changes to the solution you've
+constructed, because at the level of detail you ara working, there
+is a language where you can express the various solutions to
+alternate problems of the same type.
+
+That is the begging of the most important idea that makes cs more
+powerful then most of the other kinds of engineering.
+
+So far we've seen how to use embedding of languages. This power
+comes partly from higher order procedures. However now we are
+going to blur the lines between data and procedures(very badly
+this time).
+
+Can we make programs that manipulate mathematical expressions like
+the rules about derivatives.
 
 # template
 #+BEGIN_SRC scheme

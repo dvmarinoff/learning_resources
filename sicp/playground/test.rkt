@@ -86,22 +86,46 @@
     (sqrt (+ (square dx)
              (square dy)))))
 
+(define (+vect v1 v2)
+  (make-vector
+   (+ (xcor v1) (xcor v2))
+   (+ (ycor v1) (ycor v2))))
+
 (define A (make-vector 1 3))
 (define B (make-vector 5 5))
+(define D (make-vector 1 4))
+
+(+vect A B)
 
 (define AB (make-seg A B))
 
 (mid-point AB)
 
-(define (cons a b)
-  (lambda (pick)
-    (cond ((= pick 1) a)
-          ((= pick 2) b))))
+;; (define (cons a b)
+;;   (lambda (pick)
+;;     (cond ((= pick 1) a)
+;;           ((= pick 2) b))))
 
-(define (car x) (x 1))
+;; (define (car x) (x 1))
 
-(define (cdr x) (x 2))
+;; (define (cdr x) (x 2))
 
-(define p (cons 1 3))
-(car p)
-(cdr p)
+;; (define p (cons 1 3))
+;; (car p)
+;; (cdr p)
+(define 1-to-4 (list 1 2 3 4))
+
+
+(car 1-to-4)
+(car (cdr 1-to-4))
+(car (cdr (cdr 1-to-4)))
+
+(scale-list 1-to-4)
+
+(define (scale-list scaler xs)
+  (if (null? xs)
+      null
+      (cons (* scaler (car xs))
+            (scale-list scaler (cdr xs)))))
+
+(scale-list 10 '(1 2 3 4))
