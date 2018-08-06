@@ -1,5 +1,5 @@
 * SICP 
-** 2a.1
+** 2A.1
 A few programs that have a lot in common with each other.
 Make some abstractions that are not easy to make in most languages.
 
@@ -185,7 +185,7 @@ but the important thing is that it is different. But the recursive way
 allows for decomposition. To independantly change one part of the program
 without affecting the other part that was written for some other cases.
 
-** 2a.2
+** 2A.2
 "Computers to make people happy, not people to make computers happy."
 
 Babylonian method for finding square root
@@ -302,7 +302,7 @@ const averageDamp = function(fn) {
 //const averageDamp = fn => x => average(fn(x), x);
 #+END_SRC
 
-** 2a.3
+** 2A.3
 "... play with higher-order procedures ..."
 "functions map values, procedures compute functions"
 
@@ -372,7 +372,7 @@ class citizens:
 - to be returned as values of procedures
 - to be incorporated into data structures
 
-** 2B Compound Data
+** 2B.1 Compound Data
 
 There was an absraction barrier between sqrt and good-enuf.
 When we are building things we devorce the part of building things from
@@ -482,7 +482,7 @@ objects that allows us to put things together.
 (demon ans) ;; -> 8
 #+END_SRC
 
-We need to reduce it to lowest terms. Lets redifine make-rat:
+We need to reduce it to lowest terms. Lets redefine make-rat:
 
 #+BEGIN_SRC scheme
 (define (make-rat n d)
@@ -548,6 +548,100 @@ thinking. We gave a name to the decision.
 We gave a name to the decision of how we are going to do it, and
 then continuing as if we made the decision.
 
+NOTE: let is a way of setting up a context where you can make
+definitions. But those definitions are local to this context.
+
+** 2B.2
+
+Points in a plane.
+
+#+BEGIN_SRC scheme
+;; representing vectors in a plane
+(define (make-vector x x)
+  (cons x y))
+
+(define (xcor p) (car p))
+
+(define (ycor p) (cdr p))
+
+;; line segments
+(define (make-seg p q)
+  (cons p q))
+
+(define (seg-start s) (car s))
+
+(define (seg-end s) (cdr s))
+
+(define (mid-point s)
+  (let ((a (seg-start s))
+        (b (seg-end s)))
+    (make-vector
+      (average (xcor a) (xcor b))
+      (average (ycor a) (ycor b)))))
+
+(define (seg-length s)
+  (let
+      ((dx (- (xcor (seg-end s))
+              (xcor (seg-start s))))
+       (dy (- (ycor (seg-end s))
+              (ycor (seg-start s)))))
+    (sqrt (+ (square dx)
+             (square dy)))))
+#+END_SRC
+
+line -> point -> number
+
+Closure - the means of combination in your system are such that
+when you put things together using them, like we make a pair,
+you can then put those together with the same means of
+combination. So you can have not only a pair of numbers, but a
+pair of pairs.
+
+For example in Fortran you have arrays, but you can not put array
+in an array.
+
+Are the things you make closed under that means of combination?
+Pairs would not be that interesting if all you can do is a pair
+of numbers.
+
+Remember naming things gives us control over complexity.
+
+Q: but what about 3d points?
+A: Once you have 2 things you have as many things as you want.
+
+** 2B.3
+"existential crisis"
+
+You can build the cons primitive and car and cdr from nothing.
+
+#+BEGIN_SRC scheme
+(define (cons a b)
+  (lambda (pick)
+    (cond ((= pick 1) a)
+          ((= pick 2) b))))
+
+(define (car x) (x 1))
+
+(define (cdr x) (x 2))
+#+END_SRC
+
+#+BEGIN_SRC javascript
+const cons = function(a, b) {
+    return function(pick) {
+        if(pick === 1) { return a };
+        if(pick === 2) { return b };
+    };
+};
+
+const car = x => x(1);
+const cdr = x => x(2);
+#+END_SRC
+
+The point is it could work this way and it wouldn't make any
+difference to the system at all.
+We are going to blur the line between data and procedure. 
+
+** 3A.1 Henderson Escher Example
 
 
 # template
