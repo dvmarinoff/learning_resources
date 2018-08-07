@@ -1,4 +1,50 @@
 * SICP 
+** Evaluation Strateies
+
+The whole topic seems to be very confused. Sources put different
+meaning in the terminology. It is better to define the term before
+you use it in text. This is a glossary following the wiki page
+structure but in the context of SICP.
+
+Def.: Determine when to eveluate the arguments of a function.
+
+*** Strict evaluation (Eager)
+The most common class in popular languages.
+**** Applicative order 
+
+**** Call by value
+
+**** Call by reference
+the function receives an implicit reference to the value rather
+then a copy. Think php.
+
+**** Call by sharing
+implies that all values are based on objects rather then primitive
+types, that values are "boxed". Common in JavaScript, Ruby,
+python.
+
+*** Non-strict evaluation
+**** Normal Order
+same as Call by name, however in the context of SICP it is taken
+as equivelent to lazy evaluation.
+
+**** Call by name
+Arguments not evaluated before the function is called. If not used
+in the function the arg is not evaluated else it is evaluated each
+time it appears in the function body. 
+
+**** Lazy evaluation(call by need)
+Memoized call by name. If function argument is evaluated it is
+stored for subsequent uses. If combined with pure functions
+produces same result as Call by name, but saves the cost of
+recomputing the argument.
+
+**** Call by macro expansion
+
+*** Nondeterministic strategies
+- Full Beta-reduction
+- Call by future
+
 ** 2A.1
 A few programs that have a lot in common with each other.
 Make some abstractions that are not easy to make in most languages.
@@ -784,9 +830,10 @@ rectangle.
 
 ** 3A.3
 
-
-
-
+That is the part about the picture language. You have a rectangle
+box and you have to fit/fill images inside, which means
+transforming the image by squishing and stretching. Sorry but this
+part is boring.
 
 ** 3B.1 Symbolic Differentiation Quotation
 
@@ -813,8 +860,8 @@ comes partly from higher order procedures. However now we are
 going to blur the lines between data and procedures(very badly
 this time).
 
-Can we make programs that manipulate mathematical expressions like
-the rules about derivatives.
+Can we make programs that manipulate mathematical expressions
+(like the rules about derivatives).
 
 # template
 #+BEGIN_SRC scheme
