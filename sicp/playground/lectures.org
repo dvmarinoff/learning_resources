@@ -11,7 +11,7 @@ Def.: Determine when to eveluate the arguments of a function.
 *** Strict evaluation (Eager)
 The most common class in popular languages.
 **** Applicative order 
-
+evaluate the arguments and then apply
 **** Call by value
 
 **** Call by reference
@@ -25,8 +25,7 @@ python.
 
 *** Non-strict evaluation
 **** Normal Order
-same as Call by name, however in the context of SICP it is taken
-as equivelent to lazy evaluation.
+Fully expand and then reduce. Same as Call by name.
 
 **** Call by name
 Arguments not evaluated before the function is called. If not used
@@ -39,11 +38,32 @@ stored for subsequent uses. If combined with pure functions
 produces same result as Call by name, but saves the cost of
 recomputing the argument.
 
+Useful for resursively defining infinite data structures. Data is
+only generated as it is consumed and evaluation is terminated
+when consumption is complete.
+
+It requires the data to be available and meaningful. In pure fp
+languages this is guaranteed from immutability. In procedural
+languages it gives us the opportunity to delay calculations until
+the data for them becomes available.
+
+Transaction semantics(ts), when combined with lze they compliment,
+ts can be used to isolate expressions from tentative changes in
+state and lze can delay those same changes until it is time to
+commit the transaction. This may be a key component to combining
+Object and Functional technilogies.
 **** Call by macro expansion
 
 *** Nondeterministic strategies
 - Full Beta-reduction
 - Call by future
+
+** Evaluation in scheme 
+To evaluate a combination:
+1. Evaluate the subexpressions of the combination
+2. Apply the procedure that is the value of the leftmost
+subexpression(the operator) to the arguments that are the values
+of the other subexpressions(the operands)
 
 ** 2A.1
 A few programs that have a lot in common with each other.
@@ -504,6 +524,11 @@ objects that allows us to put things together.
 (cdr p)    ;; selects the second part of the pair
 #+END_SRC
 
+
+NOTE: The names come from the instructions set on the IBM 704.
+- cons cells:
+- car: constents of address register, head
+- cdr: contents of decrement register, tail
 
 #+BEGIN_SRC scheme
 (define (make-rat n d)

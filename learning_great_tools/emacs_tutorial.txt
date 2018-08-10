@@ -114,6 +114,18 @@ C-h i - read included manuals
 "Completion" - manual for auto-completion
 "Dired" - manual for working with files and dirs
 
+;; Keyboard Macros
+
+They are defined only for the current session.
+
+C-x ( - start recording
+C-x ) - stop recording
+C-x e - execute the macro once
+C-u 10 C-x e - execute the macro 10 times
+
+M-x name-last-kbd-macro <my-macro>- to name it for resuse in the same session
+M-x <my-macro>
+
 ;; CIDER
 
 Manual installation
