@@ -126,6 +126,13 @@ C-u 10 C-x e - execute the macro 10 times
 M-x name-last-kbd-macro <my-macro>- to name it for resuse in the same session
 M-x <my-macro>
 
+;; Scheme
+M-x run-geiser - runs geiser repl
+C-c C-s - choose scheme implementaion (fixes no geiser repl for
+this buffer)
+
+M-x restart-repl - to fix the repl after recursion process
+
 ;; CIDER
 
 Manual installation

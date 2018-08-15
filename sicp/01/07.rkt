@@ -18,7 +18,28 @@
 (define (square x)
   (* x x))
 
+(define (average x y)
+  (/ (+ x y) 2))
+
 (define (good-enough? guess x)
   (< (abs (- (square guess) x)) 0.001))
 
-;;
+(define (good-enuf-ratio? guess x)
+  (< (/ (abs (- improve guess x) guess))
+     guess)
+  1e-18)
+
+(define (improve guess x)
+  (average guess (/ x guess)))
+
+(define (sqrt-iter guess x)
+  (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x)
+                 x)))
+
+(define n 0.00000004)
+(sqrt-iter (/ n 2) n)
+
+;; the precision is set at 0.001 which causes problems with
+;; smaller numbers.

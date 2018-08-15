@@ -65,6 +65,184 @@ To evaluate a combination:
 subexpression(the operator) to the arguments that are the values
 of the other subexpressions(the operands)
 
+** Numbers
+"The characterization of numbers as ``simple data''
+is a barefaced bluff"
+
+** Procedures as black-box abstrsctions
+
+Block strucure:
+#+BEGIN_SRC scheme
+(define (sqrt x)
+  (define (good-enough? guess x)
+    (< (abs (- (square guess) x)) 0.001))
+  (define (improve guess x)
+    (average guess (/ x guess)))
+  (define (sqrt-iter guess x)
+    (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x) x)))
+  (sqrt-iter 1.0 x))
+#+END_SRC
+
+Lexical scoping:
+#+BEGIN_SRC scheme
+(define (sqrt x)
+  (define (good-enough? guess)
+    (< (abs (- (square guess) x)) 0.001))
+  (define (improve guess)
+    (average guess (/ x guess)))
+  (define (sqrt-iter guess)
+    (if (good-enough? guess)
+      guess
+      (sqrt-iter (improve guess))))
+  (sqrt-iter 1.0))
+#+END_SRC
+
+** 1A.2 Procedures and the Processes they generate
+
+A procedure is a pattern for the local evolution of a
+computational process. We wnat to be able to reason about the
+global process.
+
+*** Linear Recursion and Iteration
+
+We explore the classical factorial function.
+
+Linear recursive process:
+$$ n! = n \dot (n - 1) \dot (n - 2) \dots 3 \dot 2 \dot 1 $$
+
+$$ n! = n \dot (n - 1)! $$
+
+and
+
+$$ n! = 1 $$
+
+Then:
+
+#+BEGIN_SRC scheme
+(define (factorial n)
+  (if (= n 1)
+    1
+    (* n (factorial (- n 1)))))
+#+END_SRC
+
+Linear iterative process:
+
+We maintain a running product and a counter.
+- product <- counter * product
+- counter <- counter + 1
+And we simultaniously update.
+
+#+BEGIN_SRC scheme
+(define (factorial n)
+  (iter-factorial 1 1 n))
+ 
+(define (factorial-iter product counter max-count)
+  (if (> counter max-count)
+    product
+    (factorial-iter (* counter product) (+ 1 counter) max-count)))
+#+END_SRC
+
+Procedures are distinct from proccesses. Procedures generate
+processes. A procedure might look recursive, but generate an
+iteretive process. Procedures are about syntax, and processes are
+about evolution.
+
+Tail recursive implementations have the property to execute an
+iterative process, described by recursive procedure in constant
+space.
+
+Recursion process is expansion of deferred operations followed by
+contraction of their evaluation.
+
+
+*** Ackermann's function
+
+A research student to David Hilbert.
+
+The challenge:
+Can you come up with something that absolutly has to be done
+totally recursive (you can't do it with iteration/loops).
+
+There is a hierarchy of program types.
+
+- Recursively Enumerable functions: for some values of the
+arguments they will stop and give an answer, for others they will
+go on forever and will never stop repeating the same stack frames.
+- Recursive: you have to define recursively
+- Primitive recursive: those can be de-recursed
+
+| Type of function       |                                                                                                                                                            |
+|------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Undecidable            | ?                                                                                                                                                          |
+| Recursively Enumerable | for some values of the arguments they will stop and give an answer, for others they will go on forever and will never stop repeating the same stack frames |
+| Recursive              | you have to define recursively                                                                                                                             |
+| Primitive recursive    | those can be de-recursed (implemented with iterative for loops)                                                                                            |
+
+Ackermann(4,0) ;; -> 13
+Ackermann(4,1) ;; -> 65533
+Ackermann(4,2) ;; -> wait until after the end of the universe ...
+
+Will compute in time: 2^{65533} * (time-to-compute Ackermann(4,1))
+
+The number of seconds since the big bang is 2^{59}.
+ 
+This is behaving super exponentially, not $ n^{n} $, but
+$ n^{n^{n^{\dots^{n}}}} $ n to the power of n, n times. We can
+never know the answer, but still it is not uncomputable.
+
+*** Tree recursion
+
+Fibonacci numbers: 0,1,1,2,3,5,8,13,21,...
+
+Fib(0) = 0
+
+Fib(1) = 1
+
+Fib(n) = Fib(n - 1) + Fib(n - 2) 
+
+
+#+BEGIN_SRC scheme
+(define (fib n)
+  (cond ((= n 0) 0)
+        ((= n 1) 1)
+        (else (+ (fib (- n 1))
+                 (fib (- n 2))))))
+#+END_SRC
+
+Use a pair of integers $a$ and $b$ initialized as Fib(1) and
+Fib(0), and repeatedly apply the transformations:
+
+a = a + b
+
+b = a
+ 
+#+BEGIN_SRC scheme
+(define (fib n)
+  (fib-iter 1 0 n))
+
+(define (fib-iter a b count)
+  (if (= count 0)
+      b
+      (fib-iter (+ a b) a (- count 1))))
+#+END_SRC
+
+But tree-recursive processes are natural and powerful tool for
+operating on hierarhically structured data.
+
+*** Counting Change
+
+#+BEGIN_SRC scheme
+
+#+END_SRC
+
+
+
+
+#+BEGIN_SRC scheme
+
+#+END_SRC
 ** 2A.1
 A few programs that have a lot in common with each other.
 Make some abstractions that are not easy to make in most languages.
