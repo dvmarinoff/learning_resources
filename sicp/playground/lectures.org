@@ -233,8 +233,37 @@ operating on hierarhically structured data.
 
 *** Counting Change
 
-#+BEGIN_SRC scheme
+How many diff ways we can make change of 1.00 given:
+0.50, 0.25, 0.10, 0.05, 0.01
 
+While iterative solution might be harder to find, this problem has
+simple a simple solution as a recursive procedure.
+
+Recursively reduce the problem of changing a given amount to the
+problem of changing a smaller amount with fewer kinds of coins.
+
+
+n = f(amount, kinds.drop d) + f(amount - kinds.get d, kinds) 
+
+#+BEGIN_SRC scheme
+(define (count-change amount)
+  (cc amount 5))
+
+(define (cc amount kinds-of-coins)
+  (cond ((= amount 0) 1)
+        ((or (< amount 0) (= kinds-of-coins 0)) 0)
+        (else (+ (cc amount (- kind-of-coins 1))
+                 (cc (- amount (first-denomination kinds-of-coins))
+                     kinds-of-coins)))))
+
+(define (denomination kind-of-coins)
+  (cond ((= kinds-of-coins 1) 1)
+        ((= kinds-of coins 2) 5)
+        ((= kinds-of-coins 3) 10)
+        ((= kinds-of-coins 4) 25)
+        ((= kinds-of-coins 5) 50)))
+
+(count-change 100) ;; -> 292
 #+END_SRC
 
 
@@ -1051,20 +1080,310 @@ detail in which the solutions to that class of problems is
 representable in the language. Therefore when you change makes
 small changes to the problem ou are tring to solve, you generally
 have to make only small local changes to the solution you've
-constructed, because at the level of detail you ara working, there
-is a language where you can express the various solutions to
-alternate problems of the same type.
+constructed, because at the level of detail you ara working,
+there is a language where you can express the various solutions
+to alternate problems of the same type. That is the begging of
+the most important idea that makes cs more powerful then most of
+the other kinds of engineering. So far we've seen how to use
+embedding of languages. This power comes partly from higher order
+procedures. However now we are going to blur the lines between
+data and procedures(very badly this time). Can we make programs
+that manipulate mathematical expressions (like the rules about
+derivatives).
 
-That is the begging of the most important idea that makes cs more
-powerful then most of the other kinds of engineering.
+Robustness requres insensitivity to small  changes.
 
-So far we've seen how to use embedding of languages. This power
-comes partly from higher order procedures. However now we are
-going to blur the lines between data and procedures(very badly
-this time).
+Where you should solve at:
+- Level of decomposition
+- Class of neighourhood problems
+  
+Solution:
+Make a language that represents the solutions of that class of
+problems. Embeding languages makes cs the most powerful kind of
+engeneering.
 
-Can we make programs that manipulate mathematical expressions
-(like the rules about derivatives).
+#+BEGIN_SRC scheme
+(define (derive f)
+  (lambda (x)
+    (/ (- (f (+ x dx))
+          (f x))
+       dx)))
+
+(define dx 0.00001)
+#+END_SRC
+
+The porblem:
+Why derivatives are easy to express, while their opposites the
+integrals are hard?
+
+Consider:
+$ \frac{d(u+v)}{dx} = \frac{du}{dx} + \frac{dv}{dx} $
+$ \frac{d(uv)}{dx} = u\frac{dv}{dx} + v\frac{du}{dx} $
+
+Going to the right is a reduction, you construct from a simpler
+problem (easy for recursion).
+
+While going to the left, trying to produce integrals:
+- more than one rule mathches (sums)
+- expressioin become larger (termination is not guarantied)
+
+Making dispatch on the type of the expression (absolutly
+essential in building languages).
+
+Constant, Sum rule, Product rule:
+#+BEGIN_SRC scheme
+
+(define (deriv exp var)
+  (cond ((constant? exp var) 0)
+        ((same-var? exp var) 1)
+        ((sum? exp)
+         (make-sum (deriv (a1 exp) var)
+                   (deriv (a2 exp) var)))
+        ((product? exp)
+         (make-sum
+          (make-product (m1 exp)
+                        (deriv (m2 exp) var))
+          (make-product (m2 exp)
+                        (deriv (m1 exp) var))))))
+
+(define (atom? x)
+  (and (not (null? x))
+       (not (pair? x))))
+
+(define (constant? exp var)
+  (and (atom? exp)
+       (not (eq? exp var))))
+
+(define (same-var? exp var)
+  (and (atom? exp)
+       (eq? exp var)))
+
+(define (sum? exp)
+  (and (not (atom? exp))
+       (eq? (car exp) '+)))
+
+(define (make-sum a1 a2)
+  (list '+ a1 a2))
+
+(define a1 cadr)
+
+(define a2 caddr)
+
+(define (product? exp)
+  (and (not (atom? exp))
+       (eq? (car exp) '*)))
+
+(define (make-product m1 m2)
+  (list '* m1 m2))
+
+(define m1 cadr)
+
+(define m2 caddr)
+
+#+END_SRC
+
+I want to represent sums, products, differences and quotients,
+why not use the same language as I am writing my program in. 
+
+#+BEGIN_SRC scheme
+(+ (* a (* x x))
+   (* b x)
+   c)
+#+END_SRC
+
+In list structures every one of these objects has the property
+that I know where the car is (the operator). It is already parsed.
+
+- Car is the operator
+- Cdrs are the operands (succesive car cdr)
+
+Ambiguity in natural language:
+- "Say your name!". 
+- "Say: 'your name'!"
+
+Resolved with quotation.
+
+But quotation may be the prototypical referentialy opaque context.
+
+PN: as the ancient greeks had to develop math mostly through
+geometry, because they did not have a suitable language for
+alegbra ($\sqrt{2}$ is a famous instance of this problem).
+
+** 3B.2 Symbolic Differentiation Continued
+
+The form of the proccess is expanded from the local rules that
+you see in the procedure. The procedure represents a set of local
+rules for the exapnsion of this process. Here the process left
+behind some stuff, which is the answer, and it was constructed by
+the walk it takes of the tree structure, which is the expresion.
+
+The same problem as with the rational numbers, the answer was not
+simplified.
+
+- Derivative rules: Sum rule, Power rule
+- Abstraction Barrier: constant? same-var? sum? make-sum?
+- Representation of alg. exp.: list structure
+
+Having this barrier helps me to arbitrarily change this
+representation without changing the rules that I have written in
+terms of that representation.
+
+Many constructioins seem redundant:
+- exp + 0 = exp
+- exp * 1 = exp
+
+#+BEGIN_SRC scheme
+(define (make-sum a1 a2)
+  (cond ((and (number? a1)
+              (number? a2))
+         (+ a1 a2))
+        ((and (number? a1) (= a1 0)) a2)
+        ((and (number? a2) (= a2 0)) a1)
+        (else (list '+ a1 a2))))
+
+(define (make-product m1 m2)
+  (cond ((and (number? m1)
+              (number? m2))
+         (* m1 m2))
+        ((and (number? m1) (= m1 1)) m2)
+        ((and (number? m2) (= m2 1)) m1)
+        ((and (number? m1) (= m1 0)) 0)
+        ((and (number? m2) (= m2 0)) 0)
+        (else (list '* m1 m2))))
+#+END_SRC
+
+
+** 4A.1 Pattern-matching: Rule-based Substitution
+
+Why we should have to transfer these rules into the language of
+the computer? 
+
+It was a very stylized program:
+- a conditional
+- a dispatch on the type of the expression
+- as observed by the rules
+
+Is there a more clear way to write this program?
+
+What is a Rule? Rules have parts:
+
+$$\frac{dvu}{dx} = u\frac{dv}{dx} + v\frac{du}{dx}$$
+
+- left hand side: is compared with the expression we try to take
+the derivative of
+- right hand side: is the replacement of that expression
+
+All rules are something like this:
+- Pattern: something that matches $\frac{dvu}{dx}$
+- Skeleton: something you substitute into in order to make get a
+new expresion $u\frac{dv}{dx} + v\frac{du}{dx}$
+
+That means a pattern is matched against the expression (which is
+the source expresion) and the result  of the application of the
+rule is to produce a new expression (a target) by instantiatio of
+a skeleon.
+
+Rules(forms a graph 1->2->4 1->3->4):
+- 1. Pattern, 2. Skeleton, 3. Expression Source, 4. Expression Target
+- (1->2): Rule, (1->3): Match, (3->4): undefined, (2->4): Instantiation 
+
+TODO: add a graphic with both schemas from beginning and end of
+lecture
+
+We want to build a language and a means of interpreting that
+language, executing that language, a language that allows to
+directly express those rules.
+
+Instead of bringing the rules to the  level of the computer, by
+writing a program that is those rules, we are going to bring the
+computer to the level of us, by writing a way by which the
+computer can understand a rules of this sort.
+
+We are trying to write a solution to a class of problems, rather
+then a particular one.
+
+We would like to encapsulate all of the things that are common to
+both of those programs: the idea of matching, instantiation, the
+controll structure, separatly from the rules themselves.
+
+#+BEGIN_SRC scheme
+
+(define deriv-rules
+  '(
+    ( (dd (?c c) (? v))     0)
+    ( (dd (?v v) (? v))     1)
+    ( (dd (?v u) (? v))     0)
+
+    ( (dd (* (? x1) (? x2)) (? v))
+      (+ (dd (: x1) (: v))
+         (dd (: x2) (: v)))  )
+    ;; ...
+    ))
+#+END_SRC
+
+Rule 1:
+- the derivative of a constant $c$ with respect to a variable $v$ 
+- And on the rigth-hand side we get: 0
+
+Rule 4:
+- the derivative of the sum of exp. $x1$ and exp. $x2$ with respect
+to a variable $v$
+- 1
+
+- Pattern variables: begin with ?
+- Substitution object: is : for evaluation
+- left-hand side is the pattern
+- right hand-side is the skeleton
+
+Patterns to match:
+- foo matches to foo
+- (f a b) matches a list with elements f, a, b
+- (? x) matches any, call at x
+- (?c x) matches a constant, called x
+- (?v x) matches a variable, called x
+
+Skeletons for instantiation:
+- foo instantiates foo
+- (f a b) instantiates list of the results of instantiating f, a, b
+- (: x) instantiates the value of x
+
+
+We are going to write a general purpose simplifier:
+#+BEGIN_SRC scheme
+(define dsimp (simplifier deriv-rules))
+
+(dsimp '(dd (+ x y) x))
+;; -> (+ 1 0)
+#+END_SRC
+
+Once we are done with calculus rules we may add algebraic
+manipulation rules.
+
+
+Rule 1:
+- any operator applied to a constant e1 and a constant e2 is the
+result of evaluating that operator on the constants
+
+#+BEGIN_SRC scheme
+(define algebra-rules
+  '(
+    ( ((? op) (?c e1) (?c e2))
+      (: (op e1 e2)))
+
+    ( ((? op) (? e1) (?c e2))
+       ((: op) (: e2) (: e1)))
+
+    ( (+ 0 (? e)) (: e))
+
+    ( (* 1 (? e)) (: e))
+
+    ( (* 0 (? e)) 0)
+    ;; ...
+))
+#+END_SRC
+
+
+
 
 # template
 #+BEGIN_SRC scheme
