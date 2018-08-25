@@ -129,3 +129,115 @@
             (scale-list scaler (cdr xs)))))
 
 (scale-list 10 '(1 2 3 4))
+
+;; 3B.1
+(define (derive f)
+  (lambda (x)
+    (/ (- (f (+ x dx))
+          (f x))
+       dx)))
+
+(define dx 0.00001)
+
+((derive (lambda (x) (* x x))) 4)
+
+(define (deriv exp var)
+  (cond ((constant? exp var) 0)
+        ((same-var? exp var) 1)
+        ((sum? exp)
+         (make-sum (deriv (a1 exp) var)
+                   (deriv (a2 exp) var)))
+        ((product? exp)
+         (make-sum
+          (make-product (m1 exp)
+                        (deriv (m2 exp) var))
+          (make-product (m2 exp)
+                        (deriv (m1 exp) var))))))
+
+(define (constant? exp var)
+  (and (atom? exp)
+       (not (eq? exp var))))
+
+(define (same-var? exp var)
+  (and (atom? exp)
+       (eq? exp var)))
+
+(define (sum? exp)
+  (and (not (atom? exp))
+       (eq? (car exp) '+)))
+
+(define (make-sum a1 a2)
+  (list '+ a1 a2))
+
+(define a1 cadr)
+(define a2 caddr)
+
+(define (product? exp)
+  (and (not (atom? exp))
+       (eq? (car exp) '*)))
+
+(define (make-product m1 m2)
+  (list '* m1 m2))
+
+(define m1 cadr)
+(define m2 caddr)
+
+(define bar '(+ (* 2 x) x))
+
+(define foo '(+ (* 2 x) x))
+
+(define (atom? x)
+  (and (not (null? x))
+       (not (pair? x))))
+
+(deriv foo 'x)
+
+;; 3B.2
+(define (make-sum a1 a2)
+  (cond ((and (number? a1)
+              (number? a2))
+         (+ a1 a2))
+        ((and (number? a1) (= a1 0)) a2)
+        ((and (number? a2) (= a2 0)) a1)
+        (else (list '+ a1 a2))))
+
+(define (make-product m1 m2)
+  (cond ((and (number? m1)
+              (number? m2))
+         (* m1 m2))
+        ((and (number? m1) (= m1 1)) m2)
+        ((and (number? m2) (= m2 1)) m1)
+        ((and (number? m1) (= m1 0)) 0)
+        ((and (number? m2) (= m2 0)) 0)
+        (else (list '* m1 m2))))
+
+;; 4A.1
+(define dsimp (simplifier deriv-rules))
+
+(dsimp '(dd (+ x y) x))
+
+(define deriv-rules
+  '(
+    ( (dd (?c c) (? v))     0)
+    ( (dd (?v v) (? v))     1)
+    ( (dd (?v u) (? v))     0)
+
+    ( (dd (* (? x1) (? x2)) (? v))
+      (+ (dd (: x1) (: v))
+         (dd (: x2) (: v)))  )
+    ;; ...
+    ))
+
+(define algebra-rules
+  '(
+    ( ((? op) (?c e1) (?c e2))
+      (: (op e1 e2)))
+
+    ( ((? op) (? e1) (?c e2))
+       ((: op) (: e2) (: e1)))
+
+    ( (+ 0 (? e)) (: e))
+
+    ( (* 1 (? e)) (: e))
+
+    ( (* 0 (? e)) 0)))

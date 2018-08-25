@@ -122,6 +122,7 @@ C-x ( - start recording
 C-x ) - stop recording
 C-x e - execute the macro once
 C-u 10 C-x e - execute the macro 10 times
+SPC-u 10 C-x e - for Spacemacs
 
 M-x name-last-kbd-macro <my-macro>- to name it for resuse in the same session
 M-x <my-macro>
