@@ -110,9 +110,10 @@ global process.
 We explore the classical factorial function.
 
 Linear recursive process:
-$$ n! = n \dot (n - 1) \dot (n - 2) \dots 3 \dot 2 \dot 1 $$
+$$ n! = n \cdot (n - 1) \cdot (n - 2) \dots 3 \cdot 2 \cdot 1 $$
 
-$$ n! = n \dot (n - 1)! $$
+
+$$ n! = n (n - 1)! $$
 
 and
 
@@ -180,16 +181,18 @@ go on forever and will never stop repeating the same stack frames.
 | Recursive              | you have to define recursively                                                                                                                             |
 | Primitive recursive    | those can be de-recursed (implemented with iterative for loops)                                                                                            |
 
-Ackermann(4,0) ;; -> 13
-Ackermann(4,1) ;; -> 65533
-Ackermann(4,2) ;; -> wait until after the end of the universe ...
+#+BEGIN_SRC javascript 
+Ackermann(4,0) // -> 13
+Ackermann(4,1) // -> 65533
+Ackermann(4,2) // -> wait until after the end of the universe ...
+#+END_SRC
 
 Will compute in time: 2^{65533} * (time-to-compute Ackermann(4,1))
 
 The number of seconds since the big bang is 2^{59}.
  
-This is behaving super exponentially, not $ n^{n} $, but
-$ n^{n^{n^{\dots^{n}}}} $ n to the power of n, n times. We can
+This is behaving super exponentially, not $n^{n}$, but
+$n^{n^{n^{\dots^{n}}}}$ n to the power of n, n times. We can
 never know the answer, but still it is not uncomputable.
 
 *** Tree recursion
@@ -340,9 +343,9 @@ When you design complex systems and you want to be able to understand them,
 it's crucial to divide the things up into as many pieces as you can, each
 of which you understand separately.
 
-$$ \sum_{i=a by 4}^{b} \frac{1}{i(i + 2)} $$
+$$ \sum_{i=a \text{ by } 4}^{b} \frac{1}{i(i + 2)} $$
 
-$$ \frac{1}{1 \dot 3} + \frac{1}{5 \dot 7} + \frac{1}{9 \dot 11} $$
+$$ \frac{1}{1 \cdot 3} + \frac{1}{5 \cdot 7} + \frac{1}{9 \cdot 11} $$
 
 converges to $\frac{\pi}{8}$ 
 
@@ -665,10 +668,10 @@ higher layers(so they can easily be someone elses' concern).
 We will build a calculating system:
 
 $$ \frac{1}{2} + \frac{1}{4} = \frac{3}{4},
-\frac{3}{4} + \frac{2}{3} = \frac{1}{2}$$
+\frac{3}{4} + \frac{2}{3} = \frac{1}{2} $$
 
-$$ \frac{n_{1}}{d_{1}} + \frac{n_{2}}{d_{2}} = \frac{n_{1}d_{2}+n_{2}d_{1}}{d_{1}d_{2}},
-\frac{n_{1}}{d_{1}} + \frac{n_{2}}{d_{2}} = \frac{n_{1}n_{2}}{d_{1}d_{2}} $$
+$$ \frac{n_{1}}{d_{1}} + \frac{n_{2}}{d_{2}} = \frac{n_{1}d_{2}+n_{2}d_{1}}{d_{1}d_{2}} $$
+$$ \frac{n_{1}}{d_{1}} + \frac{n_{2}}{d_{2}} = \frac{n_{1}n_{2}}{d_{1}d_{2}} $$
 
 Note that the system does not include rational numbers. Will will use the
 strategy of wishful thinking.
@@ -1067,7 +1070,7 @@ box and you have to fit/fill images inside, which means
 transforming the image by squishing and stretching. Sorry but this
 part is boring.
 
-** 3B.1 Symbolic Differentiation Quotation
+** 3B.1 Symbolic Differentiation
 
 In order to make a system more robust, it has to be insensitive to
 small changes, that is a small change in the problem should lead
@@ -1092,7 +1095,6 @@ that manipulate mathematical expressions (like the rules about
 derivatives).
 
 Robustness requres insensitivity to small  changes.
-
 Where you should solve at:
 - Level of decomposition
 - Class of neighourhood problems
@@ -1108,17 +1110,15 @@ engeneering.
     (/ (- (f (+ x dx))
           (f x))
        dx)))
-
 (define dx 0.00001)
 #+END_SRC
 
 The porblem:
 Why derivatives are easy to express, while their opposites the
-integrals are hard?
+integrals are hard? Consider:
 
-Consider:
-$ \frac{d(u+v)}{dx} = \frac{du}{dx} + \frac{dv}{dx} $
-$ \frac{d(uv)}{dx} = u\frac{dv}{dx} + v\frac{du}{dx} $
+$$ \frac{d(u+v)}{dx} = \frac{du}{dx} + \frac{dv}{dx} $$
+$$ \frac{d(uv)}{dx} = u\frac{dv}{dx} + v\frac{du}{dx} $$
 
 Going to the right is a reduction, you construct from a simpler
 problem (easy for recursion).
@@ -1140,8 +1140,7 @@ Constant, Sum rule, Product rule:
          (make-sum (deriv (a1 exp) var)
                    (deriv (a2 exp) var)))
         ((product? exp)
-         (make-sum
-          (make-product (m1 exp)
+         (make-sum (make-product (m1 exp)
                         (deriv (m2 exp) var))
           (make-product (m2 exp)
                         (deriv (m1 exp) var))))))

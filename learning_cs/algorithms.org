@@ -1167,6 +1167,167 @@ High Precision Multiplication
 
     TODO: finish it
 
+
+** Graphs: Theory  
+
+*** Case: Relative promiscuity of men and women    
+
+The question is: Who has more oposite sex partners: men or women?
+Studies where done by Univercity of Chicago(they managed to
+produce a fat book on the subject) and ABC News. 
+
+- Univercity of Chicago: on average men have 74% more
+- ABC News: men have 233% more
+- Graph Theory: 50%?
+
+\begin{theorem}
+Def: A graph $G$ is a pair of sets $(V, E)$, where $V$ is a nonempty
+set of items called Vertices (or Nodes) and $E$ is a set of 2-item
+subsets of $V$ called edges.
+\end{theorem}
+
+$$ V = {x_{1}, x_{2}, x_{3}, \dots, x_{7}} $$
+$$ E = { (x_{1}, x_{2}), (x_{1}, x_{3}), \dots, (x_{5}, x_{7}) } $$
+
+We allow for Graph with empty edges, but we do not allow for graph
+with empty Vertices. \\
+ 
+\begin{theorem}
+Def: Two nodes $x_{i}$ and $x_{j}$ are adjacent if ${x_{i}, x_{j}}$ is
+an edge. \\
+\end{theorem}
+
+\begin{theorem}
+Def: an edge $e = {x_{i}, x_{j}}$ is incident to its end points
+$x_{i}$ and $x_{j}$. \\
+\end{theorem}
+
+\begin{theorem}
+Def: the number of edges incident to a node is called the degree
+of the node. \\
+\end{theorem}
+
+\begin{theorem}
+Def: A graph is simple if it has no loops or multiple edges. \\
+\end{theorem}
+
+Now how do we use a graph to model our problem. We have
+$V_{m} = 147.6$ million men and $V_{w} = 152.4$ million women.
+Number of edges E is unknown. But we can try to figure out the
+is the ratio of the average degree of the men to the average
+degree of the women.
+
+Model: \\
+$A_{m}$ = the average # for men, \\
+$A_{w}$ = the average # for women \\
+
+What is $\frac{A_{m}}{A_{w}}$ = 1.74, 3.33 ?
+
+$$A_{m} = \frac{\sum^{x \in V_{m}} deg(x)}{|V_{m}|} = \frac{|E|}{|V_{m}|}$$
+
+$$A_{w} = \frac{\sum^{x \in V_{w}} deg(x)}{|V_{w}|} = \frac{|E|}{|V_{w}|}$$
+
+$$\frac{A_{m}}{A_{w}} = \frac{\frac{|E|}{|V_{m}|}}{\frac{|E|}{|V_{w}|}} = \frac{|V_{w}|}{|V_{m}|} = \frac{152.4}{147.6} = 1.0325 \approx 3.25 \% $$
+
+It seems it takes two to tango.
+
+*** Case: Scheduling exams
+
+We have 5 MIT classes that form the Nodes, and Edges that show
+overlapping student enrollment. If you have an edge connecting two
+nodes you can not have their exams at the same time. You also have
+a set of free time slots to make the exams and you want to otimize
+for early hours. This is an example of graoh coloring problem. \\
+
+Classes: {6.041, 6.002, 6.005, 6.042, 6.054}
+
+Slots: {wed 5-7pm, wed 7-9pm, wed 9-11pm, wed 11-1am, wed 1-3am} \\
+
+Graph coloring problem: Given a graph G and K colors, assaign a
+color for each node so adjacent nodes get different colors. \\
+
+Def: The minimal value of K for which such a coloring exists is
+called the Chromatic Number of G = $\kai(G)$ \\
+
+
+In our case the best that we can do is 3 colors, because 6.041,
+6.002 and 6.042 'form a triangle' and they must be different
+colors. There is no efficient algoritm for finding the Chromatic
+number (they are exponential and it is one of those np-complete
+problems). \\
+
+
+Basic Graph Coloring algoritm for G = (V, E):
+1. order the nodes from $v_{1}, v_{2},\dots, v_{n}$
+2. order the colors from $c_{1}, c_{2},\dots, c_{n}$
+3. process from $i=1,2,\dots, n$ and assign the lowest color to $v_{i}$
+
+#+BEGIN_SRC scheme
+#+END_SRC
+
+The different ordering will produce different results for K, but
+if you start on the largest degree nodes you will do better, if
+you try other exotic orderings you may find better results. That
+is also an example for greedy algorithm. \\
+
+Thm: If every node in $G$ has degree $\lte d$, the basic algorithm
+uses at most $d+1$ colors for $G$. \\
+
+Pf: by Induction \\
+
+I.H.: P(n) = for every node in an n node graph G $\dots$ \\
+
+B.S.: P(1) is true - 0 edges, 0 degree, 1 color works = d+1\\
+
+I.S.: Assume P(n) is true \\
+Let $G = (V, E)$ be any (n+1) node graph. Let $d$ = max degree of
+$G$. Order the nodes $v_{1}, v_{2},\dots, v_{n}$. Remove $V_{n+1}$
+from $G$ to create G' = (V', E'). G' has a max degree $\lte d$ and $n$
+nodes so P(n) says that the basic algorithm uses $\lte d+1$ colors for
+nodes $v_{1}, v_{2},\dots, v_{n}$. V_{n+1} has \gte d neighbors.
+$\implies \exists$ color in $c_{1}, c_{2},\dots, c_{d+1}$ not used by any
+neighbor. Give V_{n+1} that color. $\implies$ Basic Algorithm uses
+$\lte d+1$ colors on G. $\implies$ P(n+1).\\ 
+
+
+NOTE: be very careful with induction on graphs, you need to put n,
+which is V or E and induct on that.
+
+
+Def: A Graph G = (V, E) is bipartite(by-par-tie-t) if V can be split into
+$V_{L}, V_{R}$ so that all the edges connect a node in $V_{L}$ to
+a node in $V_{R}$.
+
+It is easy to tell if 2 colors are enough, but it is very hard for
+3 colors.
+
+*** Matching Problems
+    
+Def: Given a graph G = (V, E), a matching is a subgraph of G,
+where every node has degree 1.
+
+Def: A matching is perfect if it has size $\frac{|V|}{2}$
+
+Def: The weight of a matching M is the sum of the weights on the
+edges in M.
+
+Def: A min-weigth matching for graph G is a perfect matching for G
+with the min weight.
+{Brad-Jennifer, Billy-Angelina} is a min matching.
+
+Def: Given a matching M, x and y form a rogue couple, if they
+prefer each other over their mates in M.
+
+Def: Matching is stable if there are no rogue couples.
+{Brad-Angelina} is a rougue couple.
+
+Goal: Find a perfect matching that is stable.
+{Brad-Angelina, Billy-Jennifer} is a stable matching.
+
+Note: very often matching graphs are weighted graphs. Lower number
+means more desirsble matching.
+
+
 ** Graphs I: Breadth First Search
 
 *** Graphs
@@ -1537,3 +1698,16 @@ the mods applied.
 
     
 
+
+# templates
+#+BEGIN_SRC scheme
+
+#+END_SRC
+
+\begin{theorem}
+
+\end{theorem}
+
+#+BEGIN_EXAMPLE
+
+#+END_EXAMPLE
