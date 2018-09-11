@@ -30,7 +30,7 @@
 ;; procedure when (sine a) is evaluated?
 
 ;; a. 5
-;; b. space $O(n/3) \implies \Theta(n)$, steps $\Theta(log n)$
+;; b. time complexity is $ \frac{n}{3} \implies \Theta(log_{3} n)$, $\Theta(log n)$
 
 ;; Results from (trace p) and (trace sine), when we call (sine 12.15):
 ;;
