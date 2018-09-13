@@ -82,10 +82,11 @@
 
 (define (help)
   (display (string-join
-            '(" Usage: \n"
-              "--old .js --new .tjs --path ./js/ \n\n"
-              "Options: \n"
-              "-i for interactive mode\n"))))
+            (list
+             " Usage: \n"
+             "--old .js --new .tjs --path ./js/ \n\n"
+             "Options: \n"
+             "-i for interactive mode\n"))))
 
 (define (main)
   (handle-arguments (read-arguments)))
