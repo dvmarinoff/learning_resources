@@ -32,6 +32,9 @@ M-e - move to end of sentence
 M-< - move to beggining of text
 M-> - move to end of text
 
+M-m v - expand region
+M-m V - contract region
+
 C-u - to enter numeric argument before command
 Holding M - to enter numeric argument with command
 
@@ -54,6 +57,9 @@ C-w - cut selection
 M-w - copy selection
 M-y - go to previuos yank
 C-/ - undo
+M-c - to uppercase
+M-l - to lowercase
+M-u - to uppercase the word under cursor
 
 M-/ - hippie expand, cycles through possible expansions
 M-\ - delete all spaces and tabs around point
@@ -256,6 +262,16 @@ C-d - go down a page
 $ - go to end of line
 G - go to end of file
 
+;; selection + mutation
+ya <(,[,{> - yank inside (,[,{
+yf <char> - yank until char 
+
+de - delete to word end
+
+ca <(,[,{> - cut inside char and go into insert mode
+cf <> - cut until char and go into insert mode
+cit - cut inside tag and go into insert mode
+
 ;; editing
 u - undo
 C-r - redo
@@ -266,6 +282,18 @@ SPC r y - show previous things you've yanked
 
 ;; search
 SPC s s - search in a file
+
+;; paredit
+M-( - open up a pair of ()
+M-) - indent next pair of () 
+
+;; (define (add x y)) -> M-) + M-( -> to make a new pair indented
+;; on a new line
+
+va( - select current sexp
+va( M( - surround with a pair of () the current sexp
+
+va( C-x C-e - select surrent sexp and evaluate it
 
 ;; other
 SPC f f <type file path and name> - to create a new file
