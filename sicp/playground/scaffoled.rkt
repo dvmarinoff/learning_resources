@@ -1,5 +1,10 @@
 #lang at-exp racket
 
+;; (load "./fold.rkt")
+(require "fold.rkt")
+
+;; (format-desc (string-split "11111111" " ") "" 65 65)
+
 ;; Scaffolds a new sicp exercise with exercise and test file
 
 ;; My second racket program, so I still try to keep close to
@@ -9,6 +14,7 @@
 (define chapter (make-parameter 1))
 (define exercise (make-parameter 1))
 (define tests (make-parameter #t))
+(define desc (make-parameter "description"))
 
 (define (chapter-format n)
   (format "~a" n))
@@ -32,44 +38,6 @@
 (define (test-file-name exercise)
   (format "~a-tests.rkt" (exercise-format exercise)))
 
-;; @-sting expression
-(define template-tests @string-append{
-#lang racket
-
-(require rackunit rackunit/text-ui)
-
-(load @(format "\"~a\""
-               (exercise-path-relative-to-test (exercise))))
-
-(define @(format "sicp-~a-tests" (exercise-name (chapter) (exercise)))
-  (test-suite
-   @(format "\"testing ~a description\""
-            (exercise-name (chapter) (exercise)))
-
-    (check-equal? (main 0) 0)
-))
-
-(run-tests @(format "sicp-~a-tests"
-                    (exercise-name (chapter) (exercise))))
-})
-;; end
-
-;; @-sting expression
-(define template-exercise @string-append{
-#lang racket
-;; ex @(format "~a" (exercise-name (chapter) (exercise)))
-;;
-
-(define (main n) n)
-
-})
-;; end
-
-(define (touch file-name content)
-  (define out (open-output-file file-name #:exists 'truncate))
-  (display content out)
-  (close-output-port out))
-
 (define parser
   (command-line
    #:usage-help
@@ -88,7 +56,54 @@
     "boolean include a test file or not default is true"
     (tests (string=? "t" TESTS))]
 
+   [("-d" "--description") DESCRIPTION
+    "exercise short description for test file"
+    (desc DESCRIPTION)]
+
    #:args () (void)))
+
+;; @-sting expression
+(define template-tests @string-append{
+#lang racket
+
+(require rackunit rackunit/text-ui)
+
+(load @(format "\"~a\""
+               (exercise-path-relative-to-test (exercise))))
+
+(define @(format "sicp-~a-tests" (exercise-name
+                                  (chapter)
+                                  (exercise)))
+  (test-suite
+   @(format "\"testing ~a ~a\""
+            (exercise-name (chapter) (exercise)) (desc))
+
+    (check-equal? (main 0) 0)
+))
+
+(run-tests @(format "sicp-~a-tests"
+                    (exercise-name (chapter) (exercise))))
+})
+;; end
+
+;; @-sting expression
+(define template-exercise @string-append{
+#lang racket
+;; ex @(format "~a" (exercise-name (chapter) (exercise)))
+;; @(format "~a" (desc))
+
+(define (main n) n)
+
+})
+;; end
+
+;; TODO: string fold for longer descriptions
+;;@(format-desc (string-split (desc) " ") "" 65 65)
+
+(define (touch file-name content)
+  (define out (open-output-file file-name #:exists 'truncate))
+  (display content out)
+  (close-output-port out))
 
 (define (main)
   (touch (exercise-file-name (exercise)) template-exercise)
@@ -96,15 +111,3 @@
     (touch (test-file-name (exercise)) template-tests)))
 
 (main)
-
-;; (require net/http-client)
-;; (require html-parsing)
-
-;; (define domain "mitpress.mit.edu")
-;; (define book "/sites/default/files/sicp/full-text/book/")
-;; (define chapter "book-Z-H-11.html")
-
-;; (let-values (((status headers response)
-;;               (http-sendrecv domain
-;;                              (concat book chapter))))
-;;   (html->xexp response))
