@@ -1,6 +1,5 @@
 #lang at-exp racket
 
-;; (load "./fold.rkt")
 (require "fold.rkt")
 
 ;; Scaffolds a new sicp exercise with exercise and test file
@@ -13,6 +12,31 @@
 (define exercise (make-parameter 1))
 (define tests (make-parameter #t))
 (define desc (make-parameter "description"))
+
+(define parser
+  (command-line
+   #:usage-help
+   "Scaffold creates and fills in with some starter code"
+   "files for sicp exercises."
+
+   #:once-each
+   [("-c" "--chapter") CHAPTER
+    "the chapter number as an integer"
+    (chapter (string->number CHAPTER))]
+
+   [("-e" "--exercise") EXERCISE
+    "the exercice number as an integer"
+    (exercise (string->number EXERCISE))]
+
+   [("-t" "--tests") TESTS
+    "boolean include a test file or not default is true"
+    (tests (string=? "t" TESTS))]
+
+   [("-d" "--description") DESCRIPTION
+    "exercise short description for test file"
+    (desc DESCRIPTION)]
+
+   #:args () (void)))
 
 (define (chapter-format n)
   (format "~a" n))
@@ -41,31 +65,7 @@
       (make-directory "./tests/"))
   (format "./tests/~a" test-file-name))
 
-(define parser
-  (command-line
-   #:usage-help
-   "Scaffold creates and fills in with some starter code files for sicp exercises."
-
-   #:once-each
-   [("-c" "--chapter") CHAPTER
-    "the chapter number as an integer"
-    (chapter (string->number CHAPTER))]
-
-   [("-e" "--exercise") EXERCISE
-    "the exercice number as an integer"
-    (exercise (string->number EXERCISE))]
-
-   [("-t" "--tests") TESTS
-    "boolean include a test file or not default is true"
-    (tests (string=? "t" TESTS))]
-
-   [("-d" "--description") DESCRIPTION
-    "exercise short description for test file"
-    (desc DESCRIPTION)]
-
-   #:args () (void)))
-
-;; @-sting expression
+;; begin @-sting expression
 (define template-tests @string-append{
 #lang racket
 
@@ -89,7 +89,7 @@
 })
 ;; end
 
-;; @-sting expression
+;; begin @-sting expression
 (define template-exercise @string-append{
 #lang racket
 ;; ex @(format "~a" (exercise-name (chapter) (exercise)))
@@ -99,9 +99,6 @@
 
 })
 ;; end
-
-;; TODO: string fold for longer descriptions
-;;@(format-desc (string-split (desc) " ") "" 65 65)
 
 (define (touch file-name content)
   (define out (open-output-file file-name #:exists 'truncate))
