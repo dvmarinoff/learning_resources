@@ -3,8 +3,6 @@
 ;; (load "./fold.rkt")
 (require "fold.rkt")
 
-;; (format-desc (string-split "11111111" " ") "" 65 65)
-
 ;; Scaffolds a new sicp exercise with exercise and test file
 
 ;; My second racket program, so I still try to keep close to
@@ -37,6 +35,11 @@
 
 (define (test-file-name exercise)
   (format "~a-tests.rkt" (exercise-format exercise)))
+
+(define (test-file-path test-file-name)
+  (unless (directory-exists? "./tests/")
+      (make-directory "./tests/"))
+  (format "./tests/~a" test-file-name))
 
 (define parser
   (command-line
@@ -108,6 +111,7 @@
 (define (main)
   (touch (exercise-file-name (exercise)) template-exercise)
   (when (equal? #t (tests))
-    (touch (test-file-name (exercise)) template-tests)))
+    (touch (test-file-path (test-file-name (exercise)))
+           template-tests)))
 
 (main)
