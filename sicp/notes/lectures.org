@@ -69,6 +69,44 @@ of the other subexpressions(the operands)
 "The characterization of numbers as ``simple data''
 is a barefaced bluff"
 
+** Abstraactions with higher-order procedures
+
+Sumation notation: 
+$$\sum_{n=a}^{b} = f(n) = f(a) + \dots + f(b)$$
+
+#+BEGIN_SRC scheme
+(define (sum term a next b)
+  (if (> a b)
+      0
+      (+ (term a) (sum term (next a) next b))))
+#+END_SRC
+
+- term gives a term of the series with transformation applied on it
+like (cube x) or (identity x)
+- next gives the next term in the series like (inc n)
+
+$$ a_{i} + sum( a_{i+1} + \dots + a_{n} ) $$
+
+0+1+2+3+4 = 10
+
+#+BEGIN_SRC pseudocode 
+sum a b c d = a + sum b c d
+sum a b c d = a + b + sum c d
+sum a b c d = a + b + c + sum d
+sum a b c d = a + b + c + d
+where + is any sum operation
+#+END_SRC
+
+It generates terms of the series with a transformation applied on them
+until the lower bound, which is updated on each step meets the upper
+bound. Once all terms are available they are summed together.
+
+
+
+#+BEGIN_SRC scheme
+
+#+END_SRC
+
 ** Procedures as black-box abstrsctions
 
 Block strucure:

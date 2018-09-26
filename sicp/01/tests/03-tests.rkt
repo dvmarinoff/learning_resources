@@ -1,5 +1,6 @@
 (require rackunit rackunit/text-ui)
-(load "../03.rkt")
+
+(load "../01/03.rkt")
 
 (define sicp-1.3-tests
   (test-suite

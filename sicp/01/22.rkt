@@ -26,6 +26,9 @@
 ;; just use C-c C-s to change implementation to mit
 ;; (e.i. mit-scheme)
 
+;;;;
+;; Sicp code
+;;;;
 (define (timed-prime-test n)
   (newline)
   (display n)
@@ -39,3 +42,48 @@
   (display " *** ")
   (display elapsed-time))
 
+(define (prime? n)
+  (= n (smallest-divisor n)))
+
+(define (smallest-divisor n)
+  (find-divisor n 2))
+
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (+ test-divisor 1)))))
+
+(define (square x)
+  (* x x))
+
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+;;;;
+;; Solution
+;;;;
+(define (search-for-primes min max)
+  (filter prime? (range min max 2 '())))
+
+(define (range min max step lst)
+  (if (< max min)
+      lst
+      (range min (- max step) step (cons max lst))))
+
+(define (take n lst)
+  (take-iter '() 0 n lst))
+
+(define (take-iter taken i n lst)
+  (if (or (= i n) (null? lst))
+      (reverse taken)
+      (take-iter (cons (car lst) taken) (+ i 1) n (cdr lst))))
+
+(take 3 (search-for-primes 1000 1111))
+(take 3 (search-for-primes 10000 10111))
+(take 3 (search-for-primes 100000 100111))
+(take 3 (search-for-primes 1000000 1000111))
+
+(timed-prime-test 1009)
+(timed-prime-test 10007)
+(timed-prime-test 100003)
+(timed-prime-test 1000003)

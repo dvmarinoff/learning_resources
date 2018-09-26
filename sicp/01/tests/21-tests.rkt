@@ -1,6 +1,6 @@
 (require rackunit rackunit/text-ui)
 
-(load "./21.rkt")
+(load "../21.rkt")
 
 (define sicp-1.21-tests
   (test-suite

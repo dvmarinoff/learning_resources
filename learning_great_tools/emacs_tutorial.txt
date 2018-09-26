@@ -262,6 +262,10 @@ C-d - go down a page
 $ - go to end of line
 G - go to end of file
 
+;; selection
+viw - select the current word
+vi) - select inside ()
+
 ;; selection + mutation
 ya <(,[,{> - yank inside (,[,{
 yf <char> - yank until char 
@@ -323,3 +327,13 @@ C-x r t - to edit selection (top-left to bottom-right) as a rectangle
 gcc - comment line
 g c + vim motion - comment sections of code
 g c - in Visual mode toggle comment
+
+;; Column wrap
+M-x auto-fill-mode - to toggle automatic line-wrapping
+C-x f <number-of-cols> - to set max number of cols
+M-q - to format the buffer
+
+;; Org-mode
+
+C-c C-n - move the next heading
+C-c C-b - move back to previous heading
