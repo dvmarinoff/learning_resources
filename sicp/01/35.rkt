@@ -7,3 +7,29 @@
 ;; \phi by means of the fixed-point procedure
 
 (define (main n) n)
+
+(fixed-point cos 1.0)
+
+(fixed-point cont-fraction-phi 1.0)
+
+(define (cont-fraction-phi x)
+  (+ 1 (/ 1 x)))
+
+(define (fixed-point f guess)
+  (define next (f guess))
+  (if (close-enough? guess next)
+      next
+      (fixed-point f next)))
+
+(define (fixed-point-iter f first-guess)
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+          next
+          (try next))))
+  (try first-guess))
+
+(define (close-enough? x y)
+  (< (abs (- x y)) tolerance))
+
+(define tolerance 0.00001)

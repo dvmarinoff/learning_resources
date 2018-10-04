@@ -1,5 +1,5 @@
 * SICP 
-** Evaluation Strateies
+** Evaluation Strategies
 
 The whole topic seems to be very confused. Sources put different
 meaning in the terminology. It is better to define the term before
@@ -69,7 +69,7 @@ of the other subexpressions(the operands)
 "The characterization of numbers as ``simple data''
 is a barefaced bluff"
 
-** Abstraactions with higher-order procedures
+** Abstractions with higher-order procedures
 
 Sumation notation: 
 $$\sum_{n=a}^{b} = f(n) = f(a) + \dots + f(b)$$
@@ -583,14 +583,15 @@ also be the square root.
 
 $$ y \xrightarrow{\text{g}} \frac{x}{y}} $$
 
-But if x = 2 and you start with 1 it oscillates between 1 and 2, and you
-never get any closer to the square root. What you have is a signal
+But if x = 2 and you start with 1 it oscillates between 1 and 2, and
+you never get any closer to the square root. What you have is a signal
 processing system that oscillates and you want to damp put these
-oscillations. The average is avariging the last two values of something that
-oscillates.
+oscillations. The average is averiging the last two values of
+something that oscillates.
 
-Average-damp is a special procedure that will take a procedure as its arg
-and a procedure as its value.
+
+Average-damp is a special procedure that will take a procedure as its
+arg and a procedure as its value.
 #+BEGIN_SRC scheme
 (define (sqrt x)
   (fixed-point
@@ -678,7 +679,7 @@ const deriv = function(fn) {
 };
 #+END_SRC
 
-Chris Strachey, ligicion one of the grandfathers of cs.
+Chris Strachey, logicion one of the grandfathers of cs.
 Envented denotational semantics. Great advocate of making procedures first
 class citizens:
 - to be named by variables
