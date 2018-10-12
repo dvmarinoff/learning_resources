@@ -13,14 +13,18 @@
 ;;
 ;; (define (f x y . z) <body>)
 ;;
-;; the procedure f can be called with two or more arguments. If we evaluate
+;; the procedure f can be called with two or more arguments.
+;; If we evaluate
+;;
 ;; (f 1 2 3 4 5 6)
+;;
 ;; then in the body of f, x will be 1, y will be 2, and z will be
 ;; the list (3 4 5 6). Given the definition
 ;;
 ;; (define (g . w) <body>)
 ;;
-;; the procedure g can be called with zero or more arguments. If we evaluate
+;; the procedure g can be called with zero or more arguments.
+;; If we evaluate
 ;;
 ;; (g 1 2 3 4 5 6)
 ;;
@@ -36,4 +40,19 @@
 ;; (same-parity 2 3 4 5 6 7)
 ;; (2 4 6)
 
-(define (main n) n)
+;; since I couldn't understand the way they want the args
+;; I am providing  two solutions for the two way that the
+;; requirement could be interpreted:
+;; 1. (same-parity . xs)
+;; 2. (same-parity number . xs)
+
+(same-parity 1 2 3 4 5 6 7)
+(same-parity 2 3 4 5 6 7)
+
+(define (same-parity . xs)
+  (define f (if (odd? (car xs)) odd? even?))
+  (filter f xs))
+
+(define (same-parity number . xs)
+  (define f (if (odd? (car xs)) odd? even?))
+  (cons number (filter f xs)))
