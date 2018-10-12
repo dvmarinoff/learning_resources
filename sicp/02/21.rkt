@@ -19,4 +19,13 @@
 ;; (define (square-list items)
 ;;   (map <??> <??>))
 
-(define (main n) n)
+(square-list (list 1 2 3 4))
+
+(define (square-list items)
+  (if (null? items)
+      null
+      (cons (sqr (car items))
+            (square-list (cdr items)))))
+
+(define (square-list items)
+  (map sqr items))
