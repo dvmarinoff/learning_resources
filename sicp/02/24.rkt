@@ -2,9 +2,30 @@
 ;; ex 02.24
 ;; examine nested lists
 ;;
-;; Suppose we evaluate the expression (list 1 (list 2 (list 3 4))).
+;; Suppose we evaluate the expression
+;; (list 1 (list 2 (list 3 4)))
 ;; Give the result printed by the interpreter, the
 ;; corresponding box-and-pointer structure, and the
 ;; interpretation of this as a tree (as in figure 2.6).
 
-(define (main n) n)
+(list 1 (list 2 (list 3 4)))
+;; -> (1 (2 (3 4)))
+
+;; here is the tree
+;;
+;;  + (1 (2 (3 4)))
+;;  | \
+;;  1 +
+;;    | \
+;;    2  + (2 (3 4))
+;;       | \
+;;       3  + (3 4)
+;;          |
+;;          4
+
+;; and the box thingy
+;;
+;; [++] -> [+\]
+;;  1      [++] -> [+\]
+;;          2      [++] -> [+\]
+;;                  3       4
