@@ -31,6 +31,42 @@
 ;;
 ;; This doesn't work either. Explain.
 
-(define (main n) n)
+(square-list (list 1 2 3 4))
 
+(define (square-list items)
+  (define (iter things answer)
+    (display (format "~a ~a ~a\n" items things answer))
+    (if (null? things)
+        answer
+        (iter (cdr things)
+              (cons (sqr (car things))
+                     answer))))
+  (iter items null))
 
+;; (square-list (list 1 2 3 4))
+;;
+;; => (16 9 4 1)
+;;
+;; items     things    answer
+;;--------------------------------
+;; (1 2 3 4) (1 2 3 4) ()
+;; (1 2 3 4) (2 3 4)   (1)
+;; (1 2 3 4) (3 4)     (4 1)
+;; (1 2 3 4) (4)       (9 4 1)
+;; (1 2 3 4) ()        (16 9 4 1)
+;;
+;; -> it is accumulating in the beggining of the list
+
+;; (square-list (list 1 2 3 4))
+;;
+;; => ((((() . 1) . 4) . 9) . 16)
+;;
+;; items     things    answer
+;;-------------------------------------------------
+;; (1 2 3 4) (1 2 3 4) ()
+;; (1 2 3 4) (2 3 4)   (() . 1)
+;; (1 2 3 4) (3 4)     ((() . 1) . 4)
+;; (1 2 3 4) (4)       (((() . 1) . 4) . 9)
+;; (1 2 3 4) ()        ((((() . 1) . 4) . 9) . 16)
+;;
+;; -> it is nesting pairs
