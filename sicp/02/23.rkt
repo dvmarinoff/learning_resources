@@ -19,4 +19,10 @@
 ;; above) can be something arbitrary, such as true. Give an
 ;; implementation of for-each.
 
-(define (main n) n)
+(for-each (lambda (x) (newline) (display x))
+          (list 57 321 88))
+
+(define (for-each fn lst)
+  (cond ((empty? lst) lst)
+        (else (fn (car lst))
+              (for-each fn (cdr lst)))))
