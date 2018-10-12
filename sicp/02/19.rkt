@@ -15,10 +15,10 @@
 ;; values of the coins to use rather than an integer specifying
 ;; which coins to use. We could then have lists that defined each
 ;; kind of currency:
-
+;;
 (define us-coins (list 50 25 10 5 1))
 (define uk-coins (list 100 50 20 10 5 2 1 0.5))
-
+;;
 ;; We could then call cc as follows:
 ;;
 ;; (cc 100 us-coins)
@@ -43,4 +43,13 @@
 ;; operations on list structures. Does the order of the list
 ;; coin-values affect the answer produced by cc? Why or why not?
 
-(define (main n) n)
+(cc 100 us-coins)
+
+(define (no-more? coin-values)
+  (empty? coin-values))
+
+(define (except-first-denomination coin-values)
+  (cdr coin-values))
+
+(define (first-denomination coin-values)
+  (car coin-values))
