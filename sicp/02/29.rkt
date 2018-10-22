@@ -7,17 +7,17 @@
 ;; which hangs either a weight or another binary mobile. We can
 ;; represent a binary mobile using compound data by constructing
 ;; it from two branches (for example, using list):
-
-(define (make-mobile left right)
-  (list left right))
-
+;;
+;; (define (make-mobile left right)
+;;   (list left right))
+;;
 ;; A branch is constructed from a length (which must be a number)
 ;; together with a structure, which may be either a number
 ;; (representing a simple weight) or another mobile:
-
-(define (make-branch length structure)
-  (list length structure))
-
+;;
+;; (define (make-branch length structure)
+;;   (list length structure))
+;;
 ;; a. Write the corresponding selectors left-branch and
 ;; right-branch, which return the branches of a mobile, and
 ;; branch-length and branch-structure, which return the
@@ -38,11 +38,136 @@
 ;; d. Suppose we change the representation of mobiles so that the
 ;; constructors are
 ;;
-(define (make-mobile left right)(cons left right))
-(define (make-branch length structure)
-(cons length structure))
+;; (define (make-mobile left right)
+;;   (cons left right))
+;;
+;; (define (make-branch length structure)
+;;   (cons length structure))
 ;;
 ;; How much do you need to change your programs to convert to the
 ;; new representation?
 
-(define (main n) n)
+(define (make-mobile left right)
+  (list left right))
+
+(define (make-branch length structure)
+  (list length structure))
+
+;;;;
+;; a.
+;;;;
+(define (left-branch mobile)
+  (car mobile))
+
+(define (right-branch mobile)
+  (car (cdr mobile)))
+
+(define (branch-length branch)
+  (car branch))
+
+(define (branch-structure branch)
+  (car (cdr branch)))
+
+;; the naming for those two is going outside the domain
+;; language for the given exercise, but is making the
+;; recursive algorithms more clear
+(define (left-child x)
+  (branch-structure (left-branch x)))
+
+(define (right-child x)
+  (branch-structure (right-branch x)))
+
+;;;;
+;; b.
+;;;;
+
+;; b.1
+(define (not-pair? x)
+  (not (pair? x)))
+
+(define (total-weight x)
+  (cond ((null? x) 0)
+        ((not-pair? x) x)
+        (else (+ (total-weight (left-child x))
+                 (total-weight (right-child x))))))
+
+;; b.2
+;; (define (total-weight x)
+;;   (+ (branch-weight (left-branch x))
+;;      (branch-weight (right-branch x))))
+
+;; (define (branch-weight x)
+;;   (cond ((null? x) x)
+;;         ((pair? (branch-structure x))
+;;          (total-weight (branch-structure x)))
+;;         (else (branch-structure x))))
+
+;; b.3
+;; TODO: higher-order functions + recursion
+;; (total-weight m1)
+
+;;;;
+;; c.
+;;;;
+;; (balanced? m7)
+
+(define (balanced? x)
+  (cond ((null? x) #t)
+        ((not-pair? x) #t)
+        (else (and
+               (balanced-branch? x)
+               (balanced? (left-child x))
+               (balanced? (right-child x))))))
+
+(define (balanced-branch? x)
+  (equal? (torque (left-branch x))
+          (torque (right-branch x))))
+
+(define (torque x)
+  (* (branch-length x)
+     (total-weight (branch-structure x))))
+
+;;;;
+;; d.
+;;;;
+;; (define (make-mobile left right)
+;;   (cons left right))
+
+;; (define (make-branch length structure)
+;;   (cons length structure))
+
+;; car cdr -> cdr
+;; (define (right-branch mobile)
+;;   (cdr mobile))
+
+;; (define (branch-structure branch)
+;;   (cdr branch))
+
+;;;;
+;; some mobiles for testing
+;;;;
+(define m0 (make-mobile (make-branch null null)
+                        (make-branch null null)))
+
+(define m1 (make-mobile (make-branch 1 2) (make-branch 1 2)))
+
+(define m2 (make-mobile (make-branch 1 2) (make-branch 3 4)))
+
+(define m3 (make-mobile (make-branch 2 4)
+                        (make-branch
+                         2
+                         (make-mobile (make-branch 1 2)
+                                      (make-branch 1 2)))))
+
+(define m4 (make-mobile (make-branch 2 4)
+                        (make-branch
+                         2
+                         (make-mobile (make-branch 2 2)
+                                      (make-branch 1 2)))))
+
+(define m7 (make-mobile
+            (make-branch 4 6)
+            (make-branch 2
+                         (make-mobile
+                          (make-branch 5 8)
+                          (make-branch 10 4)))))
