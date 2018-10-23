@@ -15,4 +15,14 @@
 ;; Define square-tree both directly (i.e., without using any higher-order
 ;; procedures) and also by usingmap and recursion.
 
-(define (main n) n)
+(define (square-tree x)
+  (cond ((null? x) null)
+        ((not (pair? x)) (sqr x))
+        (else (cons (square-tree (car x))
+                    (square-tree (cdr x))))))
+
+(define (sqr-tree xs)
+  (map (lambda (x)
+         (if (pair? x)
+             (sqr-tree x)
+             (sqr x))) xs))
