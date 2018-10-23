@@ -1,6 +1,6 @@
 #lang racket
 ;; ex 02.32
-;; set of subsets of a set
+;; the power set
 ;;
 ;; We can represent a set as a list of distinct elements, and we
 ;; can represent the set of all subsets of the set as a list of
@@ -16,4 +16,17 @@
 ;;       (let ((rest (subsets (cdr s))))
 ;;         (append rest (map <??> rest)))))
 
-(define (main n) n)
+(define (subsets s)
+  (if (null? s)
+      (list null)
+      (let ((rest (subsets (cdr s))))
+        (append rest (map (curry union s) rest)))))
+
+;; Given a set S, the power set of S is the set of all subsets of
+;; the set S including the empty set and the set S itself.
+;; The power set of S is denoted by P(S). - Rosen
+;;
+;; F(e, T) = {X \union {e} | X \in T}
+
+(define (union e x)
+  (cons (car e) x))
