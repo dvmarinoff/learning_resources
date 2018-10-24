@@ -6,9 +6,13 @@
 
 (define sicp-02.40-tests
   (test-suite
-   "testing 02.40 unique paird procedure"
+   "testing 02.40 unique pair procedure"
 
-    ;; (check-equal? (main 0) 0)
-;; ))
+   (check-equal? (unique-pairs 0) '())
+   (check-equal? (unique-pairs 3) '((2 1) (3 1) (3 2)))
 
-;; (run-tests sicp-02.40-tests)
+   (check-equal? (prime-sum-pairs 0) '())
+   (check-equal? (prime-sum-pairs 3) '((2 1 3) (3 2 5)))
+))
+
+(run-tests sicp-02.40-tests)
