@@ -13,4 +13,20 @@
 ;; produces procedures right-split and up-split with the same
 ;; behaviors as the ones already defined.
 
-(define (main n) n)
+(require sicp-pict)
+
+(define right-split (split beside below))
+
+(define up-split (split below beside))
+
+(define (split combinator1 combinator2)
+  (lambda (p n)
+    (define (recur painter n)
+      (if (= n 0)
+          painter
+          (let ((smaller (recur painter (- n 1))))
+            (combinator1 painter (combinator2 smaller smaller)))))
+    (recur p n)))
+
+(paint (up-split einstein 2))
+(paint (right-split einstein 2))
