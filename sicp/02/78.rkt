@@ -18,6 +18,12 @@
 ;; Scheme numbers rather than as pairs whose car is the symbol
 ;; scheme-number.
 
+;; Note: since the part of the required code for the next bunch
+;; of exercises is really extensive and they are building on each
+;; other I find it easier to work in one file and not copy paste
+;; the code around.
+
+;; 2.78
 ;; we need to use the scheme predicate number?
 (define (attach-tag type-tag contents)
   (if (eq? type-tag 'scheme-number)
@@ -34,7 +40,46 @@
         ((pair? datum) (cdr datum))
         (else (error "Bad tagged datum: CONTENTS" datum))))
 
+;; 2.79
+(define (install-equ?-package)
+  (define (equ-scheme-number? a b)
+    (= a b))
 
+  (define (equ-rat-number? a b)
+    (= (* (denom a) (numer b))
+       (* (denom b) (numer a))))
+
+  (define (equ-complex-number? a b)
+    (and (= (real a) (real b))
+         (= (imag a) (imag b))))
+
+  (put 'equ? '(scheme-number scheme-number) equ-scheme-number?)
+  (put 'equ? '(rat-number rat-number) equ-rat-number?)
+  (put 'equ? '(complex-number complex-number) equ-complex-number?)
+  'done)
+
+(define (equ? a b)
+  (apply-generic 'equ? a b))
+
+;; 2.80
+(define (install-=zero?-package)
+  (define (=zero-scheme-number? x)
+    (= x 0))
+
+  (define (=zero?-rat-number? x)
+    (= (numer x) 0))
+
+  (define (=zero-complex-number? x)
+    (and (= (real-part z) 0)
+         (= (imag-part z) 0)))
+
+  (put '=zero? '(scheme-number) =zero-scheme-number?)
+  (put '=zero? '(rat-number) =zero-rat-number?)
+  (put '=zero? '(complex-number) =zero-complex-number?)
+  'done)
+
+(define (=zero? x)
+  (apply-generic '=zero? x))
 
 ;;;;
 ;; Required code
@@ -233,3 +278,7 @@
 (install-rectangular-package)
 (install-polar-package)
 (install-complex-package)
+
+(install-equ?-package)
+
+(install-=zero?-package)
