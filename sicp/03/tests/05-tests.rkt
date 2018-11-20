@@ -8,7 +8,7 @@
   (test-suite
    "testing 03.05 Monte Carlo integration - estimate-integral procedure"
 
-    (check-equal? (main 0) 0)
+   (check-= (estimate-pi) 3.14 0.01)
 ))
 
 (run-tests sicp-03.05-tests)
