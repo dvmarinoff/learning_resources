@@ -17,19 +17,5 @@
 ;; (A 10)
 ;; -> 25
 
-(define (make-accumulator n)
-  ())
-
-(define (withdraw account amount)
-  (cond ((>= (balance account) amount) (- balance amount))
-        (else "Insufficient funds")))
-
-(define (make-account balance)
-  (list balance))
-
-(define (balance account)
-  (car account))
-
-(define bob (make-account 100))
-
-(withdraw bob 25)
+(define (make-accumulator acc)
+  (lambda (n) (begin (set! acc (+ acc n)) acc)))
