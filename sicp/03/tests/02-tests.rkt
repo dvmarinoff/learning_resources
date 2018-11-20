@@ -4,13 +4,19 @@
 
 (load "../02.rkt")
 
+(define s (make-monitored sqrt))
+
 (define sicp-03.02-tests
   (test-suite
    "testing 03.02 make-monitored procedure"
 
-   (check-equal? (make-monitored sqrt) null)
-   (check-equal? (s 100) 10)
-   (check-equal? (s 'how-many-calls?) 1)
+   (check-equal? (begin (s 100)
+                        (s 100)
+                        (s 100)
+                        (s 'how-many-calls?)) 3)
+
+   (check-equal? (begin (s 'reset-count)
+                        (s 'how-many-calls?)) 0)
 ))
 
 (run-tests sicp-03.02-tests)

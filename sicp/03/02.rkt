@@ -25,9 +25,15 @@
 ;; -> 1
 
 (define (make-monitored fn)
-  ())
+  (define counter 0)
+  (define (mf x)
+    (begin (set! counter (inc counter)) (fn x)))
+  (define (how-many-calls?) counter)
+  (define (reset-count) (set! counter 0))
+  (define (dispatch method)
+    (cond ((eq? method 'how-many-calls?) (how-many-calls?))
+          ((eq? method 'reset-count) (reset-count))
+          (else (mf method))))
+  dispatch)
 
-(define (how-many-calls?)
-  ())
-
-(define s (make-monitored sqrt))
+(define (inc x) (+ x 1))
