@@ -13,5 +13,30 @@
 ;; have when testing and debugging programs that use random
 ;; numbers.
 
-(define (rand config)
-  ())
+;; original rand procedure
+;; (define rand (let ((x random-init))
+;;                (lambda ()
+;;                  (set! x (rand-update x))
+;;                  x)))
+
+(define rand (let ((x random-init))
+  (lambda (method)
+    (define (generate)
+      (begin (set! x (random-update x)) x))
+    (define (reset n)
+      (set! x n))
+    (define (dispatch method)
+      (cond ((eq? method 'generate) (generate))
+            ((eq? method 'reset) reset)
+            (else "Unknown request: RAND" method)))
+    dispatch)))
+
+(rand 'generate)
+((rand 'reset) 1)
+
+;; ax + b mod m
+;; (define (rand-update x)
+;;   (let ((a 1423)
+;;         (b 813324)
+;;         (m 102342693))
+;;     (modulo (+ (* a x) b) m)))
