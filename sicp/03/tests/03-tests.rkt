@@ -8,10 +8,14 @@
   (test-suite
    "testing 03.03 add password to make-account"
 
-   ;; (check-equal? (make-account 100 'secret-password) null)
    (check-equal? ((acc 'secret-password 'withdraw) 40) 60)
-   (check-equal? ((acc 'some-other-password 'deposit) 50)
-                 "Incorrect password")
+   (check-equal? ((acc 'secret-password 'withdraw) 120)
+                 "Insufficient funds.")
+   (check-equal? ((acc 'secret-password 'deposit) 40) 100 "deposit")
+
+   (check-equal? ((acc 'wrong-password 'withdraw) 40)
+                 "Incorrect password."
+                 "pass fail")
 ))
 
 (run-tests sicp-03.03-tests)

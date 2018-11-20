@@ -18,4 +18,22 @@
 ;; ((acc 'some-other-password 'deposit) 50)
 ;; -> "Incorrect password"
 
+(define (make-account balance password)
+  (define (withdraw amount)
+    (if (>= balance amount)
+        (begin (set! balance (- balance amount))
+               balance)
+        "Insufficient funds."))
+  (define (deposit amount)
+    (begin (set! balance (+ balance amount))
+           balance))
+  (define (auth? pass)
+    (eq? password pass))
+  (define (dispatch pass method)
+    (cond ((not (auth? pass)) (lambda (n) "Incorrect password."))
+          ((eq? method 'withdraw) withdraw)
+          ((eq? method 'deposit) deposit)
+          (else (error "Unknown request: MAKE-ACCOUNT" method))))
+  dispatch)
+
 (define acc (make-account 100 'secret-password))
