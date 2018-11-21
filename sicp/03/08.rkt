@@ -1,6 +1,6 @@
 #lang racket
 ;; ex 03.08
-;; order of evalkuation with mutable state
+;; order of evaluation with mutable state
 ;;
 ;; When we defined the evaluation model in section 1.1.3, we said
 ;; that the first step in evaluating an expression is to evaluate
@@ -17,11 +17,16 @@
 ;; -> 0
 ;; -> 1
 
-(define (eval-left f)
-  ())
+;; ???? that one feels like a puzzle, how to make the most
+;; complicated assaignment chain, shared state is wierd.
+(define f
+  (let ((last 0))
+    (lambda (x)
+      (let ((result last))
+        (set! last x)
+        result))))
 
-(define (eval-right f)
-  ())
-
-(define (f x)
-  ())
+;; (+ (f 0) (f 1))
+;; -> 0
+;; (+ (f 1) (f 0))
+;; -> 1
