@@ -1,61 +1,41 @@
 #lang racket
 
-(provide format-desc)
+(define (make-car brand name year battery kwh price)
+  (list brand name year battery kwh price))
 
-(define max-row 65)
+(define (brand vehicle)
+  (car vehicle))
 
-(define (format-desc lst text wrap init)
-  (cond ((empty? lst) (string-append text "\n"))
-        (else (format-desc
-              (cdr lst)
-              (build-row (car lst) text wrap)
-              (update-wrap wrap init text (car lst))
-              init)
-              )))
+(define (name vehicle)
+  (car (cdr vehicle)))
 
-(define (update-wrap wrap init text next)
-  (if (< wrap (string-length (string-append text " " next)))
-      (+ wrap init)
-      wrap))
+(define (year vehicle)
+  (car (cdr (cdr vehicle))))
 
-(define (build-row next text wrap)
-  (if (row-end? (string-append text " " next) wrap)
-      (string-append text "\n;; " next)
-      (string-append text " " next)))
+(define (battery vehicle)
+  (car (cdr (cdr (cdr vehicle)))))
 
-(define (row-end? str wrap)
-  (> (string-length str) wrap))
+(define (kwh vehicle)
+  (car (cdr (cdr (cdr (cdr vehicle))))))
 
-;; (= (update-wrap 4 4 "1" "1") 4)
-;; (= (update-wrap 4 4 "11" "1") 4)
-;; (= (update-wrap 4 4 "111" "1") 8)
-;; (= (update-wrap 4 4 "1234" "123") 8)
+(define (price vehicle)
+  (car (cdr (cdr (cdr (cdr (cdr vehicle)))))))
 
-;; (equal? (build-row "11" ";;" 6) ";; 11")
-;; (equal? (build-row "11" ";; 11" 6) ";; 11")
-;; (equal? (build-row "11" ";; 11\n;; 11" 12) ";; 11\n;; 11\n;; 11")
+(define e-up (make-car "vw" "e-Up" 2017 16.0 11.7 52852))
+(define i3 (make-car "bmw" "i3" 2017 37.9 16.3 75950))
 
-;; (require net/http-client)
-;; (require html-parsing)
+(define ice-small (make-car "ice-small" null 2017 null 7.0 30000))
 
-;; (define domain "mitpress.mit.edu")
-;; (define book "/sites/default/files/sicp/full-text/book/")
-;; (define chapter "book-Z-H-11.html")
+(define night-cost-kwh 0.05429)
+(define day-cost-kwh 0.1399)
+(define petrol-cost-pl 2.44)
 
-;; (let-values (((status headers response)
-;;               (http-sendrecv domain
-;;                              (concat book chapter))))
-;;   (html->xexp response))
+(define (min-cost-per-km vehicle)
+  (/ (* (kwh vehicle) night-cost-kwh) 100))
 
-;; (define desc "One variant of the Fermat test that cannot be fooled is called the Miller-Rabin test (Miller
-;; 1976; Rabin 1980). This starts from an alternate form of Fermat's Little Theorem, which states that if n is a
-;; prime number and a is any positive integer less than n, then a raised to the (n - 1)st power is congruent to 1
-;; modulo n. To test the primality of a number n by the Miller-Rabin test, we pick a random number a<n and
-;; raise a to the (n - 1)st power modulo n using the expmod procedure. However, whenever we perform thesquaring step in expmod, we check to see if we have discovered a ``nontrivial square root of 1 modulo n,''
-;; that is, a number not equal to 1 or n - 1 whose square is equal to 1 modulo n. It is possible to prove that if
-;; such a nontrivial square root of 1 exists, then n is not prime. It is also possible to prove that if n is an odd
-;; number that is not prime, then, for at least half the numbers a<n, computing a n-1 in this way will reveal a
-;; nontrivial square root of 1 modulo n. (This is why the Miller-Rabin test cannot be fooled.) Modify the
-;; expmod procedure to signal if it discovers a nontrivial square root of 1, and use this to implement the
-;; Miller-Rabin test with a procedure analogous to fermat-test. Check your procedure by testing various
-;; known primes and non-primes. Hint: One convenient way to make expmod signal is to have it return 0.")
+(define (reg-cost-per-km vehicle)
+  (/ (* (kwh vehicle) day-cost-kwh) 100))
+
+(define (ice-cost vehicle)
+  (/ (* (kwh vehicle) petrol-cost-pl) 100))
+

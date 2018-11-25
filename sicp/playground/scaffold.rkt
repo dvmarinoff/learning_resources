@@ -64,7 +64,7 @@
   (format "~a/~a" chapter-path exercise-file-name))
 
 (define (exercise-path-relative-to-test exercise)
-  (format "../~a" (exercise-file-name exercise)))
+  (format "./~a" (exercise-file-name exercise)))
 
 (define (test-file-name exercise)
   (format "~a-tests.rkt" (exercise-format exercise)))
@@ -110,6 +110,7 @@
 #lang racket
 ;; ex @(format "~a" (exercise-name (chapter) (exercise)))
 ;; @(format "~a" (description))
+;;
 
 (define (main n) n)
 

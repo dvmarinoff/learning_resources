@@ -991,6 +991,58 @@ The set of data objecys in Lisp is closed under the operation
 of forming pairs. (Like in Fortarn you can put numbers and chars,
 in an array, but not make array of arrays)
 
+#+BEGIN_SRC scheme
+
+;;;;
+;; Recursion on sequances and trees
+;;;;
+(define (my-fold fn acc lst)
+  (define (iter lst i)
+    (if (null? (cdr lst))
+        (fn i (car lst))
+        (iter (cdr lst) (fn i (car lst)))))
+  (iter lst acc))
+
+(define (my-fold fn acc lst)
+  (p lst)
+  (if (null? (cdr lst))
+      (car lst)
+      (fn acc (my-fold fn acc (cdr lst)))))
+(my-fold (lambda (acc x) (+ acc x)) 0 y)
+
+(define (list-ref lst n)
+  (if (= n 0)
+      (car lst)
+      (list-ref (cdr lst) (- n 1))))
+
+(define (list-ref lst n)
+  (if (= n 0)
+      (car lst)
+      (list-ref (cdr lst) (- n 1))))
+(list-ref y 3)
+
+(define (lst-length lst)
+  (if (empty? (cdr lst))
+      0
+      (+ 1 (lst-length (cdr lst)))))
+(lst-length y)
+
+(define (tree-length x)
+  (cond ((null? x) 0)
+        ((not (pair? x)) 1)
+        (else (+ (tree-length (car x))
+                 (tree-length (cdr x))))))
+(tree-length (list (list 1 2) (list 3 4)))
+
+(define (lst-length lst)
+  (define (iter lst l)
+    (if (null? (cdr lst))
+        l
+        (iter (cdr lst) (+ l 1))))
+  (iter lst 0))
+(lst-length y)
+#+END_SRC
+
 ** 3A.1 Henderson Escher Example
 
 There are many ways to represent sequances with pairs.

@@ -299,6 +299,11 @@ va( M( - surround with a pair of () the current sexp
 
 va( C-x C-e - select surrent sexp and evaluate it
 
+;; navigate CamelCase
+SPC t c - to toggle camel-case-motion
+w - move by CamelCase
+S-w - move over CamelCase
+
 ;; other
 SPC f f <type file path and name> - to create a new file
 
@@ -315,13 +320,20 @@ SPC x K - move line up
 C-x z - repeat last command
 
 ;; MULTIPLE CURSORS
+;; evil-iedit-state
 
 SPC s e - to enter iedit
+L - to restrict the scope to the current line
+J - increase scope +1 line down
+K - increase scope -1 line up
+TAB - toggle current occuarance
+# - prefix with numbers
 n, N - to cycle items
 
 ;; Rectangles
 
 C-x r t - to edit selection (top-left to bottom-right) as a rectangle
+
 
 ;; Comments
 gcc - comment line
