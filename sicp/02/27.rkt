@@ -38,3 +38,14 @@
 
 (define (sum-list lst)
   (foldl + 0 lst))
+
+;;;;
+;; 2nd solution: lower level pure car-cdr
+;;;;
+;; (deep-reverse-low x)
+;; (deep-reverse-low y)
+
+;; (define (deep-reverse-low tree)
+;;   (cond (())
+;;         (())
+;;         (else ())))
