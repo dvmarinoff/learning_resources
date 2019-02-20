@@ -8,8 +8,6 @@
 
 (require sicp-pict)
 
-(paint (flip-horiz einstein))
-
 (define (flip-horiz painter)
   (transform-painter painter
                      (make-vect 1.0 0.0)
