@@ -29,4 +29,5 @@
     (recur p n)))
 
 (paint (up-split einstein 2))
-(paint (right-split einstein 2))
+(equal? (paint (right-split einstein 2))
+        (paint (right-split einstein 2)))
