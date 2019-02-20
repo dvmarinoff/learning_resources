@@ -1,4 +1,305 @@
-* Uncle Bob - SOLID Principles of Object Oriented and Agile Design
+* Design Patterns
+
+| Creational          | Structural      | Behavioral                 |
+|---------------------+-----------------+----------------------------|
+| Abstract Factory 88 | Adapter     135 | Chain of Resposibility 209 |
+| Builder          97 | Bridge +    145 | Command +              219 |
+| Factory Method  106 | Composite   156 | Interpreter            229 |
+| Prototype       115 | Decorator + 166 | Iterator               241 |
+| Singleton       124 | Facade      175 | Mediator               255 |
+|                     | Flyweight   184 | Memento                265 |
+|                     | Proxy       196 | Observer +             273 |
+|                     |                 | State                  283 |
+|                     |                 | Strategy +             292 |
+|                     |                 | Template Method        301 |
+|                     |                 | Visitor +              306 |
+
+* SOLID
+
+#+BEGIN_SRC javascript
+
+////
+// Single Responsibility Principal
+////
+
+const srp =
+    "A module should be responsible to one, and only one, actor.";
+
+// Symptoms:
+// - Accidental Duplication
+function Employee(spec) {
+    let hours = spec.hours;
+    // CFO
+    let calculatePay = () => {
+        return regularHours(hours) + overtimeHours(hours);
+    };
+    // COO
+    let reportHours = () => {
+        return regularHours(hours);
+    };
+    // CTO
+    let save = () => {};
+    // CFO + COO
+    let regularHours = () => {};
+
+    return Object.freeze({ calculatePay,
+                           reportHours,
+                           save });
+}
+
+// - Merges
+// ... to many git merges ...
+
+// Solutions
+// 3 Classes + Facade
+function EmployeeData() {
+    return {};
+}
+function EmployeeFacade() {
+    let calculatePay = () => PayCalculator().calculatePay();
+    let reportHours = () => HourReporter().reportHours();
+    let save = () => EmployeeSaver().saveEmployee();
+    return Object.freeze({ calculatePay,
+                           reportHours,
+                           save });
+}
+function PayCalculator() {
+    let calculatePay = () => {};
+    // ... private methods etc.
+    return Object.freeze({calculatePay});
+}
+function HourReporter() {
+    let reportHours = () => {};
+    // ... private methods, etc.
+    return Object.freeze({reportHours});
+}
+function EmployeeSaver() {
+    let saveEmployee = () => {};
+    // ... private methods, etc.
+    return Object.freeze({saveEmployee});
+}
+
+// use the Employee as Facade
+// the most important method and the data are kept in the original class
+function Employee(spec) {
+    let hours = spec.hours;
+    let calculatePay = () => {};
+    let reportHours = () => HourReporter().reportHours();
+    let save = () => EmployeeSaver().saveEmployee();
+    return Object.freeze({ calculatePay,
+                           reportHours,
+                           save });
+}
+// Conclusion:
+// - its about functions and classes
+// - SRP = Common Closure Principle = Axis of Change
+
+////
+// Open-Closed Principal
+////
+
+const ocp =
+      "A software artifact should be open for extension but closed for modification.";
+
+// If component A should be protected from changes in component B,
+// then component B should depend on component A.
+
+// NOTE: Open arrowheads are using relationships.
+// Closed arrowheads are implements or inheritance relationships.
+
+// Calculation
+function FinacialData() {}
+function FinancialAnalyzer() {}
+// Presentation
+function FinancialReportData() {}
+function WebReporter() {}
+function PrintReporter() {}
+
+// Views -> Presenters -> Controller -> Interactor
+// Interactor holds the bussness rules the highest-policies of the
+// application and must be most protected
+// - directional control through intefaces
+// - information hiding through intefaces
+
+// Conclusion:
+// - it is driving force behind the architecture of systems.
+// - make the system easy to extend with less impact from change
+// - higher-level components are protected from the changes made
+// to lower-level components.
+
+////
+// Liskov Substitutin principal
+////
+
+const lsp =
+      "What is wanted here is something like the following \
+       substitution property: If for each object o1 of type S \
+       there is an object o2 of type T such that for all programs \
+       P defined in terms of T, the behavior of P is unchanged \
+       when o1 is substituted for o2 then S is a subtype of T";
+
+// for guiding the use of inheritance
+function License() {
+    let calcFee = () => {};
+    return Object.freeze({calcFee});
+}
+function Billing() {
+    let fee = License().calcFee();
+    return fee;
+}
+function PersonalLicense(basePrice = 9.99) {
+    return basePrice;
+}
+function BusinessLicense(spec) {
+    let users = spec.users;
+    return pricePerUser * count(users);
+}
+
+// the famed square/rectangle problem
+function User() {
+    let rect = Rectangle({width: 4, heigth: 8});
+    let square = Square({side: 3});
+}
+function Rectangle(spec) {
+    let height = spec.heigth || 0.0;
+    let width = spec.width || 0.0;
+    let setH = (h) => height += h;
+    let setW = (w) => width += w;
+    return Object.freeze({setH, setW});
+}
+function Square(spec) {
+    let side = spec.side || 0.0;
+    let {setH, setW} = Rectangle();
+    let setSide = (s) => side += s;
+    return Object.freeze({setSide});
+}
+
+// Conclusion:
+// if extended to the level of architecture it can prevent polluting
+// the system with unnecessary mechanisms.
+
+////
+// The Interface Segregation Principal
+////
+
+const isp = "";
+
+// User1 User2 User3 -> Ops: op1, op2, op3
+// User1 -> IUser1-Ops: op1 -> Ops: op1, op2, op3
+//
+// System S -> Framework F -> Database D
+// changes to features in D that F does not use and S does not care
+// may cause changes to F and S.
+
+// Conclusion
+// depending on something that carries baggage that you don't need can
+// cause you troubles that you didn't expect.
+
+////
+// Dependancy Inversion Principal
+////
+
+const dip =
+      "most flexible systems are those in which source code \
+       dependencies refer only to abstractions, not to concretions.";
+
+//
+
+function Application() {
+    IService();
+    IServiceFactory();
+}
+
+function IService() {}
+function IServiceFactory() {}
+// Abstract
+// ---------------------------- //
+// Concrete
+function ConcreteImpl() {}
+function ServiceFactoryImpl() {
+    ConcreteImpl();
+
+    let makeSvc = () => {};
+}
+
+// Source code dependencies cross the line pointing up
+// Flow of control crosses in the opposite direction (down)
+
+// Conclusion:
+// most visible organization principal in our architecture diagrams
+
+////
+// Component Pincipals
+////
+
+////
+// Components
+////
+
+// the units of deployment. The smallest entities that can be deployed
+// like Ruby gems.
+
+////
+// Transaction Script
+////
+
+////
+// Domain Model
+////
+
+////
+// Active Record
+////
+function Person(spec) {
+    let { lastName, firstName, numberOfDependants } = spec;
+    let db = DB();
+
+    let getExemption = () => {};
+    let isFlaggedForAudit = () => {};
+    let getTaxableEarnings = () => {};
+
+    let insert = () => {};
+    let update = () => {};
+    let remove = () => {};
+    return Object.freeze({getExemption,
+                          isFlaggedForAudit,
+                          getTaxableEarnings,
+                          insert,
+                          update,
+                          remove});
+}
+function DB() {}
+
+
+////
+// DataMapper
+////
+function Person(spec) {
+    let { lastName, firstName, numberOfDependants } = spec;
+
+    let getExemption = () => {};
+    let isFlaggedForAudit = () => {};
+    let getTaxableEarnings = () => {};
+    return Object.freeze({getExemption,
+                          isFlaggedForAudit,
+                          getTaxableEarnings});
+}
+function PersonMapper(spec) {
+    let db = DB();
+    let person = Person();
+
+    let insert = () => {};
+    let update = () => {};
+    let remove = () => {};
+    return Object.freeze({insert,
+                          update,
+                          remove});
+}
+function DB() {}
+
+#+END_SRC
+
+* Uncle Bob - SOLID Principles of Object Oriented and Agile Design (Talk)
 
 ** Summary
 The growth demands on the industry puts it in a situation where it is
@@ -416,52 +717,3 @@ Abstractions should not depend upon details. Details should depend upon
 abstractions.
 
 covered in the first part of the talk.
-
-
-* Uncle Bob - Functional Programming or the failure of state
-
-*** Intro: Oxygen took a lot of time to appear free
-Opens up with popular phisics example:
-Why is there Air? Where did it come from? What it is made of?
-3/4 Nytrogen 1/4 Oxygen + CO2 + Others
-
-Nytrogen came from ammonia, Oxygen came from plants,
-Oxygen is very rear, it doe not want to be free it combines with other
-elements like Iron. For the first 3 billion years of history of life on
-Earth, every Oxygen atom emited by a plant got grab by an Iron atom and
-fell to the bottom of the sea. Only 1 billion years ago Oxygen began to
-accumulate in the atmosphere.
-
-*** State, Recursion, Tail-call optimization
-
-What is state?
-
-1; // is a value
-int x = 1; // x is an id that has a value
-x = x + 1; // now x has changed state
-
-The identifier will identify value, but you have no idea what that value
-is. The identifier has a state not a value.
-
-Example with for loop in C, rewritten with no loop, and then with recursion.
-
-Memory usage is a problem with recursion in C. But tail-call optimizaion is
-a technique invented in the 1950's, why the jvm and .net do not support it.
-
-*** SICP
-it  gives no appologies, goes at light speed, concept after concept.
-They go through basic algorithms, queueing structures, stacking structures,
-symbol tables, message passing, all kinds of stuff.
-
-Suddenly they stop and excuse themselves for that they have to introce an
-assaignment statement.
-
-They substituted function calls with their implementaions. Assaignment
-breaks this model by introducing the concept of time. Assaignmnet
-statement separates the code above the assignment from the code below in
-time.
-
-y = f(x), will remain the same no matter what time it is.
-
-
-

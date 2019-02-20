@@ -111,7 +111,8 @@ M-x delete-frame - to close frame
 <ESC> <ESC> <ESC> - to get out of what C-g can not get you out
 
 C-h - for help
-C-h ? - to see what kind of help is available
+C-h ? - to s
+ee what kind of help is available
 C-h c C-p - displayes a very brief description of the command
 C-h k - diplayes documentation
 C-h f - describes a function
