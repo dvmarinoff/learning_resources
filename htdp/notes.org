@@ -1,0 +1,1040 @@
+* Fixed-Size Data
+  - language of data:
+provides atomic data and data composition
+  - language of operations on data:
+operations and composition of operations
+
+Arithmetic combines these two parts and is known from grade school.
+
+"organizing thoughts" = design
+
+** Arithmetic
+   
+Atomic is used in analogy to physics. You build by combining atoms.
+
+   - Arithmetic of Numbers
+   - Arithmetic of Strings
+   - Arithmetic of Images
+   - Arithmetic of Booleans
+
+#+BEGIN_SRC scheme 
+(+ 3 4)
+
+(string-append "hello" " " "world")
+
+(overlay (circle 9 "solid" "red")
+         (rectangle 40 25 "solid" "white"))
+
+(or #true #false)
+(and #true #true)
+(not #false)
+#+END_SRC
+
+   - Predicates: Know thy data
+
+Atomic:
+number?, string?, image?, boolean?
+
+Numbers:
+integer?, rational?, real?, complex?, exact?, inexact?
+     
+#+BEGIN_SRC scheme 
+(number? pi)
+
+(define x ...)
+
+(if (string? x)
+    (string-length x))
+    
+(cond ((string? x) (string-append x " is string"))
+      ((number? x) (+ x 10))
+      ((image? x) (ovelay x (rectangle 40 40 "solid" "white")))
+      ((boolean? x) (not x))
+      (else (error "x is not atomic ...")))
+
+(= 1 1)
+(string=? "hello" "hello")
+
+(sqrt -1)
+(complex? (sqrt -1))
+#+END_SRC
+
+** Functions and Programs  
+Arithmetic is half the game, the other half is algebra:
+variables, fuction definition, function application and function
+composition.
+
+*** Functions
+Programs are functions, they consume inputs and produce outputs,
+furthermore programs are triggered by events in the real world, and
+they may affect the real world.
+
+    - definition
+    - application
+
+#+BEGIN_SRC scheme 
+(define watts 231)
+
+(define (watts-per-kilo watts kilos)
+  (/ watts kilos))
+  
+(watts-per-kilo watts 75)
+#+END_SRC
+
+*** Computing
+Function definitions and applications work in tandem.
+Evaluation:
+- determine value of argument expression
+- check # arguments and # parameters are the same
+- replace parameters with the computed values for the corresponding
+arguments and compute the function body
+
+You may use the stepper to debug the program.
+
+*** Function Composition
+Define one function per task.
+
+#+BEGIN_SRC scheme 
+(define (letter fst lst signature-name)
+  (string-append (opening fst)
+                 (body fst lst)
+                 (closing signature-name)))
+
+(define (opening fst) (string-append "Dear " fst ","))
+(define (body fst lst) (string-append  "..." fst " " lst "..."))
+(define (closing signature-name)
+  (string-append "Sincerely, " signature-name))
+#+END_SRC
+
+*** Global Constants
+
+#+BEGIN_SRC scheme 
+(define TARGET-WATTS 231)
+
+#+END_SRC
+
+*** Programs
+    
+- a batch parogram - consumes all of it inputs at once and computes
+its results.
+- an interactive program - consumes all of its inputs, computes,
+prosuces some output, consumes more input, and so on. Events,
+event-driven programs and event-handlers.
+
+#+BEGIN_SRC scheme 
+(require 2htdp/batch-io)
+
+(write-file "sample.dat" "343")
+(read-file "sample.dat")
+#+END_SRC
+
+Explore the big-bang library for making first interactive programs.
+
+** How to Design Programs
+
+"garage programming" leeds to y2k kind of problems.
+
+"Programmers write programs for other programmers to read, and on
+occasion, people run these programs to ge work done."
+
+- Designing Functions
+
+Programs describe computational process that consumes some
+information and produces new information. This information is not
+limited to numbers it comes from the real world (program's domain).
+Think of Information as facts about the program's domain.
+
+For a program to process information, it must turn it into some form
+of data in the programming language; then it processes the data; and
+once it is finished, it turns the resulting data into information
+again.
+
+------------+---------------------------+-------------
+Real World  |          Program          | Real World
+------------+---------------------------+-------------
+Information -> Data - Processing - Data -> Information
+------------+---------------------------+-------------
+        interpret                   represent
+------------+---------------------------+-------------
+
+MVC separation is universal and important for begginers.
+
+42 may represent pixels, temperature, size, etc.
+
+#+BEGIN_SRC scheme 
+; A Temperature is a Number
+; interpretation represents Celsius degrees
+#+END_SRC
+
+- The Design Process
+  1. Express how you wish to represent information as data. A one-line
+     comment suffices:
+#+BEGIN_SRC scheme
+; We use numbers to represent centimeters
+#+END_SRC
+
+  2. Write down a signature, a statement of purpose, and a function
+     header:
+#+BEGIN_SRC scheme
+; String -> Number
+; Temperature -> String
+; Number String Image -> Image
+
+(define (f a-string) 0)
+(define (g n) "a")
+(define (h num str img) (empty-scene 100 100))
+
+; Number String Image -> Image
+; adds s to image
+; y pixels from the top and 10 from the left
+(define (add-image y s img)
+  (empty-scene 100 100))
+#+END_SRC
+
+  3. Illustrate the signature and the purpose statement with examples.
+#+BEGIN_SRC scheme
+; Number -> Number
+; computes the area of the square with side len
+; given: 2, expect: 4
+; given: 7, expect: 49
+(define (area-of-square len) 0)
+#+END_SRC
+
+  4. Take inventory to understand what are the givens and what we
+     need to compute.
+#+BEGIN_SRC scheme
+(define (area-of-square len)
+  (... len ...))
+#+END_SRC
+
+  5. Time to code. Replace the body of the function with an expression
+     that attempts to compute from the pieces in the template.
+#+BEGIN_SRC scheme
+; Number -> Number
+; computes the area of the square with side len
+; given: 2, expect: 4
+; given: 7, expect: 49
+(define (area-of-square len)
+  (sqr len))
+  
+; Number String Image -> Image
+; adds s to img, y pixels from top, 10 pixels to the left
+; given:
+;    5 for y,
+;    "hello" for s, and
+;    (empty-scene 100 100) for img
+; expected:
+;    (place-image (text "hello" 10 "red") 10 5 ...)
+;    where ... is (empty-scene 100 100)
+(define (add-image y s img)
+  (place-image (text s 10 "red") 10 y img))
+#+END_SRC
+
+  6. Test the function on the examples.
+     And debug if needed:
+
+a. You miscalculated and determined the wrong expected outputs.
+b. The function definition computes the wrong result (Logical error).
+c. Both the examples and function defininitions are wrong.
+
+#+BEGIN_SRC scheme
+(area-of-square 2)
+(area-of-square 7)
+#+END_SRC
+
+** Domain Knowledge
+   - knowledge from external domain (math, music, biology)
+   - knowledge about libraries and choosen language
+   * computer science knowledge for complex forms of data
+
+** From Functions to Programs 
+   Keep a wish list of functions. Each entry should consist of three
+things:
+1. a meaningful name for the function
+2. a signiture
+3. a purpose statement
+
+** On Testing
+   Testing is important to maintain even basic quality, but it can
+quickly become a chore, so it is best to automate it. One of the first
+things you do when you start with a new language is to learn the
+testing framework.
+
+#+BEGIN_SRC scheme
+; Number -> Number 
+; converts Fahrenheit temperatures to Celsius
+; given 32, expect 0
+; given 212, expect 100
+; given -40, expect -40
+(define (f2c f)
+  (* 5/9 (- f 32)))
+
+(check-expect (f2c -40) -40)
+(check-expect (f2c 32) 0)
+(check-expect (f2c 212) 100)
+#+END_SRC
+
+** Designing World Programs
+   
+
+1. For all those properties of the world that remain the same over
+   time and are needed to render it as an Image, introduce constants. 
+
+   a. "Physical" constants describe general attributes of objects
+       in the world.
+   b. Graphical constants are images of objects in the world.
+      The program composes them into images that represent the
+      complete state of the world.
+
+2. Those properties that change over time give rise to the current
+   state of the world. Develop a data representation for all possible
+   states of the world. 
+
+3. Design the functions needed for valid big-bang expression. 
+#+BEGIN_SRC scheme
+;; render
+;; clock-tick-handler
+;; keystroke-handler
+;; mouse-event-handler
+;; end?
+#+END_SRC
+
+4. Finally you need a main function.
+#+BEGIN_SRC scheme
+(define (main init)
+  (big-bang init
+           (on-tick clock-tick-handler)
+           (stop-when end?)
+           (to-draw render)
+           (on-key keystroke-handler)
+           (on-mouse mouse-event-handler)))
+#+END_SRC
+
+
+
+#+BEGIN_SRC scheme
+(define IMAGE ...)
+(define WIDTH ...)
+(define HEIGHT ...)
+(define SOME-CONSTANT ...)
+
+;; WorldState -> Image
+;; ...
+(define (render ws) ...)
+
+;; WorldState -> WorldState
+;; ...
+(define (clock-tick-handler cw) ...)
+
+;; WorldState String -> WorldState
+;; ...
+(define (keystroke-handler cw ke) ...)
+
+;; WorldState Number Number String -> WorldState
+;; ...
+(define (mouse-event-handler cw x y me) ...)
+
+;; WorldState -> Boolean
+;; ...
+(define (end? cw) ...)
+
+(define (main init)
+  (big-bang init
+           (on-tick clock-tick-handler)
+           (stop-when end?)
+           (to-draw render)
+           (on-key keystroke-handler)
+           (on-mouse mouse-event-handler)))
+#+END_SRC
+
+** Intervals, Enumerations, and Itemizations
+   Those will gives more way to represent information as data and also
+a way to put restrictions (like enumerating a collection).
+
+  - Programming with Conditionals
+
+#+BEGIN_SRC scheme
+(cond
+  [ConditionExpression1 ResultExpression1]
+  [ConditionExpression2 ResultExpression2]
+  ...
+  [ConditionExpressionN ResultExpressionN])
+#+END_SRC
+
+  - Computing Conditionally
+  - Enumerations
+
+** Adding Structure
+
+How one piece of data can represent two or more changing quantities of
+information. Using math tricks here will obscure the true intention.
+Every programming language provides some mechanism to combine several
+pieces of data (compound data) and ways to retrieve the constituent
+values when needed.
+
+** Summary
+
+1. A good programmer designs programs, a bad one tinkers until it
+   works.
+2. The design recipe has two dimentions:
+   - the process of design, seq of steps
+   - the data represention influence on the design process
+3. A program consists of:
+   - constant definitions
+   - structure type definitions
+   - data defininitions
+   - function definitions
+   (- main or big-bang function)
+4. Know the vocabulary and grammar of your language
+5. Know the libraries of your language
+6. Know the "tools" that the language offers
+
+* Arbitrary Large Data
+** Lists 
+
+Self-referential data definitions are useful when we don't know the
+size of our data.
+
+Then again, if a list is supposed to represent a record with a
+fixed number of pieces, use a structure type instead.
+
+#+BEGIN_SRC scheme
+;; the empty list
+'() ;; new kind of atomic value
+
+(empty? '())
+
+;; adding to lists
+(cons "Mercury" '())
+
+(cons "Mars" (cons "Earth" (cons "Venus" (cons "Mercury" '()))))
+
+(first (cons 1 '())) ;; -> 1
+(rest (cons 1 '()))  ;; -> '()
+
+;; A List-of-names is one of: 
+;; – '()
+;; – (cons String List-of-names)
+;; interpretation a list of invitees, by last name
+
+
+;; What is cons? - A checked function as in Itemization and Structures
+
+(pair (left right))
+
+;; Any Any -> ConsOrEmpty
+(define (our-cons a-value a-list)
+  (cond ((empty? a-list)
+         (pair a-value a-list))
+        ((pair? a-list)
+         (pair a-value a-list))
+        (else (error "cons: second argument ..."))))
+      
+;; ConsOrEmpty -> Any
+(define (our-first a-list)
+  (if (empty? a-list)
+      (error 'our-first "...")
+      (pair-left a-list)))
+
+(define (our-rest a-list)
+  (if (empty? a-list)
+      (error 'our-rest "...")
+      (pair-right a-list)))
+
+#+END_SRC
+
+** Designing with Self-Referential Data Definitions
+
+   1. data (and data examples)
+   2. header (, signiture and dummy definition)
+   3. usage examples (tests) 
+   4. template
+   5. code
+   6. test (full test coverage)
+
+Table 56: Designing a function for self-referential data 
+
+| steps      | outcome      | activity                                             |
+|------------+--------------+------------------------------------------------------|
+| problem    | data         | Develop a data representation for the information;   |
+| analysis   | definition   | Create examples for specific items of information    |
+|            |              | and interpret data as information;                   |
+|            |              | Identify self-reference.                             |
+|            |              |                                                      |
+| header     | signature;   | Write down a signature using defined names;          |
+|            | purpose;     | Formulate a concise purpose statement;               |
+|            | dummy        | Create a dummy function that produces a constant     |
+|            | definition   | value from the specified range.                      |
+|            |              |                                                      |
+| examples   | examples     | Work through several examples, at least one          |
+|            | and tests    | per clause in the data definition                    |
+|            |              |                                                      |
+| template   | function     | Translate the data definition into a template:       |
+|            | template     | One cond clause por data clause;                     |
+|            |              | Selectors where the condition identifies a structure |
+|            |              | One natural recursion per self-reference             |
+|            |              |                                                      |
+| definition | full-fledged | Find a function that combines the values of the      |
+|            | definition   | expressions in the cond clause into the expected     |
+|            |              | answer                                               |
+|            |              |                                                      |
+| test       | validate     | Turn them into check-expect tests and run them.      |
+|            | tests        |                                                      |
+
+Table 52: How to translate a data definition into a template
+
+| Question                    | Answer                                     |
+|-----------------------------+--------------------------------------------|
+| Does the data definition    | Your template needs as many cond           |
+| distinguish among different | clauses as sub-classes that the            |
+| sub-classes of data?        | data definition distinguishes.             |
+|-----------------------------+--------------------------------------------|
+| How do the sub-classes      | Use the differences to formulate           |
+| differ from each other?     | a condition per clause.                    |
+|-----------------------------+--------------------------------------------|
+| Do any of the clauses deal  | If so, add appropriate selector            |
+| with structured values?     | expressions to the clause.                 |
+|-----------------------------+--------------------------------------------|
+| Does the data definition    | Formulate “natural recursions” for the     |
+| use self-references?        | template to represent the self-            |
+|                             | references of the data definition.         |
+|-----------------------------+--------------------------------------------|
+| If the data definition      | Specialize the template for the other      |
+| refers to some other data   | data definition. Refer to this template.   |
+| definition, where is this   | See Designing with Itemizations,           |
+| cross-reference to another  | Again, steps 4 and 5 of the design recipe. |
+| data definition?            |                                            |
+
+Table 53: How to turn a template into a function
+
+| Question                   | Answer                                             |
+|----------------------------+----------------------------------------------------|
+| What are the answers       | The examples should tell you which values          |
+| for the non-recursive      | you need here. If not, formulate appropriate       |
+| cond clauses?              | examples and tests.                                |
+|----------------------------+----------------------------------------------------|
+| What do the selector       | The data definitions tell you what kind of         |
+| expressions in the         | data these expressions extract, and the            |
+| recursive clauses compute? | interpretations of the data definitions            |
+|                            | tell you what this data represents.                |
+|----------------------------+----------------------------------------------------|
+| What do the natural        | Use the purpose statement of the function to       |
+| recursions compute?        | determine what the value of the recursion means,   |
+|                            | not how it computes this answer. If the purpose    |
+|                            | statement doesn’t tell you the answer, improve the |
+|                            | purpose statement.                                 |
+|----------------------------+----------------------------------------------------|
+| How can the function       | Find a function in BSL that combines the values.   |
+| combine these values to    | Or, if that doesn’t work, make a wish for a helper |
+| get the desired answer?    | function. For many functions, this last step is    |
+|                            | straightforward. The purpose, the examples, and    |
+|                            | the template together tell you which function or   |
+|                            | expression combines the available values into the  |
+|                            | proper result. We refer to this function or        |
+|                            | expression as a combinator, slightly abusing       |
+|                            | existing terminology.                              |
+
+Examples for the table method for finding the combinator function
+
+| given input                    |   selector | selector              | natural recursion |   output |
+|--------------------------------+------------+-----------------------+-------------------+----------|
+| xs                             | (first xs) | (rest xs)             |   (sum (rest xs)) | (sum xs) |
+|--------------------------------+------------+-----------------------+-------------------+----------|
+| (cons 2 (cons 1 '()))          |          2 | (cons 1 '())          |                 1 |        3 |
+| (cons 4 (cons 3 '()))          |          4 | (cons 3 '())          |                 3 |        7 |
+| (cons 4 (cons 3 (cons 2 '()))) |          4 | (cons 3 (cons 2 '())) |                 5 |        9 |
+
+| given input                          | selector    | selector                  |     natural recursion |         output |
+|--------------------------------------+-------------+---------------------------+-----------------------+----------------|
+| lst                                  | (first lst) | (rest lst)                | (how-many (rest lst)) | (how-many lst) |
+|--------------------------------------+-------------+---------------------------+-----------------------+----------------|
+| (cons "a" '())                       | "a"         | '()                       |                     0 |              1 |
+| (cons "b" (cons "a" '()))            | "b"         | (cons "a" '())            |                     1 |              2 |
+| (cons "x" (cons "b" (cons "a" '()))) | "x"         | (cons "b" (cons "a" '())) |                     2 |              3 |
+
+#+BEGIN_SRC scheme
+;; Full example for the sum function:
+
+;; List-of-numbers is one of:
+;; - '()
+;; - (cons Number List-of-numbers)
+
+'()
+(cons 1 '())
+(cons 4 (cons 3 (cons 2 (cons 1 '()))))
+
+;; List-of-numbers -> Number
+;; sums the values in a list of numbers
+(check-equal? (sum '()) 0)
+(check-equal? (sum (cons 1 '())) 1)
+(check-equal? (sum (cons 4 (cons 3 (cons 2 (cons 1 '()))))) 10)
+
+;; v1
+(define (sum lon) 0)
+
+;; v2
+(define (sum lon)
+  (cond ((empty? lon) .)
+        ((cons? lon)
+         (. (first lon)
+            (sum (rest lon))))))
+;; v3
+(define (sum lon)
+  (cond ((empty? lon) 0)
+        ((cons? lon)
+         (+ (first lon)
+            (sum (rest lon))))))
+
+#+END_SRC
+
+#+BEGIN_SRC scheme
+;; Full example for the count function:
+
+;; List is one of:
+;; - '()
+;; - (cons ANY List)
+
+'()
+(cons 1 '())
+(cons "word" (cons -3 (cons 'symbol (cons 1 '()))))
+
+;; List-of-numbers -> Number
+;; sums the values in a list of numbers
+(check-equal? (count '()) 0)
+(check-equal? (count (cons 1 '())) 1)
+(check-equal? (count (cons "word"
+                         (cons -3
+                                (cons 'symbol
+                                       (cons 1 '()))))) 4)
+
+;; v1
+(define (count lst) 0)
+
+;; v2
+(define (count lst)
+  (cond ((empty? lst) .)
+        ((cons? lst)
+         (. (first lst)
+            (count (rest lst))))))
+;; v3
+(define (count lst)
+  (cond ((empty? lst) 0)
+        ((cons? lst)
+         (+ 1
+            (count (rest lst))))))
+
+#+END_SRC
+
+#+BEGIN_SRC scheme
+;; Full example for the all-true function:
+
+;; List-of-booleans is one of:
+;; - '()
+;; - (cons Boolean List-of-booleans)
+
+'()
+(cons #t '())
+(cons #f '())
+(cons #t (cons #t (cons #t (cons #t '()))))
+(cons #t (cons #f (cons #t (cons #t '()))))
+
+;; List-of-numbers -> Number
+;; sums the values in a list of numbers
+(check-true (all-true (cons #t '())))
+(check-false (all-true (cons #f '())))
+(check-true (all-true (cons #t (cons #t (cons #t (cons #t '()))))))
+(check-false (all-true (cons #t (cons #f (cons #t (cons #t '()))))))
+
+;; v1
+(define (all-true lob) #t)
+
+;; v2
+(define (all-true lob)
+  (cond ((empty? lob) .)
+        ((cons? lob)
+         (. (first lob)
+            (all-true (rest lob))))))
+;; v3
+(define (all-true lob)
+  (cond ((empty? lob) #t)
+        ((cons? lob)
+         (and (first lob)
+              (all-true (rest lob))))))
+
+#+END_SRC
+
+*** Non-empty Lists
+
+A special case for our template:
+When the data definition does not allow for empty? xs. Like taking
+the average of empty set does not make sense.
+
+Compute the averarage of a list of temperatures?
+
+#+BEGIN_SRC scheme
+;; An NEList-of-temperatures is one of:
+;; - ??
+;; - (cons Temperature NEList-of-temperatures)
+
+;; becomes:
+
+;; An NEList-of-temperatures is one of:
+;; - (cons Temperature '())
+;; - (cons Temperature NEList-of-temperatures)
+
+;; NEList-of-temperatures -> Number
+(define (average ne-l)
+  (/ (sum ne-l) (how-many ne-l))
+  
+;; NEList-of-temperatures -> Number
+(define (sum ne-l)
+  (cond ((empty? (rest ne-l)) (first ne-l))
+        (else (+ (first ne-l)
+                 (sum (rest ne-l))))))
+
+#+END_SRC
+
+| given input                    |  selector | selector              | natural recursion   | output       |
+|--------------------------------+-----------+-----------------------+---------------------+--------------|
+| l                              | (first l) | (rest l)              | (sorted>? (rest l)) | (sorted>? l) |
+|--------------------------------+-----------+-----------------------+---------------------+--------------|
+| (cons 1 (cons 2 '()))          |         1 | (cons 2 '())          | #t                  | #f           |
+| (cons 3 (cons 2 '()))          |         3 | (cons 2 '())          | #t                  | #t           |
+| (cons 0 (cons 3 (cons 2 '()))) |         0 | (cons 3 (cons 2 '())) | #t                  | #t           |
+
+*** Natural Numbers
+
+Functions that consume atomic data and produce arbitrary large data
+
+#+BEGIN_SRC scheme
+;; An N is one of:
+;; - 0
+;; - (add1 N)
+;; interpretation represents the counting numbers
+
+#+END_SRC
+
+Simply put:   
+- add1 is a constructor like cons (we specifically did not used (+ n 1))
+- sub1 is like the first and rest selectors
+- zero? and positive? are predicates like empty? and cons?
+
+#+BEGIN_SRC scheme
+;; List-of-strings is one of:
+;; - '()
+;; - (cons String List-of-strings)
+
+;; N String -> List-of-strings
+(define (copier n str)
+  (cond ((zero? n) '())
+        ((positive? n)
+         (cons str
+              (copier (sub1 n) str)))))
+
+
+;; N -> Boolean
+(define (one? n) (= n 1))
+(define box (square 10 "outline" "black"))
+
+;; Row is one of:
+;; - box
+;; - (beside box Row)
+;;
+;; box
+;; (beside box box)
+;; (beside box (beside box (beside box box)))
+;; Non-zero-N Image -> Image
+;; produces a row of n copies of img
+(define (row n img)
+  (cond ((one? n) img)
+        ((positive? n)
+         (beside img (row (sub1 n) img)))
+         (else (error "row: expects a non-zero natural number"))))
+#+END_SRC
+
+*** 9.6 A Note on Lists and Sets
+
+A data definition produces a name for a set of BSL values.
+We frequently need to ask whether some element is in some
+given set. Sets and list live at different levels in our
+conversations:
+- a Set is a concept (to discuss steps in the design of code)
+- a List is a form of data
+    
+;; - a List is a form of data
+
+| property         | lists                | sets               |
+|------------------+----------------------+--------------------|
+| membership       | one among many       | critical           |
+| ordering         | critical             | irrelevant         |
+| # of occurrences | sensible             | irrelevant         |
+| size             | finite but arbitrary | finite or infinite |
+
+** 10. More on Lists
+   
+*** Functions that Produce Lists
+
+*** Structures in Lists
+
+*** Lists in Lists, Files
+
+** 11. 
+
+*** 11.1 The list Function 
+
+*** 11.2 Composing Functions
+
+A program is a collection of definitions:
+- structure type definitions
+- data definitions
+- constant definitions
+- function definitions
+- and Tests
+
+How to guide the division of labor among functions:
+Design one function per task. Formulate auxilary function
+definitions for every dependency between quantities in the
+problem.
+
+Design one template per data definition. Formulate auxilary
+function definitions when one data definition points to a
+second data definition.
+
+1. If the composition of values requires knowledge of a
+   particular domain of application
+2. If the composition of values requires a case analysis:
+   use cond, if the cond is too comples design an auxilary function
+3. If the composition of values must process an element
+   from a self-referential data definition
+4. If everything fails, you may need to design a more
+   general function and define the main function as a
+   specific use of the general function
+
+Remember you need to maintain the Wish List of function headers.
+
+*** 11.3 Auxiliary Functions that Recur
+    
+Sorting is an interesting problem for composition.
+
+
+#+BEGIN_SRC scheme
+#+END_SRC
+
+
+* Abelson, Sussman Lectures
+
+  This one is the greatest ever opening lecture on CS.
+
+** Hal Abelson, SICP - Lecture 1,
+
+I'd like to welcome you on this course of computer science. Actually
+that is a terrible way to start. Computer science is a terrible name
+for this business. First of all, it's not a science. It might be
+engineering or it might be art, but we'll actually see that computer
+so called science actually has a lot in common with magic, and we'll
+see that in this course. So it' not a science. It's not really very
+much about computers. And it's not about computers in the same sense
+that physics is not really about particle accelerators, and biology is
+not really about microscopes and pertri dishes. And not about
+computers in the same sense that geometry is not really about using
+surveying instruments. In fact there's a lot of commonality between
+computer science and geometry. Geometry, first of all, is another
+subject with a lousy name. The name comes from Gaia, meaning the
+Earth, and metron, meaning to measure. Geometry originally meant
+measuring the Earth or surveying. And the reason for that was that,
+thousands of years ago, the Egyption priesthood developed the
+rudiments of geometry in order to figure out how to restore the
+boundsries of fields that were destroyed in the annual flooding of
+the Nile. And to the Egyptions who did that, geometry really was the
+use of surveying instruments. Now the reason that we think computer
+science is about computers is pretty much the same reason that the
+Eqyptions thought that geometry was about surveying instruments. And
+that is, when some field is just getting started and you don't really
+understand it very well, it's very easy to confuse the essence of
+what you're doing with the tools you use. And indeed, on some absolute
+scale of things, we probably less about the essence of computer
+science than the the ancient Egyptions really knew about geometry.
+Well, what do I mean by the essence of computer science? What do I
+mean by the essence of geometry? See, it's certainly true that these
+Egyptians went off and used surveying instruments, but when we look
+back on them after a couple of thousands years, we say, gee, what they
+were doing, the important stuff they were doing, was to begin to
+formalize notions about space and time, to start a way of talking
+about mathematical truths formally. That led to the axiomatic method.
+That led to sort if all of modern mathematics, figuring out a way to
+talk about so-called declarative knowledge, what is true. Well
+similarly, I think in the future people will look back and say, yes,
+those primitives in the 20th century were fiddling around with these
+gadgets called computers, but really what they were doing is starting
+to learn how to formalize intuitions about process, how to do things,
+starting to develop a way to talk precisely, about how-to knowedge, as
+opposed to geometry that talks about what is true. Let me give you an
+example of that. Here is a piece of mathematics that says what a
+square root is.
+
+Declarative "What is":
+$$ sqrt{x} is the y such that y^{2} = x and y >= 0 $$
+
+Now that is a fine piece of mathematics, but just telling you what a
+square root is doesn't really say anything about how you might go out
+and find one. So let's contrast that with a piece of imperative
+knowedge, how you might go out and find a square root. This, in fact,
+also comes fron Egypt, not ancient, ancient Egypt. This is an
+algorithm due to Heron of Alexandria, called how to find a square
+root by successive averaging.
+
+Imperative "How to":
+- Make a guess G
+- Improve the guess by averaging G and X/G
+- Keep improving the guess until it is good enough
+
+And what it says is that, in order to find a square root, you make a
+guess, you improve that guess by averaging the guess and X over the
+guess, and we'll talk a little bit later about why that's a reasonable
+thing and you keep improving the guess until it's good enough. That's
+how to do something as opposed to declarative knowledge that says what
+you're looking for. Well, what's a process in general? It's kinda
+hard to say. You can think of it as like a magical spirit that sort of
+lives on the computer and does something. And the thing that directs a
+process is a pettern of rules called a procedure. So procedures are
+the spells, if you like, that control these magical spirits that are
+the processes. I guess you know everyone needs a magical language, and
+sorcerers, real sorcerers, use ancient Arcadian or Sumerian or
+Babylonian or whatever. We're going to conjure our spirit in a magical
+language called Lisp, which is a lanuage designed for talking about,
+for casting spells that are procedures to direct the processes. Now,
+it's very easy to learn Lisp. In fact, in a few minutes, I'm going to
+teach you, essentially, all of Lisp. I'm going to teach you
+essentially, all of the rules. And you shouldn't find that
+particularly surprising. That's sort of like saying it's very easy to
+learn the rules of chess. And indeed, in a few minutes, you can tell
+somebody the rules of chess. But of course, that's very different from
+saying you understand the implications of those rules and how to use
+those rules to became a masterful chess player. Well, Lisp is the same
+way. How you exploit those rules to be a master programmer. And the
+implications of those rules are going to take us the, well, the whole
+rest of the subject and, of course, way beyond.
+
+Ok, so in computer science, we're in the business of formalizing this
+sort of how-to imperative knowledge, how to do stuff. And the real
+issues of computer science are of course, not telling people how to
+do square roots. Because if that was all it was, there wouldn't be no
+big deal. The real problems come when we try to build very, very
+large systems, computer programs that are thousands of pages long, so
+long that nobody can really hold them in their heads all ata once.
+And the only reason that that's possible is because there are
+techniques for controlling the complexity of these large systems.
+And these techinques that are conntrolling complexity are what this
+course is really about. And in some sense, that's really what
+computer science is about. Now that may seem like a very strange
+thing to say. Because after all, a lot os people besides computer
+scientists deal with controlling complexity. A large airliner is an
+extremely complex system, and the aeronautical engineers who design
+that are dealing with immense complexity. But there's a difference
+between that kind of complexity and what we deal with in computer
+science. And that is that computer science, in some sense, isn't
+real. You see, when an engineer is designing a physical system,
+that's made out of real parts. The engineers who worry about that
+have to address problems of tolerance and approximation and noise
+in the system. So for example, as an electrical engineer, I can go
+off and easily build a one-stage amplifier or a two-stage amplifier,
+and I can imagine cascading a lot of them to build a million-stage
+amplifier. But it's ridiculous to build such a thing, because long
+before the millionth stage, the thermal noise in those components is
+going to get amplified and make the whole thing meaningless.
+
+Computer Science deals with idealized components. We know as much as
+we want about these little program and data pieces that we're fitting
+things together. We don't have to worry about tolerance. And that
+means that, in building a large program, there's not all that much
+difference between what I can build and what I can imagine, because
+the parts are these abstract entities that I know as much as I want.
+So opposed to other kinds of engineering, where the constraints on
+what you can build are the constraints of physical systems, the
+constraints of physics and noise approximation, the constraints
+imposed in building large software systems are the limitations of our
+own minds. So in that sense, computer science is like an abstract form
+of engineering. It's the kind of engineerin where you ignore the
+constraints that are imposed by reality.
+
+Well, what are some of these techniques? 
+
+They are not special to computer science. First technique, which is
+used in all of engineering, is a kind of abstraction called black-box
+abstraction. Take something and build a box about it. Let's see for
+example, if we looked at that square root method, I might want to take
+that and build a box. That sort of says, to find the square root of X.
+And that might be a whole complicated set of rules. And that might end
+up being a kind of thing where I can put in, say, 36 and say, what's
+the square root of 36? And out comes 6.
+
+      +------------------+
+36 -> | Find square root | -> 6
+      +------------------+
+
+And the important thing is that I'd like to design that so that if
+George comes along and would like to compute, say the square root of
+A plus the square root of B, he can take this thing and use it as a
+module without having to look inside and build something that looks
+like this, like an A and a B and a square root box and another square
+root box and then something that adds that would put out the answer.
+
+$$ sqrt{A} + sqrt{B}
+
+     +------+    +--+
+A -> | sqrt | -> |   \
+     +------+    | + | ->   
+B -> | sqrt | -> |   / 
+     +------+    +--+
+
+And you can see, just from the fact that I want to do that, is from
+George's point of view, the internals of what's in here should not be
+important. So for instance, it shouldn't matter, when I wrote this, I
+said I want to find the square root of X. I could have said the square
+root of Y, or the square root of A, or anything at all. That's the
+fundamental notion of putting something in a box using black-box
+abstraction to suppress detail. And the reason for that is you want to
+go off and build bigger boxes. Now there's another reason for doing
+black-box abstraction other than you want to suppress detail for
+building bigger boxes. Sometimes you want to say that your way of
+doing something, your how-to method, id an instance of more general
+thing, and you'd like your language to be able to express that
+generality.
+
+Let me show you another example sticking with square roots. Let's go
+baxk and take another look at that slide woth the square root
+algorithm on it... So there is a general strategy of, I'm looking for
+something, and the way I find it id that I keep improving it. Now
+that's a particular case of another kind of strategy for finding a
+fixed point of something. So you have a fixed point of a function. A
+fixed point of a function F is a value Y, such that F of Y equals Y.
+And the way I might do that is start with a guess. And then if I want
+somthing that doesn't change when I keep applying F, is I'll keep
+applying F over and over again until that result doesn't change very
+much. So there's a general strategy. And then, for example. to
+compute the square root of X, I can try and find a fixed point of the
+function which takes Y to the average of X/Y. And the idea that is
+that if I really had Y equal to the square root of X, then Y and X/Y
+would be the same value. They'd both be the square root of X, because
+X over the square root of X is the square root of X. And so the
+average if Y were equal to the square root of X, then the average
+wouldn't change. So the aquare root of X is a fixed point of that
+particular function. Now, what I'd like to have, I'd like to express
+the general strategy for finding fixed points. So what I might imagine
+doing is to find, is to be able to use my language to define a box
+that says fixed-point. Just like I could make a box that says square
+root and I'd like to be able to express this in my language. So I'd
+like to express not only the imperative how-to knowledge of a
+particular thing like square root, but I'd like to be able to express
+the imperative knowledge of how to do a general thing like how to find
+fixed point. And in fact let's go back and look at that slide again.
+See not only is this a piece of imperative knowledge, how to find
+fixed point, but over here on the bottom, there's another piece of
+imperative knowledge which says, one way to compute square root is to
+apply this general fixed point method. So I'd like to also be able to
+express that imperative knowledge. That would say, this fixed pint box
+is such that is I input to it the function that takes Y to the average
+of Y and X/Y, then what should come out of that fixed pint box is a
+method for finding square roots.
+17:05
+
