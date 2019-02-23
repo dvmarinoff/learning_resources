@@ -3,7 +3,12 @@ garbige/
 .idea
 .ipynb_checkpoints/
 .sass-cache
+
 **/node_modules
 **/bower_components
 **/*.jar
 **/garbidge
+
+advent-of-code/2018/
+practical-common-lisp/
+sicp/playground/tests.rkt

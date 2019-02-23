@@ -1041,7 +1041,7 @@
 ;; Word -> List-of-words
 (arrangements (list "b" "a" "r"))
 (define (arrangements w)
-  (cond ((empty? w) '())
+  (cond ((empty? w) (list '()))
         (else
          (insert-everywhere/in-all-words (first w)
                                          (arrangements (rest w))))))
@@ -1055,37 +1055,28 @@
 (check-equal? (insert-everywhere/in-all-words "b" low-in) low-out)
 (define (insert-everywhere/in-all-words l low)
   (cond ((empty? low) '())
-        (else (append (insert-everywhere l (first low))
+        (else (append (insert-everywhere/word l (first low))
                       (insert-everywhere/in-all-words l (rest low))))))
 
 ;; 1String Word -> List-of-words
-(check-equal? (insert-everywhere "b" (list "a" "r"))
+(check-equal? (insert-everywhere/word "b" (list "a" "r"))
               (list (list "b" "a" "r") (list "a" "b" "r") (list "a" "r" "b")))
-(insert-everywhere "b" (list "a" "r"))
+(define (insert-everywhere/word l w)
+  (cond ((empty? w) (list (list l)))
+        (else (cons (cons l w)
+                    (insert-front (first w)
+                                  (insert-everywhere/word l (rest w)))))))
 
-(define (insert-everywhere l w)
-  (list (insert-f "b" w)
-        (insert-m "b" w)
-        (insert-e "b" w)))
+;; 1String List-of-Word -> Word
+(check-equal? (insert-front "b" '()) '())
+(check-equal? (insert-front "b" (list (list "a" "r"))) (list (list "b" "a" "r")))
+(check-equal? (insert-front "b" (list (list "a" "r") (list "r" "a")))
+              (list (list "b" "a" "r") (list "b" "r" "a")))
+(define (insert-front l low)
+  (cond ((empty? low) '())
+        (else (cons (cons l (first low)) (insert-front l (rest low))))))
 
-()
-
-;; 1String Word -> Word
-(check-equal? (insert-f "b" (list "a" "r")) (list "b" "a" "r"))
-(define (insert-f l w) (cons l w))
-
-;; 1String Word -> Word
-(check-equal? (insert-m "b" (list "a" "r")) (list "a" "b" "r"))
-(check-equal? (insert-m "b" (list "a" "c" "d")) (list "a" "b" "c" "d"))
-(define (insert-m l w)
-  (append (list (first w)) (list l) (rest w)))
-
-;; 1String Word -> Word
-(check-equal? (insert-e "b" (list "a" "r")) (list "a" "r" "b"))
-(define (insert-e l w)
-  (cond ((empty? w) (cons l '()))
-        (else (cons (first w) (insert-e l (rest w))))))
-
+;; Bonus:
 ;; Number -> Number
 (check-equal? (factorial 0) 1)
 (check-equal? (factorial 1) 1)
@@ -1096,8 +1087,125 @@
   (cond ((zero? n) 1)
         (else (* n (factorial (sub1 n))))))
 
+(require lang/posn)
+
+;; N -> Image
+(define (unit-circle size)
+  (overlay/align "middle" "middle"
+                 (line 1 (* 2 size) "gray")
+                 (line (* 2 size) 1 "gray")
+                 (rotate 30 (line (* 2 size) 1 "white"))
+                 (rotate 30 (line (* 2 size) 1 "gray"))
+                 (rotate 45 (line (* 2 size) 1 "gray"))
+                 (rotate 60 (line (* 2 size) 1 "gray"))
+                 (rotate -60 (line (* 2 size) 1 "gray"))
+                 (rotate -45 (line (* 2 size) 1 "gray"))
+                 (rotate -30 (line (* 2 size) 1 "gray"))
+                 (circle size "outline" "gray")
+                 (empty-scene (* 3 size) (* 3 size) "white")))
+
+(unit-circle 100)
+
+(define (unit-circle size)
+  (define origin (* 1.5 size))
+  (place-images/align
+   (list (line 1 (* 2 size) "gray")
+         (line (* 2 size) 1 "gray")
+         (circle size "outline" "gray")
+         (rotate 30 (line (* 2.1 size) 1 "gray"))
+         (rotate 45 (line (* 2.1 size) 1 "gray"))
+         (rotate 60 (line (* 2.1 size) 1 "gray"))
+         (rotate -60 (line (* 2.1 size) 1 "gray"))
+         (rotate -45 (line (* 2.1 size) 1 "gray"))
+         (rotate -30 (line (* 2.1 size) 1 "gray"))
+         )
+   (list (make-posn origin origin)
+         (make-posn origin origin)
+         (make-posn origin origin)
+         (make-posn origin origin)
+         (make-posn origin origin)
+         (make-posn origin origin)
+         (make-posn origin origin)
+         (make-posn origin origin)
+         (make-posn origin origin))
+   "middle" "middle"
+   (empty-scene (* 3 size) (* 3 size) "white")))
+
+;;;;
+;; 12.5 Feeding Worms
+;;;;
+
+;; 1. constants: physical and graphical
+;; 2. data representation for possible states of te world
+;; 3.
+
+(define width 200)
+(define height 200)
+(define background (empty-scene width height "white"))
 
 
+(define (cn n)
+  (+ (- (expt 2 n) (* 3 n)) 5))
+
+(foldl + 0 (map cn (range 1 11 1)))
+
+(/ (* 100 101) 2)
+(foldl + 0 (range 0 101 1))
+
+(define (snake-main initial)
+  (big-bang initial
+            (stop-when? game-end?)
+            (on-tick update)
+            (pn-key key-handler)
+            (to-draw render)))
+
+;;;;
+;; 12.6 Simple Tetris
+;;;;
+
+;;;;
+;; 12.7 Full Space War
+;;;;
+
+;; Exercise 224. Use the lessons learned from the preceding two
+;; sections and design the game extension slowly, adding one
+;; feature of the game after another. Always use the design
+;; recipe and rely on the guidelines for auxiliary functions. If
+;; you like the game, add other features: show a running text;
+;; equip the UFO with charges that can eliminate the tank; create
+;; an entire fleet of attacking UFOs; and above all, use your
+;; imagination.
+
+
+
+;; Exercise 225. Design a fire-fighting game.
+;;
+;; The game is set in the western states where fires rage through
+;; vast forests. It simulates an airborne fire-fighting effort.
+;; Specifically, the player acts as the pilot of an airplane that
+;; drops loads of water on fires on the ground. The player
+;; controls the plane’s horizontal movements and the release of
+;; water loads.
+;;
+;; Your game software starts fires at random places on the
+;; ground. You may wish to limit the number of fires, making them
+;; a function of how many fires are currently burning or other
+;; factors. The purpose of the game is to extinguish all fires in
+;; a limited amount of time. Hint Use an iterative design
+;; approach as illustrated in this chapter to create this game.
+
+;; Design by iterative refinement:
+;;
+;; The basic idea is that the first program implements only a
+;; fraction of the desired behavior, the next one a bit more, ...
+
+;;;;
+;; 12.8 Finite State Machines
+;;;;
+
+;;;;
+;; Summary
+;;;;
 
 
 
