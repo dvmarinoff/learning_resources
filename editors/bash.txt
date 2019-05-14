@@ -1,6 +1,5 @@
-////
-// Unix history
-////
+* Unix history
+
 -OS developed at Bell Labs(1969-1971)
 -Rewritten in C, so it can be portable(originaly in assembly)
 -C is made specifically for making portable programs for Unix
@@ -20,7 +19,7 @@ Access Unix directly fromthe command line using Terminal
 
 -Differenc in power and control
 
-//Terminal application
+** Terminal application
 echo 'Hello World'
 
 UpArrow and DownArrow to go through previous commands
@@ -30,7 +29,7 @@ Tab - autocomplete
 Tab + Tab - show list of possible matches
 Alt + ~ - Cycle between Terminal windows
 
-//Command structure
+** Command structure
 command	options	argument
 
 options and arguments are optional
@@ -41,7 +40,7 @@ options sometimes have argumenton their own:
 banner -w 50 'Hello World!'
 width: 50
 
-//Kernel and shells
+** Kernel and shells
 -kernel - core of the OS
 	- allocates time and memory to programs
 	- OS X uses Mach kernel
@@ -67,7 +66,7 @@ exit		- exit current shell
 
 Shell can nest.
 
-//Unix manual pages
+** Unix manual pages
 man + what you want to look up in the manual
 f	- forward
 Space	- forward
@@ -76,12 +75,13 @@ q	- quit
 
 man -k banner	- show what banner does
 
-/*File system basics*/
-//working directory - the dirctory where we are now, where commands are issuied
+* File system basics
+working directory - the dirctory where we are now, where commands are issuied
 
 pwd	- present working directory
 /	- root
--listing files and directories -
+
+** listing files and directories
 ls	- list directories
 ls -l	- list directories vertical
 ls -la	- list all directories and files
@@ -95,7 +95,7 @@ ls -lah - returns sixe in human readable format
 d	- directory
 l	- link
 
-//moving around the filesystem
+** moving around the filesystem
 cd + path to directory
 cd ..		- go to parent directory
 cd ../..	- go back two levels
@@ -108,7 +108,7 @@ Ctrl + e	- end of line
 /Users/Someone	- absolute path
 Users/Someone	- relative path
 
-//file system organization
+** file system organization
 /	- Root
 /bin	- Binaries, programs
 /sbin	- System binaries, system programs
@@ -124,19 +124,20 @@ Users/Someone	- relative path
 /usr/lib
 /usr/local
 
-/*Working with files and directories*/
-//naming files
+** Working with files and directories
+
+** naming files
 - avoid /\*&%$|^~<> and most other symbols
 - use A-Z, a-z, 0-9, period, underscore, hyphen(do not start withthis one)
 - stick with lowercase
 - escape spaces with \ or " "
 - file endings
 
-//creating files
+** creating files
 - touch	- updates file access if it exists else creates it
 - use text editor
 
-//UNIX text editors
+** UNIX text editors
 ed - earlier
 vi - visual editing mode
 vim - vi improved
@@ -144,7 +145,7 @@ GNU Emacs - Macros to automate work
 pico -
 nano - basic features, easy to use
 
-//reading files
+** reading files
 cat	- concatenate
 more	- paginated output, can not go backwards
 less	- backward scrolling, better memory use
@@ -159,7 +160,7 @@ tail -f	- 'follow' the tail of a file
 tail -f /var/log/system_log
 tail -f /varlog/apache2/access_log
 
-//creating directoies
+** creating directoies
 mkdir testdir
 
 mkdir testdir/test1	- will work if testdir exist
@@ -177,13 +178,13 @@ options:
 -i	- interactive overwriting, 'ask me'
 -v	- verbose
 
-//coping
+** coping
 cp new_file.txt newer_file.txt
 
 options:
 -R	- recursive copy
 
-//deleting
+** deleting
 rm somefile.text 	- removes it permanantly, does not sends it first to the trash
 rmdir folder		- removes non-empthy dirs
 rm -r /path/		- removes dirs
@@ -196,9 +197,17 @@ ln  filetolink hardlink name/pathtofile 	- reference to the file, that do not br
 ln -s filetolink symlink	- reference a file or a directory path,
 						  	 break when file is moved
 
-//searching
+** searching
+*** find
 find path expression
-find ~/Documents -name "someimage.jpg"
+find ~/Documents -name "picture.jpg"
+find ~/Documents -iname "*.jpg"
+find ~ ( -iname 'jpeg' -o -iname 'jpg' )                       - or
+find ~ ( -iname 'jpeg' -o -iname 'jpg' ) -type f               - only files
+find ~ ( -iname 'jpeg' -o -iname 'jpg' ) -type d               - only directories 
+find ~ \( -iname '*jpeg' -o -iname '*jpg' \) -type f -mtime -7 - last 7 days
+find /var/log -size +1G  - greater than 1GB files
+find ./books/ -size +10M  - greater than 10MB files
 
 	- wildcard characters
 ????	- any one character
@@ -213,7 +222,42 @@ find ~/Documents -name "someimage.jpg"
 
 -and -not -path *Preferences* 	- excludes from search
 
-// create permenent alias
+*** grep
+Syntax:
+grep 'word' filename
+grep 'word' file1 file2 file3
+grep 'string1 string2'  filename
+cat otherfile | grep 'something'
+command | grep 'something'
+command option1 | grep 'data'
+grep --color 'data' fileName
+
+ls ./books/ | grep -i "felleisen" - search ls output for author case insensitive
+
+grep -l 'lambda' *.scm            - list only the names of .scm files containing lambda
+
+** redirecting
+
+Pipes Syntax:
+Command-1 | Command-2 | …| Command-N
+
+cat article.txt | wc -l
+
+|  - redirect output to other program
+>  - redirect to file and overwrite file
+>> - redirect to file and append file
+
+** history
+
+history - list commands history
+history 10 - last 10 commands
+history 10 | grep "rfkill" - search the last 10 commands for rfkill
+
+!4 - 4th command
+!mplayer - last mplayer command
+!! - last command
+
+** create permenent alias
 - craete a file .bash_aliases in users home directory
 
 - examples:
@@ -243,55 +287,53 @@ alias c='clear'
     sudo poweroff
     sudo reboot
 
-- Scripting
+** Scripting
 
-    - chmod -
-    chmod options permissions filname
+*** chmod
 
-        - permissions:
-            user group others
+*** permissions:
 
-            read, write, execute, no permission
-            4     2      1        0
-            chmod u=rwx,g=rx,o=r myfile
-            chmod 754
+user group others
 
-            chmod +x - to make file executable
+read, write, execute, no permission
+4     2      1        0
+chmod u=rwx,g=rx,o=r myfile
+chmod 754
 
-    -
-    which bash - will locate bash on the system
-    /bin/bash
+chmod +x - to make file executable
 
-    the first line is not read as a comment, it defines the interpreter
-    ./hello_world.sh
-    #!/bin/bash
-    STRING="Hello World!"
-    echo $STRING
 
-    chmod +x hello_world.sh
-    ./hello_world.sh
-    Hello World!
+which bash - will locate bash on the system
+/bin/bash
 
-    - global local variables
+the first line is not read as a comment, it defines the interpreter
+./hello_world.sh
+#!/bin/bash
+STRING="Hello World!"
+echo $STRING
 
-    #!/bin/bash
-    VAR="global variable"
-    function bash {
-        local VAR="local variable"
-        echo $VAR
-    }
+chmod +x hello_world.sh
+./hello_world.sh
+Hello World!
+
+*** global and local variables
+
+#!/bin/bash
+VAR="global variable"
+function bash {
+    local VAR="local variable"
     echo $VAR
-    bash
+}
+echo $VAR
+bash
 
-    - passing arguments
+*** passing arguments
 
-    #predefined variables
-    echo $1 $2 $3 ' -> $1 $2 $3'
-////
-// Bash
-////
+#predefined variables
+echo $1 $2 $3 ' -> $1 $2 $3'
 
-// Inception
+** Bash
+*** Inception
 
 - shell program is one that provides users with an interface to interact with other programs
 - The main difference between bash and most other programs is that unlike them, bash was not programmed to perform a certain task
@@ -335,5 +377,3 @@ by creating a process for the program to work in. A process relays the program i
 - stream - is information (specifically, bytes) flowing through the links between files, devices and processes
  in a running system. They can transport any kind of bytes, and the receiving end can only consume their bytes
  in the order they were sent.
-
-// Commands and Arguments
