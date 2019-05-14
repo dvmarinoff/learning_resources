@@ -1,0 +1,1857 @@
+////
+// The Foundations: Logic and Proofs
+////
+
+The rules of logic specify the meaning of mathematical statements.
+To understand mathematics, we must understand what makes up a correct
+mathematical argument, that is, a proof.
+Once we prove a mathematical statement is true, we call it a theorem.
+A collection of theorems on a topic organize what we know about this topic.
+
+In CS proofs are used to establish that computer programs:
+  - produce the correct output for all possible input values
+  - security of a system
+  - artificial intelligence
+  - automated reasoning systems allow computers to construct their own proofs
+
+
+
+// 1.1 Propositional Logic
+
+- Propositions
+
+A `proposition` is a declarative sentence (that is, a sentence that declares
+a fact) that is either true or false, but not both.
+
+ARISTOTLE (384 b.c.e.–322 b.c.e.):
+First developed systematically the area of logic that deals with propositions
+now called the `propositional calculus` or `propositional logic`.
+
+`Propositional variables`: p, q, r, s
+
+T - True
+F - False
+
+GEORGE BOOLE (1815–1864):
+in The Laws of Thought (1854) explored methods for producing new propositions
+from those that we already have called `compound propositions`.
+
+`negation` - denoted by ¬p (!p), not p
+
+`connectives` - form new proposition from 2 or more existing
+
+    - `conjunction` of p and q, denoted by p ∧ q (p && q)
+
+    - `disjunction` of p and q, denoted by p ∨ q (p || q), p or q.
+      p ∨ q is false when both p and q are false and is true otherwise.
+
+      - inclusive or (p ∨ q) OR
+      - exclusive or (p ⊕ q) XOR 'Soup or salad comes with an entrée'
+
+- Conditional Statements
+
+Let p and q be propositions. The conditional statement p → q is the proposition
+if p, then q. The conditional statement p → q is false when p is true and q is
+false, and true otherwise. In the conditional statement p → q, p is called
+the hypothesis (or antecedent or premise) and q is called the conclusion
+(or consequence)
+
+p → q asserts that q is true on the condition that p holds
+
+p q  p → q
+T T    T
+T F    F
+F T    T
+F F    T
+
+Remember that 'q unless ¬p' expresses the same conditional statement as
+'if p, then q'.
+
+The if-then construction used in many programming languages is different from
+that used in logic.
+
+x = 0
+if 2 + 2 = 4 then x = x + 1
+
+- Converse, Contrapositive, and Inverse
+
+from p → q we can form three related statements
+
+    - `converse`: q → p
+    - `contrapositive`: ¬q → ¬p
+    - `inverse`: ¬p → ¬q
+
+Remember that only contrapositive is equivalent
+
+Note that one of the most common logical errors is to assume that the converse
+or the inverse of a conditional statement is equivalent to this conditional
+statement
+
+- Bi-conditionals
+
+A way to combine propositions that expresses that two propositions
+have the same truth value
+
+Let p and q be propositions. The bi-conditional statement p ↔ q
+is the proposition 'p if and only if q'.
+The bi-conditional statement p ↔ q is true when p and q have the same truth
+values, and is false otherwise.
+
+
+'p is necessary and sufficient for q'
+'if p then q, and conversely'
+'p iff q.' (if and only if)
+
+p ↔ q has the truth value of (p → q) ∧ (q → p)
+
+p  q p ↔ q
+T  T   T
+T  F   F
+F  T   F
+F  F   T
+
+// 1.2 Applications of Propositional Logic
+
+- System specifications
+
+'The diagnostic message is stored in the buffer or it is retransmitted.'
+'The diagnostic message is not stored in the buffer.'
+'If the diagnostic message is stored in the buffer, then it is retransmitted.'
+
+s OR r      | s ∨ r
+NOT s       | ¬ s
+s then r    | s → r
+
+if s false and r true it is consistent
+
+'The diagnostic message is not retransmitted'
+
+NOT r       | ¬ r
+
+now not consistent
+
+- Boolean searches
+- Logic Puzzles
+
+RAYMOND SMULLYAN (BORN 1919)
+books on recreational logic and mathematics:
+
+Satan, Cantor, and Infinity;
+What Is the Name of This Book?;
+The Lady or the Tiger?;
+Alice in Puzzleland;
+To Mock a Mockingbird;
+Forever Undecided;
+The Riddle of Scheherazade: Amazing Logic Puzzles, Ancient and Modern;
+
+he is considered to be a modern-day Lewis Carroll
+interested in self-reference and has worked on extending some of Gödel’s results
+
+- Logic Circuits
+
+Propositional logic can be applied to the design of computer hardware.
+This was first observed in 1938 by Claude Shannon.
+
+// 1.3 Propositional Equivalences
+
+An important type of step used in a mathematical argument is the replacement
+of a statement with another statement with the same truth value.
+
+`tautology` - a compound proposition that is always true, no matter what
+  the truth values of the propositional variables that occur in it
+
+`contradiction` - a compound proposition that is always false
+
+`contingency` - a compound proposition that is neither a tautology nor a
+  contradiction
+
+         tautology  contradiction
+p   ¬q   p ∨ ¬p     p ∧ ¬p
+T    F     T          F
+F    T     T          F
+
+- Logical Equivalences
+
+The compound propositions p and q are called logically equivalent if p ↔ q is a
+tautology. The notation p ≡ q denotes that p and q are logically equivalent.
+
+Remark: ≡ is not logical connective or compound statement, just expresses that
+p ↔ q is a tautology
+
+AUGUSTUS DE MORGAN (1806–1871)
+mathematical induction and
+De Morgan Laws
+¬(p ∧ q) ≡ ¬p ∨ ¬q
+¬(p ∨ q) ≡ ¬p ∧ ¬q
+
+they extend to
+¬(p 1 ∨ p 2 ∨ · · · ∨ p n ) ≡ (¬p 1 ∧ ¬p 2 ∧ · · · ∧ ¬p n )
+and
+¬(p 1 ∧ p 2 ∧ · · · ∧ p n ) ≡ (¬p 1 ∨ ¬p 2 ∨ · · · ∨ ¬p n )
+
+
+
+Equivalence                         Name
+-------------------------------------------------------
+p ∧ T ≡ p
+p ∨ F ≡ p                           Identity laws
+-------------------------------------------------------
+p ∨ T ≡ T
+p ∧ F ≡ F                           Domination laws
+-------------------------------------------------------
+p ∨ p ≡ p
+p ∧ p ≡ p                           Idempotent laws
+-------------------------------------------------------
+¬(¬p) ≡ p                           Double negation law
+-------------------------------------------------------
+p ∨ q ≡ q ∨ p
+p ∧ q ≡ q ∧ p                       Commutative laws
+-------------------------------------------------------
+(p ∨ q) ∨ r ≡ p ∨ (q ∨ r)
+(p ∧ q) ∧ r ≡ p ∧ (q ∧ r)           Associative laws
+-------------------------------------------------------
+p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)
+p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)     Distributive laws
+-------------------------------------------------------
+¬(p ∧ q) ≡ ¬p ∨ ¬q
+¬(p ∨ q) ≡ ¬p ∧ ¬q                  De Morgan’s laws
+-------------------------------------------------------
+p ∨ (p ∧ q) ≡ p
+p ∧ (p ∨ q) ≡ p                     Absorption laws
+-------------------------------------------------------
+p ∨ ¬p ≡ T
+p ∧ ¬p ≡ F                          Negation
+-------------------------------------------------------
+
+
+
+Logical Equivalences Involving Conditional Statements
+-------------------------------------------------------
+p → q ≡ ¬p ∨ q
+p → q ≡ ¬q → ¬p
+p ∨ q ≡ ¬p → q
+p ∧ q ≡ ¬(p → ¬q)
+¬(p → q) ≡ p ∧ ¬q
+(p → q) ∧ (p → r) ≡ p → (q ∧ r)
+(p → r) ∧ (q → r) ≡ (p ∨ q) → r
+(p → q) ∨ (p → r) ≡ p → (q ∨ r)
+(p → r) ∨ (q → r) ≡ (p ∧ q) → r
+
+
+
+Equivalences Involving Bi-conditional Statements
+-------------------------------------------------------
+p ↔ q ≡ (p → q) ∧ (q → p)
+p ↔ q ≡ ¬p ↔ ¬q
+p ↔ q ≡ (p ∧ q) ∨ (¬p ∧ ¬q)
+¬(p ↔ q) ≡ p ↔ ¬q
+
+
+
+- Propositional Satisfiability
+
+`satisfiable` - a compound proposition is satisfiable if there is an assignment
+  of truth values to its variables that makes it true
+
+
+AUGUSTA ADA, COUNTESS OF LOVELACE (1815–1852)
+worked with Charles Babbage on his Analytic Engine
+the 'engine is the material expression of any indefinite function of any degree
+of generality and complexity'
+
+- Applications of Satisfiability
+
+Many problems, in:
+robotics, software testing, computer-aided design, machine vision,
+integrated circuit design, computer networking, and genetics,
+can be modeled in terms of propositional satisfiability
+
+HENRY MAURICE SHEFFER (1883–1964)
+introduced what is now known as the Sheffer stroke. Used in Whitehead and
+Russell’s Principia Mathematica
+
+// 1.4 Predicates and Quantifiers
+
+Propositional logic cannot adequately express the meaning of all statements in
+mathematics and in natural language:
+
+'Every computer connected to the university network is functioning properly.'
+
+Predicate logic can be used to express the meaning of a wide range of statements
+in mathematics and computer science in ways that permit us to reason and explore
+relationships between objects.
+
+- Predicates
+
+    statements involving variables:
+
+    x > 3,
+    x = y + 3,
+    x + y = z,
+    'computer x is under attack by an intruder'
+
+    We can denote the statement 'x is greater than 3' by P (x)
+    The statement P (x) is also said to be the value of the propositional
+    function P at x
+    Once a value has been assigned to the variable x, the statement P (x)
+    becomes a proposition and has a truth value
+
+CHARLES SANDERS PEIRCE (1839–1914)
+He made important contributions to an amazing number of disciplines.
+He is noted as the preeminent system-building philosopher competent and
+productive in logic, mathematics, and a wide range of sciences.
+
+- Preconditions and Postconditions
+
+`preconditions` - the statements that describe valid input
+`postconditions` - conditions that the output should satisfy when the program
+  has run
+
+- Quantifiers
+
+express the extent to which a predicate is true over a range of elements
+
+all, some, many, none, and few
+
+studied by predicate calculus
+
+- The Universal Quantifier
+
+The universal quantification of P (x) is the statement:
+
+'P (x) for all values of x in the domain.'
+
+The notation ∀xP (x) denotes the universal quantification of P (x).
+We read ∀xP (x) as 'for all xP (x)' or 'for every xP (x).'
+An element for which P (x) is false is called a counterexample of ∀xP (x).
+
+- The Existential Quantifier
+
+'There exists an element x in the domain such that P (x).'
+We use the notation ∃xP (x)
+
+- The Uniqueness Quantifier
+
+The notation ∃!xP (x) [or ∃ 1 xP (x)] states:
+  'There exists a unique x such that P (x) is true.'
+
+- Logical Equivalences Involving Quantifiers
+
+∀x(P (x) ∧ Q(x)) ≡ ∀xP (x) ∧ ∀xQ(x)
+
+we can distribute a universal quantifier over a conjunction
+we can also distribute an existential quantifier over a disjunction
+
+However, we cannot distribute a universal quantifier over a disjunction, nor can
+we distribute an existential quantifier over a conjunction
+
+∀x(P (x) ∧ Q(x)) ≡ ∀xP (x) ∧ ∀xQ(x)
+
+¬∀xP (x) ≡ ∃x ¬P (x)
+
+The rules for negations for quantifiers are called:
+
+De Morgan’s Laws for Quantifiers
+-----------------------------------
+Negation   Equivalent Statement   When Is Negation True?         When False?
+¬∃xP (x)   ∀x¬P (x)               For every x, P (x) is false    There is an x for which
+¬∀xP (x)   ∃x¬P (x)               There is an x for which        P (x) is true.
+                                  P (x) is false                 P (x) is true for every x
+
+CHARLES LUTWIDGE DODGSON (1832–1898)
+His writings published under this real name include articles and books on
+geometry, determinants, and the mathematics of tournaments and elections.
+(He also used the pseudonym Lewis Carroll for his many works on
+recreational logic)
+
+// 1.5 Nested Quantifiers
+
+∀x∀y(x + y = y + x)
+∀x∃y(x + y = 0)
+∀x∀y∀z(x + (y + z) = (x + y) + z)
+
+In working with quantifications of more than one variable, it is sometimes
+helpful to think in terms of nested loops
+
+Quantifications of Two Variables
+-----------------------------------
+Statement      When True?                             When False?
+∀x∀yP (x, y)   P (x, y) is true for every pair x, y   There is a pair x, y for
+∀y∀xP (x, y)                                          which P (x, y) is false
+
+∀x∃yP (x, y)   For every x there is a y for           There is an x such that
+               which P (x, y) is true                 P (x, y) is false for every y
+
+∃x∀yP (x, y)   There is an x for which P (x, y)       For every x there is a y for
+               is true for every y                    which P (x, y) is false
+
+∃x∃yP (x, y)   There is a pair x, y for which         P (x, y) is false for every
+∃y∃xP (x, y)   P (x, y) is true                       pair x, y
+
+
+A statement is in prenex normal form (PNF) if and only if it is of the form:
+
+Q 1 x 1 Q 2 x 2 · · · Q k x k P (x 1 , x 2 , . . . , x k )
+
+where each Q i , i = 1, 2, . . . , k, is either the existential quantifier or
+the universal quantifier, and P (x 1 , . . . , x k ) is a predicate
+involving no quantifiers
+
+For example:
+
+∃x∀y(P (x, y) ∧ Q(y))
+
+is in prenex normal form, whereas:
+
+∃xP (x) ∨ ∀xQ(x)
+
+is not (because the quantifiers do not all occur first)
+
+// 1.6 Rules of Inference
+
+An argument in propositional logic is a sequence of propositions. All but the
+final proposition in the argument are called premises and the final proposition
+is called the conclusion.
+An argument is valid if the truth of all its premises implies that the
+conclusion is true.
+An argument form in propositional logic is a sequence of compound propositions
+involving propositional variables.
+An argument form is valid no matter which particular propositions are
+substituted for the propositional variables in its premises, the conclusion
+is true if the premises are all true.
+
+
+- Modus ponens (Latin for mode that affirms)
+
+The tautology (p ∧ (p → q)) → q is the basis of the rule of inference called
+modus ponens, or the law of detachment
+
+- the symbol ∴ denotes “therefore”
+
+  p
+  p → q
+  -----
+∴ q
+
+Rules of Inference
+----------------------
+Rule of Inference   Tautology                         Name
+  p                 (p ∧ (p → q)) → q                 Modus ponens
+  p → q
+  -----
+∴ q
+
+  ¬q                (¬q ∧ (p → q)) → ¬p               Modus tollens
+  p → q
+  ----
+∴ ¬p
+
+  p → q             ((p → q) ∧ (q → r)) → (p → r)     Hypothetical syllogism
+  q → r
+  -----
+∴ p → r
+
+  p ∨ q             ((p ∨ q) ∧ ¬p) → q                Disjunctive syllogism
+  ¬p
+  ----
+∴ q
+
+  p                 p → (p ∨ q)                       Addition
+  -----
+∴ p ∨ q
+
+  p ∧ q             p ∧ q) → p                        Simplification
+  ----
+∴ p
+
+  p                 ((p) ∧ (q)) → (p ∧ q)             Conjunction
+  q
+  -----
+∴ p ∧ q
+
+  p ∨ q             ((p ∨ q) ∧ (¬p ∨ r)) → (q ∨ r)    Resolution
+  ¬p ∨ r
+  -----
+∴ q ∨ r
+
+
+- Resolution
+
+Computer programs have been developed to automate the task of reasoning and
+proving theorems. Many of these programs make use of a rule of inference known
+as resolution. This rule of inference is based on the tautology:
+
+((p ∨ q) ∧ (¬p ∨ r)) → (q ∨ r)
+
+- Fallacies
+
+  fallacy of affirming the conclusion:
+
+  ((p → q) ∧ q) → p
+
+  is not a tautology. However, there are many incorrect arguments that treat
+  this as a tautology
+
+  fallacy of denying the hypothesis:
+
+  ((p → q) ∧ ¬p) → ¬q
+
+Rules of Inference for Quantified Statements
+------------------------------------------------
+Rule of Inference             Name
+
+  ∀xP (x)                     Universal instantiation
+  -------
+∴ P (c)
+
+  P (c) for an arbitrary c    Universal generalization
+  ------------------------
+∴ ∀xP (x)
+
+  ∃xP (x)                     Existential instantiation
+  ------------------------
+∴ P (c) for some element c
+
+  P (c) for some element c    Existential generalization
+  ------------------------
+∴ ∃xP (x)
+
+
+
+
+// 1.7 Introduction to Proofs
+
+
+
+// 1.8 Proof Methods and Strategy
+
+- Exhaustive Proof and Proof by Cases
+
+    Exhaustive proofs
+
+    Proofs by cases
+
+    Without loss of generality
+
+    Common errors
+
+- Existence Proofs
+
+
+GODFREY HAROLD HARDY (1877–1947)
+
+
+
+SRINIVASA RAMANUJAN (1887–1920)
+
+
+
+- Uniqueness Proofs
+
+- Proof Strategies
+
+    Forward and Back Reasoning
+
+- Looking for Counterexamples
+
+
+////
+// Basic Structures: Sets, Functions, Sequences, Sums, and Matrices
+////
+
+2.1. Sets
+
+- Introduction
+
+a fundamental discrete structure on which all other discrete structures
+are built
+
+    Definition 1:
+    A set is an unordered collection of objects, called elements or members of
+    the set. A set is said to contain its elements. We write a ∈ A to denote
+    that a is an element of the set A. The notation a ∈ A denotes that a is not
+    an element of the set A.
+
+It is common for sets to be denoted using uppercase letters. Lowercase letters
+are usually used to denote elements of sets
+
+`roster method`:
+
+The set V of all vowels in the English alphabet can be written as
+V = {a, e, i, o, u}
+
+ellipses (...) are used when the general pattern of the elements is obvious
+
+`builder notation`:
+
+O = {x | x is an odd positive integer less than 10},
+
+or, specifying the universe as the set of positive integers, as
+
+O = {x ∈ Z + | x is odd and x < 10}.
+
+Some important sets:
+N = {0, 1, 2, 3, . . .}, the set of natural numbers
+Z = {. . . , −2, −1, 0, 1, 2, . . .}, the set of integers
+Z + = {1, 2, 3, . . .}, the set of positive integers
+Q = {p/q | p ∈ Z, q ∈ Z, and q = 0}, the set of rational numbers
+R, the set of real numbers
+R + , the set of positive real numbers
+C, the set of complex numbers.
+
+    NOTE:
+    Beware that mathematicians disagree whether 0 is a natural number.
+    We consider it quite natural.
+
+in:
+[a, b] = {x | a ≤ x ≤ b}
+[a, b] is called the closed interval
+(a, b) = {x | a < x < b}
+(a, b) is called the open interval
+
+Note that the concept of a datatype, or type, is built upon the concept of a set.
+Type is the name of a set, together with a set of operations that can be
+performed on objects from that set. For example:
+
+Boolean is the name of the set {0, 1} together with operators such as
+AND, OR, and NOT
+
+    Definition 2:
+    Two sets are equal if and only if they have the same elements. Therefore,
+    if A and B are sets, then A and B are equal if and only if
+    ∀x(x ∈ A ↔ x ∈ B). We write A = B if A and B are equal sets.
+
+The order or if an element is listed more than once does not matter.
+
+{1, 3, 3, 3, 5, 5, 5, 5} = {1, 3, 5},
+{1, 3, 5} = {3, 5, 1}
+
+
+GEORG CANTOR (1845–1918)
+is considered the founder of set theory. His contributions in this area include
+the discovery that the set of real numbers is uncountable. He is also noted for
+his many important contributions to analysis. Cantor also was interested in
+philosophy and wrote papers relating his theory of sets with metaphysics
+
+
+    Empty set (null set)
+    has no elements, denoted ∅ or {}
+
+    Singleton set
+    has one element
+    {∅} is not empty, but singleton set of one empty set
+
+    Naive set theory
+    This description of a set as a collection of objects, based on the intuitive
+    notion of an object, was first stated in 1895 by  Cantor. The theory that
+    results from this intuitive definition of a set, and the use of the
+    intuitive notion that for any property whatever, there is a set consisting
+    of exactly the objects with this property, leads to paradoxes, or logical
+    inconsistencies
+
+    Axiomatic set theory
+    These logical inconsistencies can be avoided by building set theory
+    beginning with axioms. But it is much more abstract.
+
+- Venn diagrams
+    graphical representation of sets.
+    U is the universal set
+
+- Subsets
+
+    Definition 3:
+    The set A is a subset of B if and only if every element of A is also an
+    element of B. We use the notation A ⊆ B to indicate that A is a subset
+    of the set B.
+
+BERTRAND RUSSELL (1872–1970)
+Russell’s greatest work was in his development of principles that could be used
+as a foundation for all of mathematics. His most famous work is Principia
+Mathematica, written with Alfred North Whitehead, which attempts to deduce all
+of mathematics using a set of primitive axioms. He wrote many books on
+philosophy, physics, and his political ideas. Russell won the Nobel Prize for
+literature in 1950
+
+
+
+Theorem 1 shows that every nonempty set S is guaranteed to have at least two
+subsets, the empty set and the set S itself,
+
+THEOREM 1:
+For every set S, (i ) ∅ ⊆ S and (ii ) S ⊆ S.
+
+
+
+JOHN VENN (1834–1923)
+Venn’s book Symbolic Logic clarifies ideas originally presented by Boole.
+Today Venn diagrams are primarily used to analyze logical arguments and to
+illustrate relationships between sets. He made contributions to probability
+theory described in his widely used textbook on that subject
+
+
+
+- The Size of a Set
+
+    Definition 4:
+    Let S be a set. If there are exactly n distinct elements in S where n is a
+    nonnegative integer, we say that S is a finite set and that n is the
+    cardinality of S. The cardinality of S is denoted by |S|.
+
+    Definition 5:
+    A set is said to be infinite if it is not finite.
+
+- Power Sets
+
+    Definition 6:
+    Given a set S, the power set of S is the set of all subsets of the set S.
+    The power set of S is denoted by P (S).
+
+    The power set of {1, 2, 3} is:
+    P({0, 1, 2}) = {∅, {0}, {1}, {2}, {0, 1}, {0, 2}, {1, 2}, {0, 1, 2}}
+
+    The power set of null set is:
+    P ({∅}) = {∅, {∅}}
+
+    If a set has n elements, then its power set has 2 ** n elements
+
+- Cartesian Products
+
+    Definition 7:
+    The ordered n-tuple (a 1 , a 2 , . . . , a n ) is the ordered collection
+    that has a 1 as its first element, a 2 as its second element, . . . ,
+    and a n as its nth element.
+
+In particular, ordered 2-tuples are called ordered pairs. The ordered pairs
+(a, b) and (c, d) are equal if and only if a = c and b = d
+
+RENÉ DESCARTES (1596–1650)
+he wrote several books, including the Discours, which contains his contributions
+to analytic geometry, for which he is best known. He also made fundamental
+contributions to philosophy
+
+
+
+    Definition 8:
+    Let A and B be sets. The Cartesian product of A and B, denoted by A × B,
+    is the set of all ordered pairs (a, b), where a ∈ A and b ∈ B. Hence,
+    A × B = {(a, b) | a ∈ A ∧ b ∈ B}.
+
+If A is all students and B is all courses:
+the Cartesian product A × B consists of all the ordered pairs of the form
+(a, b), where a is a student at the university and b is a course offered at
+the university. One way to use the set A × B is to represent all possible
+enrollments of students in courses at the university
+
+A = {1, 2} and B = {a, b, c}
+
+A * B = {(1, a), (1, b), (1, c), (2, a), (2, b), (2, c)}
+
+    Definition 9:
+    The Cartesian product of the sets A 1 , A 2 , ... , A n ,
+    denoted by A 1 × A 2 × ··· × A n , is the set of ordered n-tuples
+    (a 1 , a 2 , ... , a n ), where a i belongs to A i for i = 1, 2, ... , n.
+    In other words,
+    A 1 × A 2 × ··· × A n = {(a 1 , a 2 , ... , a n ) | a i ∈ A i for i = 1, 2, ... , n}.
+
+- Using Set Notation with Quantifiers
+
+∀x∈ S(P (x)) is shorthand for ∀x(x ∈ S → P (x))
+∃x∈ S(P (x)) is shorthand for ∃x(x ∈ S ∧ P (x))
+
+- Truth Sets and Quantifiers
+
+2.2. Set Operations
+
+- Introduction
+
+    Let A and B be sets. The union of the sets A and B, denoted by A ∪ B, is the
+    set that contains those elements that are either in A or in B, or in both
+
+A ∪ B = {x | x ∈ A ∨ x ∈ B}
+
+    Let A and B be sets. The intersection of the sets A and B, denoted by A ∩ B,
+    is the set containing those elements in both A and B
+
+A ∩ B = {x | x ∈ A ∧ x ∈ B}
+
+    Two sets are called disjoint if their intersection is the empty set
+
+Note that |A| + |B| counts each element that is in A but not in B or in B but
+not in A exactly once, and each element that is in both A and B exactly twice.
+Thus, if the number of elements that are in both A and B is subtracted from
+|A| + |B|, elements in A ∩ B will be counted only once. Hence,
+
+Principle of inclusion–exclusion:
+|A ∪ B| = |A| + |B| − |A ∩ B|
+
+    Let A and B be sets. The difference of A and B, denoted by A − B, is the set
+    containing those elements that are in A but not in B. The difference of
+    A and B is also called the complement of B with respect to A
+
+A − B = {x | x ∈ A ∧ x ∈ / B}
+
+    Let U be the universal set. The complement of the set A, denoted by A, is
+    the complement of A with respect to U . Therefore, the complement
+    of the set A is U − A
+
+A = {x ∈ U | x ∈ / A}
+
+- Set Identities
+
+Set identities and propositional equivalences are just special cases of
+identities for Boolean algebra
+
+
+Identity                           Name
+--------------------------------------------------------
+A ∩ U = A                          Identity laws
+A ∪∅= A
+--------------------------------------------------------
+A ∪ U = U                          Domination laws
+A ∩∅=∅
+--------------------------------------------------------
+A ∪ A = A                          Idempotent laws
+A ∩ A = A
+--------------------------------------------------------
+(A) = A                            Complementation law
+--------------------------------------------------------
+A ∪ B = B ∪ A                      Commutative laws
+A ∩ B = B ∩ A
+--------------------------------------------------------
+A ∪ (B ∪ C) = (A ∪ B) ∪ C          Associative laws
+A ∩ (B ∩ C) = (A ∩ B) ∩ C
+--------------------------------------------------------
+A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)    Distributive laws
+A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)
+--------------------------------------------------------
+A ∩ B = A ∪ B                      De Morgan’s laws
+A ∪ B = A ∩ B
+--------------------------------------------------------
+A ∪ (A ∩ B) = A                    Absorption laws
+A ∩ (A ∪ B) = A
+--------------------------------------------------------
+A ∪ A = U                          Complement laws
+A ∩ A =∅
+--------------------------------------------------------
+
+- Generalized Unions and Intersections
+
+    The union of a collection of sets is the set that contains those elements
+    that are members of at least one set in the collection
+                     n
+A1 ∪ A2 ∪ ... ∪ An = U Ai
+                     i=1
+
+     The intersection of a collection of sets is the set that contains those
+     elements that are members of all the sets in the collection
+                      n
+ A1 ∩ A2 ∩ ... ∩ An = ∩ Ai
+                      i=1
+
+- Computer Representation of Sets
+
+2.3. Functions
+
+- wikipedia: in math, a function is a relation between a set of inputs and a set
+ of permissible outputs with the property that each input is related to exactly
+ one output
+
+- mathsisfun: a function relates each element of a set with exactly one element
+  of another set
+
+  - "...each element..." - means that every element in X is related to some
+   element in Y. We say that the function covers X (relates every element of it).
+   (But some elements of Y might not be related to at all, which is fine.)
+
+  - "...exactly one..." - one-to-many is not ok, but many-to-one is ok
+
+  - vertical line test - on a graph, the idea of single valued means that
+   no vertical line ever crosses more than one value
+
+  - domain, codomain and range
+    - the set "X" is called the Domain,
+    - the set "Y" is called the Codomain, and
+    - the set of elements that get pointed to in Y (the actual values produced
+     by the function) is called the Range
+
+  - ordered pairs
+    - another way to think about functions
+    (4.16)
+    (input, output)
+    (x, f(x))
+
+    - set of ordered pairs
+    {(2,4), (3,5), (7,3)}
+      - a benefit of ordered pairs is that we can graph them as coordinates
+
+
+input x --> [ function f ] --> output f(x)
+
+input | relationship | output
+   3  |     x * x    |    9
+   4  |     x * x    |   16
+   5  |     x * x    |   25
+
+   - functions process sets of things
+    - set of even numbers { -4, -2, 0, 2, 4 }
+    - set of clothes      { 'hat', 'shirt' }
+   - each individual thing is called a member (or element)
+   - function takes elements of a set and returns elements of a set
+
+- Set-Builder Notation
+
+  { x | x > 0 }
+  { x : x > 0 }
+
+  - it says "the set of all x's, such that x is greater than 0"
+
+  { x E R | x > 3 }
+
+  [3, infinity]
+
+  - E - means a member of
+  - R - stands for real numbers
+
+- Interval Notation
+
+  [0, 20]
+  - include 0 and 20
+  (0, 20)
+  - not 0 and 20
+
+- Introduction
+
+    Definition:
+    Let A and B be nonempty sets. A function f from A to B is an
+    assignment of exactly one element of B to each element of A. We write
+    f (a) = b if b is the unique element of B assigned by the function f to
+    the element a of A. If f is a function from A to B, we write f : A → B.
+
+    Remark: Functions are sometimes also called mappings or transformations.
+
+    Definition:
+    If f is a function from A to B, we say that A is the domain of
+    f and B is the codomain of f. If f (a) = b, we say that b is the image of a
+    and a is a preimage of b. The range, or image, of f is the set of all
+    images of elements of A. Also, if f is a function from A to B, we say that
+    f maps A to B.
+
+    Definition:
+    Let f1 and f2 be functions from A to R. Then f1 + f2
+    and f1 f2 are also functions from A to R defined for all x ∈ A by
+    (f1 + f2)(x) = f1(x) + f2(x),
+    (f1 f2)(x) = f1(x)f2(x).
+
+Let f1 and f2 be functions from R to R such that
+f1(x) = x ** 2 and f2(x) = x − x ** 2 .
+What are the functions f1 + f2 and f1 f2 ?
+
+From the definition of the sum and product of functions, it follows that:
+(f1 + f2)(x) = f1(x) + f2(x) = x ** 2 + (x − x ** 2 ) = x
+and
+(f1 f2)(x) = x ** 2 (x − x ** 2 ) = x ** 3 − x ** 4
+
+    Let f be a function from A to B and let S be a subset of A. The image of S
+    under the function f is the subset of B that consists of the images of the
+    elements of S. We denote the image of S by f (S), so
+    f (S) = {t | ∃s ∈ S (t = f (s))}.
+    We also use the shorthand {f (s) | s ∈ S} to denote this set.
+
+- One-to-One and Onto Functions
+
+    One-to-one:
+    A function f is said to be one-to-one, or an injunction, if and only if
+    f (a) = f (b) implies that a = b for all a and b in the domain of f.
+    A function is said to be injective if it is one-to-one
+
+
+
+    Onto:
+    A function f from A to B is called onto, or a surjection, if and only if for
+    every element b ∈ B there is an element a ∈ A with f (a) = b. A function f
+    is called surjective if it is onto
+
+
+
+    One-to-one correspondence:
+    The function f is a one-to-one correspondence, or a bijection, if it is
+    both one-to-one and onto. We also say that such a function is bijective.
+
+
+
+    Suppose that f : A → B
+    To show that f is injective Show that if f(x) = f(y) for arbitrary
+    x, y ∈ A with x  = y, then x = y
+
+    To show that f is not injective Find particular elements x, y ∈ A such that
+    x = y and f(x) = f(y)
+
+    To show that f is surjective Consider an arbitrary element y ∈ B and find
+    an element x ∈ A such that f(x) = y
+
+    To show that f is not surjective Find a particular y ∈ B such that
+    f(x) = y for all x ∈ A
+
+
+
+- Inverse Functions and Compositions of Functions
+
+    Let f be a one-to-one correspondence from the set A to the set B.
+    The inverse function of f is the function that assigns to an element b
+    belonging to B the unique element a in A such that f (a) = b. The inverse
+    function of f is denoted by f −1 . Hence, f −1 (b) = a when f (a) = b
+
+
+
+    Let g be a function from the set A to the set B and let f be a function from
+    the set B to the set C. The composition of the functions f and g, denoted
+    for all a ∈ A by f ◦ g, is defined by:
+    (f ◦ g)(a) = f (g(a))
+
+Remark: f ◦ g and g ◦ f are not equal. In other words, the commutative law does
+not hold for the composition of functions
+
+- The Graphs of Functions
+
+    Let f be a function from the set A to the set B. The graph of the function f
+    is the set of ordered pairs {(a, b) | a ∈ A and f (a) = b}
+
+- Some Important Functions
+
+the floor function
+
+the ceiling function
+
+JAMES STIRLING (1692–1770)
+In 1730 he published Methodus Differentialis, his most important work,
+presenting results on infinite series, summations, interpolation, and
+quadrature. It is in this book that his asymptotic formula for n! appears.
+Stirling also worked on gravitation and the shape of the earth; he stated, but
+did not prove, that the earth is an oblate spheroid
+
+- Partial Functions
+
+In abstract mathematics, we often want to discuss functions that are defined
+only for a subset of the real numbers, such as 1/x, x, and arcsin (x).
+Also, we may want to use such notions as the “youngest child” function,
+which is undefined for a couple having no children, or the “time of sunrise,”
+which is undefined for some days above the Arctic Circle
+
+    A partial function f from a set A to a set B is an assignment to each
+    element a in a subset of A, called the domain of definition of f , of a
+    unique element b in B. The sets A and B are called the domain and codomain
+    of f , respectively. We say that f is undefined for elements in A that are
+    not in the domain of definition of f . When the domain of definition of f
+    equals A, we say that f is a total function
+
+2.4. Sequences and Summations
+
+- Sequences
+
+    A sequence is a function from a subset of the set of integers (usually
+    either the set {0, 1, 2, . . .} or the set {1, 2, 3, . . .}) to a set S.
+    We use the notation a n to denote the image of the integer n. We call a n a
+    term of the sequence
+
+    A geometric progression is a sequence of the form:
+    a, ar, ar2 , ..., ar ** n, ...
+    where the initial term a and the common ratio r are real numbers
+
+Remark: A geometric progression is a discrete analogue of the exponential
+function f(x) = ar ** x
+
+    An arithmetic progression is a sequence of the form:
+    a, a + d, a + 2d, ... , a + nd, ...
+
+Remark: or f (x) = dx + a
+
+- Recurrence Relations
+
+    A recurrence relation for the sequence {a n } is an equation that expresses
+    a n in terms of one or more of the previous terms of the sequence, namely,
+    a0, a1, ..., a_n−1 , for all integers n with n ≥ n 0 , where n 0 is a
+    nonnegative integer. A sequence is called a solution of a recurrence
+    relation if its terms satisfy the recurrence relation
+
+    - initial conditions - for a recursively defined sequence specify the terms
+     that precede the first term where the recurrence relation takes effect
+
+    - closed formula - we say that we have solved the recurrence relation
+     together with the initial conditions when we find an explicit formula
+
+    - iteration - repeated use of the recurrence relation
+
+    - forward substitution - finding successive terms beginning with the initial
+     condition and ending with an
+
+ a 2 = 2 + 3
+ a 3 = (2 + 3) + 3 = 2 + 3 · 2
+ a 4 = (2 + 2 · 3) + 3 = 2 + 3 · 3
+ ...
+ a n = a n−1 + 3 = (2 + 3 · (n − 2)) + 3 = 2 + 3(n − 1)
+
+    - backward substitution - begin with an and iterate to express it in terms
+     of falling terms of the sequence until we found it in terms of a1
+
+ a n = a n−1 + 3
+ = (a n−2 + 3) + 3 = a n−2 + 3 · 2
+ = (a n−3 + 3) + 3 · 2 = a n−3 + 3 · 3
+ ...
+ = a 2 + 3(n − 2) = (a 1 + 3) + 3(n − 2) = 2 + 3(n − 1)
+
+    The Fibonacci sequence, f0 , f1 , f2 , ... , is defined by the initial
+    conditions f0 = 0, f1 = 1, and the recurrence relation
+    f_n = f_n−1 + f_n−2 for n = 2, 3, 4, ...
+
+
+Example: Compound Interest
+a0 = 10,000
+interest = 0.11
+
+an = a_n-1 + (a_n-1 * 0.11) = (1.11) * a_n-1
+
+a1 = (1.11) * a0
+a2 = (1.11) * (1.11) * a0 = (1.11) ** 2 * a0
+a3 = (1.11) ** 3 * a0
+
+an = (1.11) ** n * a0
+
+a30 = (1.11) ** 30 * 10000 = 22892297
+
+- Special Integer Sequences
+
+    1. Are there runs of the same value? That is, does the same value occur many
+     times in a row?
+    2. Are terms obtained from previous terms by adding the same amount or an
+     amount that depends on the position in the sequence?
+    3. Are terms obtained from previous terms by multiplying by a particular
+     amount?
+    4. Are terms obtained by combining previous terms in a certain way?
+    5. Are there cycles among the terms?
+
+- Summations
+
+
+
+
+      n
+    Sigma a_j
+    j = m
+
+    Sigma_m<=j<=n a_j
+
+(read as the sum from j = m to j = n of a j ) to represent
+
+a_m + a_m+1 + ... + a_n
+
+Here, the variable j is called the index of summation, and the choice of the
+letter j as the variable is arbitrary; that is, we could have used any other
+letter, such as i or k.
+The index of summation runs through all integers starting with its lower limit m
+and ending with its upper limit n
+
+NEIL SLOANE (BORN 1939)
+One of his favorite problems is the kissing problem (a name he coined), which
+asks how many spheres can be arranged in n dimensions so that they all touch a
+central sphere of the same size. (In two dimensions the answer is 6, because 6
+pennies can be placed so that they touch a central penny. In three dimensions,
+12 billiard balls can be placed so that they touch a central billiard ball.
+Two billiard balls that just touch are said to “kiss,” giving rise to the
+terminology “kissing problem” and “kissing number.”) Sloane, together with
+Andrew Odlyzko, showed that in 8 and 24 dimensions, the optimal kissing numbers
+are, respectively, 240 and 196,560. The kissing number is known in dimensions
+1, 2, 3, 4, 8, and 24, but not in any other dimensions. Sloane’s books include
+Sphere Packings, Lattices and Groups, 3d ed., with John Conway;
+The Theory of Error-Correcting Codes with Jessie MacWilliams;
+The Encyclopedia of Integer Sequences with Simon Plouffe (which has grown into
+the famous OEIS website);
+
+
+    Theorem:
+    If a and r are real numbers and r  = 0, then:
+                  { ar**n-1 - a
+      n           { ------------   if r != 1
+    Sigma ar**j = {   r - 1
+     j=0          {
+                  { (n + 1)a       if r = 1
+
+Double summations arise in many contexts (as in the analysis of nested loops in
+computer programs). An example of a double summation is:
+
+      4     3
+    Sigma Sigma i j
+     i=1   j=1
+
+         4                     4
+     = Sigma (i + 2i + 3i) = Sigma 6i = 6 + 12 + 18 + 24 = 60
+        i=1                   i=1
+
+
+Proof 1: Summation of N by Gauss
+
+  n
+Sigma i
+ i=1
+
+S(n) = 1 + 2 + 3 + 4 + ... + n
+
+rewrite in different order:
+S(n) = n + (n - 1) + (n - 2) + (n - 3) + ... + 4 + 3 + 2 + 1
+
+add the first and second rows right sides to double:
+2S(n) = n + 1 +((n - 1) + 2) + ((n - 2) + 3) + ((n - 3) + 4) ...
+2S(n) = (n + 1) + (n + 1) + (n + 1) + ... + (n + 1)
+
+2S(n) = n(n + 1)
+
+S(n) = n(n + 1)
+       --------
+          2
+
+Proof 2: Summation of N by Induction (finite arithmetic series)
+
+1) base case -> S(1)
+2) induction -> assume True for S(k) then must be True for S(k + 1)
+
+S(k + 1) = 1 + 2 + 3 + 4 + ... + k + k + 1
+
+S(k + 1) = k(k + 1)  + (k + 1) = k(k + 1) + 2(k + 1) = k(k + 1) + 2(k + 1) =
+           --------              --------   --------   -------------------
+              2                     2          2                2
+
+         = ( (k + 1)(k + 2) ) / 2 = ( (k + 1)((k + 1) + 1) ) / 2
+
+Some Useful Summation Formulae
+------------------------------------------
+Sum                      Closed Form
+------------------------------------------
+  n                      ar^n+1 - a
+Sigma a*r^k (r!=0)       -----------, r!=1
+ k=0                        r - 1
+
+  n                      n(n + 1)
+Sigma k                  --------
+ k=1                        2
+
+  n                      n(n + 1)(2n + 1)
+Sigma k ^ 2              ----------------
+ k=1                            6
+
+  n                      n^2 (n + 1)^2
+Sigma k ^ 3              ---------------
+ k=1                             4
+
+ inf                       1
+Sigma x^k, |x| < 1       -----
+ k=0                     1 - x
+
+ inf                         1
+Sigma k*x^k-1, |x| < 1   ----------
+ k=1                     (1 - x)^2
+
+
+
+    Some infinite series
+
+2.5. Cardinality of Sets
+
+- Introduction
+
+A function is called uncomputable if no computer program can be written
+to find all its values, even with unlimited time and memory. We will use the
+concepts in this section to explain why uncomputable functions exist
+
+    The sets A and B have the same cardinality if and only if there is a
+    one-to-one correspondence from A to B. When A and B have the same
+    cardinality, we write |A| = |B|
+
+    If there is a one-to-one function from A to B, the cardinality of A is less
+    than or the same as the cardinality of B and we write |A| ≤ |B|. Moreover,
+    when |A| ≤ |B| and A and B have different cardinality, we say that the
+    cardinality of A is less than the cardinality of B and we write |A| < |B|
+
+- Countable Sets
+
+    A set that is either finite or has the same cardinality as the set of
+    positive integers is called countable.A set that is not countable is called
+    uncountable. When an infinite set S is countable, we denote the cardinality
+    of S by א 0 (where א is aleph, the first letter of the Hebrew alphabet). We
+    write |S| = א 0 and say that S has cardinality “aleph null”
+
+Example:
+Show that the set of odd positive integers is a countable set.
+
+Solution:
+To show that the set of odd positive integers is countable, we will exhibit a
+one-to-one correspondence between this set and the set of positive integers.
+Consider the function:
+
+f (n) = 2n − 1    from Z+
+
+to the set of odd positive integers. We show that f is a one-to-one
+correspondence by showing that it is both one-to-one and onto. To see that it
+is one-to-one, suppose that f (n) = f (m). Then 2n − 1 = 2m − 1, so n = m.
+To see that it is onto, suppose that t is an odd positive integer. Then t is 1
+less than an even integer 2k, where k is a natural number.
+Hence t = 2k − 1 = f (k).
+
+An infinite set is countable if and only if it is possible to list the elements
+of the set in a sequence (indexed by the positive integers). The reason for this
+is that a one-to-one correspondence f from the set of positive integers to a set
+S can be expressed in terms of a sequence a1 , a2 , ..., an , ... , where
+a1 = f(1), a2 = f(2), ... , an = f (n), ...
+
+    Hilbert's Grand Hotel
+
+    A paradox which takes advantage of infinite sets to show that we can always
+    accommodate a new guest at the Grand Hotel, even when all rooms are already
+    occupied
+
+DAVID HILBERT (1862–1943)
+He almost always worked on one area of mathematics at a time, making important
+contributions, then moving to a new mathematical subject (calculus of variations,
+geometry, algebra, number theory, logic, and mathematical physics).
+Also Hilbert is remembered for his famous list of 23 difficult problem.
+
+
+Examples of countable sets are:
+    all integers
+    positive rational numbers
+
+
+- An Uncountable Set
+
+    Not all infinite sets have the same size!
+
+    Results About Cardinality
+
+    Theorem:
+    If A and B are countable sets, then A ∪ B is also countable.
+
+    Theorem:
+    SCHRÖDER-BERNSTEIN THEOREM If A and B are sets with |A| ≤ |B| and |B| ≤
+    |A|, then |A| = |B|. In other words, if there are one-to-one functions f
+    from A to B and g from B to A, then there is a one-to-one correspondence
+    between A and B.
+
+    Uncomputable functions
+
+    We say that a function is computable if there is a computer program in some
+    programming language that finds the values of this function. If a function
+    is not computable we say it is uncomputable.
+
+    The continuum Hypothesis
+
+2.6. Matrices
+
+- Introduction
+
+A matrix is a rectangular array of numbers. A matrix with m rows and n columns
+is called an m × n matrix(pl. matrices). Two matrices are equal if they
+have the same number of rows and the same number of columns and the
+corresponding entries in every position are equal
+
+- Matrix Arithmetic
+
+Addition:
+Let A = [a ij ] and B = [b ij ] be m × n matrices. The sum of A and B,
+denoted by A + B, is the m × n matrix that has a ij + b ij as its (i, j )th
+element. In other words, A + B = [a ij + b ij ]
+
+Product:
+Let A be an m × k matrix and B be a k × n matrix. The product of A and B,
+denoted by AB, is the m × n matrix with its (i, j)th entry equal to the sum
+of the products of the corresponding elements from the ith row of A and the j th
+column of B. In other words, if AB = [c ij ], then
+
+c_ij = a i1 b1_j + a i2 b2_j + ... + a_ik b_kj
+
+- Transposes and Powers of Matrices
+
+The identity matrix of order n is the n × n matrix I n = [δ ij ],
+where δ ij = 1 if i = j and δ ij = 0 if i  = j . Hence
+
+    [ 1 0 ... 0 ]
+    [ 0 1 ... 0 ]
+I_n [ . . ... 0 ]
+    [ . . ... 0 ]
+    [ . . ... 0 ]
+    [ 0 0 ... 0 ]
+
+
+Let A = [a ij ] be an m × n matrix. The transpose of A, denoted by A t , is the
+n × m matrix obtained by interchanging the rows and columns of A.
+In other words, if A t = [b ij ], then
+
+b_ij = a j i for i = 1, 2, ... , n and j = 1, 2, ... , m.
+
+
+
+A square matrix A is called symmetric if A = A t. Thus A = [ a_ij ] is symmetric
+if a_ij = a j i for all i and j with 1 ≤ i ≤ n and 1 ≤ j ≤ n
+
+- Zero–One Matrices
+
+Let A = [ a_ij ] and B = [ b_ij ] be m × n zero–one matrices. Then the join of
+A and B is the zero–one matrix with (i, j )th entry a_ij ∨ b_ij . The join of
+A and B is denoted by A ∨ B. The meet of A and B is the zero–one matrix with
+(i, j )th entry a_ij ∧ b_ij . The meet of A and B is denoted by A ∧ B
+
+
+
+Let A = [a_ij ] be an m × k zero–one matrix and B = [b_ij ] be a k × n zero–one
+matrix. Then the Boolean product of A and B, denoted by A  B, is the m × n
+matrix with (i, j )th entry c_ij where
+
+c_ij = (a_i1 ∧ b_1j ) ∨ (a_i2 ∧ b_2j ) ∨ ... ∨ (a_ik ∧ b_kj ).
+
+
+
+Let A be a square zero–one matrix and let r be a positive integer.
+The rth Boolean power of A is the Boolean product of r factors of A
+The rth Boolean product of A is denoted by A[r] . Hence
+
+A[r] = A A A A } r times
+
+(This is well defined because the Boolean product of matrices is associative.)
+We also define A[0] to be I_n .
+
+////
+// Algorithms
+////
+
+3.1. Algorithms
+
+Many problems can be solved by considering them as special cases of
+general problems.
+
+- Introduction
+
+When presented with such a problem, the first thing to do is to construct
+a model that translates the problem into a mathematical context.
+Discrete structures used in such models include:
+sets, sequences, functions,
+permutations, relations, graphs, trees, networks,
+and finite state machines
+
+An algorithm is a finite sequence of precise instructions for performing a
+computation or for solving a problem.
+
+ABU JA‘FAR MOHAMMED IBN MUSA AL-KHOWARIZMI (C. 780 – C. 850)
+an astronomer and mathematician, was a member of the House of Wisdom, an academy
+of scientists in Baghdad. The name al-Khowarizmi means “from the town of
+Kowarzizm,” which was then part of Persia, but is now called Khiva and is part
+of Uzbekistan. al-Khowarizmi wrote books on mathematics, astronomy,
+and geography. Western Europeans first learned about algebra from his works.
+The word algebra comes from al-jabr, part of the title of his book
+Kitab al-jabr w’al muquabala.
+
+    - Properties of Algorithms
+    Input, Output, Definiteness, Correctness,
+    Finiteness, Effectiveness, Generality
+
+- Searching Algorithms
+
+The Linear Search
+
+
+The Binary Search
+
+When the list terms are sorted in order of increasing size
+
+- Sorting
+
+// The Bubble Sort
+
+Theta(n**n)
+
+// The Insertion Sort
+
+sorted and unsorted
+shift until in right place of sorted portion
+
+Pseudo-code 1:
+for i = 1 to n - 1
+    element = array[i]
+    j = i
+    while (j > 0 and array[j - 1] > element)
+        array[j] = array[j - 1]
+        j = j - 1
+    array[j] = element
+
+It is summation
+
+ n-1
+Sigma i = n(n - 1) = (n^2)/2 - n/2 = n^2 is dominant
+ i=1      --------
+             2
+Theta(n^2)
+Omega(n)
+
+// The Selection Sort
+
+sorted and unsorted
+current minimum
+swap with the first unsorted
+if itself leave it at position
+
+Pseudo-code 1:
+for 1 = 1 to n -1
+    min = 1
+    for j=i + 1 to n
+        if array[j] < array[min]
+            min = j
+    if min != i
+        swap array[min] and array[i]
+
+Similar to Insertion Sort summation
+Theta(n^2)
+Omega(n^2)
+
+// The Merge Sort
+
+
+
+- Greedy Algorithms
+
+Algorithms that make what seems to be the “best” choice at each step
+
+Greedy Change-Making Algorithm
+
+Pseudo-code 2:
+procedure change(c1, c2, ..., cr : values of denominations of coins, where
+    c1 > c2 > ... > c  ; n: a positive integer)
+    for i := 1 to r
+        d_i := 0 {d_i counts the coins of denomination c_i used}
+        while n ≥ c_i
+            d_i := d_i + 1 {add a coin of denomination c_i }
+            n := n − c_i
+    { d i is the number of coins of denomination c_i
+     in the change for i = 1, 2, ..., r }
+
+Lemma 1:
+If n is a positive integer, then n cents in change using quarters, dimes,
+nickels, and pennies using the fewest coins possible has at most two dimes, at
+most one nickel, at most four pennies, and cannot have two dimes and a nickel.
+The amount of change in dimes, nickels, and pennies cannot exceed 24 cents.
+
+Theorem 1:
+The greedy algorithm (Algorithm 6) produces change using the fewest coins
+possible.
+
+Greedy Algorithm for Scheduling Talks
+
+procedure schedule(s1 ≤ s2 ≤ ... ≤ s_n : start times of talks,
+    e1 ≤ e2 ≤ ... ≤ e_n : ending times of talks)
+    sort talks by finish time and reorder so that e1 ≤ e2 ≤ ... ≤ e_n
+    S := ∅
+    for j := 1 to n
+        if talk j is compatible with S then
+            S := S ∪ {talk j }
+    return S{ S is the set of talks scheduled }
+
+- The Halting Problem
+
+3.2. The Growth of Functions
+
+- Introduction
+
+- Big-O-Notation
+
+
+PAUL GUSTAV HEINRICH BACHMANN (1837–1920)
+
+
+EDMUND LANDAU (1877–1938)
+
+
+DONALD E. KNUTH (BORN 1938)
+
+
+- Big-O Estimates for some important Function
+
+Theorem 1:
+Let f (x) = a_n*x^n + a_n−1*x^n−1 + ... + a_1x + a_0 ,
+where a0 , a1 , ... , a_n−1 , a_n are real numbers.
+Then f(x) is O( x^n ).
+
+^
+|
+|    n!                        Factorial
+|
+|    2^n                       Exponential
+|
+|    n^2                       Polynomial
+|
+|    n log n                   Linearithmic
+|
+|    n                         Linear
+|
+|    log n                     Logarithmic
+|
+|    1                         Constant complexity
+----------------------------->
+
+    - Useful Big-O Estimates involving logarithms, powers,
+     and exponential functions
+
+- The Growth of Combinations of Functions
+
+Theorem 2:
+Suppose that f1(x) is O( g1(x) ) and that f2(x) is O( g2(x) ).
+Then (f1 + f2)(x) is O( max(|g1(x)|, |g2(x)|) )
+
+Corollary 1:
+Suppose that f1(x) and f2(x) are both O( g(x) ). Then (f1 + f2)(x) is O( g(x) )
+
+
+Theorem 3:
+Suppose that f1(x) is O( g1(x) ) and f2(x) is O( g2(x) ).
+Then (f1 f2)(x) is O( g1(x)g2(x) )
+
+
+
+- Big-Omega and Big-Theta Notation
+
+Theorem 4:
+Let f(x) = a_n*x^n + a_n−1*x^n−1 + ... + a1x + a0, where a0, a1, ... ,
+a_n are real numbers with a_n != 0. Then f(x) is of order x^n
+
+Unfortunately, as Knuth observed, big-O notation is often used by careless
+writers and speakers as if it had the same meaning as big-Theta notation.
+Keep this in mind when you see big-O notation used. The recent trend has been
+to use big-Theta notation whenever both upper and lower bounds on the size of
+a function are needed
+
+3.3. Complexity of Algorithms
+
+- Introduction
+
+- Time Complexity
+
+- Complexity of Matrix Multiplication
+
+- Algorithmic Paradigms
+
+- Understanding the Complexity of Algorithms
+
+P versus NP
+
+STEPHEN COOK (BORN 1939)
+
+
+
+...
+
+// Here follows a list of random notes on math topics
+
+////
+// Combinations and Permutations
+////
+
+Combination - when order doesn't matter
+Permutation - ordered Combination
+
+- Permutations
+
+  - Permutations with repetition
+   When a thing has n different things we have n choices each time
+
+  For example: choosing 2 of those things, the permutations are:
+
+  n * n * n
+
+  More generally: choosing r of something that has n different types,
+  the permutations are:
+
+  n * n * ... (r times) = n ^ r
+
+  - Permutations without repetition
+  In this case, we have to reduce the number of available choices
+  each time:
+
+  16 * 15 * 14 * 13 * ... = 20922789888000
+
+  or if we need only 3:
+
+  16 * 15 * 14 = 3360
+
+////
+// Trigonometry
+////
+
+1. wikipedia:
+  - from greek trigonon (triangle) and metron measure
+  - a branch of math that studies relationships involving lengths and angles
+   of triangles
+  - emerged in the Hellenistic world during 3rd c. B.C. from applications of
+   geometry to astonomical studies
+  - if at least the length of one side and the value of one angle is known all
+   can be determined
+  - since any non-right-angle-triangle(on a flat plane) can be bisected to
+   create two right-angle triangles, most problems can be reduced to
+   calculations on right-angle triangles. One exception is spherical trigonometry
+
+  Sine = Opposite / Hypotenuse     - SOH
+  Cosine = Adjecent / Hypotenuse   - CAH
+  Tangent = Opposite / Adjecent    - TOA
+
+  Some Old Hippie Caught Another Hippie Trippin' On Acid
+
+////
+// Vectors
+////
+    - a vector has magnitude (size) and direction
+    - the length of the line shows its magnitude and the arrowhead points
+     in the direction
+
+        magnitude
+    --- ---------> --- direction
+      tail     head
+
+          -->
+      a = AB
+
+    - velocity, acceleration, force and many other things are vectors
+    - subtracting
+      - first we reverse the direction of the vector we want to subtract,
+      - then add them as usual
+
+    - calculations
+      - most common way is to first break up vectors into x and y parts
+
+         x  y
+    a = (8.13)
+    b = (26.7)
+
+    c = a + b
+    ax + bx = 8 + 26 = 34
+    ay + by = 13 + 7 = 20
+
+    c = (34.20)
+
+    - magnitude
+    |a| or ||a||
+
+    |a| = cqrt(x*x + y*y)
+
+    - scalar
+     - a scalar has magnitude (size) only
+     - when we multiply a vector by a scalar it is called "scaling" a vector,
+      because we change how big or small the vector is
+
+////
+// Calculus
+////
+//TODO: move this in the begging of separate piece on calculus
+1. Intro
+
+- Sam and Alex are traveling in the car ... but the speedometer is broken.
+ ...
+ "No, Sam! Not our average for the last minute, or even the last second,
+ I want to know our speed RIGHT NOW."
+
+ Think about it ... how do we figure out a speed at an exact instant in time?
+ What is the distance? What is the time difference?
+ They are both zero, giving us nothing to calculate with!
+
+ But Sam has an idea ... invent a time so short it won't matter.
+
+  delta t
+
+ So Sam works out the difference in distance between t and (t + delta t)
+
+
+- The word Calculus comes from Latin meaning "small stone". Because it is like
+ understanding something by looking at small pieces
+
+ - Differential Calculus cuts something into small pieces to find how it changes
+
+ - Integral Calculus joins (integrates) the small pieces together to find how
+  much there is
+
+ - and Differential Calculus and Integral Calculus are like inverses of each
+  other, just like multiplication and division are inverses
+
+////
+// Logarithms
+////
+- How many of one number do we multiply to get another number?
+- "ratio-number"
+
+How many 2s do we multiply to get 8?
+
+2 × 2 × 2 = 8, so we had to multiply 3 of the 2s to get 8
+
+
+To what power a have to raise 2 to get 8? -> 3
+
+log_2(8) = 3
+
+2^? = 8
+2^3 = 8
+
+// Properties of logarithms
+
+Product rule        | log_b(M N) = log_b(M) + log_b(N)
+Quotient rule       | log_b(M/N) = log_b(M) - log_b(N)
+Power rule          | log_b(M^p) = p * log_b(M)
+Change of base rule | log_b(M)   = log_a(M) / log_a(b)
+
+
+log_17(357) = log_10(357) / log_10(17)
+
+1 / log_b(4) = log_4(b)
+
+// Properties of exponents
+
+b^x = b^y * b^z = b^y+z   x = y + z
+b^x^y = b^xy
+
+log (2^3)^3 = log(2^9)
+sqrt(32) = 32^1/2
+
+
+log_8(2) = 1/3
+log_2(1/8) = -3
+2^-3 = 1/2^3 = 1/8
+
+8^1/3 = 2
+log_8(1/2) = -1/3
+8^-1/3 = 1 / (1/8^1/3) = 1/2
+
+
+// e and the compound interest
+
+1) borrow 1 usd for 1 year at 100%
+2) borrow 1 usd for 1/2 * 2 year at 100%
+
+1                   1                            1
+|                   |                            | * 1.083  100%/12=8 1/3 %
+|                   | * 1.5 50% (6 months)       1.083^1
+|                   |                            |
+|* 2 100% (1 year)  1+0.50 = 1.50                1.083^2
+|                   |                            |
+|                   | * 1.5 50% (6 months)       ...
+|                   |                            |
+1+1                 1.50 + 0.75 = 2.25           1.083^12 = 2.60
+
+= 1(2)^1            = 1(1.5)^2                   =
+
+= 1(1 + 100%/1)^1   = 1(1 + 100%/2)^2            = 1(1 + 100%/12)^12
+                                                 = (1 + 1/12)^12
+
+for 364 day it is 2.71456 and is approaching e = 2.71828182846
+
+// e as a limit
+
+lim    (1 + 1/n)^n = e = 2.71828182846
+n->inf
+
+ln - the natural logarithm
+
+log_e(67) = x same as
+ln(67) = x
+
+Note: in Computer Science the natural base of logarithm is 2 not e
+log(N) = log_2(N)

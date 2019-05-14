@@ -1,0 +1,356 @@
+emacs -nw - open in text-based console
+
+C - Ctrl key
+M - meta key
+<SPC> -  Space bar
+
+C-x C-c - close
+C-g - cancel command
+
+C-v - move one screen forward
+M-v - move one screen backward
+C-l - cycle cursor centered in middle, top, bottom
+
+C-n - next line
+C-p - previous line
+C-b - backward
+C-f - forward
+M-g g <line number> - go to line number
+C-j - go to new line and indent
+
+M-f - move between words forward
+M-b - move between words backward
+
+- very often Meta is used for operations over language units,
+and Control for operations over characters, lines, etc.
+
+C-a - move to beginning of line
+C-e - move to end of line
+M-a - move to beggining of sentence
+M-e - move to end of sentence
+
+M-< - move to beggining of text
+M-> - move to end of text
+
+M-m v - expand region
+M-m V - contract region
+
+C-u - to enter numeric argument before command
+Holding M - to enter numeric argument with command
+
+C-x 1 - expand the window with the cursor and kill the rest
+
+C-h k <command> - to see documentation window
+
+<DEL> - delete char before cursor
+C-d - delete the character under the cursor
+M-<DEL> - kill the word before the cursor
+M-d - kill the next word after the cursor
+C-k - kill from cursor position to end of line
+M-k - kill from cursor to end of sentence
+
+C-<SPC> - select text
+C-w - kill text
+
+C-y - yank text (paste)
+C-w - cut selection
+M-w - copy selection
+M-y - go to previuos yank
+C-/ - undo
+M-c - to uppercase
+M-l - to lowercase
+M-u - to uppercase the word under cursor
+
+M-/ - hippie expand, cycles through possible expansions
+M-\ - delete all spaces and tabs around point
+
+C-x C-s - save text to current file
+C-x s - loop the bufers and ask which to save
+C-x C-f - find file or create one
+C-x C-b - to see list of buffers that exist
+C-x b <name> - to switch to buffer
+C-x k - to kill buffer
+
+C-x - character extend
+M-x - named command extend
+
+M-x open-menu-bar - opens the menu bar
+q - to quit the browser or other tool
+
+C-z - suspend emacs (useful in text-based console)
+C-x C-c - to quit emacs
+
+M-x repl s<Tab> <return> 'stringtobereplaced' <return> 'withthisstring'
+
+Autosave is enabled
+#main.js# - is the name of auto-saved file, but open the original and type
+
+M-x recover-file <return> yes <return>
+
+Mode line - gives information on the status of emacs
+
+M-x <mode-name> - to switch to other mode
+
+auto-fill-mode - for auto dividing lines when they are too long
+
+C-u 20 C-x f - to set margin to be 20
+
+M-q - auto-refills paragraph
+
+C-s - for search forward
+C-r - for search backward
+
+C-x 2 - splits into two windows
+C-x 4 C-f <filename> - to open file in other window
+C-M-v - scrolls second window
+C-x o - moves cursor to other window
+
+M-x make-frame - to open another frame
+M-x delete-frame - to close frame
+
+<ESC> <ESC> <ESC> - to get out of what C-g can not get you out
+
+C-h - for help
+C-h ? - to s
+ee what kind of help is available
+C-h c C-p - displayes a very brief description of the command
+C-h k - diplayes documentation
+C-h f - describes a function
+use C-M-v to scroll help menu
+C-h i - read included manuals
+"Completion" - manual for auto-completion
+"Dired" - manual for working with files and dirs
+
+;; Keyboard Macros
+
+They are defined only for the current session.
+
+C-x ( - start recording
+C-x ) - stop recording
+C-x e - execute the macro once
+C-u 10 C-x e - execute the macro 10 times
+SPC-u 10 C-x e - for Spacemacs
+
+M-x name-last-kbd-macro <my-macro>- to name it for resuse in the same session
+M-x <my-macro>
+
+;; Scheme
+M-x run-geiser - runs geiser repl
+C-c C-s - choose scheme implementaion (fixes no geiser repl for
+this buffer)
+
+M-x restart-repl - to fix the repl after recursion process
+
+;; CIDER
+
+Manual installation
+
+in ~/.emacs.d
+at ~/.emacs.d/init.el add
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+	     (package-initialize)
+
+M-x package-refresh-contents
+
+M-x package install [RET] cider
+M-x cider-jack-in
+M-x cider-quit
+
+;; Easy Clojure setup
+
+     - just delete any .emacs or .emacs.d and in fresh .emacs.d
+     paste the content of the zip. In init.el paste the lines
+     from README.md instructions for cider upgrade and run emacs
+     - has very outdated packages, so better base a new config on it
+https://github.com/flyingmachine/emacs-for-clojure
+
+http://www.braveclojure.com/basic-emacs/
+
+C-c M-j - to jack in
+C-x C-e - at the end of a s-exp evaluates it
+C-c C-z - quick switch between repl and source buffer
+C-c C-d d - when cursor is over a function to display its doc
+M-. - from repl jump to the source of a function
+M-, - to pop the stack and return where you were (go back from M-.)
+M-n - go forward in repl history
+M-p - go backward in repl history
+C-<up> - go forward in repl history
+C-<down> - go backward in repl history
+C-c M-o - to clear the repl
+
+C-c C-k - evaluate the whole buffer (load the code)
+C-M-x   - evaluate
+C-c C-c - will break from a loop at the top level
+         of the cider repl (stop evaluation)
+
+C-c M-n - set namespace in repl from list of available
+C-u C-c C-z - set namespace in repl to current and switch to it
+
+C-c M-t v - to select value for tracing
+C-c M-i - inspect a value like a nested map
+
+    - checkout the use-packege syntax
+    (use-package company
+      :ensure t
+      :bind (("C-c /". company-complete))
+      :config
+      (global-company-mode))
+
+C-c C-t n - run tests in a source buffer
+C-c C-t C-n - run tests in a REPL buffer
+
+NOTE:
+
+install which key for key binding tips
+
+;; WEB
+
+C-j - expand abbreviation in emmet-mode
+M-x run-skewer
+
+;; MAGIT
+
+SPC g s - open status buffer
+
+;; in status buffer
+c c - open a commit message buffer
+b b - checkout branch
+b c - create branch
+f f - fetch changes
+s   - on a file: stage file
+S   - stage all
+u   - on a staged file: unstage
+
+;; commit msg editing buffer
+, c - commit the changes
+
+p p - push to remote
+p u - push upstream
+
+;; SPACEMACS
+
+to fix fonts for Ubuntu 16.10:
+
+git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git ~/.fonts/adobe-fonts/source-code-pro
+fc-cache -f -v ~/.fonts/adobe-fonts/source-code-pro
+
+SPC 1 - switch to window 1
+SPC 2 - switch to window 2
+SPC TAB - switch to the previous buffer in that window
+
+SPC w d - kill a window
+
+SPC f f - open files menu
+    C-h - up a folder
+    C-l - open a folder
+    C-j - up
+    C-k - down
+
+;; movement
+w - move forward to beggining of word
+e - move forward to end of word
+b - move backward to beginning of word
+
+[[ - go to previous function
+]] - go to next function
+
+C-u - go up a page
+C-d - go down a page
+
+$ - go to end of line
+G - go to end of file
+
+;; selection
+viw - select the current word
+vi) - select inside ()
+
+;; selection + mutation
+ya <(,[,{> - yank inside (,[,{
+yf <char> - yank until char 
+
+de - delete to word end
+
+ca <(,[,{> - cut inside char and go into insert mode
+cf <> - cut until char and go into insert mode
+cit - cut inside tag and go into insert mode
+
+;; editing
+u - undo
+C-r - redo
+g ; - go to last place edited
+"ay - yank into register
+"ap - paste from register
+SPC r y - show previous things you've yanked
+
+;; search
+SPC s s - search in a file
+
+;; paredit
+M-( - open up a pair of ()
+M-) - indent next pair of () 
+
+;; (define (add x y)) -> M-) + M-( -> to make a new pair indented
+;; on a new line
+
+va( - select current sexp
+va( M( - surround with a pair of () the current sexp
+
+va( C-x C-e - select surrent sexp and evaluate it
+
+;; navigate CamelCase
+SPC t c - to toggle camel-case-motion
+w - move by CamelCase
+S-w - move over CamelCase
+
+;; shell
+SPC ' - start shell
+C-c C-c - kill process running in shell
+
+;; other
+SPC f f <type file path and name> - to create a new file
+
+M-/ - cycle snippet completions
+
+C-x C-t - transpose lines (switch lines)
+SPC x t c - transpose the current char with the previous one
+SPC x t w - transpose the current word with the previous one
+SPC x t l - transpose the current line with the previous one
+
+SPC x J - move line down
+SPC x K - move line up
+
+C-x z - repeat last command
+
+;; MULTIPLE CURSORS
+;; evil-iedit-state
+
+SPC s e - to enter iedit
+L - to restrict the scope to the current line
+J - increase scope +1 line down
+K - increase scope -1 line up
+TAB - toggle current occuarance
+# - prefix with numbers
+n, N - to cycle items
+
+;; Rectangles
+
+C-x r t - to edit selection (top-left to bottom-right) as a rectangle
+
+
+;; Comments
+gcc - comment line
+g c + vim motion - comment sections of code
+g c - in Visual mode toggle comment
+
+;; Column wrap
+M-x auto-fill-mode - to toggle automatic line-wrapping
+C-x f <number-of-cols> - to set max number of cols
+M-q - to format the buffer
+
+;; Org-mode
+
+C-c C-n - move the next heading
+C-c C-b - move back to previous heading

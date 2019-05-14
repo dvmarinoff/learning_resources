@@ -1,0 +1,272 @@
+////
+// Install and configure
+////
+
+apt-get install git
+
+Home directory: ~/.gitconfig
+
+git config --system
+git config --global    //to user level
+git config 	       //project level
+
+git config --global core.autocrlf true
+git config --global user.name "Pesho Peshev"
+git config --global user.email "some@kaspichan.com"
+git config --list
+
+cd ~	//make sure that you are in your user directory
+
+ls -la	//lists the directory
+
+cat .gitconfig	//opens the file
+
+git config --global core.editor "Text Editor -wl1"
+//w - wait; l1 - start at line one
+git config --global color.ui true
+
+////
+// Auto-completion
+////
+
+// Download from github
+
+curl -OL http://github.com/git/git/raw/master/contrib/completion/git-completion.bash
+
+// Rename
+mv ~/git-completion.bash ~/.git-completion.bash
+
+// Git help
+git help log
+man git log
+
+f - forward
+b - backwards
+q - quit
+
+
+// Edit
+~/.bash_profile or ~/.bashrc
+
+// Script
+if [ -f ~/.git-completion.bash ]; then
+ source ~/.git-completion.bash
+fi
+
+////
+// Getting started
+////
+
+// Initializing repository
+git init	//initialize
+
+mkdir	//make new directory
+pwd	//print working directory
+
+//First commit
+git add .	//push all the changes to git of the current directory
+git add file.txt	//push only file.txt
+git commit -m "Initial commit"
+
+make changes --> add the changes --> commit changes to the repository with a message
+
+// Log message
+git log
+
+commit 7aa195bd44ea0610796a1fcac8024c4a556f0621	//commit id
+Author: Some Someone <someone@somewhere.com>
+Date: Fri Jun 15 08:29:22 2012 -0400
+	Initial commit
+
+git log -n 4	//will limit the showed commits to 4
+git log --since=2012-06-15	//will show commits since the date
+git log --until=2012-06-15
+git log --author "Some"	//will show commits by author, part of name is needed only.
+git log --grep="Init"	//global regular expression search
+
+/*Git Concepts and Architecture*/
+
+two-tree architecture -
+	- repository and working tree
+	- you checkout copy from repository and than commit.
+	-
+
+three-tree architecture -
+	- repository, staging index, working tree
+	- first add to staging index than commit
+	- git add pushes to the staging index tree
+
+workflow -
+	- A, B and C are not tree different files, but they are set of changes
+	not necessary to one file, but multiple files. Not versions or files,
+	but snaphots of changes.
+
+hash values (SHA-1) -
+	- git generates a checksum for each change set -
+	- checksum algorithms convert data into a simple number
+	- same data always equals same checksum
+	- git uses SHA-1 hash algorithm to create checksums -
+	- 40-character hex string (0-9,a-f)
+	- each shecksum refers to it's parent so git can keep track to change sets
+
+HEAD pointer -
+	- HEAD is the tip of the currently selected branch in the repository
+
+// Making changes to files
+
+git status	//check changes that are not staged for commit
+
+// git push --set-upstream origin master
+
+// Undoing Changes
+- to working directory
+git diff 				   - what the change is
+git checkout named_thing   - will take it from repo
+git checkout -- index.html - stay on the same branc and take this file
+
+- unstaging files
+git reset HEAD file.html	- remove just this file from staging area
+
+- amending commits
+git commit --amend -m ""
+
+- retrieving old versions
+git checkout hjdhaskjh -- index.html 	- stay in this branch and take the version
+										 of index.html from commit with SHA hskjdahsjda
+- reverting a commit
+git revert asdasdasdasdr
+
+- undo multiple commits
+
+git reset     - moves the HEAD pointer like the point head of a tape recorder
+
+- options
+	--soft 	  - does not change staging index or working directory
+	--mixed   - changes staging index to match repository,
+			  - does not changes working directory
+	--hard    - changes staging index and working directory to match repositor
+
+// Ignoring Files
+- with .gitignore
+
+*.php
+!index.php
+/images/
+
+- use the github .gitignore repository for tips
+
+- ignoring files globally
+touch .gitignore_global 	- create the file in the user directory
+git config --global core.excludesfile ~/.gitignore_global 	- tell config about it
+
+/*Navigating the Commit Tree*/
+- referencing commits
+- tree-ish - something that reference a part of the tree
+
+- full SHA-1 hash
+- short SHA-1 hash
+	- at least 4 characters
+	- uambiguous 8-10 characters
+	-
+- The HEAD pointer
+- brach reference, tag reference
+
+- parent commit
+HEAD^, acf87804^, master^
+HEAD~1, HEAD ~
+
+- grantparent commit
+HEAD^^, acf87804^^, master^^
+HEAD~2,
+
+- great-grantparent commit
+HEAD^^^, acf87804^^^, master^^^
+HEAD~3,
+
+-
+git ls-tree tree-ish
+
+git ls-tree HEAD 		        - the tip of the currentky checout branch
+git ls-tree master              - the master branch
+git ls-tree master assets/ 	    - the assets directory at master branch
+git ls-tree master^ assets/ 	- the previous state of assets directory
+
+- blob - any kind of file
+- tree - directory
+
+- getting more from commit log
+
+git log --oneline 				- compresses all to one line output
+git log --oneline -3			- limit to the last 3 commits
+git log --since="2012-06-20"    - limit time since
+git log --until="2012-06-20" 	- limit time until
+git log --since="2 week ago" --until="3 days ago"
+git log --since=2.weeks --until=3.days
+git log --author="Kevin"
+git log --grep="temp"			    - global regular expression search
+git log 2907418..acf8401 --oneline 	- range with SHA
+git log c4b9124.. index.html        - check history of file index.html since that commit
+git log -p c4b9124.. index.html     - see all the changes
+git log --stat --summary 			- shows statistics
+git log --format=oneline 			- returns full SHA
+
+format=short						- shorter
+format=medium						- default
+format=full 						- commit author
+format=fuller   					- author, date
+format=email
+format=raw  						- raw information stored in git
+format=graph 						- the branch graph
+
+git log --oneline --graph --all --decorate
+
+- viewing commits
+
+git show djfsl13 				- shows author, date and changes for the commit
+
+
+
+// Branching
+-
+git branch 				- show branches
+cat .git/HEAD 			- show where HEAD currently points
+ls -la .git/refs/heads
+cat .git/refs/heads
+
+- create new
+git branch new_feature
+
+- switching branches
+git checkout new_feature
+
+
+// Merging Branches
+
+
+// Stashing Changes
+
+
+// Source Control Systems
+
+--> Analysis --> Design --> Implementation --> Build --> Testing --> Release -->
+
+- Dictionary
+
+Change -
+Change set -
+Revision/ Version -
+Update/ Clone -
+Merge -
+Branch -
+
+- Centralized version control
+
+		Repository
+	/	    |	         \
+update/commit	update/commit	update/commit
+     |              |             |
+Working copy	Working copy	Working copy
+
+	- Subversion(SVN)
+
+- Distributed version control
