@@ -1,0 +1,49 @@
+* Levelling Up
+
+This is my quest to develop and level up my real world class Monkey Coder character.
+Starting at a lvl 8 out of 100 with only battle skill being javascript mastery
+I am venturing into the world of functional programming, object-oriented design,
+Lisps, code editors and math.
+
+This repository has only personal value, except maybe the solutions to sicp.
+
+* Skill Trees:
+  You gain skills by following the teachings of great masters.
+  There is alot of wisdom hidden between the covers of those ancient volumes.
+  I'll focus my training on classical books and some video cources.
+  As I progress I will expand each branch and hopefully add new ones.
+
+** Functional Programming
+*** How to Design Programs
+*** Structure and Interpretaion of Computer Programs
+*** Learn You a Haskell for Great Good!
+*** Living Clojure
+*** Every Rich Hicky talk
+
+** Object-Oriented Design
+*** Practical Object-Oriented Design with Ruby
+*** Test Driven Development: by example
+*** Clean Code
+ 
+** Code Editors
+*** some basic Vim
+*** Spacemacs
+   
+** Math
+*** Calculus 1 and 2 (Strang)
+*** Linear Algebra (Strang)
+*** Machine Learning (Course by Andrew Ng)
+
+* Reading List
+** Books 
+*** Beck, Growing Object-Oriented Software Guided by Tests
+*** Gamma, Helm, Johnson, Vlissides, Design Patterns: Elements of Reusable Code
+*** Milewski, Category Theory for Programmers
+*** Spivak, Category Theory for Scientists
+*** Velleman, How to Prove It: A Structured Approach
+** Papers
+*** Krishnamurthi, Felleisen, Implementation and Use of the PLT Scheme Web Server
+*** Queinnec, Continuations and Web Servers
+*** Felleisen, Flatt, Scheme with Classes, Mixins, and Traits
+*** Felleisen, Strickland, Contracts for First-Class Classes
+*** Krishnamurthi, Felleisen, Fridman, Syntesizing OO and Functional Design to Promote Re-use
