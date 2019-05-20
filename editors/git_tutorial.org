@@ -1,6 +1,6 @@
-////
-// Install and configure
-////
+* Git
+
+** Install and configure
 
 apt-get install git
 
@@ -25,18 +25,16 @@ git config --global core.editor "Text Editor -wl1"
 //w - wait; l1 - start at line one
 git config --global color.ui true
 
-////
-// Auto-completion
-////
+** Auto-completion
 
-// Download from github
+- Download from github
 
 curl -OL http://github.com/git/git/raw/master/contrib/completion/git-completion.bash
 
-// Rename
+- Rename
 mv ~/git-completion.bash ~/.git-completion.bash
 
-// Git help
+- Git help
 git help log
 man git log
 
@@ -45,7 +43,7 @@ b - backwards
 q - quit
 
 
-// Edit
+- Edit
 ~/.bash_profile or ~/.bashrc
 
 // Script
@@ -53,24 +51,20 @@ if [ -f ~/.git-completion.bash ]; then
  source ~/.git-completion.bash
 fi
 
-////
-// Getting started
-////
-
-// Initializing repository
+** Initializing repository
 git init	//initialize
 
 mkdir	//make new directory
 pwd	//print working directory
 
-//First commit
+** First commit
 git add .	//push all the changes to git of the current directory
 git add file.txt	//push only file.txt
 git commit -m "Initial commit"
 
 make changes --> add the changes --> commit changes to the repository with a message
 
-// Log message
+** Log message
 git log
 
 commit 7aa195bd44ea0610796a1fcac8024c4a556f0621	//commit id
@@ -84,7 +78,7 @@ git log --until=2012-06-15
 git log --author "Some"	//will show commits by author, part of name is needed only.
 git log --grep="Init"	//global regular expression search
 
-/*Git Concepts and Architecture*/
+** Git Concepts and Architecture
 
 two-tree architecture -
 	- repository and working tree
@@ -112,13 +106,13 @@ hash values (SHA-1) -
 HEAD pointer -
 	- HEAD is the tip of the currently selected branch in the repository
 
-// Making changes to files
+** Making changes to files
 
 git status	//check changes that are not staged for commit
 
 // git push --set-upstream origin master
 
-// Undoing Changes
+** Undoing Changes
 - to working directory
 git diff 				   - what the change is
 git checkout named_thing   - will take it from repo
@@ -146,7 +140,7 @@ git reset     - moves the HEAD pointer like the point head of a tape recorder
 			  - does not changes working directory
 	--hard    - changes staging index and working directory to match repositor
 
-// Ignoring Files
+** Ignoring Files
 - with .gitignore
 
 *.php
@@ -159,7 +153,7 @@ git reset     - moves the HEAD pointer like the point head of a tape recorder
 touch .gitignore_global 	- create the file in the user directory
 git config --global core.excludesfile ~/.gitignore_global 	- tell config about it
 
-/*Navigating the Commit Tree*/
+** Navigating the Commit Tree
 - referencing commits
 - tree-ish - something that reference a part of the tree
 
@@ -183,7 +177,6 @@ HEAD~2,
 HEAD^^^, acf87804^^^, master^^^
 HEAD~3,
 
--
 git ls-tree tree-ish
 
 git ls-tree HEAD 		        - the tip of the currentky checout branch
@@ -194,7 +187,7 @@ git ls-tree master^ assets/ 	- the previous state of assets directory
 - blob - any kind of file
 - tree - directory
 
-- getting more from commit log
+*** getting more from commit log
 
 git log --oneline 				- compresses all to one line output
 git log --oneline -3			- limit to the last 3 commits
@@ -213,40 +206,104 @@ git log --format=oneline 			- returns full SHA
 format=short						- shorter
 format=medium						- default
 format=full 						- commit author
-format=fuller   					- author, date
+format=fuller   				- author, date
 format=email
 format=raw  						- raw information stored in git
 format=graph 						- the branch graph
 
-git log --oneline --graph --all --decorate
+*** --format options:
+| Option | Description of output                           |
+|--------+-------------------------------------------------|
+| %H     | Commit hash                                     |
+| %h     | Abbreviated commit hash                         |
+| %T     | Tree hash                                       |
+| %t     | Abbreviated tree hash                           |
+| %P     | Parent hashes                                   |
+| %p     | Abbreviated parent hashes                       |
+| %an    | Author name                                     |
+| %ae    | Author email                                    |
+| %ad    | Author date (format respects the --date=option) |
+| %ar    | Author date, relative                           |
+| %cn    | Committer name                                  |
+| %ce    | Committer email                                 |
+| %cd    | Committer date                                  |
+| %cr    | Committer date, relative                        |
+| %s     | Subject                                         |
 
-- viewing commits
+*** log options:
+|-----------------+------------------------------------------------------------------------------------------------------------------------------------|
+| -p              | Show the patch introduced with each commit.                                                                                        |
+| --stat          | Show statistics for files modified in each commit.                                                                                 |
+| --shortstat     | Display only the changed/insertions/deletions line from the --stat command.                                                        |
+| --name-only     | Show the list of files modified after the commit information.                                                                      |
+| --name-status   | Show the list of files affected with added/modified/deleted information as well.                                                   |
+| --abbrev-commit | Show only the first few characters of the SHA-1 checksum instead of all 40.                                                        |
+| --relative-date | Display the date in a relative format (for example, “2 weeks ago”) instead of using the full date format.                          |
+| --graph         | Display an ASCII graph of the branch and merge history beside the log output.                                                      |
+| --pretty        | Show commits in an alternate format. Options include oneline, short, full, fuller, and format (where you specify your own format). |
+| --oneline       | Shorthand for --pretty=oneline --abbrev-commit used together.                                                                      |
+
+git log --oneline --graph --all --decorate
+git log --pretty=format:"%h - %an, %ar : %s"
+
+*** viewing commits
 
 git show djfsl13 				- shows author, date and changes for the commit
 
+git log --stat           - summary for each commit
+git log --patch          - difference in each commit
+git log --graph          - print with graph
+
+*** git blame
+
+git blame <filename>
+
+git blame -L 1,14 <filename> - lines 1-14
+
+| -L | show lines                                                |
+|  w | ignore whitespace                                         |
+| -M | original auther of moved or copied lines                  |
+| -C | original author of moved or copied lines from other files |
+
+** Rewriting history
+   
 
 
-// Branching
--
-git branch 				- show branches
-cat .git/HEAD 			- show where HEAD currently points
+
+** Branching
+git branch 				       - show branches
+cat .git/HEAD 			     - show where HEAD currently points
 ls -la .git/refs/heads
 cat .git/refs/heads
 
-- create new
-git branch new_feature
-
-- switching branches
-git checkout new_feature
+git branch new_feature   - create new
+git checkout new_feature - switching branches
 
 
-// Merging Branches
+
+** Merging Branches
 
 
-// Stashing Changes
+
+** Stashing Changes
+git stash save "Adding scss style"
+git stash list
+
+git stash show -p
+git stash pop stash@{3}
+
+git stash pop    - apply changes and remove from stash
+git stash apply  - apply changes (but keep in stash)
+
+git stash branch <branch-name> stash@{1} - create branch from stash 1
+
+git stash drop stash@{1} - remove stash 1
+
+git stash clear  - remove everithing from stash
 
 
-// Source Control Systems
+
+** Source Control Systems
 
 --> Analysis --> Design --> Implementation --> Build --> Testing --> Release -->
 
