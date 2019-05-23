@@ -1,0 +1,106 @@
+* Make Javascript Scheme Again.
+** I. Javascript is a mess.
+*** The history:
+The original idea was for an object-oriented scheme, but it was
+implemented in a hurry, in 10 days as the legend has it. And
+on top of that, midway the managers found out that scheme is
+actually a lisp, and lisp was that piece of technology that
+lost a lot of money in the AI winter ca. 1990. So it had to be
+removed with all of its parens and replaced with java-like syntax.
+Making a functional lisp in about 10 days is a possible task,
+exactly because of it syntax, or the lack of it, but implementing,
+a c-like language on top of half done lisp with half done objects
+in just 5 days is another story. A very unfortunate one. When the
+managers saw a working demo, they shiped it to production.
+The thinking at the time being that time to market is more important
+and you can always fix things later.
+Well at this point Microsoft came and make sure that the infant
+language is put down to a standart with all of its design flaws and
+problems, so that it wouldn't compete with their own visual basic
+script or something.
+
+*** The problems:
+1. Prototypal OO.
+You have a prototypal inheritance model, but with no way to create
+objects or actually use it, because a class oriented model was
+quickly swaped on top of it.
+Object.setPrototypeOf() and anything prototypal related is considered
+harmful by Mozilla. But this is of little consequince, because nobody
+actually knows what a prototypal object-orientation is, anyway.
+It was used only in a briefly existing precursor to java named self.
+2. That scoping.
+The scheme scoping makes more sense in a lisp syntax and purely
+functional usage that avoids mutation.
+Hoisting on the other hand does not make sense. With the current
+trend of using lambdas instead of function declarations, it is
+producing more hair pulling hours than the behavior of 'this'.
+3. The misleading behavior of 'this'.
+4. Lack of data structures.
+In terms of data structures you have only 'objects', which accept
+only strings as keys, and even arrays are just objects, but it depends
+on browser engine implementations (so if you don't mutate them and
+instantiate them in a certain way maybe ...)
+Map and WeakMap came with tiny public interface, just one for-each
+method. You have to convert them to arrays in order to work with them
+as collections. O(n) operation before you have even started.
+So we still don't have any collections, but just kinda working hashes.
+5. No standart library.
+The lack of it means that everybody is building their own one.
+And they are coming in and out of fashion pretty quickly.
+So at some point your project may use underscore, but your dependances
+will most certainly use one or more likely all of the other options
+(rambda, immutable, mori or whatever is most fashionable this week).
+6. All the frameworks.
+Javascript frameworks are tring to solve problems with the language
+itself.
+Creators of libraries and frameworks tend to copy the corresponding
+library from thier favourite language and build a ton of stuff in order
+to bring along their favourite language features.
+The react.js ecosystem is trying to make the language a hacky version
+of elm.
+Just think of all those projects written in a short lived frameworks
+and using long dead libraries that all do almost the same thing, but
+just in a diffrent way.
+7. The new ecmascript versions.
+Simply throwing money at a problem does not solve anything.
+The same goes for languages and features. Just look at Ruby.
+
+At this point coding in javascript feels a lot like somebody requires
+of you to think in english, while using chinese grammer, and at the end
+write everyting down in sumerian cuinforn.
+
+** II. Classless OO (by Crockford):
+Since javascripts' leaky design already adds a ton of complexity,
+we can reduce it by bringing the language back to its intended
+design as a scheme.
+Let's use a minimalist subset of the language that we know is working
+in a predictable way and write simple and uncomplicated code.
+
+Lambda the Ultimate:
+instead of the class/prototype mess we can simply use closures.
+
+#+SRC_BEGIN javascript
+function Person(spec) {
+    let firstName = _ => spec.firstName;
+    let lastName = _ => spec.lastName;
+    let talk = _ => ``;
+    return { firstName, lastName, talk };
+}
+function EnglishSpeakingPerson(spec) {
+    let { firstName, lastName } = Person(spec);
+    let talk = _ => `My name is ${firstName()} ${lastName()}`;
+    return { talk };
+}
+function GermanSpeakingPerson(spec) {
+    let { firstName, lastName } = Person(spec);
+    let talk = _ => `Ich haise ${firstName()} ${lastName()}`;
+    return { talk };
+}
+
+var crockford = Person({firstName: "Douglass", lastName: "Crockford"});
+crockford.talk();
+var eng = EnglishSpeakingPerson({firstName: "Douglass", lastName: "Crockford"});
+eng.talk();
+var ger = GermanSpeakingPerson({firstName: "Axel", lastName: "Reuschmeyer"});
+ger.talk();
+#+SRC_END
