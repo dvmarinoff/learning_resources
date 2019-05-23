@@ -1,4 +1,89 @@
+#lang racket
+
+;;;;
+;; Practical Object-Oriented Design with (Object-Oriented) Racket
+;;;;
+(require racket/class)
+
 ;; 2. Designing Classes with Single Responsibility
+
+;; Gear v0
+(define gear%
+  (class object%
+    (field (chainring 48)
+           (cog 11))
+    (define/public (gear-ratio) (/ chainring cog))
+    (super-new)))
+
+(define g (new gear%))
+(send g gear-ratio)
+
+;; Gear v1
+;; add accessor methods for the fields
+(define gear%
+  (class object%
+    (init chainring cog)
+    (define @chainring chainring)
+    (define @cog cog)
+    (super-new)
+    (define/public (get-chainring) @chainring)
+    (define/public (get-cog) @cog)
+
+    (define/public (gear-ratio) (/ (get-chainring) (get-cog)))))
+
+(define g (new gear% (chainring 48) (cog 11)))
+(send g gear-ratio)
+
+;; Gear v2
+(define gear%
+  (class object%
+    (init chainring cog)
+    (define @chainring chainring)
+    (define @cog cog)
+    (super-new)
+    (define/public (get-chainring) @chainring)
+    (define/public (get-cog) @cog)
+
+    (define/public (gear-ratio) (/ (get-chainring) (get-cog)))
+    ))
+
+
+
+
+;;
+;; 7. Sharing Role Behavior with Modules
+;;
+
+;; Domain problem: Schdule
+
+;; v1: Schedule knows the lead time for other objects
+(define schedule%
+  (class object%
+    (super-new)
+    (field (lead_days 0))
+    (public/define (schedulable? target starting ending)
+                   (cond ((x? target) (set! lead_days 1))
+                         ((y? target) (set! lead_days 3))
+                         ((z? target) (set! lead_days 4))))
+    (public/define (scheduled? target starting ending) #f)
+    (public/define (add target starting ending) '())
+    (public/define (remove target starting ending) '())))
+
+;; v2: Schedule expects targets to know their own lead days
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ;; Gear v1
 (struct gear (chainring cog) #:transparent)

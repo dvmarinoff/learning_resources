@@ -1,273 +1,398 @@
+// NOTE:
+// All examples involve a process of iterative refining thus I'm using
+// the 'var' syntax. It also plays better with the repl.
+
 //
 // 02. Desinging Classes with Single Responsibiliy
 //
 
 // Gear v1
-function Gear (spec) {
-    let chainring = _ => spec.chainring;
-    let cog = _ => spec.cog;
-    let ratio = _ => chainring() / cog();
-    return { ratio: ratio };
+var Gear = class {
+    constructor(args) {
+        this.chainring = args.chainring;
+        this.cog = args.cog;
+    }
+    get_chainring() { return this.chainring; }
+    get_cog() { return this.cog; }
+    ratio() { return this.get_chainring() / this.get_cog(); }
 }
 
-Gear({chainring: 48, cog: 11}).ratio();
-Gear({chainring: 34, cog: 28}).ratio();
+var Mammal = class {
+    constructor(args) {
+        this._sound = args.sound;
+        this.post_initialize(args);
+    }
+    read_sound() { return this._sound; };
+    post_initialize(args) { return null; }
+    talk() { return "NoImplementedError"; }
+};
+
+var Dog = class extends Mammal {
+    post_initialize(args) {
+        this._guard = args.guard || this.default_guard();
+    }
+    read_guard() { return this._guard; }
+    talk() { this.read_sound(); }
+    default_guard() { return "rrrrh"; }
+};
+
+var Cat = class extends Mammal {
+    post_initialize(args) {
+        Object.assign(this.defaults(), args);
+        this._hunt = args.hunt;
+    }
+    read_hunt() { return this._hunt; }
+    talk() { return this.read_sound(); }
+    default_hunt() { return "jump, jump, catch"; }
+    defaults() { return { hunt: "jump, jump, catch" }; }
+};
+
+var d = new Dog({sound: "woof", guard: "rrrrh rolf"});
+d.talk();
+d.read_guard();
+var t = new Cat({sound: "miay"});
+t.talk();
+t.read_hunt();
+
+
 
 // Gear v2
-function Wheel (spec) {
-    let rim = _ => spec.rim;
-    let tire = _ => spec.tire;
-    let diameter = _ => rim() + (tire() * 2);
-    let cicumference = _ => Math.PI * diameter();
-    return { diameter: diameter, cicumference: cicumference };
+var Wheel = class {
+    constructor(args) {
+        this.rim = args.rim;
+        this.tire = args.tire;
+    }
+    get_rim() { return this.rim; }
+    get_tire() { return this.tire; }
+    diameter() { return this.get_rim() + (2 * this.get_tire()); }
+    circumference() { return Math.PI * this.diameter(); }
 }
 
-function Gear (spec) {
-    let chainring = _ => spec.chainring;
-    let cog = _ => spec.cog;
-    let ratio = _ => chainring() / cog();
-    let gearInches = _ => ratio() * spec.wheel.diameter();
-    return { ratio: ratio, gearInches: gearInches };
+var Gear = class {
+    constructor(args) {
+        this.chainring = args.chainring;
+        this.cog = args.cog;
+        this.wheel = args.wheel; // wheel object that responds to diameter
+    }
+    get_chainring() { return this.chainring; }
+    get_cog() { return this.cog; }
+    ratio() { return this.get_chainring() / this.get_cog(); }
+    gear_inches() { return this.ratio() * this.wheel.diameter(); }
 }
-
-var w1 = Wheel({rim: 28, tire: 38});
-Gear({chainring: 48, cog: 11, wheel: w1}).gearInches();
-Gear({chainring: 34, cog: 28, wheel: w1}).gearInches();
 
 //
 // 3. Managing Dependancies
 //
 
-// Gear v3
-// Case of Isolating Dependency and Default Values
-function Gear(spec) {
-    let chainring = _ => spec.chainring || 48;
-    let cog = _ => spec.cog || 11;
-    let wheel = spec.wheel;
-
-    let ratio = _ => chainring() / cog();
-    let gearInches = _ => ratio() * wheel.diameter();
-}
-
-// Case of external Framework Dependency and Factories
-var SomeFramework = (function () {
-    function Gear(chainring, cog, wheel) {
-        let self = this;
-        self.chainring = chainring;
-        self.cog = cog;
-        self.wheel = wheel;
+// - Explicitly Define Defaults
+// use with care when you have boolean values in agrs
+var Gear = class {
+    constructor(args) {
+        Object.assign(this.defaults(), args);
+        this.chainring = args.chainring;
+        this.cog = args.cog;
+        this.wheel = args.wheel;
     }
-    Gear.prototype.ratio = function () {
-        return this.chainring / this.cog;
+    get_chainring() { return this.chainring; }
+    get_cog() { return this.cog; }
+    ratio() { return this.get_chainring() / this.get_cog(); }
+    gear_inches() { return this.ratio() * this.wheel.diameter(); }
+    defaults() { return { chainring: 53, cog: 11 }; };
+}
+
+// - Isolate Multiparameter Initialization
+// Imagine that Gear is part of a framework you have no control over.
+
+var Gear = class {
+    constructor(chainring, cog, wheel) {
+        this.chainring = chainring;
+        this.cog = cog;
+        this.wheel = wheel;
+    }
+    // ...
+}
+
+function GearWrapper () {
+    this.gear = function(args) {
+        return new Gear(args.chainring, args.cog, args.wheel);
     };
-    Gear.prototype.gear_inches = function () {
-        return this.ratio() * this.wheel.diameter();
-    };
-    return { Gear: Gear };
-}());
-
-function GearWrapper (spec) {
-    return new SomeFramework.Gear(spec.chainring, spec.cog, spec.wheel);
 }
 
-GearWrapper({chainring: 48, cog: 11, wheel: w1}).gear_inches();
+// separate object to which you can send the gear message while
+// simultaneously conveying the idea that you don't expect to have
+// instances of GearWrapper.
+
+// GearWrapper is a factory. Its sole purpose is to create instances
+// of some other class.
 
 //
-// 4.
+// 4. Creating Flexible Interfaces
 //
 
-// Attempt 1 (HtDP approach):
+// Attempt 1:
+var Customer = class {
+    search() {
+        Trip.suitable_trip(on_date, of_difficulty);
+    }
+};
+var Trip = class {
+    suitable_trip(on_date, of_difficulty) {
+        Bike.suitable_bikes(on_date, route_type);
+    }
+};
+var Bike = class {
+    suitable_bikes(trip_date, route_type) {}
+};
 
-// Customer ({ Number, Number })
-// Customer({ technical, aerobic })
-function Customer (spec) {
-    let technical = _ => spec.technical || 0;
-    let aerobic = _ => spec.aerobic || 0;
-    return { technical: technical,
-             aerobic: aerobic };
-}
+// Attempt 2:
+var Customer = class {
+    search() {
+        Trip.suitable_trip();
+        Bike.suitable_bike();
+    }
+};
 
-// Trip({ String, Number, Number })
-// Trip({ terrain, technical, aerobic })
-function Trip (spec) {
-    let terrain = _ => spec.terrain || "unknown";
-    let technical = _ => spec.technical || 0;
-    let aerobic = _ => spec.aerobic || 0;
-    return { terrain: terrain,
-             technical: technical,
-             aerobic: aerobic };
-}
+// Asking for "What" instead of "How"
 
-// Bike({ String, Number })
-// Bike({ type, size })
-Bike({type: "mtb", size: 56});
-Bike({type: "road", size: 54});
-function Bike (spec) {
-    let type = _ => spec.type;
-    let size = _ => spec.size;
-    return { type: type,
-             size: size };
-}
+// Case 2:
+// Attempt 1:
+// 1: I know what I want and I know how you do it
+var Mechanic = class {
+    clean_bike(bike) {}
+    pump_tires(bike) {}
+    lube_chain(bike) {}
+    check_brakes(bike) {}
+};
+var Trip = class {
+    prepare() {
+        Mechanic.clean_bike(bike);
+        Mechanic.pump_tires(bike);
+        Mechanic.lube_chain(bike);
+        Mechanic.chieck_brakes(bike);
+    }
+};
 
-// A List-of-Bikes is one of:
-// - []
-// - List-of-Bikes.push(Bike)
-//
-// []
-// [Bike({type: "mtb", size: 54})]
-// [Bike({type: "mtb", size: 54}),
-//  Bike({type: "road", size: 56}),
-//  Bike({type: "road", size: 54})]
+// Attempt 2:
+// 2: I know what I want and I know what you do
+var Trip = class {
+    prepare() {
+        Mechanic.prepare_bikes(bikes);
+    }
+};
+var Mechanic = class {
+    prepare_bikes(bikes) {}
+    clean_bike(bike) {}
+    pump_tires(bike) {}
+    lube_chain(bike) {}
+    check_brakes(bike) {}
+};
 
-// Mechanic({  })
+// Attempt 3:
+// 3: I know what I want and I trust you to do your part
+var Trip = class {
+    prepare() {
+        Mechanic.prepare_trip(self);
+        bikes.map(bike => Mechanic.prepare_bike(bike));
+    }
+    bikes () {}
+};
+var Mechanic = class {
+    prepare_trip(trip) {
+        let bikes = trip.bikes();
+    }
+    prepare_bike(bike) {}
+    clean_bike(bike) {}
+    pump_tires(bike) {}
+    lube_chain(bike) {}
+    check_brakes(bike) {}
+};
 
-// A List-of-Trips is on of:
-// - []
-// - List-of-trips.push(Trip)
-//
-// []
-// [Trip({terrain: "Mountain", technical: 4, aerobic: 1})]
-// [Trip({terrain: "Mountain", technical: 4, aerobic: 1}),
-//  Trip({terrain: "Road", technical: 1, aerobic: 3}),
-//  Trip({terrain: "Road", technical: 1, aerobic: 5})]
+// Seeking context Independence
 
-var Moe = Customer({aerobic: 3, technical: 4});
-// suitable_trip :: List-of-trips, Customer -> List-of-trips
-suitable_trip([], Moe);
-suitable_trip([Trip({terrain: "mountain", technical: 4, aerobic: 1})], Moe);
-suitable_trip([Trip({terrain: "mountain", technical: 4, aerobic: 1}),
-               Trip({terrain: "road", technical: 1, aerobic: 3}),
-               Trip({terrain: "road", technical: 1, aerobic: 5})], Moe);
+// Using Messages to Discover Objects
 
-function suitable_trip (lot, customer) {
-    return lot.filter( trip => (trip.aerobic()   <= customer.aerobic() &&
-                                trip.technical() <= customer.technical()));
-}
-
-// suitable_bike :: List-of-Bikes Trip -> List-of-Bikes
-var mtb_trip = Trip({terrain: "mountain", technical: 4, aerobic: 1});
-var road_trip = Trip({terrain: "road", technical: 4, aerobic: 1});
-suitable_bike([], mtb_trip);
-suitable_bike([Bike({type: "mtb", size: 54})], mtb_trip);
-suitable_bike([Bike({type: "mtb", size: 54}),
-               Bike({type: "road", size: 56}),
-               Bike({type: "road", size: 54})], road_trip);
-
-function suitable_bike(lob, trip) {
-    return lob.filter(function (bike) {
-        if(trip.terrain() === "mountain" && bike.type() === "mtb") { return true; }
-        else if(trip.terrain() === "road" && bike.type() === "road") { return true; }
-        else { return false; };
-    });
-}
-
-// Attempt 2 (oop):
-function Customer (spec) {
-    let technical = _ => spec.technical || 0;
-    let aerobic = _ => spec.aerobic || 0;
-    return { technical: technical, aerobic: aerobic };
-}
-function Trip (spec) {
-    let terrain = _ => spec.terrain || "unknown";
-    let technical = _ => spec.technical || 0;
-    let aerobic = _ => spec.aerobic || 0;
-    let bikes = () => {};
-    return { terrain: terrain,
-             technical: technical,
-             aerobic: aerobic,
-             bikes: bikes };
-}
-function TripFinder (spec) {
-    let suitable_trip = () => { return {}; };
-    return { suitable_trip: suitable_trip };
-}
-function Bike (spec) {
-    let type = _ => spec.type;
-    let size = _ => spec.size;
-
-    let suitable_bike = (trip) => { return {};};
-    return { type: type, size: size };
-}
-function Mechanic (spec) {
-    let clean_bike = (bike) => { return bike; };
-    let pump_tires = (bike) => { return bike; };
-    let lube_chain = (bike) => { return bike; };
-    let check_brakes = (bike) => { return bike; };
-
-    let prepare_trip = trip => { return trip; };
-    let prepare_bike = bike => {
-        return check_brakes(lube_chain(pump_tires(clean_bike(bike))));
-    };
-    let prepare_bikes = lob => { return lob.map(prepare_bike); };
-    return { prepare_trip: prepare_trip,
-             prepare_bike: prepare_bike };
-}
-// suitable_trip :: List-of-trips, Customer -> List-of-trips
-// suitable_bike :: List-of-Bikes Trip -> List-of-Bikes
-
+// Creating Message-Based Apllication
 
 //
 // 5. Reducing Costs With Duck Typing
 //
 
-function Trip(spec) {
-    let bikes = () => { return []; };
-    let customers = () => { return []; };
-    let vehicles = () => { return []; };
+// Duck types are public interfaces that are not tied to any specific class.
+// It's not what an objects is (class/type) that matters, it's what it does.
+// If every object trusts all others to be what it expect at any given
+// moment, and any object can be any kind of thing, the design possibilities
+// are infinite.
 
-    let prepare_trip = () => {
-        spec.mechanic.prepare_trip(self);
-        spec.trip_coordinator.prepare_trip(customers());
-        spec.driver.prepare_trip(vehicles());
-    };
+// Overlooking the Duck
+var Trip = class {
+    prepare(prepares) {
+        preparerers.map( preparer => {
+            if(preparer instanceof Mechanic) {
+                preparer.prepare_bicycles(this.bikes);
+            }
+            if(preparer instanceof TripCoordinator) {
+                preparer.buy_food(this.customers);
+            }
+            if(preparer instanceof Driver) {
+                preparer.fill_water_tank(this.vehicle);
+            }
+        });
+    }
+};
 
-    return { prepare_trip: prepare_trip,
-             bikes: bikes,
-             customers: customers,
-             vehicles: vehicles };
-}
+// Finding the Duck Type
+var Trip = class {
+    prepare(preparers) {
+        preparers.for_each(preparer => preparer.prepare_trip(this));
+    }
+};
+var Mechanic = class {
+    prepare_trip(trip) {
+        prepare_bikes(trip.bikes);
+    }
+};
+var TripCoordinator = class {
+    prepare_trip(trip) {
+        buy_food(trip.customers);
+    }
+};
+var Driver = class {
+    prepare_trip(trip) {
+        gas_up(trip.vechicle);
+        fill_water_tank(trip.vechicle);
+    }
+};
 
-function Mechanic(spec) {
-    let prepare_trip = (trip) => prepare_bikes(trip.bikes);
+// Summary:
 
-    let prepare_bikes = (bikes) => bikes.map(prepare_bike);
-    let prepare_bike = (bike) => index_gears(pump_tires(bike));
-    let pump_tires = (bike) => { return bike; };
-    let index_gears = (bike) => { return bike; };
-
-    return { prepare_trip: prepare_trip };
-}
-
-function Trip_Coordinator(spec) {
-    let prepare_trip = (customers) => prepare_customers(customers);
-
-    let prepare_customers = (customers) => {return customers; };
-    return { prepare_trip: prepare_trip };
-}
-
-function Driver(spec) {
-    let prepare_trip = (vehicles) => prepare_vehicles(vehicles);
-
-    let prepare_vehicles = (vehicles) => fill_water_tank(gas_up(vehicles));
-    let gas_up = (vehicle) => { return vehicle; };
-    let fill_water_tank = (vehicle) => { return vehicle; };
-
-    return { prepare_trip: prepare_trip };
-}
-
-
+// Duck typing detaches public interfaces from specific classes, creating
+// virtual types that are defined by what they do instead of who they are.
 
 //
 //  6. Aquiring Behavior Through Inheritance
 //
-function Bike(spec) {
-}
 
-function RoadBike(spec) {
-}
+// Inheritance is a mechanism for automatic message delegation.
+// It defines a forwarding path for not-understood messages.
 
-function MTB(spec) {
-}
+// Template Method Pattern (all the way):
+
+// The technique of defining a basic structure in the superclass and
+// sending messages to acquire subclass-specific contributions is known
+// as the template method pattern.
+//
+// we are defining the defaults as methods, but giving the subclasses the
+// opportunity to override them with specializations.
+
+// Managing Coupling Between Superclasses and Subclasses
+
+// Decoupling Subclasses Using Hook Messages
+
+// Hooks give control back to the abstract algorithm and the superclass.
+// Bicycle is now responsible for sending post_initialize message.
+// RoadBike and MountainBike contain only specializations.
+// New subclasses need only implement the template methods.
+
+// Attempt 6:
+// The final hierarchy
+var Bicycle = class {
+    constructor(args) {
+        this._size = args.size;
+        this._chain = args.chain;
+        this._tire_size = args.tire_size;
+        this.post_initialize(args);
+    }
+    get_size() { return this._size; }
+    get_chain() { return this._chain; }
+    get_tire_size() { return this._tire_size; }
+    post_initialize(args) { return null; }
+    local_spares() { return {}; }
+    spares() { return Object.assign({ tire_size: this.get_tire_size(), chain: this.get_chain() }, this.local_spares); }
+    default_chain() { return "10-speed"; }
+    default_tire_size() { return Error("NoImplementedError"); }
+};
+
+var RoadBicycle = class extends Bicycle {
+    post_initialize(args) {
+        this._tape_color = args.tape_color || this.default_tape_color();
+    };
+    get_tape_color() { return this._tape_color; }
+    local_spares() { return { tape_color: this.get_tape_color() }; }
+    default_tire_size() { return "23"; }
+    default_tape_color() { return "black"; };
+};
+
+var MountainBike = class extends Bicycle {
+    post_initialize(args) {
+        this._front_shock = args.front_shock || this.default_front_shock();
+        this._rear_shock = args.rear_shock || this.default_rear_shock();
+    }
+    get_front_shock() { return this._front_shock; }
+    get_rear_shock() { return this._rear_shock; }
+    local_spares() { return { rear_shock: this.get_rear_shock() }; }
+    default_tire_size() { return "2.1"; }
+    default_front_shock() { return "RS Front"; }
+    default_rear_shock() { return "RS Rear"; }
+};
+
+var RecumbentBike = class {
+    post_initialize(args) {
+        this._flag = args.flag || this.default_flag();
+    }
+    get_flag() { return this._flag; }
+    local_spares() { return { flag: this.get_flaf() }; }
+    default_flag() { return  "cool flag"; }
+    default_chain() { return  "9-speed"; }
+    default_tire_size() { return  "28"; }
+};
+
+//
+// 7. Sharing Role Behavior with Modules
+//
+
+// Some problems require sharing behavior among otherwise unrelated
+// objects. This behavior is orthogonal to class, it’s a role an object
+// plays.
+
+// Discovering a duck type
+
+// Target isn't a specific class -> it is a duck type
+
+// Domain problem: Schdule
+
+// v1: Schedule knows the lead time for other objects
+var Schedule = class {
+    is_schedulable(target, starting, ending) {
+        if(target instanceof x) lead_days = 1;
+        if(target instanceof y) lead_days = 3;
+        if(target instanceof z) lead_days = 4;
+    }
+    // ...
+};
+
+// v2: Schedule expects targets to know their own lead days
+var Schedule = class {
+    is_schedulable(target, starting, ending) {
+        let lead_days = target.lead_days;
+    }
+    // ...
+};
+
+
+
+
+
+
+
+
+
+
+
+
+// is_scheduled(target, starting, ending) {
+// }
+// add(target, starting, ending) {}
+// remove(target, starting, ending) {}
 
 
 

@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # 2. Designing Clases with Single Responsibility
 #
@@ -117,7 +118,7 @@ end
 # Isolate Extra Responsibilities in Classes
 
 # When writing changable code, it's best to postpone decisions
-# until you are absolutely forces to make them.
+# until you are absolutely forced to make them.
 
 # You don't need to commit to full Wheel class yet.
 
@@ -227,7 +228,7 @@ Gear.new(48, 11, Wheel.new(28, 38)).gear_inches
 
 # - Isolate Dependancies
 
-# If you are so constraint theat you can not move the creation of wheel
+# If you are so constraint that you can not move the creation of wheel
 # isolate the instance creation to the init or other special method.
 
 # - Isolate Vulnarable External Messages
@@ -408,7 +409,7 @@ Wheel.new(28, 38, 48, 11).gear_inches
 # that change less often than they do.
 
 #
-# 4.
+# 4. Creating Flexible Interfaces
 #
 
 # Understanding Interfaces
@@ -516,7 +517,7 @@ Wheel.new(28, 38, 48, 11).gear_inches
 
 # Writing Code That Puts Its Best (Inter)Face Forward
 
-# Create Explicot Interfaces:
+# Create Explicit Interfaces:
 # - be about what not how
 # - have names that, insofar as you can anticipate, will not change
 # - take a hash as an options parameter
@@ -857,6 +858,13 @@ end
 
 # Template Method Pattern (all the way):
 
+# The technique of defining a basic structure in the superclass and
+# sending messages to acquire subclass-specific contributions is known
+# as the template method pattern.
+#
+# we are defining the defaults as methods, but giving the subclasses the
+# opportunity to override them with specializations.
+
 # Managing Coupling Between Superclasses and Subclasses
 
 # Attempt 5:
@@ -923,7 +931,7 @@ end
 # - about each other (spare parts specialization)
 # - about the superclass (spares, initialize)
 # both created by sending super in the subclasses,
-# which now effectively know about the algorithm
+# which now effectively knows about the algorithm
 
 # If someone added another bike and forgot to send super in initialize or
 # spares methods (maybe yourself in 2 months or more).
@@ -1037,12 +1045,68 @@ end
 # 7. Sharing Role Behavior with Modules
 #
 
-# What if you need Recumbent-Mountain bikes? (Gravel Bikes?)
+# What if you need Recumbent-Mountain bikes? (Gravel?)
 
 # Inheritance has many alternatives.
-# No design technique is free. Creating the most cost-effective application
-# requires making informed trade-offs.
+# No design technique is free. Creating the most cost-effective
+# application requires making informed trade-offs.
 
 # Understanding Roles
 
-#
+# Some problems require sharing behavior among otherwise unrelated
+# objects. This behavior is orthogonal to class, it’s a role an object
+# plays.
+
+# From chapter 5 example:
+# The Preparerer duck type is a role, and any object that implements the
+# interface plays the role. The Preparable is also a role (parallel role).
+
+# Preparerer - any object that implements its own prepare_trip method
+# Those to a implemented as duck types, but other roles are more complex.
+# When a role needs a shared behavior, you are faced with the problem of
+# organizing the shared code.
+
+# A named groups of methods that are indipendant of class and can be
+# mixed in any object. Ruby has modules.
+
+# Domain Problem: Scheduling a Trip
+# We have Bikes, Mechanics and Vehicles, we need to know:
+# - which are available and
+# - which are commited.
+
+# Maintanace time:
+# bikes - 1 day
+# vehicles - 3 day
+# mechanics - 4 day
+
+# Discovering a duck type
+
+# v1: Schedule knows the lead time for other objects
+class Schedule
+  def schedulable?(target, starting, ending)
+    # target.class == x lead_days = 1
+    # target.class == y lead_days = 3
+    # target.class == z lead_days = 4
+  end
+  def scheduled?(target, starting, ending) end
+  def add(target, starting, ending) end
+  def remove(target, starting, ending) end
+end
+
+# v2: Schedule expects targets to know their own lead days
+class Schedule
+  def schedulable?(target, starting, ending)
+    target.lead_days
+  end
+  def scheduled?(target, starting, ending) end
+  def add(target, starting, ending) end
+  def remove(target, starting, ending) end
+end
+
+# Schedule expects target to behave as something that understands lead_days
+# Target isn't a specific class -> it is a duck type
+
+
+
+
+
