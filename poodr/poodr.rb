@@ -1084,9 +1084,9 @@ end
 # v1: Schedule knows the lead time for other objects
 class Schedule
   def schedulable?(target, starting, ending)
-    # target.class == x lead_days = 1
-    # target.class == y lead_days = 3
-    # target.class == z lead_days = 4
+    # target.class == Bicycle lead_days = 1
+    # target.class == Mechanic lead_days = 3
+    # target.class == Vehicle lead_days = 4
   end
   def scheduled?(target, starting, ending) end
   def add(target, starting, ending) end
@@ -1106,7 +1106,222 @@ end
 # Schedule expects target to behave as something that understands lead_days
 # Target isn't a specific class -> it is a duck type
 
+# Writing the Concrete Code
+
+class Schedule
+  def scheduled?(schedulable, start_date, end_date)
+    puts "This #{schedulable.class} is not scheduled" +
+         "between #{start_date} and #{end_date}."
+    false
+  end
+end
+
+class Bicycle
+  attr_reader :schedule, :size, :chain, :tire_size
+  def initialize(args={})
+    @schedule = args[:schedule] || Schedule.new
+    # ...
+  end
+
+  def schedulable?(start_date, end_date)
+    !scheduled?(start_date - lead_days, end_date)
+  end
+
+  def scheduled?(start_date, end_date)
+    schedule.scheduled?(self, start_date, end_date)
+  end
+
+  def lead_days 1 end
+  # ...
+end
+
+module Schedulable
+  attr_writer :schedule
+
+  def schedule
+    @schedule ||= ::Schedule.new
+  end
+
+  def schedulable?(start_date, end_date)
+    !scheduled?(start_date - lead_days, end_date)
+  end
+
+  def scheduled?(start_date, end_date)
+    schedule.scheduled?(self, start_date, end_date)
+  end
+
+  def lead_days 1 end
+  # ...
+end
+
+# Extracting the Abstraction
+module Schedulable
+  attr_writer :schedulable
+
+  def schedule
+    @schedule ||= ::Schedule.new
+  end
+
+  def schedulable?(start_date, end_date)
+    !scheduled?(start_date - lead_days, end_date)
+  end
+
+  def scheduled?(start_date, end_date)
+    schedule.scheduled?(self, start_date, end_date)
+  end
+
+  # includers may override
+  def lead_days 0 end
+end
+
+class Bicycle
+  include Schedulable
+
+  def lead_days 1 end
+  # ...
+end
+
+class Vehicle
+  include Schedulable
+
+  def lead_days 3 end
+  # ...
+end
+
+class Mechanic
+  include Schedulable
+
+  def lead_days 4 end
+  # ...
+end
+
+# Looking Up Methods
+
+# First Model
+
+# Ruby
+# message -> Object -> Class -> Superclass
+
+# spares -> a bike -> MountainBike -> Bicycle ---> Object
+#           object    superclass      superclass
+
+# methods are not duplicated, because they are stored in a class
+
+# JS
+# message -> Object -> Proto Object -> Proto Object
+
+# Second Model
+
+# schedulable? -> a bike ->  MountainBike -> Bicycle ---> Schedulable -> Object
+#                 object     superclass      module       superclass
+
+# Third  Model
+
+# message -> a bike ->  Singleton Class -> MountainBike -> modules -> Bicycle
+
+# -> modules -> Object
 
 
 
+# Writing Inheritable Code
 
+# Recognize the Antipatterns (when you might need inheritance)
+
+# 1. Uses variable named type or category to determine message to send to self
+# 2. When sending object checks the class of a receiving you need duck type.
+
+# In addition:
+# When duck types share behavior, place the sharing cod in a module and include
+# that module in each class or object that plays that role.
+
+# Insist on the Abstraction
+
+# All code in abstract superclass should apply to every subclass.
+# Subclasses should not overwrite methods to declare that they do not do that
+# thing (this is close to not being that thing at all).
+# If you cannot correctly identify the abstraction then you don't need
+# inheritance.
+
+# Honor the Contract (LSP)
+
+# Subclasses agree to be substitutable for their superclasses,
+# To conform to their superclass interface.
+# Respond to every message and take the same kind of inputs and outputs.
+
+# Use Template Method Pattern
+
+# fundamential for creating inheritable code.
+# separeted the abstract from the concrete.
+# the abstract defines the algorithm.
+# the concrete contributes specializations.
+
+# Preemptive Decouple Classes
+
+# Create Shallow Hierarchies
+
+# This follows from the limitations of the hook methods.
+# Deep hierarchies define a long search paths, and opportunities for
+# others to add behavior, and everything above can change.
+# Middle classes tend to be ignored, and vulnarable to changes.
+
+
+
+# Summary
+
+# The code in a module can be added to any object (instance, class, module)
+# The coding technique for modules mirrors inheritance.
+# Use template method to invite specialization and hooks to avoid
+# super in includers/inheritors.
+# The LSP means that objects should act for what they are and honor
+# their commitments to the interface.
+
+#
+# 8.
+#
+
+# The act of combining distict parts into a complex whole that becomes more
+# than the sum of it parts.
+
+# has-a relationship,
+# a bike has parts,
+# part is a role,
+# bikes communicate with parts via an interface.
+
+# Composing a Bicycle of Parts
+
+# a Bike - spares -> Parts
+
+class Bicycle
+  attr_reader :size, :parts
+  def initialize(args={})
+    @size = args[:size]
+    @parts = args[:parts]
+  end
+
+  def spares parts.spares end
+end
+
+# Creating a Parts Hierarchy
+
+class Parts
+  attr_reader :chain, :tire_size
+
+  def initialize(args={})
+    @chain = args[:chain] || defaul_chain
+    @tire_size = args[:tire_size] || defaul_tire_size
+    post_initialize(args)
+  end
+
+  def spares
+    { tire_size: tire-size, chain: chain }.merge(local_spares)
+  end
+
+  def default_tire_size
+    raise NotImplementedError
+  end
+
+  # subclasses may override
+  def post_initialze(args) nil end
+  def local_spares {} end
+  def default_chain '10-speed' end
+end

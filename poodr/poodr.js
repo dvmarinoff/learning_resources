@@ -363,9 +363,9 @@ var RecumbentBike = class {
 // v1: Schedule knows the lead time for other objects
 var Schedule = class {
     is_schedulable(target, starting, ending) {
-        if(target instanceof x) lead_days = 1;
-        if(target instanceof y) lead_days = 3;
-        if(target instanceof z) lead_days = 4;
+        if(target instanceof Bicycle) lead_days = 1;
+        if(target instanceof Mechanic) lead_days = 3;
+        if(target instanceof Vehical) lead_days = 4;
     }
     // ...
 };
@@ -379,7 +379,118 @@ var Schedule = class {
 };
 
 
+////
+// MENU MOBILE
+////
+class MenuMobile {
+    constructor(args) {
+        this._el = $(args.el);
+        this._width = args.width || this.default_width();
+        this._height = args.height || this.default_height();
+        this._document = args.document || $(document);
+    }
+    get_el() { return this._el; }
+    get_width() { return this._width; }
+    get_height() { return this._height; }
+    get_document() { return this._document; }
 
+    init() {
+        let self = this;
+        this.get_el().css({ width: self.get_width(),
+                            left: -self.get_width() });
+        this.get_document()
+            .on('menu:expand', self.expand.bind(self));
+        this.get_document()
+            .on('menu:expand', self.collapse.bind(self));
+    }
+    expand() { this.get_el().slideLeft(100, 0); }
+    collapse() {
+        let width = this.get_width();
+        this.get_el()
+            .slideLeft(100, -parseInt(width));
+    }
+    default_width() { return $(window).width(); }
+    default_height() { return $(window).height(); }
+}
+
+class MenuBtn {
+    constructor(args) {
+        this._el = $(args.root);
+        this._top = this._el.find('.top');
+        this._middle = this._el.find('.middle');
+        this._bottom = this._el.find('.bottom');
+        this._expanded = false;
+        this._document = args.document || $(document);
+    }
+    get_el() { return this._el; }
+    get_top() { return this._top; }
+    get_middle() { return this._middle; }
+    get_bottom() { return this._bottom; }
+    get_document() { return this._document; }
+    get_expanded() { return this._expanded; }
+    set_expanded(is_expanded) {
+        return this._expanded = is_expanded;
+    }
+
+    init() {
+        let self = this;
+        this._el.on('click', function() {
+            if(self.get_is_expanded()) {
+                self.get_document().trigger('menu:collapse');
+            } else {
+                self.get_document().trigger('menu:expand');
+            }
+        });
+        this.get_document()
+            .on('menu:expand', self.expand.bind(self));
+        this.get_document()
+            .on('menu:collapse', self.collapse.bind(self));
+    }
+    expand() {
+        this.expandAnimation();
+        this.get_el().addClass('active');
+        this.set_expanded(true);
+    }
+    collapse() {
+        this.collapseAnimation();
+        this.get_el().removeClass('active');
+        this.set_expanded(false);
+    }
+    expandAnimation() {
+        // burger style
+        let duration = 100;
+        let middle = 11;
+        let angle = 45;
+        this.get_top()
+            .top(duration, middle)
+            .rotateZ(duration, -angle);
+        self.get_middle().hide(duration);
+        self.get_bottom()
+            .top(duration, middle)
+            .rotateZ(duration, angle);
+    }
+    collapseAnimation() {
+        // burger style
+        let duration = 100;
+        let middle = 11;
+        let angle = 45;
+        this.get_top()
+            .velocity({top: middle, rotateZ: '+='+angle+'deg'},
+                      {duration: duration})
+            .top(duration, 0);
+        self.get_middle()
+            .show(duration)
+            .velocity({top: middle,opacity: 1},
+                      {duration: duration});
+        self.get_bottom()
+            .velocity({top: middle, rotateZ: '-='+angle+'deg'},
+                      {duration: duration})
+            .top(duration, 22);
+    }
+}
+
+let menu = new MenuMobile({});
+menu.init();
 
 
 
