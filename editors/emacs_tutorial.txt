@@ -60,6 +60,7 @@ C-/ - undo
 M-c - to uppercase
 M-l - to lowercase
 M-u - to uppercase the word under cursor
+C-o - jump back to previous place
 
 M-/ - hippie expand, cycles through possible expansions
 M-\ - delete all spaces and tabs around point
@@ -284,6 +285,11 @@ g ; - go to last place edited
 "ay - yank into register
 "ap - paste from register
 SPC r y - show previous things you've yanked
+
+;; registers
+"1p - paste last register
+"2p - paste next to last register
+"<n>p - paste n from last register 
 
 ;; search
 SPC s s - search in a file
