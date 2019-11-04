@@ -323,7 +323,7 @@
     
     var app = function (ui) {
         ui.dropNav.init();
-        ui.slider.front.slick(options.slider.front);
+        //ui.slider.front.slick(options.slider.front);
 
         if($win.width() < options.minWidthMobile) {
             ui.menu.mobileBasic.init();
